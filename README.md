@@ -1,4 +1,4 @@
-# Parkie 🅿️
+# Parkr 🅿️
 ## Private Building Parkade Manager Mobile App 🚗
 
 Many car owners find City / public parking too expensive and restrictive, especially in downtown and sub-centers.  Many residential buildings have very limited visitor parking spots and many unused private spots.  For many global investors who have purchased apartments with parking spots as an investment, their renters might not have cars.  That leaves their parking spots empty for most of the year.  These foreign investors are unaware that there is an opportunity to earn extra income to pay for the $25-40,000 parking lot they purchased.
