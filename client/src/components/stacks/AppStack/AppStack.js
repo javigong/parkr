@@ -15,7 +15,7 @@ const AppStack = () => (
         options={{
           title: 'Parkr App',
           headerStyle: {
-            backgroundColor: '#2c3e50'
+            backgroundColor: "rgb(94,39,161)"
           },
           headerTitleStyle: {
             color: '#fff'
@@ -28,7 +28,7 @@ const AppStack = () => (
         options={{
           title: 'Authentication',
           headerStyle: {
-            backgroundColor: '#2c3e50'
+            backgroundColor: "rgb(94,39,161)"
           },
           headerTitleStyle: {
             color: '#fff'
