@@ -6,7 +6,7 @@ const Stack = createNativeStackNavigator();
 
 const AppStack = () => (
   <Stack.Navigator>
-    <Stack.Screen name="Home" component={HomeTab} />
+    <Stack.Screen name="Home" component={HomeTab} options={{ headerShown: true }} />
   </Stack.Navigator>
 );
 

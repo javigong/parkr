@@ -10,8 +10,8 @@ import AppStack from "./AppStack";
 const Stack = createNativeStackNavigator();
 
 const AuthStack = () => (
-  <Stack.Navigator screenOptions={{ headerShown: false }}>
- <Stack.Screen name="IndexScreen" component={IndexScreen} />
+  <Stack.Navigator>
+    <Stack.Screen name="IndexScreen" component={IndexScreen} />
     <Stack.Screen name="LoginScreen" component={LoginScreen} />
     <Stack.Screen name="SignupScreen" component={SignupScreen} />
     <Stack.Screen name="ForgotPwdScreen" component={ForgotPwdScreen} />

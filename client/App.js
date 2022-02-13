@@ -4,10 +4,11 @@ import { NativeBaseProvider } from "native-base";
 import { NavigationContainer } from "@react-navigation/native";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./src/components/config/firebase";
-import AuthStack from "./src/components/stacks/AuthStack";
 import Loading from "./src/components/layout/Loading";
+import AuthStack from "./src/components/stacks/AuthStack";
 import AppStack from "./src/components/stacks/AppStack";
-import IndexScreen from "./src/components/screens/auth-stack/IndexScreen";
+import ParkingScreen from "./src/components/screens/home-tab/ParkingScreen";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // user context:
 
@@ -47,22 +48,20 @@ function RootNavigator() {
     return <Loading />;
   }
 
-  return (
-    <NavigationContainer>
-      {user ? <IndexScreen /> : <IndexScreen />}
-    </NavigationContainer>
-  );
+  return <>{user ? <AppStack /> : <AuthStack />}</>;
 
-  {
-    /* // return <AuthStack />; */
-  }
+  // return <AuthStack />;
+
+  // return <AppStack />;
 }
 
 const App = () => {
   return (
     <NativeBaseProvider>
       <AuthenticatedUserProvider>
-        <RootNavigator />
+        <NavigationContainer>
+          <RootNavigator />
+        </NavigationContainer>
       </AuthenticatedUserProvider>
     </NativeBaseProvider>
   );

@@ -1,13 +1,13 @@
 import React, { useState, useLayoutEffect, useCallback } from "react";
 import { TouchableOpacity, Text } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat";
-// import {
-//   collection,
-//   addDoc,
-//   orderBy,
-//   query,
-//   onSnapshot,
-// } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  orderBy,
+  query,
+  onSnapshot,
+} from "firebase/firestore";
 import { signOut } from "firebase/auth";
 
 import { auth, database } from "";
