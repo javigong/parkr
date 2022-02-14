@@ -6,6 +6,9 @@ import { auth } from "./src/components/config/firebase";
 import Loading from "./src/components/layout/Loading";
 import AuthStack from "./src/components/stacks/AuthStack";
 import AppStack from "./src/components/stacks/AppStack";
+import SignupScreen from "./src/components/screens/auth-stack/SignupScreen";
+import LoginScreen from "./src/components/screens/auth-stack/LoginScreen";
+import WelcomeScreen from "./src/components/screens/auth-stack/WelcomeScreen";
 
 // user context:
 
@@ -45,11 +48,11 @@ function RootNavigator() {
     return <Loading />;
   }
 
-  return <>{user ? <AppStack /> : <AuthStack />}</>;
+  return <>{user ? <AppStack /> : <AuthStack />}</>
 
   // return <AuthStack />;
 
-  // return <AppStack />;
+  // return <WelcomeScreen />;
 }
 
 const App = () => {

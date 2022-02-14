@@ -1,29 +1,36 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import * as WebBrowser from "expo-web-browser";
 import { ResponseType } from "expo-auth-session";
 import * as Google from "expo-auth-session/providers/google";
 import { Text, Center, Box, VStack, Button } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
-import { signInWithCredential } from 'firebase/auth';
-
-import { auth, provider } from "../../config/firebase";
+import {
+  GoogleAuthProvider,
+  signInWithCredential,
+  getAuth,
+} from "firebase/auth";
 
 WebBrowser.maybeCompleteAuthSession();
 
 const IndexScreen = ({ navigation }) => {
-  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
+  const [request, googleResponse, promptAsync] = Google.useIdTokenAuthRequest({
     clientId:
       "982042294137-meilc590t5ohvhh3esghbegr74ndimio.apps.googleusercontent.com",
   });
 
   useEffect(() => {
-    if (response?.type === "success") {
-      const { id_token } = response.params;
+    if (googleResponse?.type === "success") {
+      (async () => {
+        const { id_token } = googleResponse.params;
+        const auth = getAuth();
 
-      const credential = provider.credential(id_token);
-      signInWithCredential(auth, credential);
+        const credential = GoogleAuthProvider.credential(id_token);
+        const user = await signInWithCredential(auth, credential);
+        console.log("*****", user, "*****");
+        if (user !== null) () => navigation.navigate("WelcomeScreen");
+      })();
     }
-  }, [response]);
+  }, [googleResponse]);
 
   return (
     <>
@@ -68,7 +75,9 @@ const IndexScreen = ({ navigation }) => {
                 size={25}
                 backgroundColor="rgb(66,133,244)"
                 disabled={!request}
-                onPress={() => promptAsync}
+                onPress={() => {
+                  promptAsync();
+                }}
               >
                 Sign in with Google
               </Ionicons.Button>

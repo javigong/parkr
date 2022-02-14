@@ -6,6 +6,7 @@ export default {
     slug: "parkr",
     version: "1.0.0",
     orientation: "portrait",
+    scheme: "parkr",
     icon: "./assets/icon.png",
     splash: {
       image: "./assets/splash.png",
@@ -39,7 +40,7 @@ export default {
     },
     packagerOpts: {
       sourceExts: ["js", "json", "ts", "tsx", "jsx", "vue"],
-      "config": "metro.config.js"
+      config: "metro.config.js",
     },
   },
 };

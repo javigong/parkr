@@ -6,6 +6,7 @@ import LoginScreen from "../screens/auth-stack/LoginScreen";
 import SignupScreen from "../screens/auth-stack/SignupScreen";
 import ForgotPwdScreen from "../screens/auth-stack/ForgotPwdScreen";
 import AppStack from "./AppStack";
+import WelcomeScreen from "../screens/auth-stack/WelcomeScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +16,7 @@ const AuthStack = () => (
     <Stack.Screen name="LoginScreen" component={LoginScreen} />
     <Stack.Screen name="SignupScreen" component={SignupScreen} />
     <Stack.Screen name="ForgotPwdScreen" component={ForgotPwdScreen} />
+    <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
     <Stack.Screen name="AppStack" component={AppStack} />
   </Stack.Navigator>
 );
