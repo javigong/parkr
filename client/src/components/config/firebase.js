@@ -18,8 +18,7 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 // get user auth
 export const auth = getAuth();
-// get google auth credential
-const provider = new GoogleAuthProvider;
-export const credential = provider.credential(id_token);
+// get google auth provider
+export const provider = new GoogleAuthProvider;
 // access firestore database
 export const database = getFirestore();

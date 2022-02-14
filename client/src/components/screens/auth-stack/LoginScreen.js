@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Text,
@@ -18,6 +18,7 @@ import { auth } from "../../config/firebase";
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+ 
 
   const onHandleLogin = () => {
     if (email !== "" && password !== "") {
@@ -27,15 +28,22 @@ const LoginScreen = ({ navigation }) => {
     }
   };
 
+  
+
   return (
     <Center flex={1} px="3">
       <Center w="100%">
         <Box safeArea p="2" py="8" w="90%" maxW="290">
-          <Heading size="xl" fontWeight="600" color="coolGray.800" _dark={{
-        color: "warmGray.50"
-      }}>
-          Welcome to Parkr
-        </Heading>
+          <Heading
+            size="xl"
+            fontWeight="600"
+            color="coolGray.800"
+            _dark={{
+              color: "warmGray.50",
+            }}
+          >
+            Welcome to Parkr
+          </Heading>
           <Heading
             mt="1"
             _dark={{

@@ -1,23 +1,25 @@
-import React from "react";
-import * as WebBrowser from 'expo-web-browser';
-import { ResponseType } from 'expo-auth-session';
-import * as Google from 'expo-auth-session/providers/google';
+import React, { useEffect } from "react";
+import * as WebBrowser from "expo-web-browser";
+import { ResponseType } from "expo-auth-session";
+import * as Google from "expo-auth-session/providers/google";
 import { Text, Center, Box, VStack, Button } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
+import { signInWithCredential } from 'firebase/auth';
+
+import { auth, provider } from "../../config/firebase";
+
+WebBrowser.maybeCompleteAuthSession();
 
 const IndexScreen = ({ navigation }) => {
-  WebBrowser.maybeCompleteAuthSession();
-
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    clientId: "Your-Web-Client-ID.apps.googleusercontent.com",
+    clientId:
+      "982042294137-meilc590t5ohvhh3esghbegr74ndimio.apps.googleusercontent.com",
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (response?.type === "success") {
       const { id_token } = response.params;
 
-      const auth = getAuth();
-      const provider = new GoogleAuthProvider();
       const credential = provider.credential(id_token);
       signInWithCredential(auth, credential);
     }
@@ -65,6 +67,7 @@ const IndexScreen = ({ navigation }) => {
                 width={190}
                 size={25}
                 backgroundColor="rgb(66,133,244)"
+                disabled={!request}
                 onPress={() => promptAsync}
               >
                 Sign in with Google

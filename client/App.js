@@ -1,5 +1,4 @@
 import React, { useState, createContext, useContext, useEffect } from "react";
-import { StatusBar } from "expo-status-bar";
 import { NativeBaseProvider } from "native-base";
 import { NavigationContainer } from "@react-navigation/native";
 import { onAuthStateChanged } from "firebase/auth";
@@ -7,8 +6,6 @@ import { auth } from "./src/components/config/firebase";
 import Loading from "./src/components/layout/Loading";
 import AuthStack from "./src/components/stacks/AuthStack";
 import AppStack from "./src/components/stacks/AppStack";
-import ParkingScreen from "./src/components/screens/home-tab/ParkingScreen";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 // user context:
 
