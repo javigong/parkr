@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import * as WebBrowser from "expo-web-browser";
 import { ResponseType } from "expo-auth-session";
 import * as Google from "expo-auth-session/providers/google";
-import { Text, Center, Box, VStack, Button } from "native-base";
+import * as Facebook from "expo-auth-session/providers/facebook";
+import { Text, Center, Box, VStack, Button, Heading } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import {
-  GoogleAuthProvider,
-  signInWithCredential,
   getAuth,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  signInWithCredential,
 } from "firebase/auth";
 
 WebBrowser.maybeCompleteAuthSession();
@@ -31,6 +33,25 @@ const IndexScreen = ({ navigation }) => {
       })();
     }
   }, [googleResponse]);
+
+  const [fbRequest, facebookResponse, fbPromptAsync] = Facebook.useAuthRequest({
+    responseType: ResponseType.Token,
+    clientId: "367814018517994",
+  });
+
+  useEffect(() => {
+    if (facebookResponse?.type === "success") {
+      (async () => {
+        const { access_token } = facebookResponse.params;
+        const auth = getAuth();
+
+        const credential = FacebookAuthProvider.credential(access_token);
+        const user = await signInWithCredential(auth, credential);
+        console.log("***FACEBOOK***", user, "***FACEBOOK***");
+        if (user !== null) () => navigation.navigate("ParkingScreen");
+      })();
+    }
+  }, [facebookResponse]);
 
   return (
     <>
