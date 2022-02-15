@@ -17,7 +17,7 @@ WebBrowser.maybeCompleteAuthSession();
 const IndexScreen = ({ navigation }) => {
   const [request, googleResponse, promptAsync] = Google.useIdTokenAuthRequest({
     clientId:
-      "982042294137-meilc590t5ohvhh3esghbegr74ndimio.apps.googleusercontent.com",
+      "1013744309561-i48rf6f03b7ueb637huticdbuergsuuq.apps.googleusercontent.com",
   });
 
   useEffect(() => {
@@ -28,8 +28,8 @@ const IndexScreen = ({ navigation }) => {
 
         const credential = GoogleAuthProvider.credential(id_token);
         const user = await signInWithCredential(auth, credential);
-        console.log("*****", user, "*****");
-        if (user !== null) () => navigation.navigate("WelcomeScreen");
+        console.log("***GOOGLE***", user, "***GOOGLE***");
+        if (user !== null) () => navigation.navigate("ParkingScreen");
       })();
     }
   }, [googleResponse]);
