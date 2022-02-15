@@ -29,7 +29,7 @@ const IndexScreen = ({ navigation }) => {
         const credential = GoogleAuthProvider.credential(id_token);
         const user = await signInWithCredential(auth, credential);
         console.log("***GOOGLE***", user, "***GOOGLE***");
-        if (user !== null) () => navigation.navigate("ParkingScreen");
+        // if (user !== null) () => navigation.navigate("ParkingScreen");
       })();
     }
   }, [googleResponse]);
@@ -48,7 +48,7 @@ const IndexScreen = ({ navigation }) => {
         const credential = FacebookAuthProvider.credential(access_token);
         const user = await signInWithCredential(auth, credential);
         console.log("***FACEBOOK***", user, "***FACEBOOK***");
-        if (user !== null) () => navigation.navigate("ParkingScreen");
+        // if (user !== null) () => navigation.navigate("ParkingScreen");
       })();
     }
   }, [facebookResponse]);
