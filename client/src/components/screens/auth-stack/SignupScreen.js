@@ -25,6 +25,7 @@ const SignupScreen = ({ navigation }) => {
         .then(() => console.log("Signup success"))
         .catch((err) => console.log(`Login err: ${err}`));
     }
+    navigation.navigate("ParkingLocationScreen");
   };
 
   return (
