@@ -49,7 +49,7 @@ function RootNavigator() {
     return <Loading />;
   }
 
-  // return <>{user ? <AppStack /> : <AuthStack />}</>
+  // return <>{user ? <AppStack /> : <AuthStack />}</>;
 
   // return <AuthStack />;
 
