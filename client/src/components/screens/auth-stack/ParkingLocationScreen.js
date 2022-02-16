@@ -22,17 +22,22 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 
 const ParkingLocationScreen = ({ navigation }) => {
   return (
-    <GooglePlacesAutocomplete
-      placeholder="Search"
-      onPress={(data, details = null) => {
-        // 'details' is provided when fetchDetails = true
-        console.log(data, details);
-      }}
-      query={{
-        key: "AIzaSyB59OVgaJ7bRTw8ZbF2VDRaW2Qb1XcMn5Y",
-        language: "en",
-      }}
-    />
+    <>
+      <GooglePlacesAutocomplete
+        placeholder="Search"
+        onPress={(data, details = null) => {
+          // 'details' is provided when fetchDetails = true
+          console.log(data, details);
+        }}
+        query={{
+          key: "AIzaSyB59OVgaJ7bRTw8ZbF2VDRaW2Qb1XcMn5Y",
+          language: "en",
+        }}
+      />
+      <Box alignItems="center" w="100%" safeArea>
+        <Button w="80%">Next</Button>
+      </Box>
+    </>
   );
   s;
 };
