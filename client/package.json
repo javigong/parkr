@@ -1,6 +1,4 @@
 {
-  "name": "parkr",
-  "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -11,6 +9,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
+    "@react-native-async-storage/async-storage": "^1.16.1",
     "@react-navigation/material-bottom-tabs": "^6.1.1",
     "@react-navigation/material-top-tabs": "^6.1.1",
     "@react-navigation/native": "^6.0.8",
@@ -18,12 +17,18 @@
     "axios": "^0.25.0",
     "dotenv": "^16.0.0",
     "expo": "~44.0.0",
+    "expo-auth-session": "~3.5.0",
     "expo-constants": "~13.0.1",
+    "expo-random": "~12.1.1",
     "expo-status-bar": "~1.2.0",
+    "expo-web-browser": "~10.1.0",
+    "firebase": "9.4.1",
     "native-base": "^3.3.5",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
+    "react-native-gifted-chat": "0.16.3",
+    "react-native-onboarding-swiper": "^1.2.0",
     "react-native-pager-view": "5.4.9",
     "react-native-paper": "^4.11.2",
     "react-native-safe-area-context": "^3.3.2",

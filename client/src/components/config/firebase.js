@@ -1,21 +1,24 @@
-import firebase from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 import Constants from 'expo-constants';
 
-// Initialize Firebase
+// firebase config
 const firebaseConfig = {
   apiKey: Constants.manifest.extra.apiKey,
   authDomain: Constants.manifest.extra.authDomain,
   projectId: Constants.manifest.extra.projectId,
   storageBucket: Constants.manifest.extra.storageBucket,
   messagingSenderId: Constants.manifest.extra.messagingSenderId,
-  appId: Constants.manifest.extra.appId
+  appId: Constants.manifest.extra.appId,
+  databaseURL: Constants.manifest.extra.databaseURL
 };
 
-let Firebase;
-
-if (firebase.apps.length === 0) {
-  Firebase = firebase.initializeApp(firebaseConfig);
-}
-
-export default Firebase;
+// initialize firebase
+initializeApp(firebaseConfig);
+// get user auth
+export const auth = getAuth();
+// get google auth provider
+export const provider = new GoogleAuthProvider;
+// access firestore database
+export const database = getFirestore();
