@@ -37,8 +37,8 @@ For the purposes of this Privacy Policy:
 * <ins>You</ins> means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.
 
 # Collecting and Using Your Personal Data
-##Types of Data Collected
-###Personal Data
+## Types of Data Collected
+### Personal Data
 While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to:
 
 * Email address
