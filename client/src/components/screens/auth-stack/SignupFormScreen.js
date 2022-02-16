@@ -12,7 +12,9 @@ import {
 } from "native-base";
 import { useState } from "react";
 
-const SignupFormScreen = ({ navigation }) => {
+const SignupFormScreen = ({ navigation, route }) => {
+  const { parkingLot } = route.params;
+
   const [haveParking, setHaveParking] = useState();
   const [haveCar, setHaveCar] = useState();
 
@@ -23,7 +25,7 @@ const SignupFormScreen = ({ navigation }) => {
       <Flex>
         <Box marginBottom="30px">
           <Heading size="md">Your Parking Lot</Heading>
-          <Text fontSize="lg">previous input</Text>
+          <Text fontSize="lg">{parkingLot}</Text>
         </Box>
         <FormControl>
           <VStack space={10}>
