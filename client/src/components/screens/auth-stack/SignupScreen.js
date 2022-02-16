@@ -14,6 +14,7 @@ import {
 } from "native-base";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebase";
+import ParkingLocationScreen from "./ParkingLocationScreen";
 
 const SignupScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");

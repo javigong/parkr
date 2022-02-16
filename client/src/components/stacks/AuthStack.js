@@ -9,6 +9,7 @@ import AppStack from "./AppStack";
 import WelcomeScreen from "../screens/auth-stack/WelcomeScreen";
 import OnboardingScreen from "../screens/auth-stack/OnboardingScreen";
 import SignupFormScreen from "../screens/auth-stack/SignupFormScreen";
+import ParkingLocationScreen from "../screens/auth-stack/ParkingLocationScreen";
 
 const Stack = createNativeStackNavigator();
 
