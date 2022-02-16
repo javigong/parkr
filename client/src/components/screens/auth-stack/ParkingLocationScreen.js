@@ -22,7 +22,7 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 
 const ParkingLocationScreen = ({ navigation }) => {
   return (
-    <Box alignItems="center">
+    <Box alignItems="center" safeArea>
       <GooglePlacesAutocomplete
         placeholder="Search"
         onPress={(data, details = null) => {
@@ -35,7 +35,7 @@ const ParkingLocationScreen = ({ navigation }) => {
         }}
       />
 
-      <Button>Next</Button>
+      <Button onPress={navigation.navigate("SignupFormScreen")}>Next</Button>
     </Box>
   );
   s;
