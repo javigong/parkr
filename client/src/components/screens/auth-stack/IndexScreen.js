@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import * as WebBrowser from "expo-web-browser";
 import { ResponseType } from "expo-auth-session";
 import * as Google from "expo-auth-session/providers/google";
-import { Text, Center, Box, VStack, Button } from "native-base";
+import * as Facebook from "expo-auth-session/providers/facebook";
+import { Text, Center, Box, VStack, Button, Heading } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import {
-  GoogleAuthProvider,
-  signInWithCredential,
   getAuth,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  signInWithCredential,
 } from "firebase/auth";
 
 WebBrowser.maybeCompleteAuthSession();
@@ -15,7 +17,7 @@ WebBrowser.maybeCompleteAuthSession();
 const IndexScreen = ({ navigation }) => {
   const [request, googleResponse, promptAsync] = Google.useIdTokenAuthRequest({
     clientId:
-      "982042294137-meilc590t5ohvhh3esghbegr74ndimio.apps.googleusercontent.com",
+      "1013744309561-i48rf6f03b7ueb637huticdbuergsuuq.apps.googleusercontent.com",
   });
 
   useEffect(() => {
@@ -26,52 +28,83 @@ const IndexScreen = ({ navigation }) => {
 
         const credential = GoogleAuthProvider.credential(id_token);
         const user = await signInWithCredential(auth, credential);
-        console.log("*****", user, "*****");
-        if (user !== null) () => navigation.navigate("WelcomeScreen");
+        console.log("***GOOGLE***", user, "***GOOGLE***");
+        // if (user !== null) () => navigation.navigate("ParkingScreen");
       })();
     }
   }, [googleResponse]);
 
+  const [fbRequest, facebookResponse, fbPromptAsync] = Facebook.useAuthRequest({
+    responseType: ResponseType.Token,
+    clientId: "367814018517994",
+  });
+
+  useEffect(() => {
+    if (facebookResponse?.type === "success") {
+      (async () => {
+        const { access_token } = facebookResponse.params;
+        const auth = getAuth();
+
+        const credential = FacebookAuthProvider.credential(access_token);
+        const user = await signInWithCredential(auth, credential);
+        console.log("***FACEBOOK***", user, "***FACEBOOK***");
+        // if (user !== null) () => navigation.navigate("ParkingScreen");
+      })();
+    }
+  }, [facebookResponse]);
+
   return (
     <>
       <Center>
-        <Box>
-          <VStack flex={1} space={4} justifyContent="center">
-            <Text fontSize={25}>Welcome to Parkr</Text>
-            <Button
-              py={3}
-              px={1}
-              size="lg"
-              backgroundColor="rgb(94,39,161)"
-              onPress={() => navigation.navigate("LoginScreen")}
+        <Center w="100%">
+          <Box safeArea py="8" w="90%" maxW="290">
+            <Heading
+              py="16"
+              size="xl"
+              fontWeight="600"
+              color="coolGray.800"
+              _dark={{
+                color: "warmGray.50",
+              }}
             >
-              Login
-            </Button>
-            <Button
-              py={3}
-              px={1}
-              size="lg"
-              backgroundColor="rgb(94,39,161)"
-              onPress={() => navigation.navigate("SignupScreen")}
-            >
-              Signup
-            </Button>
-            <Center>
-              <Text
-                pb="3"
-                fontSize="md"
-                color="coolGray.600"
-                _dark={{
-                  color: "warmGray.200",
-                }}
+              Welcome to Parkr
+            </Heading>
+
+            <VStack space={3} mt="5" justifyContent="center">
+              <Button
+                py={3}
+                px={1}
+                size="lg"
+                backgroundColor="rgb(94,39,161)"
+                onPress={() => navigation.navigate("LoginScreen")}
               >
-                Or{" "}
-              </Text>
+                Login
+              </Button>
+              <Button
+                py={3}
+                px={1}
+                size="lg"
+                backgroundColor="rgb(94,39,161)"
+                onPress={() => navigation.navigate("SignupScreen")}
+              >
+                Signup
+              </Button>
+              <Center>
+                <Text
+                  fontSize="md"
+                  color="coolGray.600"
+                  _dark={{
+                    color: "warmGray.200",
+                  }}
+                >
+                  Or{" "}
+                </Text>
+              </Center>
               <Ionicons.Button
                 name="ios-logo-google"
-                iconStyle={{ marginLeft: 3 }}
+                iconStyle={{ marginLeft: 52 }}
                 height={48}
-                width={190}
+                width="100%"
                 size={25}
                 backgroundColor="rgb(66,133,244)"
                 disabled={!request}
@@ -81,9 +114,23 @@ const IndexScreen = ({ navigation }) => {
               >
                 Sign in with Google
               </Ionicons.Button>
-            </Center>
-          </VStack>
-        </Box>
+              <Ionicons.Button
+                name="ios-logo-facebook"
+                iconStyle={{ marginLeft: 51 }}
+                height={48}
+                width="100%"
+                size={25}
+                backgroundColor="rgb(56,84,152)"
+                disabled={!fbRequest}
+                onPress={() => {
+                  fbPromptAsync();
+                }}
+              >
+                Login with Facebook
+              </Ionicons.Button>
+            </VStack>
+          </Box>
+        </Center>
       </Center>
     </>
   );
