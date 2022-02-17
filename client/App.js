@@ -50,7 +50,7 @@ function RootNavigator() {
     return <Loading />;
   }
 
-  // return <>{user ? <AppStack /> : <AuthStack />}</>;
+  return <>{user ? <AppStack /> : <AuthStack />}</>;
 
   // return <AuthStack />;
 
@@ -58,7 +58,7 @@ function RootNavigator() {
 
   // return <SignupFormScreen />;
 
-  return <AppStack/>
+  // return <AppStack/>
 }
 
 const App = () => {

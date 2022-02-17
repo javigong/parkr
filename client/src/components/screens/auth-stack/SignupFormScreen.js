@@ -18,7 +18,9 @@ const SignupFormScreen = ({ navigation, route }) => {
   const [haveParking, setHaveParking] = useState();
   const [haveCar, setHaveCar] = useState();
 
-  const handleRegister = () => {};
+  const handleRegister = () => {navigation.navigate("AppStack", {
+    parkingLot,
+  })};
 
   return (
     <Box margin="3">
