@@ -56,7 +56,9 @@ function RootNavigator() {
 
   // return <WelcomeScreen />;
 
-  // return <ParkingLocationScreen />;
+  // return <SignupFormScreen />;
+
+  // return <AppStack/>
 }
 
 const App = () => {

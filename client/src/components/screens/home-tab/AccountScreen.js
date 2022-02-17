@@ -1,7 +1,7 @@
-import React, { useLayoutEffect } from "react";
-import { Button, Center, Text } from "native-base";
+import React from "react";
+import { Center, Text } from "native-base";
 
-const ParkingScreen = ({ navigation }) => {
+const AccountScreen = () => {
   return (
     <Center>
       <Center bg="primary.400" _text={{
@@ -11,10 +11,10 @@ const ParkingScreen = ({ navigation }) => {
       base: 200,
       lg: 255
     }}>
-        ParkingScreen
+        AccountScreen
       </Center>
     </Center>
   );
 };
 
-export default ParkingScreen;
+export default AccountScreen;
