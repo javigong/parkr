@@ -1,17 +1,18 @@
 import React, { useLayoutEffect } from "react";
 import { Button, Center, Text } from "native-base";
-import { TouchableOpacity } from "react-native";
-import { signOut } from "firebase/auth";
-import { auth } from "../../config/firebase";
 
 const ParkingScreen = ({ navigation }) => {
-  const onSignOut = () => {
-    signOut(auth).catch((error) => console.log("Error logging out: ", error));
-  };
   return (
     <Center>
-      <Text>ParkingScreen</Text>
-      <Button onPress={onSignOut}>Sign out</Button>
+      <Center bg="primary.400" _text={{
+      color: "white",
+      fontWeight: "bold"
+    }} height={200} width={{
+      base: 200,
+      lg: 255
+    }}>
+        ParkingScreen
+      </Center>
     </Center>
   );
 };
