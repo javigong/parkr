@@ -9,6 +9,7 @@ import AppStack from "./AppStack";
 import WelcomeScreen from "../screens/auth-stack/WelcomeScreen";
 import OnboardingScreen from "../screens/auth-stack/OnboardingScreen";
 import SignupFormScreen from "../screens/auth-stack/SignupFormScreen";
+import ParkingLocationScreen from "../screens/auth-stack/ParkingLocationScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,7 +19,17 @@ const AuthStack = () => (
     <Stack.Screen name="IndexScreen" component={IndexScreen} />
     <Stack.Screen name="LoginScreen" component={LoginScreen} />
     <Stack.Screen name="SignupScreen" component={SignupScreen} />
-    <Stack.Screen name="SignupFormScreen" component={SignupFormScreen} />
+    <Stack.Screen
+      name="ParkingLocationScreen"
+      component={ParkingLocationScreen}
+    />
+    <Stack.Screen
+      name="SignupFormScreen"
+      options={({ route }) => ({
+        parkingLot: route.params,
+      })}
+      component={SignupFormScreen}
+    />
     <Stack.Screen name="ForgotPwdScreen" component={ForgotPwdScreen} />
     <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
     <Stack.Screen name="AppStack" component={AppStack} />
