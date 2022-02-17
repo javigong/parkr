@@ -1,6 +1,9 @@
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { auth } from "../config/firebase";
+import AccountScreen from "../screens/home-tab/AccountScreen";
+import ChatScreen from "../screens/home-tab/ChatScreen";
+import HostScreen from "../screens/home-tab/HostScreen";
 import ParkingScreen from "../screens/home-tab/ParkingScreen";
 
 const Tab = createMaterialBottomTabNavigator();
@@ -13,10 +16,9 @@ const HomeTab = () => {
   return (
     <Tab.Navigator
       initialRouteName="Park"
-      initialRouteName="Feed"
-      activeColor="black"
+      activeColor="white"
       labelStyle={{ fontSize: 12 }}
-      style={{ backgroundColor: "rgb(94,39,161)" }}
+      barStyle={{ backgroundColor: "rgb(94,39,161)" }}
       options={{
         headerRight: () => (
           <Button onPress={onSignOut} title="Logout" color="rgb(94,39,161)" />
@@ -24,16 +26,12 @@ const HomeTab = () => {
       }}
     >
       <Tab.Screen
-        name="Parking"
+        name="Park"
         component={ParkingScreen}
         options={{
           tabBarLabel: "Park",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="local-parking"
-              color={color}
-              size={26}
-            />
+            <MaterialCommunityIcons name="parking" color={color} size={26} />
           ),
         }}
       />
@@ -41,13 +39,9 @@ const HomeTab = () => {
         name="Host"
         component={HostScreen}
         options={{
-          tabBarLabel: "Park",
+          tabBarLabel: "Host",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="local-parking"
-              color={color}
-              size={26}
-            />
+            <MaterialCommunityIcons name="table-cog" color={color} size={26} />
           ),
         }}
       />
@@ -55,10 +49,10 @@ const HomeTab = () => {
         name="Chat"
         component={ChatScreen}
         options={{
-          tabBarLabel: "Park",
+          tabBarLabel: "Chat",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
-              name="local-parking"
+              name="chat-processing"
               color={color}
               size={26}
             />
@@ -67,12 +61,12 @@ const HomeTab = () => {
       />
       <Tab.Screen
         name="Account"
-        component={Account}
+        component={AccountScreen}
         options={{
-          tabBarLabel: "Park",
+          tabBarLabel: "Account",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
-              name="local-parking"
+              name="account-circle"
               color={color}
               size={26}
             />
