@@ -1,25 +1,28 @@
 {
-    "name": "aws",
-    "version": "1.0.0",
-    "main": "databaseCOnfig.js",
-    "license": "MIT",
-    "scripts": {
-        "start": "yarn dev",
-        "dev": "node databaseConfig.js",
-        "dev-debug": "node --inspect-brk=5858 databaseConfig.js"
-    },
-    "dependencies": {
-        "body-parser": "^1.19.2",
-        "docker": "^1.0.0",
-        "express": "^4.17.3",
-        "fs": "^0.0.1-security",
-        "mysql": "^2.18.1",
-        "mysql-ssh": "^1.0.6",
-        "node": "^17.4.0",
-        "nodejs": "^0.0.0",
-        "xpress": "^2.4.6"
-    },
-    "description": "backend parkr app",
-    "repository": "https://github.com/javigong/parkr",
-    "author": "bos dev"
+  "name": "NodeJS-sequelize-mysql-ssh",
+  "version": "1.0.0",
+  "description": "Simples project to show how connect a MySQL database thru SSH connection using Sequelize",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.5.0",
+    "tunnel-ssh": "^4.1.4",
+    "y": "^0.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulodelima/NodeJS-sequelize-mysql-ssh.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paulodelima/NodeJS-sequelize-mysql-ssh/issues"
+  },
+  "homepage": "https://github.com/paulodelima/NodeJS-sequelize-mysql-ssh#readme"
 }

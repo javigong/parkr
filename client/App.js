@@ -17,60 +17,60 @@ import ParkingLocationScreen from "./src/components/screens/auth-stack/ParkingLo
 const AuthenticatedUserContext = createContext({});
 
 const AuthenticatedUserProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);
 
-    return ( <
-        AuthenticatedUserContext.Provider value = {
-            { user, setUser } } > { children } <
-        /AuthenticatedUserContext.Provider>
-    );
+  return (
+    <AuthenticatedUserContext.Provider value={{ user, setUser }}>
+      {children}
+    </AuthenticatedUserContext.Provider>
+  );
 };
 
 // root navigator:
 
 function RootNavigator() {
-    const { user, setUser } = useContext(AuthenticatedUserContext);
-    const [isLoading, setIsLoading] = useState(true);
+  const { user, setUser } = useContext(AuthenticatedUserContext);
+  const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        // onAuthStateChanged returns an unsubscriber
-        const unsubscribeAuth = onAuthStateChanged(
-            auth,
-            async(authenticatedUser) => {
-                authenticatedUser ? setUser(authenticatedUser) : setUser(null);
-                setIsLoading(false);
-            }
-        );
+  useEffect(() => {
+    // onAuthStateChanged returns an unsubscriber
+    const unsubscribeAuth = onAuthStateChanged(
+      auth,
+      async (authenticatedUser) => {
+        authenticatedUser ? setUser(authenticatedUser) : setUser(null);
+        setIsLoading(false);
+      }
+    );
 
-        // unsubscribe auth listener on unmount
-        return unsubscribeAuth;
-    }, [user]);
+    // unsubscribe auth listener on unmount
+    return unsubscribeAuth;
+  }, [user]);
 
-    if (isLoading) {
-        return <Loading / > ;
-    }
+  if (isLoading) {
+    return <Loading />;
+  }
 
-    return < > { user ? < AppStack / > : < AuthStack / > } < />;
+  return <>{user ? <AppStack /> : <AuthStack />}</>;
 
-    // return <AuthStack />;
+  // return <AuthStack />;
 
+  // return <WelcomeScreen />;
 
-    // return <AppStack/>
+  // return <SignupFormScreen />;
+
+  // return <AppStack/>
 }
 
-const App = () => { <
-    NativeBaseProvider >
-        <
-        AuthenticatedUserProvider >
-        <
-        NavigationContainer >
-        <
-        RootNavigator / >
-        <
-        /NavigationContainer> <
-        /AuthenticatedUserProvider> <
-        /NativeBaseProvider>
-);
+const App = () => {
+  return (
+    <NativeBaseProvider>
+      <AuthenticatedUserProvider>
+        <NavigationContainer>
+          <RootNavigator />
+        </NavigationContainer>
+      </AuthenticatedUserProvider>
+    </NativeBaseProvider>
+  );
 };
 
 export default App;

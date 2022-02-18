@@ -13,42 +13,27 @@ import ParkingLocationScreen from "../screens/auth-stack/ParkingLocationScreen";
 
 const Stack = createNativeStackNavigator();
 
-const AuthStack = () => ( <
-    Stack.Navigator >
-    <
-    Stack.Screen name = "OnboardingScreen"
-    component = { OnboardingScreen }
-    /> <
-    Stack.Screen name = "IndexScreen"
-    component = { IndexScreen }
-    /> <
-    Stack.Screen name = "LoginScreen"
-    component = { LoginScreen }
-    /> <
-    Stack.Screen name = "SignupScreen"
-    component = { SignupScreen }
-    /> <
-    Stack.Screen name = "ParkingLocationScreen"
-    component = { ParkingLocationScreen }
-    /> <
-    Stack.Screen name = "SignupFormScreen"
-    options = {
-        ({ route }) => ({
-            parkingLot: route.params,
-        })
-    }
-    component = { SignupFormScreen }
-    /> <
-    Stack.Screen name = "ForgotPwdScreen"
-    component = { ForgotPwdScreen }
-    /> <
-    Stack.Screen name = "WelcomeScreen"
-    component = { WelcomeScreen }
-    /> <
-    Stack.Screen name = "AppStack"
-    component = { AppStack }
-    /> <
-    /Stack.Navigator>
+const AuthStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
+    <Stack.Screen name="IndexScreen" component={IndexScreen} />
+    <Stack.Screen name="LoginScreen" component={LoginScreen} />
+    <Stack.Screen name="SignupScreen" component={SignupScreen} />
+    <Stack.Screen
+      name="ParkingLocationScreen"
+      component={ParkingLocationScreen}
+    />
+    <Stack.Screen
+      name="SignupFormScreen"
+      options={({ route }) => ({
+        parkingLot: route.params,
+      })}
+      component={SignupFormScreen}
+    />
+    <Stack.Screen name="ForgotPwdScreen" component={ForgotPwdScreen} />
+    <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+    <Stack.Screen name="AppStack" component={AppStack} />
+  </Stack.Navigator>
 );
 
 export default AuthStack;
