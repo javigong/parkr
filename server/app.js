@@ -1,27 +1,36 @@
-const { Sequelize } = require('sequelize');
-const tunnel = require('tunnel-ssh');
+const path = require('path');
+// load dependencies
+const env = require('dotenv');
+const csrf = require('csurf');
+const express = require('express');
+const flash = require('express-flash');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const expressHbs = require('express-handlebars');
+const SequelizeStore = require("connect-session-sequelize")(session.Store); // initalize sequelize with session store
 
-const environment = process.env.ENV || 'development';
-const config = require('./config/config.js')[environment];
+const app = express();
+const csrfProtection = csrf();
+const router = express.Router();
 
-const { host, port, user, password, database } = config.database;
+//Loading Routes
+//const webRoutes = require('./routes/web');
+const sequelize = require('./config/config');
+//const errorController = require('./app/controllers/ErrorController');
 
-const sequelize = new Sequelize(database, user, password, {
-    dialect: 'mysql',
-    logging: false
-});
+env.config();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 
-const configTunnelSSH = config.tunnelSSH;
 
-tunnel(configTunnelSSH, (error, server) => {
-    if (error) {
-        console.error(error);
-    } else {
-        console.info('Server Info: ', server);
-        sequelize.authenticate().then(() => {
-            console.info('Connection established');
-        }).catch((err) => {
-            console.error('Unable to establish connection', err);
-        });
-    }
-});
+sequelize
+//.sync({force : true})
+    .sync()
+    .then(() => {
+        app.listen(process.env.PORT);
+        //pending set timezone
+        console.log("App listening on port " + process.env.PORT);
+    })
+    .catch(err => {
+        console.log(err);
+    });

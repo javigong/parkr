@@ -1,51 +1,16 @@
-const fs = require('fs');
+const Sequelize = require('sequelize');
+const env = require('dotenv');
+env.config();
 
-module.exports = {
-    development: {
-        database: {
-            host: '172.17.0.2',
-            port: 3306,
-            user: 'parkrdev',
-            password: 'P@rkrDevs2022!',
-            database: 'dbparkr',
-        },
-        tunnelSSH: {
-            user: 'ec2-user',
-            host: 'ec2-52-9-101-33.us-west-1.compute.amazonaws.com',
-            port: 22,
-            privateKey: fs.readFile('parkr.pem', function read(err, data) {
-                if (err) {
-                    throw err;
-                }
-                var content = data;
+const DB_HOST = process.env.DB_HOST
+const DB_PORT = process.env.DB_PORT
+const DB_DATABASE = process.env.DB_DATABASE
+const DB_USERNAME = process.env.DB_USERNAME
+const DB_PASSWORD = process.env.DB_PASSWORD
 
-                console.log(content);
+const sequelize = new Sequelize(DB_DATABASE, DB_USERNAME, DB_PASSWORD, {
+    dialect: 'mysql',
+    host: DB_HOST
+});
 
-            }),
-            dstHost: 'ec2-52-9-101-33.us-west-1.compute.amazonaws.com',
-            dstPort: 22,
-            srcHost: '172.17.0.2',
-            srcPort: 3306
-        },
-    },
-    production: {
-        database: {
-            host: process.env.DB_HOST,
-            port: process.env.DB_PORT,
-            user: process.env.DB_USERNAME,
-            password: process.env.DB_PASSWORD,
-            database: process.env.DB_NAME,
-        },
-        tunnelSSH: {
-            user: process.env.TUNNEL_USER,
-            host: process.env.TUNNEL_SSH_HOST,
-            port: process.env.TUNNEL_PORT,
-            dstHost: process.env.TUNNEL_DST_HOST,
-            dstPort: process.env.TUNNEL_DST_PORT,
-            srcHost: process.env.TUNNEL_SRC_HOST,
-            srcPort: process.env.TUNNEL_SRC_PORT,
-            localHost: process.env.TUNNEL_LOCAL_HOST,
-            localPort: process.env.TUNNEL_LOCAL_PORT,
-        },
-    },
-};
+module.exports = sequelize;
