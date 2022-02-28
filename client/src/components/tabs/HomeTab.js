@@ -16,14 +16,10 @@ const HomeTab = () => {
   return (
     <Tab.Navigator
       initialRouteName="Park"
-      activeColor="white"
+      activeColor="#FD6B36"
+      inactiveColor="#818181"
       labelStyle={{ fontSize: 12 }}
-      barStyle={{ backgroundColor: "rgb(94,39,161)" }}
-      options={{
-        headerRight: () => (
-          <Button onPress={onSignOut} title="Logout" color="rgb(94,39,161)" />
-        ),
-      }}
+      barStyle={{ backgroundColor: "white" }}
     >
       <Tab.Screen
         name="Park"
