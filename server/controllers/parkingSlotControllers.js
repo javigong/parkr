@@ -1,20 +1,27 @@
-const parkingSlot = require("../routes/parkingSlot.js");
+const ParkingArea = require("../model/parkingArea.js");
 
-exports.getAllParkingSlots = (req, res, next) => {
-    //req.params.userEmail
-    DailyLog.find({ userEmailAddress: req.params.userEmail })
-        .sort({ dailyLogDate: 'asc' })
-        .exec()
-        .then(results => {
-            res.status(200).json(results);
-        })
-        .catch(error => res.status(500).send(error));
+exports.getAllParkingSlots = async(req, res, next) => {
+    try {
+        const [parkingSlots, _] = await ParkingArea.findAll();
 
-
-
-
+        res.status(200).json({ parkingSlots });
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
 };
 
 exports.postNewParkingArea = (req, res, next) => {
-    res.send("Saved new parking slot")
+
+    try {
+        let _ParkingArea = new ParkingArea(req.body.objParkingArea);
+        const newParkingArea = _ParkingArea.save();
+
+        res.status(201).json({ message: "Saved new parking slot" });
+
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+
 };
