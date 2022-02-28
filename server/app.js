@@ -1,36 +1,40 @@
-const path = require('path');
-// load dependencies
-const env = require('dotenv');
-const csrf = require('csurf');
-const express = require('express');
-const flash = require('express-flash');
+const express = require("express");
+const morgan = require('morgan');
+const cors = require('cors');
 const bodyParser = require('body-parser');
-const session = require('express-session');
-const expressHbs = require('express-handlebars');
-const SequelizeStore = require("connect-session-sequelize")(session.Store); // initalize sequelize with session store
-
 const app = express();
-const csrfProtection = csrf();
-const router = express.Router();
+app.use(cors({
+    origin: ['http://localhost:3000', 'http://localhost:8080']
+}));
 
-//Loading Routes
-//const webRoutes = require('./routes/web');
-const sequelize = require('./config/config');
-//const errorController = require('./app/controllers/ErrorController');
-
-env.config();
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+require("dotenv").config();
+//const cookieParser = require("cookie-parser");
+const connected = require("./Backend/connection.js");
+const PORT = process.env.PORT || 8080;
 
 
-sequelize
-//.sync({force : true})
-    .sync()
-    .then(() => {
-        app.listen(process.env.PORT);
-        //pending set timezone
-        console.log("App listening on port " + process.env.PORT);
-    })
-    .catch(err => {
-        console.log(err);
-    });
+
+//app.use(cookieParser);
+app.use(morgan('tiny'));
+
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({
+    limit: '50mb',
+    extended: true,
+    parameterLimit: 50000
+}));
+app.get('/api/test', (req, res) => {
+    const message = {
+        message: 'Welcome to PARKR server.'
+    };
+    res.json(message);
+})
+
+////////////////////////////Route////////////////////////////
+const router = require("./routes/");
+app.use("/", router);
+/////////////////////////////////////////////////////////////
+
+connected.on('open', () => {
+    app.listen(PORT, () => console.log(`Server is starting at ${PORT}`));
+});

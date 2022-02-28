@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const mysql = require("mysql");
 const env = require('dotenv');
 env.config();
 
@@ -8,9 +8,11 @@ const DB_DATABASE = process.env.DB_DATABASE
 const DB_USERNAME = process.env.DB_USERNAME
 const DB_PASSWORD = process.env.DB_PASSWORD
 
-const sequelize = new Sequelize(DB_DATABASE, DB_USERNAME, DB_PASSWORD, {
-    dialect: 'mysql',
-    host: DB_HOST
+const pool = mysql.createPool({
+    host: DB_HOST,
+    user: DB_USERNAME,
+    database: DB_DATABASE,
+    password: DB_PASSWORD
 });
 
-module.exports = sequelize;
+module.exports = pool.promise();
