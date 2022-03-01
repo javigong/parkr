@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Text } from "native-base";
 
-const DetailsScreen = () => {
+const ChooseCarScreen = () => {
   return (
     <Box>
       <Text></Text>
@@ -9,4 +9,4 @@ const DetailsScreen = () => {
   );
 };
 
-export default DetailsScreen;
+export default ChooseCarScreen;
