@@ -3,7 +3,7 @@ import * as WebBrowser from "expo-web-browser";
 import { ResponseType } from "expo-auth-session";
 import * as Google from "expo-auth-session/providers/google";
 import * as Facebook from "expo-auth-session/providers/facebook";
-import { Text, Center, Box, VStack, Button, Heading } from "native-base";
+import { Text, Center, Box, VStack, Button, Heading, Image } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import {
   getAuth,
@@ -55,83 +55,95 @@ const IndexScreen = ({ navigation }) => {
 
   return (
     <>
-      <Center>
-        <Center w="100%">
-          <Box safeArea py="8" w="90%" maxW="290">
-            <Heading
-              py="16"
-              size="xl"
-              fontWeight="600"
-              color="coolGray.800"
-              _dark={{
-                color: "warmGray.50",
-              }}
-            >
-              Welcome to Parkr
-            </Heading>
+      <Box style={{ backgroundColor: "white" }}>
+        <Center>
+          <Center w="100%">
+            <Box safeArea py="8" w="90%" maxW="290">
+              <Box style={{ paddingVertical: 60 }}>
+                <Center>
+                  <Image
+                    source={require("../../../../assets/login-image.png")}
+                    alt="onboarding image"
+                  />
+                </Center>
+              </Box>
 
-            <VStack space={3} mt="5" justifyContent="center">
-              <Button
-                py={3}
-                px={1}
-                size="lg"
-                backgroundColor="rgb(94,39,161)"
-                onPress={() => navigation.navigate("LoginScreen")}
-              >
-                Login
-              </Button>
-              <Button
-                py={3}
-                px={1}
-                size="lg"
-                backgroundColor="rgb(94,39,161)"
-                onPress={() => navigation.navigate("SignupScreen")}
-              >
-                Signup
-              </Button>
-              <Center>
-                <Text
-                  fontSize="md"
-                  color="coolGray.600"
-                  _dark={{
-                    color: "warmGray.200",
+              <VStack space={3} mt="5" justifyContent="center">
+                <Button
+                  py={3}
+                  px={1}
+                  size="lg"
+                  backgroundColor="#FD6B36"
+                  borderRadius="50px"
+                  onPress={() => navigation.navigate("LoginScreen")}
+                >
+                  Login
+                </Button>
+                <Button
+                  py={3}
+                  px={1}
+                  size="lg"
+                  backgroundColor="white"
+                  borderStyle="solid"
+                  borderWidth="2px"
+                  borderRadius="50px"
+                  borderColor="#FD6B36"
+                  onPress={() => navigation.navigate("SignupScreen")}
+                >
+                  <Text
+                    style={{
+                      fontWeight: "bold",
+                      fontSize: "16px",
+                      color: "#FD6B36",
+                    }}
+                  >
+                    Register
+                  </Text>
+                </Button>
+                <Center>
+                  <Text
+                    fontSize="md"
+                    color="coolGray.600"
+                    _dark={{
+                      color: "warmGray.200",
+                    }}
+                  >
+                    Or{" "}
+                  </Text>
+                </Center>
+                <Ionicons.Button
+                  name="ios-logo-google"
+                  iconStyle={{ marginLeft: 52 }}
+                  height={48}
+                  width="100%"
+                  size={25}
+                  backgroundColor="rgb(66,133,244)"
+                  disabled={!request}
+                  onPress={() => {
+                    promptAsync();
                   }}
                 >
-                  Or{" "}
-                </Text>
-              </Center>
-              <Ionicons.Button
-                name="ios-logo-google"
-                iconStyle={{ marginLeft: 52 }}
-                height={48}
-                width="100%"
-                size={25}
-                backgroundColor="rgb(66,133,244)"
-                disabled={!request}
-                onPress={() => {
-                  promptAsync();
-                }}
-              >
-                Sign in with Google
-              </Ionicons.Button>
-              <Ionicons.Button
-                name="ios-logo-facebook"
-                iconStyle={{ marginLeft: 51 }}
-                height={48}
-                width="100%"
-                size={25}
-                backgroundColor="rgb(56,84,152)"
-                disabled={!fbRequest}
-                onPress={() => {
-                  fbPromptAsync();
-                }}
-              >
-                Login with Facebook
-              </Ionicons.Button>
-            </VStack>
-          </Box>
+                  Sign in with Google
+                </Ionicons.Button>
+                <Ionicons.Button
+                  name="ios-logo-facebook"
+                  iconStyle={{ marginLeft: 51 }}
+                  height={48}
+                  width="100%"
+                  size={25}
+                  backgroundColor="rgb(56,84,152)"
+                  disabled={!fbRequest}
+                  onPress={() => {
+                    fbPromptAsync();
+                  }}
+                >
+                  Login with Facebook
+                </Ionicons.Button>
+              </VStack>
+            </Box>
+          </Center>
         </Center>
-      </Center>
+      </Box>
     </>
   );
 };
