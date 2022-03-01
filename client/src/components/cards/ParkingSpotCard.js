@@ -26,7 +26,7 @@ const ParkingSpotCard = ({ item }) => {
             >
               <Center h="39">
                 <Text color="white" fontSize="xl">
-                  {item.ownerInitials}
+                  {item.firstName.charAt(0).toUpperCase()}{item.lastName.charAt(0).toUpperCase()}
                 </Text>
               </Center>
             </Box>

@@ -5,7 +5,8 @@ import ParkingSpotCard from "../cards/ParkingSpotCard";
 const data = [
   {
     id: "1",
-    ownerInitials: "FH",
+    firstName: "Brian",
+    lastName: "Feder",
     spotNumber: "10",
     type: "motorcycle",
     startDate: "Feb 20",
@@ -16,7 +17,8 @@ const data = [
   },
   {
     id: "2",
-    ownerInitials: "DF",
+    firstName: "Debora",
+    lastName: "Morris",
     spotNumber: "25",
     type: "ev",
     startDate: "Feb 20",
@@ -27,7 +29,8 @@ const data = [
   },
   {
     id: "3",
-    ownerInitials: "AW",
+    firstName: "Sandra",
+    lastName: "Coleman",
     spotNumber: "57",
     type: "standard",
     startDate: "Feb 20",
