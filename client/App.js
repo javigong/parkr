@@ -14,6 +14,8 @@ import ParkingLocationScreen from "./src/components/screens/auth-stack/ParkingLo
 import ParkingSpotCard from "./src/components/cards/ParkingSpotCard";
 
 import { LogBox } from 'react-native';
+import TodaySpotList from "./src/components/lists/TodaySpotList";
+import ParkingScreen from "./src/components/screens/home-tab/ParkingScreen";
 
 LogBox.ignoreLogs(["AsyncStorage has been extracted from react-native core and will be removed in a future release. It can now be installed and imported from '@react-native-async-storage/async-storage' instead of 'react-native'. See https://github.com/react-native-async-storage/async-storage"]); // Ignore log notification by message
 
@@ -61,7 +63,6 @@ function RootNavigator() {
   // return <WelcomeScreen />;
   // return <SignupFormScreen />;
   // return <AppStack />;
-
 }
 
 const App = () => {
