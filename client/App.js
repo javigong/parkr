@@ -11,6 +11,7 @@ import LoginScreen from "./src/components/screens/auth-stack/LoginScreen";
 import WelcomeScreen from "./src/components/screens/auth-stack/WelcomeScreen";
 import SignupFormScreen from "./src/components/screens/auth-stack/SignupFormScreen";
 import ParkingLocationScreen from "./src/components/screens/auth-stack/ParkingLocationScreen";
+import ParkingSpotCard from "./src/components/cards/ParkingSpotCard";
 
 // user context:
 
@@ -50,15 +51,13 @@ function RootNavigator() {
     return <Loading />;
   }
 
-  return <>{user ? <AppStack /> : <AuthStack />}</>;
+  // return <>{user ? <AppStack /> : <AuthStack />}</>;
 
   // return <AuthStack />;
-
   // return <WelcomeScreen />;
-
   // return <SignupFormScreen />;
-
-  // return <AppStack/>
+  // return <AppStack />;
+  return <ParkingSpotCard />;
 }
 
 const App = () => {
