@@ -1,59 +1,92 @@
-import React from 'react';
-import { TouchableOpacity, Text, View } from 'react-native';
-import { Image } from 'native-base';
-import Onboarding from 'react-native-onboarding-swiper';
+import React from "react";
+import { TouchableOpacity, Text, View } from "react-native";
+import { Image } from "native-base";
+import Onboarding from "react-native-onboarding-swiper";
 
 const Done = ({ ...props }) => {
-    return <TouchableOpacity style={{ marginHorizontal: 15}} { ...props }><Text style={{ fontSize: 16 }}>Done</Text></TouchableOpacity>
-}
+  return (
+    <TouchableOpacity style={{ marginHorizontal: 15 }} {...props}>
+      <Text style={{ fontSize: 16 }}>Done</Text>
+    </TouchableOpacity>
+  );
+};
 
-const Dots = ({selected}) => {
-    let backgroundColor;
+const Dots = ({ selected }) => {
+  let backgroundColor;
 
-    backgroundColor = selected ? 'rgba(0,0,0,0.8)' : 'rgba(0,0,0,0.3)';
-    return (
-        <View style={{
-            width: 10,
-            height: 10,
-            borderRadius: 50,
-            marginHorizontal: 3,
-            backgroundColor
-        }}/>
-    );
-}
+  backgroundColor = selected ? "rgba(0,0,0,0.8)" : "rgba(0,0,0,0.3)";
+  return (
+    <View
+      style={{
+        width: 10,
+        height: 10,
+        borderRadius: 50,
+        marginHorizontal: 3,
+        backgroundColor,
+      }}
+    />
+  );
+};
 
 const OnboardingScreen = ({ navigation }) => {
-
-    return (
-        <>
-        <Onboarding
+  return (
+    <>
+      <Onboarding
         onSkip={() => navigation.replace("IndexScreen")}
         onDone={() => navigation.replace("IndexScreen")}
         DoneButtonComponent={Done}
         DotComponent={Dots}
+        containerStyles={{}}
+        imageContainerStyles={{
+          paddingBottom: 30,
+        }}
+        subTitleStyles={{
+          paddingHorizontal: 40,
+        }}
         pages={[
-            {
-                backgroundColor: '#a6e4d0',
-                // image: <Image source={require('../../../../assets/*.png')} />,
-                title: 'Onboarding 1',
-                subtitle: ''
-            },
-            {
-                backgroundColor: '#fdeb93',
-                // image: <Image source={require('../../../../assets/*.png')} />,
-                title: 'Onboarding 2',
-                subtitle: ''
-            },
-            {
-                backgroundColor: '#e6b4d5',
-                // image: <Image source={require('../../../../assets/*.png')} />,
-                title: 'Onboarding 3',
-                subtitle: ''
-            },
-            ]}
-        />
-        </>
-    )
+          {
+            backgroundColor: "white",
+            image: (
+              <Image
+                style={{ width: 300, height: 300 }}
+                source={require("../../../../assets/onboard_image1.png")}
+                alt="onboarding image"
+              />
+            ),
+            title: "Visiting a friend",
+            subtitle:
+              "You wonder if there would be an available visitor's spot when you arrive",
+          },
+          {
+            backgroundColor: "white",
+            image: (
+              <Image
+                style={{ width: 300, height: 300 }}
+                source={require("../../../../assets/onboard_image2.png")}
+                alt="onboarding image"
+              />
+            ),
+            title: "Try Parkr",
+            subtitle:
+              "You're in luck! Your friend's building is registered with Parkr.",
+          },
+          {
+            backgroundColor: "white",
+            image: (
+              <Image
+                style={{ width: 300, height: 300 }}
+                source={require("../../../../assets/onboard_image3.png")}
+                alt="onboarding image"
+              />
+            ),
+            title: "Park without hassle",
+            subtitle:
+              "Parkr lets you reserve spots within participating buildings in advance.",
+          },
+        ]}
+      />
+    </>
+  );
 };
 
 export default OnboardingScreen;
