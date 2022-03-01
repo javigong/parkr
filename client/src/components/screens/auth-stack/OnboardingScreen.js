@@ -81,7 +81,7 @@ const OnboardingScreen = ({ navigation }) => {
             ),
             title: "Park without hassle",
             subtitle:
-              "Parkr lets you reserve spots within participating buildings in advance.",
+              "Parkr lets you reserve spots at participating buildings in advance.",
           },
         ]}
       />
