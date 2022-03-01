@@ -7,6 +7,46 @@ import SegmentedControlTab from "react-native-segmented-control-tab";
 import { Ionicons } from "@expo/vector-icons";
 import TodaySpotList from "../../lists/TodaySpotList";
 
+const data = [
+  {
+    id: "1",
+    firstName: "Brian",
+    lastName: "Feder",
+    spotNumber: "10",
+    type: "motorcycle",
+    startDate: "Feb 20",
+    startTime: "06:00",
+    endDate: null,
+    endTime: null,
+    price: "1.50",
+  },
+  {
+    id: "2",
+    firstName: "Debora",
+    lastName: "Morris",
+    spotNumber: "25",
+    type: "ev",
+    startDate: "Feb 20",
+    startTime: "06:00",
+    endDate: null,
+    endTime: null,
+    price: "4.50",
+  },
+  {
+    id: "3",
+    firstName: "Sandra",
+    lastName: "Coleman",
+    spotNumber: "57",
+    type: "standard",
+    startDate: "Feb 20",
+    startTime: "11:30",
+    endDate: null,
+    endTime: null,
+    price: "2.00",
+  },
+  
+];
+
 const ParkingScreen = ({ navigation }) => {
   const [customStyleIndex, setCustomStyleIndex] = useState(0);
 
@@ -85,7 +125,7 @@ const ParkingScreen = ({ navigation }) => {
             <Box width="100%">
               {/* <Text style={styles.tabContent}> Tab one</Text> */}
             <Box backgroundColor="white" >
-                <TodaySpotList />
+                <TodaySpotList data={data} />
             </Box>
               <Box>
               </Box>
