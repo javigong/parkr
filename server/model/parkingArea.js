@@ -12,6 +12,7 @@ class ParkingArea {
 
     async save() {
 
+
         let sql = `INSERT INTO parkingarea (idParkingSlot,paUnitNo,paVehicleType,paStatus,paVisitorId,paFee)VALUES
         ('${this.objParkingArea.idParkingSlot}','${this.objParkingArea.paUnitNo}','${this.objParkingArea.paVehicleType}',
         '${this.objParkingArea.paStatus}','${this.objParkingArea.paVisitorId}','${this.objParkingArea.paFee}')`;
@@ -22,7 +23,12 @@ class ParkingArea {
     }
 
     static findAll() {
-        let sql = "SELECT * FROM parkingarea;";
+        let sql = "SELECT idParkingSlot, paUnitNo, paOwnerId, paVehicleType, paStatus, paVisitorId, paFee, rsrv_start, rsrv_end, IF(paVisitorID<>null, 0, 1) as availability FROM dbparkr.parkingarea INNER JOIN dbparkr.slotlist ON userid = paOwnerId";
+        return db.execute(sql);
+    }
+
+    static checkAvailability(userId, dtStart, dtEnd) {
+        let sql = "SELECT idParkingSlot, paUnitNo, paOwnerId, paVehicleType, paStatus, paVisitorId, paFee, rsrv_start, rsrv_end, IF(paVisitorID<>null, 0, 1) as availability FROM dbparkr.parkingarea INNER JOIN dbparkr.slotlist ON userid = paOwnerId";
         return db.execute(sql);
     }
 }

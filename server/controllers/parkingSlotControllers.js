@@ -14,7 +14,8 @@ exports.getAllParkingSlots = async(req, res, next) => {
 exports.postNewParkingArea = (req, res, next) => {
 
     try {
-        let _ParkingArea = new ParkingArea(req.body.objParkingArea);
+        console.log(req.body);
+
         const newParkingArea = _ParkingArea.save();
 
         res.status(201).json({ message: "Saved new parking slot" });
