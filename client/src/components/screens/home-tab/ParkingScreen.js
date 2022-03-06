@@ -44,7 +44,6 @@ const data = [
     endTime: null,
     price: "2.00",
   },
-  
 ];
 
 const ParkingScreen = ({ navigation }) => {
@@ -57,6 +56,11 @@ const ParkingScreen = ({ navigation }) => {
   const onSignOut = () => {
     signOut(auth).catch((error) => console.log("Error logging out: ", error));
   };
+
+  const findParkingHandler = () => {
+    navigation.navigate("ParkingStack");
+  };
+
   return (
     <>
       <SafeAreaView style={styles.container}>
@@ -115,7 +119,12 @@ const ParkingScreen = ({ navigation }) => {
               parking?
             </Text>
 
-            <Button backgroundColor="white" width="85%" mb="10">
+            <Button
+              onPress={findParkingHandler}
+              backgroundColor="white"
+              width="85%"
+              mb="10"
+            >
               <Text color="#FD6B36" fontWeight="bold">
                 FIND PARKING
               </Text>
@@ -124,11 +133,10 @@ const ParkingScreen = ({ navigation }) => {
           {customStyleIndex === 0 && (
             <Box width="100%">
               {/* <Text style={styles.tabContent}> Tab one</Text> */}
-            <Box backgroundColor="white" >
+              <Box backgroundColor="white">
                 <TodaySpotList data={data} />
-            </Box>
-              <Box>
               </Box>
+              <Box></Box>
             </Box>
           )}
           {customStyleIndex === 1 && (
