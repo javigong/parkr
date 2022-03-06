@@ -1,27 +1,30 @@
-const { Sequelize } = require('sequelize');
-const tunnel = require('tunnel-ssh');
+const express = require("express");
+const morgan = require('morgan');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const app = express();
+app.use(cors({
+    origin: ['http://localhost:3000']
+}));
 
-const environment = process.env.ENV || 'development';
-const config = require('./config/config.js')[environment];
+//const cookieParser = require("cookie-parser");
+const PORT = process.env.PORT || 3000;
 
-const { host, port, user, password, database } = config.database;
 
-const sequelize = new Sequelize(database, user, password, {
-    dialect: 'mysql',
-    logging: false
-});
 
-const configTunnelSSH = config.tunnelSSH;
+//app.use(cookieParser);
+app.use(morgan('tiny'));
 
-tunnel(configTunnelSSH, (error, server) => {
-    if (error) {
-        console.error(error);
-    } else {
-        console.info('Server Info: ', server);
-        sequelize.authenticate().then(() => {
-            console.info('Connection established');
-        }).catch((err) => {
-            console.error('Unable to establish connection', err);
-        });
-    }
-});
+app.get('/api/test', (req, res) => {
+    const message = {
+        message: 'Welcome to PARKR server.'
+    };
+    res.json(message);
+})
+
+////////////////////////////Route////////////////////////////
+const router = require("./routes/index.js");
+app.use("/", router);
+/////////////////////////////////////////////////////////////
+
+app.listen(PORT, () => console.log(`Server is starting at ${PORT}`));
