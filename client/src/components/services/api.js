@@ -1,22 +1,22 @@
 import axios from "axios";
 import { BASE_URL } from "../config/api_config";
 
-export const getAllParkingSlots = async () => {
+export const getAllParkingSpots = async () => {
   const configurationObject = {
     method: "get",
     url: `${BASE_URL}/parkingslot/allslots`,
   };
   try {
     const response = await axios(configurationObject);
-    // console.log(response.data.results);
-    const results = response.data.results;
+    console.log(response.data.parkingSlots);
+    const results = response.data.parkingSlots;
     return results;
   } catch (error) {
     throw error;
   }
 };
 
-export const postNewParkingSlot = async (
+export const postNewParkingSpot = async (
   idParkingSlot,
   paUnitNo,
   paVehicleType,
@@ -38,7 +38,7 @@ export const postNewParkingSlot = async (
   };
   try {
     const response = await axios(configurationObject);
-    // console.log(response.data.results);
+    console.log(response.data.results);
     const results = response.data.results;
     return results;
   } catch (error) {
