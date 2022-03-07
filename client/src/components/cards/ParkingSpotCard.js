@@ -2,7 +2,8 @@ import { Box, Center, Divider, HStack, Text, VStack } from "native-base";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const ParkingSpotCard = ({ item }) => {
+const ParkingSpotCard = ({ item, currentDate }) => {
+  // type 1 -standard\\ntype 2 - large\\ntype 3 - electric car\\ntype 4 - motorcycle
 
   return (
     <>
@@ -26,48 +27,65 @@ const ParkingSpotCard = ({ item }) => {
             >
               <Center h="39">
                 <Text color="white" fontSize="xl">
-                  {item.firstName.charAt(0).toUpperCase()}{item.lastName.charAt(0).toUpperCase()}
+                  {item.upFirstName.charAt(0).toUpperCase()}
+                  {item.upLastName.charAt(0).toUpperCase()}
                 </Text>
               </Center>
             </Box>
             <VStack space="1">
               <Box>
-                <Text fontSize="xl">Spot {item.spotNumber}</Text>
+                <Text fontSize="xl">Spot {item.idParkingSlot}</Text>
               </Box>
               <Box>
-                {item.type == "ev" && (
+                {item.paVehicleType == "1" && (
                   <Box
-                    px="2"
-                    borderWidth="1"
-                    borderColor="#FD6B36"
-                    rounded="full"
-                  >
-                    <Text fontSize="13" color="#FD6B36">
-                      EV Charger
-                    </Text>
-                  </Box>
-                )}
-                {item.type == "motorcycle" && (
-                  <Box
+                    width="75"
                     px="2"
                     borderWidth="1"
                     borderColor="#0CB183"
                     rounded="full"
                   >
                     <Text fontSize="13" color="#0CB183">
-                      Motorcycle
+                      Standard
                     </Text>
                   </Box>
                 )}
-                {item.type == "standard" && (
+                {item.paVehicleType == "2" && (
                   <Box
+                    width="55"
+                    px="2"
+                    borderWidth="1"
+                    borderColor="#FD6B36"
+                    rounded="full"
+                  >
+                    <Text fontSize="13" color="#FD6B36">
+                      Large
+                    </Text>
+                  </Box>
+                )}
+                {item.paVehicleType == "3" && (
+                  <Box
+                    width="90"
                     px="2"
                     borderWidth="1"
                     borderColor="#09A1C6"
                     rounded="full"
                   >
                     <Text fontSize="13" color="#09A1C6">
-                      Standard
+                      EV Charger
+                    </Text>
+                  </Box>
+                )}
+                {item.paVehicleType == "4" && (
+                  <Box
+                    width="87"
+                    px="2"
+                    borderWidth="1"
+                    borderColor="#DB7D16"
+                    rounded="full"
+                  >
+                    <Text fontSize="13" color="#DB7D16">
+                      Motorcycle
                     </Text>
                   </Box>
                 )}
@@ -77,11 +95,12 @@ const ParkingSpotCard = ({ item }) => {
           <HStack space="4" justifyContent="space-between">
             <Box>
               <Text>
-                {item.startDate}, {item.startTime} {item.endDate && `- ${item.endDate}, ${item.endTime}`}
+                {currentDate}, {item.rsrv_start.slice(0, 5)} -{" "}
+                {item.rsrv_end.slice(0, 5)}
               </Text>
             </Box>
             <Box>
-              <Text>CAD ${item.price}</Text>
+              <Text>CAD ${item.paFee}</Text>
             </Box>
           </HStack>
         </VStack>
