@@ -46,25 +46,25 @@ const FindParkingScreen = () => {
           />
         </Svg>
         <Text>Start</Text>
+        <View>
+          <HStack>
+            <Button onPress={showDatepicker} title="Start Date" />
+            <Button onPress={showTimepicker} title="Start Time" />
+          </HStack>
+
+          {show && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              mode={mode}
+              is24Hour={true}
+              display="default"
+              onChange={onChange}
+            />
+          )}
+        </View>
       </HStack>
-      <View>
-        <View>
-          <Button onPress={showDatepicker} title="Show date picker!" />
-        </View>
-        <View>
-          <Button onPress={showTimepicker} title="Show time picker!" />
-        </View>
-        {show && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode={mode}
-            is24Hour={true}
-            display="default"
-            onChange={onChange}
-          />
-        )}
-      </View>
+
       <HStack>
         <Svg
           width="26"
@@ -79,7 +79,25 @@ const FindParkingScreen = () => {
           />
         </Svg>
         <Text>End</Text>
+        <View>
+          <HStack>
+            <Button onPress={showDatepicker} title="End Date" />
+            <Button onPress={showTimepicker} title=" Time" />
+          </HStack>
+
+          {show && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              mode={mode}
+              is24Hour={true}
+              display="default"
+              onChange={onChange}
+            />
+          )}
+        </View>
       </HStack>
+      <Text>Select the parking type</Text>
     </Box>
   );
 };
