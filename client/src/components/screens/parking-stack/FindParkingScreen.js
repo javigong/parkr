@@ -5,6 +5,8 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import StartTimeSvg from "../../UI/StartTimeSvg";
 import EndTimeSvg from "../../UI/EndTimeSvg";
 import ParkingTypeButton from "../../UI/ParkingTypeButton";
+import OutlineButton from "../../UI/OutlineButton";
+import SolidOrangeButton from "../../UI/SolidOrangeButton";
 
 const FindParkingScreen = () => {
   const [date, setDate] = useState(new Date(1598051730000));
@@ -83,6 +85,8 @@ const FindParkingScreen = () => {
           );
         })}
       </Flex>
+      <OutlineButton buttonText="Cancel" />
+      <SolidOrangeButton buttonText="Save" />
     </Box>
   );
 };
