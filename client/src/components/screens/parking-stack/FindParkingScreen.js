@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Text, View, Button, Flex, HStack } from "native-base";
+import { Box, Text, View, Button, Flex, Stack } from "native-base";
 
 import DateTimePicker from "@react-native-community/datetimepicker";
 import StartTimeSvg from "../../UI/StartTimeSvg";
@@ -85,8 +85,10 @@ const FindParkingScreen = () => {
           );
         })}
       </Flex>
-      <OutlineButton buttonText="Cancel" />
-      <SolidOrangeButton buttonText="Save" />
+      <Flex flexDirection="row" justifyContent="stretch">
+        <OutlineButton style={{ flex: 1 }} buttonText="CANCEL" />
+        <SolidOrangeButton buttonText="SAVE" />
+      </Flex>
     </Box>
   );
 };
