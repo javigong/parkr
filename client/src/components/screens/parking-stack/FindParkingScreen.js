@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Button } from "react-native";
-import { Box, Text, View, Input, HStack } from "native-base";
+import { Box, Text, View, Button, Flex, HStack } from "native-base";
 import { Svg, Path } from "react-native-svg";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 const FindParkingScreen = () => {
   const [date, setDate] = useState(new Date(1598051730000));
-  const [mode, setMode] = useState("date");
+  const [mode, setMode] = useState("datetime");
   const [show, setShow] = useState(false);
+  const [colorState, setColorState] = useState(false);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -21,18 +21,18 @@ const FindParkingScreen = () => {
   };
 
   const showDatepicker = () => {
-    showMode("date");
+    showMode("datetime");
   };
 
-  const showTimepicker = () => {
-    showMode("time");
+  const colorHandler = () => {
+    setColorState(!colorState);
   };
 
   return (
     <Box>
       <Text>Select the period for parking</Text>
 
-      <HStack>
+      <HStack w="100%">
         <Svg
           width="27"
           height="28"
@@ -46,10 +46,9 @@ const FindParkingScreen = () => {
           />
         </Svg>
         <Text>Start</Text>
-        <View>
+        <View w="100%">
           <HStack>
             <Button onPress={showDatepicker} title="Start Date" />
-            <Button onPress={showTimepicker} title="Start Time" />
           </HStack>
 
           {show && (
@@ -58,7 +57,7 @@ const FindParkingScreen = () => {
               value={date}
               mode={mode}
               is24Hour={true}
-              display="default"
+              display="spinner"
               onChange={onChange}
             />
           )}
@@ -82,7 +81,6 @@ const FindParkingScreen = () => {
         <View>
           <HStack>
             <Button onPress={showDatepicker} title="End Date" />
-            <Button onPress={showTimepicker} title=" Time" />
           </HStack>
 
           {show && (
@@ -98,6 +96,59 @@ const FindParkingScreen = () => {
         </View>
       </HStack>
       <Text>Select the parking type</Text>
+      <Flex flexDirection="row" flexWrap="wrap">
+        <Button borderRadius="17" width="1/4" m="1.5" width="fitContent">
+          All
+        </Button>
+        <Button
+          borderRadius="17"
+          width="1/4"
+          m="1.5"
+          alignSelf="center"
+          width="fitContent"
+          _text={colorState ? { color: "white" } : { color: "gray.500" }}
+          backgroundColor={colorState ? "orange.400" : "gray.300"}
+          onPress={colorHandler}
+        >
+          Standard
+        </Button>
+        <Button
+          borderRadius="17"
+          width="1/4"
+          m="1.5"
+          alignSelf="center"
+          width="fitContent"
+        >
+          EV Charger
+        </Button>
+        <Button
+          borderRadius="17"
+          width="1/4"
+          m="1.5"
+          alignSelf="center"
+          width="fitContent"
+        >
+          Large
+        </Button>
+        <Button
+          borderRadius="17"
+          width="1/4"
+          m="1.5"
+          alignSelf="center"
+          width="fitContent"
+        >
+          Motorcycle
+        </Button>
+        <Button
+          borderRadius="17"
+          width="1/4"
+          m="1.5"
+          alignSelf="center"
+          width="fitContent"
+        >
+          Small Car
+        </Button>
+      </Flex>
     </Box>
   );
 };
