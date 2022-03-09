@@ -37,6 +37,13 @@ const ParkingScreen = ({ navigation }) => {
     setCustomStyleIndex(index);
   };
 
+  const onSignOut = () => {
+    signOut(auth).catch((error) => console.log("Error logging out: ", error));
+  };
+
+  const findParkingHandler = () => {
+    navigation.navigate("ParkingStack");
+  };
   useEffect(() => {
     const date = new Date();
     setCurrentDate(date.toString().slice(4, 10));
@@ -115,7 +122,7 @@ const ParkingScreen = ({ navigation }) => {
                   mb="3"
                   borderRadius="20"
                   backgroundColor="#FD6B36"
-                  
+                  onPress={findParkingHandler}
                 >
                   <Text color="white" fontWeight="bold">
                     FIND PARKING
@@ -158,11 +165,12 @@ const ParkingScreen = ({ navigation }) => {
                   </Tab.Screen>
                 </Tab.Navigator>
               </Box>
+              <Box></Box>
             </Box>
           )}
           {customStyleIndex === 1 && (
             <Box flex="1" width="100%">
-            <Box flex="1">
+              <Box flex="1">
                 <Tab.Navigator
                   screenOptions={{
                     tabBarIndicatorStyle: {
