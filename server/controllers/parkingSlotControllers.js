@@ -11,6 +11,28 @@ exports.getAllParkingSlots = async(req, res, next) => {
     }
 };
 
+exports.getBuildingInfo = async(req, res, next) => {
+    try {
+        const [buildingInfo, _] = await ParkingArea.getBuildingInformation();
+
+        res.status(200).json({ buildingInfo });
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+};
+
+exports.getUserProfiles = async(req, res, next) => {
+    try {
+        const [userProfiles, _] = await ParkingArea.fetchUserProfiles();
+
+        res.status(200).json({ userProfiles });
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+};
+
 exports.postNewParkingArea = (req, res, next) => {
 
     try {
