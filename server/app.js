@@ -7,6 +7,8 @@ app.use(cors({
     origin: ['http://localhost:4000']
 }));
 
+const { initializeApp } = require('firebase-admin/app');
+
 //const cookieParser = require("cookie-parser");
 const PORT = process.env.PORT || 4000;
 
