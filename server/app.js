@@ -10,6 +10,8 @@ const { initializeApp } = require('firebase-admin/app');
 const admin = require('firebase-admin');
 const googleAppCredentials = require('./config/google_app_credentials.json');
 
+const { initializeApp } = require('firebase-admin/app');
+
 //const cookieParser = require("cookie-parser");
 const PORT = process.env.PORT || 4000;
 
