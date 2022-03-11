@@ -2,7 +2,6 @@
 // https://aboutreact.com/react-native-upload-file-to-aws-s3-bucket/
 // https://www.youtube.com/watch?v=KrhuoEiv_sk&t=621s
 
-
 import React, { useState, useEffect } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 import { Box, Text, VStack, FormControl, Input, WarningOutlineIcon, Button, Image, ScrollView } from "native-base";
@@ -20,7 +19,7 @@ const LicensePlateScreen = () => {
   const [filename, setFilename] = useState();
   const [filePath, setFilePath] = useState({});
   const [imageType, setImageType] = useState();
-  const [plateNum, setPlateNum] = useState();
+  const [plateNum, setPlateNum] = useState('');
   const [uploadSuccessMessage, setUploadSuccessMessage] = useState();
   const [callAPI, setCallAPI] = useState({});
 
@@ -94,6 +93,7 @@ const LicensePlateScreen = () => {
         type: imageType,
       },
       {
+        //can make prefix to user's name
         keyPrefix: 'cars/', 
         bucket: 'parkrbucket', 
         region: 'us-west-2', 
@@ -114,7 +114,7 @@ const LicensePlateScreen = () => {
           location
         } = response.body.postResponse;
           setUploadSuccessMessage('Uploaded successfully');
-          setCallAPI(response);
+          setCallAPI(response.body.etag);
         // setUploadSuccessMessage(
         //   `Uploaded Successfully: 
         //   \n1. bucket => ${bucket}
@@ -170,7 +170,7 @@ const LicensePlateScreen = () => {
           </FormControl.ErrorMessage>  
 
           <FormControl.Label>License Plate</FormControl.Label>
-          <Input type="text" placeholder="i.e. 291 VSA" value={plateNum ? plateNum : ""}/>
+          <Input type="text" placeholder="i.e. 291 VSA" value={plateNum}/>
           <FormControl.HelperText>
             Please provide license plate number</FormControl.HelperText>
             <FormControl.HelperText>
