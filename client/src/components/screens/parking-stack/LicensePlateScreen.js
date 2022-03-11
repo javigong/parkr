@@ -15,13 +15,14 @@ const LicensePlateScreen = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [camera, setCamera] = useState(null);
   const [cameraOn, setCameraOn] = useState(false);
+  const [cameraText, setCameraText] = useState('Turn On Camera')
   const [image, setImage] = useState(null);
   const [filename, setFilename] = useState();
   const [filePath, setFilePath] = useState({});
   const [imageType, setImageType] = useState();
   const [plateNum, setPlateNum] = useState('');
   const [uploadSuccessMessage, setUploadSuccessMessage] = useState();
-  const [callAPI, setCallAPI] = useState({});
+
 
 // request user permission to access camera
 
@@ -37,15 +38,18 @@ const LicensePlateScreen = () => {
   const openCamera = () => {
     if (cameraOn) {
       setCameraOn(false);
+      setCameraText('Turn On Camera');
     } else {
       setCameraOn(true);
+      setImage(null);
+      setCameraText('Turn Off Camera');
     }
   }
 
   const takePicture = async () => {
     if(camera) {
       const data = await camera.takePictureAsync(null)
-      console.log("data: ", data);
+      // console.log("data: ", data);
       setImage(data.uri);
 
       let file = data.uri.substring(data.uri.lastIndexOf('/')+1);
@@ -54,12 +58,16 @@ const LicensePlateScreen = () => {
       setImageType(type);
       setFilename(file);
       setFilePath(data);
+
+   
     }
   }
   
 // pick an image from gallery
 
   const pickImage = async () => {
+
+    setCameraOn(false);
 
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -77,6 +85,7 @@ const LicensePlateScreen = () => {
       setImage(result.uri);
       setFilePath(result);
     }
+
   };
 
 // upload file to AWS S3 Bucket for easy storage and retrieval  
@@ -113,8 +122,9 @@ const LicensePlateScreen = () => {
           key,
           location
         } = response.body.postResponse;
+
           setUploadSuccessMessage('Uploaded successfully');
-          setCallAPI(response.body.etag);
+    
         // setUploadSuccessMessage(
         //   `Uploaded Successfully: 
         //   \n1. bucket => ${bucket}
@@ -122,37 +132,28 @@ const LicensePlateScreen = () => {
         //   \n3. key => ${key}
         //   \n4. location => ${location}`,
         // );
+        const options = {
+          method: 'POST',
+          url: 'https://zyanyatech1-license-plate-recognition-v1.p.rapidapi.com/recognize_url',
+          params: {
+            image_url: `https://parkrbucket.s3.us-west-2.amazonaws.com/cars/${filename}`
+          },
+          headers: {
+            'x-rapidapi-host': 'zyanyatech1-license-plate-recognition-v1.p.rapidapi.com',
+            'x-rapidapi-key': 'e2db6c2630msh1ecfed303fd1acfp1b1d28jsn4bb1e7714451'
+          }
+        };
+        
+        axios.request(options).then(function (response) {
+          if (response.data.length > 0) {
+          setPlateNum(response.data.results[0].plate);
+          }
+        }).catch(function (error) {
+          console.error(error);
+        });
+       
       });
     }
-
-// analyze license plate with AI algorithm provided by API
-
-  useEffect(() => {
- 
-    const options = {
-      method: 'POST',
-      url: 'https://zyanyatech1-license-plate-recognition-v1.p.rapidapi.com/recognize_url',
-      params: {
-        image_url: `https://parkrbucket.s3.us-west-2.amazonaws.com/cars/${filename}`
-      },
-      headers: {
-        'x-rapidapi-host': 'zyanyatech1-license-plate-recognition-v1.p.rapidapi.com',
-        'x-rapidapi-key': 'e2db6c2630msh1ecfed303fd1acfp1b1d28jsn4bb1e7714451'
-      }
-    };
-    
-    axios.request(options).then(function (response) {
-      // console.log(response.data);
-
-      if (response.data.length > 0) {
-      console.log(response.data)
-      setPlateNum(response.data.results[0].plate);
-      }
-
-    }).catch(function (error) {
-      console.error(error);
-    });
-  }, [callAPI]);
 
   return (
     <>
@@ -172,9 +173,7 @@ const LicensePlateScreen = () => {
           <FormControl.Label>License Plate</FormControl.Label>
           <Input type="text" placeholder="i.e. 291 VSA" />
           <FormControl.HelperText>
-            Please provide license plate number</FormControl.HelperText>
-            <FormControl.HelperText>
-            Or, take a photo of your license plate</FormControl.HelperText>
+            Please provide license plate number or upload a clear photo of your license plate.</FormControl.HelperText>
           <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
             At least 6 characters are required.
           </FormControl.ErrorMessage>  
@@ -183,7 +182,7 @@ const LicensePlateScreen = () => {
       </FormControl>
 
       <Box style={{ flex: "1", alignItems: 'center', justifyContent: 'center', width: '100%'}}>
-       {image && <Image source={{ uri: image }} alt="car photo" style={{ width: 300, height: 300, borderRadius: 10 }} />}
+       {image && <Image source={{ uri: image }} alt="car photo" style={{ width: 300, height: 150, borderRadius: 10 }} />}
        <Button style={styles.button} onPress={pickImage}>Go To Gallery</Button>
        {filePath.uri ? (
           <>
@@ -202,7 +201,7 @@ const LicensePlateScreen = () => {
       </Box>
 
       <Box style={{ flex: "1", alignItems: 'center', justifyContent: 'center', width: '100%'}}>
-      <Button style={styles.button} onPress={()=> openCamera()}>Turn On Camera</Button>
+      <Button style={styles.button} onPress={()=> openCamera()}>{cameraText}</Button>
       { cameraOn ? 
       (
       <>
@@ -210,7 +209,7 @@ const LicensePlateScreen = () => {
         <Camera
           ref={ref => setCamera(ref)}
           style={styles.fixedRatio}
-          ratio={'1:1'} />
+        />
       </Box>
 
       <Button style={styles.button} onPress={() => takePicture() }>
@@ -219,6 +218,7 @@ const LicensePlateScreen = () => {
       </>
       ) : <Text></Text>}
       </Box>
+      {plateNum ? <Text>Is your license plate number: {plateNum} </Text> : <Text></Text>}
 
     </SafeAreaView>
     </ScrollView>
@@ -242,8 +242,7 @@ const styles = StyleSheet.create({
   },
   fixedRatio: {
     flex: 1,
-    aspectRatio: 1,
-    height: 300,
+    height: 150,
     width: 300,
     borderRadius: 10
   }
