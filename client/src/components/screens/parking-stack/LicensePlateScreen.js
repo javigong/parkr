@@ -170,7 +170,7 @@ const LicensePlateScreen = () => {
           </FormControl.ErrorMessage>  
 
           <FormControl.Label>License Plate</FormControl.Label>
-          <Input type="text" placeholder="i.e. 291 VSA" value={plateNum}/>
+          <Input type="text" placeholder="i.e. 291 VSA" />
           <FormControl.HelperText>
             Please provide license plate number</FormControl.HelperText>
             <FormControl.HelperText>
