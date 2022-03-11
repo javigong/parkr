@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Box, Text, View, Button, Flex, Stack } from "native-base";
+import { Container, Header } from "react-native";
+import { Box, Text, View, Button, Flex } from "native-base";
 
 import DateTimePicker from "@react-native-community/datetimepicker";
 import StartTimeSvg from "../../UI/StartTimeSvg";
@@ -7,16 +8,23 @@ import EndTimeSvg from "../../UI/EndTimeSvg";
 import ParkingTypeButton from "../../UI/ParkingTypeButton";
 import OutlineButton from "../../UI/OutlineButton";
 import SolidOrangeButton from "../../UI/SolidOrangeButton";
+import { TouchableOpacity } from "react-native";
 
 const FindParkingScreen = () => {
-  const [date, setDate] = useState(new Date(1598051730000));
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const [mode, setMode] = useState("datetime");
   const [show, setShow] = useState(false);
 
-  const onChange = (event, selectedDate) => {
+  const onStartDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
-    setDate(currentDate);
+    setStartDate(currentDate);
+  };
+  const onEndDateChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === "ios");
+    setEndDate(currentDate);
   };
 
   const showMode = (currentMode) => {
@@ -41,51 +49,57 @@ const FindParkingScreen = () => {
     <Box>
       <Text>Select the period for parking</Text>
 
-      <StartTimeSvg />
-
-      <Text>Start</Text>
-      <View w="100%">
-        <Button onPress={showDatepicker} title="Start Date" />
-
-        {show && (
+      <Flex
+        flexDirection="row"
+        justifyContent="space-around"
+        alignItems="center"
+        m="3"
+      >
+        <StartTimeSvg />
+        <Text width="20%">Start</Text>
+        <View width="60%">
           <DateTimePicker
             testID="dateTimePicker"
-            value={date}
+            value={startDate}
             mode={mode}
             is24Hour={true}
             display="compact"
-            onChange={onChange}
+            onChange={onStartDateChange}
           />
-        )}
-      </View>
+        </View>
+      </Flex>
 
-      <EndTimeSvg />
-
-      <Text>End</Text>
-      <View>
-        <Button onPress={showDatepicker} title="End Date" />
-
-        {show && (
+      <Flex
+        flexDirection="row"
+        justifyContent="space-around"
+        alignItems="center"
+        m="3"
+      >
+        <EndTimeSvg />
+        <Text width="20%">End</Text>
+        <View width="60%">
           <DateTimePicker
             testID="dateTimePicker"
-            value={date}
+            value={endDate}
             mode={mode}
             is24Hour={true}
-            display="spinner"
-            onChange={onChange}
+            display="compact"
+            onChange={onEndDateChange}
           />
-        )}
-      </View>
+        </View>
+      </Flex>
 
       <Text>Select the parking type</Text>
       <Flex flexDirection="row" flexWrap="wrap">
         {parkingTypesArray.map((each) => {
           return (
-            <ParkingTypeButton buttonText={each}>{each}</ParkingTypeButton>
+            <ParkingTypeButton key={each} buttonText={each}>
+              {each}
+            </ParkingTypeButton>
           );
         })}
       </Flex>
-      <Flex flexDirection="row" justifyContent="stretch">
+      <Flex flexDirection="row" justifyContent="space-around">
         <OutlineButton style={{ flex: 1 }} buttonText="CANCEL" />
         <SolidOrangeButton buttonText="SAVE" />
       </Flex>
