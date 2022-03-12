@@ -145,9 +145,10 @@ const LicensePlateScreen = () => {
         };
         
         axios.request(options).then(function (response) {
-          if (response.data.length > 0) {
+      
+          // console.log(response.data);
           setPlateNum(response.data.results[0].plate);
-          }
+          
         }).catch(function (error) {
           console.error(error);
         });
@@ -187,9 +188,9 @@ const LicensePlateScreen = () => {
        {filePath.uri ? (
           <>
             <Button
-              style={styles.button}
+              style={styles.button2}
               onPress={uploadFile}>
-                Upload Image
+                <Text style={{color: "#FD6B36"}}>Upload Image</Text>
             </Button>
           </>
         ) : null}
@@ -233,6 +234,15 @@ const styles = StyleSheet.create({
   button: {
     alignSelf: 'center',
     backgroundColor: '#FD6B36',
+    marginVertical: 10,
+    borderRadius: 20,
+    width: '85%'
+  },
+  button2: {
+    alignSelf: 'center',
+    backgroundColor: 'white',
+    borderColor: '#FD6B36',
+    borderWidth: 2,
     marginVertical: 10,
     borderRadius: 20,
     width: '85%'
