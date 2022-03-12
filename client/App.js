@@ -13,6 +13,7 @@ import SignupFormScreen from "./src/components/screens/auth-stack/SignupFormScre
 import ParkingLocationScreen from "./src/components/screens/auth-stack/ParkingLocationScreen";
 import ParkingSpotCard from "./src/components/cards/ParkingSpotCard";
 import LicensePlateScreen from "./src/components/screens/parking-stack/LicensePlateScreen";
+import WhoParksScreen from "./src/components/screens/parking-stack/WhoParksScreen";
 
 import { LogBox } from "react-native";
 import TodaySpotList from "./src/components/lists/TodaySpotList";
@@ -67,6 +68,7 @@ function RootNavigator() {
   // return <SignupFormScreen />;
   // return <AppStack />;
   // return <LicensePlateScreen />;
+  // return <WhoParksScreen />;
 }
 
 const App = () => {
