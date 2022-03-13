@@ -1,6 +1,7 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import FindParkingScreen from "../screens/parking-stack/FindParkingScreen";
+import FoundParkingScreen from "../screens/parking-stack/FoundParkingScreen";
 import ConfirmDateTimeScreen from "../screens/parking-stack/ConfirmDateTimeScreen";
 import WhoParksScreen from "../screens/parking-stack/WhoParksScreen";
 import AvailableTodayScreen from "../screens/parking-stack/AvailableTodayScreen";

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Container, Header } from "react-native";
 import { Box, Text, View, Button, Flex } from "native-base";
-
 import DateTimePicker from "@react-native-community/datetimepicker";
 import StartTimeSvg from "../../UI/StartTimeSvg";
 import EndTimeSvg from "../../UI/EndTimeSvg";
@@ -10,7 +9,7 @@ import OutlineButton from "../../UI/OutlineButton";
 import SolidOrangeButton from "../../UI/SolidOrangeButton";
 import { TouchableOpacity } from "react-native";
 
-const FindParkingScreen = () => {
+const FindParkingScreen = ({ navigation }) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [mode, setMode] = useState("datetime");
@@ -44,6 +43,10 @@ const FindParkingScreen = () => {
     "Motorcycle",
     "Small Car",
   ];
+
+  saveDateTimeHandler = () => {
+    navigation.navigate("FoundParkingScreen", { startDate, endDate });
+  };
 
   return (
     <Flex justifyContent="space-between">
