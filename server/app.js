@@ -4,11 +4,11 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
 app.use(cors({
-    origin: ['http://localhost:3000']
+    origin: ['http://localhost:4000']
 }));
 
 //const cookieParser = require("cookie-parser");
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 
 
