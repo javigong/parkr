@@ -33,6 +33,79 @@ exports.getUserProfiles = async(req, res, next) => {
     }
 };
 
+
+exports.getUserProfiles = async(req, res, next) => {
+    try {
+        const [userProfiles, _] = await ParkingArea.fetchUserProfiles();
+
+        res.status(200).json({ userProfiles });
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+};
+
+exports.getUserProfiles = async(req, res, next) => {
+    try {
+        const [userProfiles, _] = await ParkingArea.fetchUserProfiles();
+
+        res.status(200).json({ userProfiles });
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+};
+
+exports.getMyActivityCurrent = async(req, res, next) => {
+    try {
+        console.log(req.params.useremail);
+
+        const [userProfiles, _] = await ParkingArea.userActivityInUse(req.params.useremail);
+
+        res.status(200).json({ userProfiles });
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+};
+
+exports.getMyActivityIncoming = async(req, res, next) => {
+    try {
+        console.log(req.params.useremail);
+        const [userProfiles, _] = await ParkingArea.userActivityUpcoming(req.params.useremail);
+
+        res.status(200).json({ userProfiles });
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+};
+
+exports.getMyActivityExpired = async(req, res, next) => {
+    try {
+        console.log(req.params.useremail);
+        const [userProfiles, _] = await ParkingArea.userActivityExpired(req.params.useremail);
+
+        res.status(200).json({ userProfiles });
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+};
+
+
+exports.getCarListByUser = async(req, res, next) => {
+    try {
+        const [userProfiles, _] = await ParkingArea.getCarHistoryByUser(req.params.useremail);
+
+        res.status(200).json({ userProfiles });
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+};
+
+
 exports.postNewParkingArea = (req, res, next) => {
 
     try {
