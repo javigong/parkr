@@ -19,7 +19,7 @@ router
     .get("/userprofiles", getUserProfiles)
     .get("/incoming/:useremail", getMyActivityIncoming)
     .get("/current/:useremail", getMyActivityCurrent)
-    .get("/expired/:useremail", getMyreActivityExpired)
+    .get("/expired/:useremail", getMyActivityExpired)
     .get("/carlist/:useremail", getCarListByUser)
     .post("/saveparkingarea/:slotid", postNewParkingArea);
 
