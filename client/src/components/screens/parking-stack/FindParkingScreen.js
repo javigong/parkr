@@ -46,64 +46,63 @@ const FindParkingScreen = () => {
   ];
 
   return (
-    <Box>
-      <Text>Select the period for parking</Text>
-
-      <Flex
-        flexDirection="row"
-        justifyContent="space-around"
-        alignItems="center"
-        m="3"
-      >
-        <StartTimeSvg />
-        <Text width="20%">Start</Text>
-        <View width="60%">
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={startDate}
-            mode={mode}
-            is24Hour={true}
-            display="compact"
-            onChange={onStartDateChange}
-          />
-        </View>
-      </Flex>
-
-      <Flex
-        flexDirection="row"
-        justifyContent="space-around"
-        alignItems="center"
-        m="3"
-      >
-        <EndTimeSvg />
-        <Text width="20%">End</Text>
-        <View width="60%">
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={endDate}
-            mode={mode}
-            is24Hour={true}
-            display="compact"
-            onChange={onEndDateChange}
-          />
-        </View>
-      </Flex>
-
-      <Text>Select the parking type</Text>
-      <Flex flexDirection="row" flexWrap="wrap">
-        {parkingTypesArray.map((each) => {
-          return (
-            <ParkingTypeButton key={each} buttonText={each}>
-              {each}
-            </ParkingTypeButton>
-          );
-        })}
-      </Flex>
+    <Flex justifyContent="space-between">
+      <Box>
+        <Text>Select the period for parking</Text>
+        <Flex
+          flexDirection="row"
+          justifyContent="space-around"
+          alignItems="center"
+          m="3"
+        >
+          <StartTimeSvg />
+          <Text width="20%">Start</Text>
+          <View width="60%">
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={startDate}
+              mode={mode}
+              is24Hour={true}
+              display="compact"
+              onChange={onStartDateChange}
+            />
+          </View>
+        </Flex>
+        <Flex
+          flexDirection="row"
+          justifyContent="space-around"
+          alignItems="center"
+          m="3"
+        >
+          <EndTimeSvg />
+          <Text width="20%">End</Text>
+          <View width="60%">
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={endDate}
+              mode={mode}
+              is24Hour={true}
+              display="compact"
+              onChange={onEndDateChange}
+            />
+          </View>
+        </Flex>
+        <Text>Select the parking type</Text>
+        <Flex flexDirection="row" flexWrap="wrap">
+          {parkingTypesArray.map((each) => {
+            return (
+              <ParkingTypeButton key={each} buttonText={each}>
+                {each}
+              </ParkingTypeButton>
+            );
+          })}
+        </Flex>
+      </Box>
       <Flex flexDirection="row" justifyContent="space-around">
         <OutlineButton style={{ flex: 1 }} buttonText="CANCEL" />
         <SolidOrangeButton buttonText="SAVE" />
       </Flex>
-    </Box>
+    </Flex>
   );
 };
 
