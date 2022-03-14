@@ -4,7 +4,7 @@
     "description": "",
     "main": "app.js",
     "scripts": {
-        "start": "nodemon ./app.js",
+        "start": "GOOGLE_APPLICATION_CREDENTIALS='./config/google_app_credentials.json' nodemon ./app.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
