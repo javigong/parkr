@@ -58,7 +58,7 @@ const OnboardingScreen = ({ navigation }) => {
             ),
             title: "Visiting a friend",
             subtitle:
-              "You wonder if there would be an available visitor's spot when you arrive",
+              "You wonder if there will be a visitor's spot available when you arrive",
           },
           {
             backgroundColor: "white",
