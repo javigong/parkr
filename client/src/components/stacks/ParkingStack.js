@@ -15,6 +15,7 @@ const ParkingStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="FindParkingScreen" component={FindParkingScreen} />
+      <Stack.Screen name="FoundParkingScreen" component={FoundParkingScreen} />
       <Stack.Screen
         name="ConfirmDateTimeScreen"
         component={ConfirmDateTimeScreen}
