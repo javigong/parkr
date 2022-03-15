@@ -86,7 +86,7 @@ const ParkingScreen = ({ navigation }) => {
               </Text>
               </>
               :
-              <Text ml={8} fontSize="2xl" fontWeight="bold" color="white">Building Info</Text>
+              <Text></Text>
               }
             </Box>
             <Icon
