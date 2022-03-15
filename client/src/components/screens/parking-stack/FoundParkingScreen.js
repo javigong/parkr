@@ -8,8 +8,8 @@ const FoundParkingScreen = ({ navigation, route }) => {
     <Box>
       <Text>Results</Text>
       <Text>
-        {format(startDate, "EEE,d,MMM, hh:mm b ")} -{" "}
-        {format(endDate, "EEE,d,MMM, hh:mm b ")}
+        {format(startDate, "EEE,d MMM, hh:mm b ")} -{" "}
+        {format(endDate, "EEE,d MMM, hh:mm b ")}
       </Text>
     </Box>
   );
