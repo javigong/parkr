@@ -42,15 +42,18 @@ const OnboardingScreen = ({ navigation }) => {
         }}
         subTitleStyles={{
           paddingHorizontal: 40,
+          paddingBottom: 120,
         }}
         pages={[
           {
             backgroundColor: "white",
             image: (
               <Image
-                style={{ width: 300, height: 300 }}
+                style={{ width: 315, height: 300 }}
                 source={require("../../../../assets/onboard_image1.png")}
                 alt="onboarding image"
+                ml={3}
+                mb={10}
               />
             ),
             title: "Visiting a friend",
@@ -64,6 +67,7 @@ const OnboardingScreen = ({ navigation }) => {
                 style={{ width: 300, height: 300 }}
                 source={require("../../../../assets/onboard_image2.png")}
                 alt="onboarding image"
+                mb={10}
               />
             ),
             title: "Try Parkr",
@@ -77,6 +81,7 @@ const OnboardingScreen = ({ navigation }) => {
                 style={{ width: 300, height: 300 }}
                 source={require("../../../../assets/onboard_image3.png")}
                 alt="onboarding image"
+                mb={10}
               />
             ),
             title: "Park without hassle",

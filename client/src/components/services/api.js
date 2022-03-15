@@ -51,15 +51,22 @@ export const postNewParkingSpot = async (
 };
 
 
-export const getCarListByUser = async (email) => {
+export const getCarListByUser = async (email, token) => {
   const configurationObject = {
     method: "get",
     url: `${BASE_URL}/parkingslot/carlist/${email}`,
+    headers: {
+      "content-type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
   };
   try {
     const response = await axios(configurationObject);
 
+    console.log(response.data);
+
     const results = response.data.userProfiles;
+
     return results;
   } catch (error) {
     throw error;
