@@ -3,6 +3,7 @@ import { NativeBaseProvider } from "native-base";
 import { NavigationContainer } from "@react-navigation/native";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./src/components/config/firebase";
+import { AuthenticatedUserContext, AuthenticatedUserProvider } from "./src/components/contexts/AuthenticatedUserContext";
 import Loading from "./src/components/layout/Loading";
 import AuthStack from "./src/components/stacks/AuthStack";
 import AppStack from "./src/components/stacks/AppStack";
@@ -23,19 +24,7 @@ LogBox.ignoreLogs([
   "AsyncStorage has been extracted from react-native core and will be removed in a future release. It can now be installed and imported from '@react-native-async-storage/async-storage' instead of 'react-native'. See https://github.com/react-native-async-storage/async-storage",
 ]); // Ignore log notification by message
 
-// user context:
 
-const AuthenticatedUserContext = createContext({});
-
-const AuthenticatedUserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-
-  return (
-    <AuthenticatedUserContext.Provider value={{ user, setUser }}>
-      {children}
-    </AuthenticatedUserContext.Provider>
-  );
-};
 
 // root navigator:
 
@@ -52,7 +41,7 @@ function RootNavigator() {
         setIsLoading(false);
       }
     );
-
+    // console.log("user", user);
     // unsubscribe auth listener on unmount
     return unsubscribeAuth;
   }, [user]);
