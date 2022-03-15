@@ -22,15 +22,3 @@ export const auth = getAuth();
 export const provider = new GoogleAuthProvider();
 // access firestore database
 export const database = getFirestore();
-
-export const idToken = () => {
-  firebase
-    .auth()
-    .currentUser.getIdToken(/* forceRefresh */ true)
-    .then(function (idToken) {
-      return idToken;
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-};

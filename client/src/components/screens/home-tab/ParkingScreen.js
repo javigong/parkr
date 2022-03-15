@@ -31,7 +31,6 @@ const _exampleDataStructure = [
 
 const ParkingScreen = ({ navigation }) => {
   const { user, setUser } = useContext(AuthenticatedUserContext);
-  const [token, setToken] = useState(null);
 
   const [customStyleIndex, setCustomStyleIndex] = useState(0);
   const [spotsTodayList, setSpotsTodayList] = useState(null);
@@ -48,8 +47,8 @@ const ParkingScreen = ({ navigation }) => {
   const findParkingHandler = () => {
     navigation.navigate("ParkingStack");
   };
-  useEffect(() => {
-    setToken(user.accessToken);
+  useEffect(() => { 
+    const token = user.accessToken;
     const date = new Date();
     setCurrentDate(date.toString().slice(4, 10));
     getAllParkingSpots(token).then((results) => setSpotsTodayList(results));

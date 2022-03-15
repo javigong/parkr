@@ -40,7 +40,7 @@ const verifyToken = async (req, res, next) => {
         if (!uid) {
           return res.status(401).end();
         }
-        console.log("## valid bearer token ##");
+        console.log("Authorized request: Valid Bearer Token");
         next();
       })
       .catch((error) => {
@@ -49,7 +49,7 @@ const verifyToken = async (req, res, next) => {
   } catch (e) {
     return res
       .status(401)
-      .send({ message: "Unauthorized request: invalid token" });
+      .send({ message: "Unauthorized request: Invalid Bearer Token" });
   }
 };
 
