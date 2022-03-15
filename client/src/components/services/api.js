@@ -50,6 +50,29 @@ export const postNewParkingSpot = async (
   }
 };
 
+export const getBuildingInfo = async (token) => {
+  const configurationObject = {
+    method: "get",
+    url: `${BASE_URL}/parkingslot/buildinginfo`,
+    headers: {
+      "content-type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const response = await axios(configurationObject);
+
+    // console.log(response.data);
+
+    const results = response.data.buildingInfo;
+
+    return results;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 
 export const getCarListByUser = async (email, token) => {
   const configurationObject = {
