@@ -4,11 +4,9 @@ import { Box, Radio, Center, Text, VStack, Button } from "native-base";
 const WhoParksScreen = ({ navigation }) => {
   return (
     <>
-      <Box flex="1" mt="16">
-      <Center>
-        <VStack marginBottom="450">
-          <Center>
-            <Text fontWeight="bold" fontSize="20px" mb="10">
+      <Box flex="1" justifyContent="space-between" alignItems="center">
+        <Box flex="1" mt={20} justifyContent="flex-start" alignItems="center">
+            <Text fontWeight="bold" fontSize="2xl" mb="10">
               Please select who is parking
             </Text>
 
@@ -25,10 +23,9 @@ const WhoParksScreen = ({ navigation }) => {
                 My Visitor
               </Radio>
             </Radio.Group>
-          </Center>
-        </VStack>
-        <Button borderRadius="20px" backgroundColor="#FD6B36" width="80%" onPress={()=> navigation.navigate("")}>NEXT</Button>
-        </Center>
+
+        </Box>
+        <Button mb={10} borderRadius="20px" backgroundColor="#FD6B36" width="80%" onPress={()=> navigation.navigate("")}>NEXT</Button>
       </Box>
     </>
   );
