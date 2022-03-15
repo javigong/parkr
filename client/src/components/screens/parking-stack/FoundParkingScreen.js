@@ -1,6 +1,6 @@
-import { Box } from "native-base";
+import { Box, Text } from "native-base";
 
-const FoundParkingScreen = (navigation, route) => {
+const FoundParkingScreen = ({ navigation, route }) => {
   const { startDate, endDate } = route.params;
 
   return (

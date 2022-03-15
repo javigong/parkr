@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Header } from "react-native";
+import { Pressable } from "react-native";
 import { Box, Text, View, Button, Flex } from "native-base";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import StartTimeSvg from "../../UI/StartTimeSvg";
@@ -7,9 +7,9 @@ import EndTimeSvg from "../../UI/EndTimeSvg";
 import ParkingTypeButton from "../../UI/ParkingTypeButton";
 import OutlineButton from "../../UI/OutlineButton";
 import SolidOrangeButton from "../../UI/SolidOrangeButton";
-import { TouchableOpacity } from "react-native";
+// import { TouchableOpacity } from "react-native";
 
-const FindParkingScreen = ({ navigation }) => {
+const FindParkingScreen = ({ navigation, route }) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [mode, setMode] = useState("datetime");
@@ -44,7 +44,8 @@ const FindParkingScreen = ({ navigation }) => {
     "Small Car",
   ];
 
-  saveDateTimeHandler = () => {
+  const saveDateTimeHandler = () => {
+    // console.log("Save Clicked");
     navigation.navigate("FoundParkingScreen", { startDate, endDate });
   };
 
@@ -103,7 +104,7 @@ const FindParkingScreen = ({ navigation }) => {
       </Box>
       <Flex flexDirection="row" justifyContent="space-around">
         <OutlineButton style={{ flex: 1 }} buttonText="CANCEL" />
-        <SolidOrangeButton buttonText="SAVE" />
+        <SolidOrangeButton buttonText="SAVE" onPress={saveDateTimeHandler} />
       </Flex>
     </Flex>
   );
