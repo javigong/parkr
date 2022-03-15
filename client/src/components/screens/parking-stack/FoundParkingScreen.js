@@ -6,7 +6,7 @@ import ParkingSpotList from "../../lists/ParkingSpotList";
 
 const FoundParkingScreen = ({ navigation, route }) => {
   const { startDate, endDate } = route.params;
-  const [filteredSpotsList, setFilteredSpotsList] = useState([]);
+  const [filteredSpotsList, setFilteredSpotsList] = useState(null);
 
   useEffect(() => {
     getAllParkingSpots().then((results) => setFilteredSpotsList(results));
@@ -19,7 +19,7 @@ const FoundParkingScreen = ({ navigation, route }) => {
         {format(startDate, "EEE,d MMM, hh:mm b ")} - {""}
         {format(endDate, "EEE,d MMM, hh:mm b ")}
       </Text>
-      {() => <ParkingSpotList data={spotsTodayList} />}
+      {() => <ParkingSpotList data={filteredSpotsList} />}
     </Box>
   );
 };
