@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Center, Box, Text, Icon, Container } from "native-base";
 import { SafeAreaView, StyleSheet } from "react-native";
 import { signOut } from "firebase/auth";
@@ -8,6 +8,7 @@ import { Ionicons } from "@expo/vector-icons";
 import TodaySpotList from "../../lists/TodaySpotList";
 import { getAllParkingSpots } from "../../services/api";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { AuthenticatedUserContext } from "../../contexts/AuthenticatedUserContext";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -29,6 +30,9 @@ const _exampleDataStructure = [
 ];
 
 const ParkingScreen = ({ navigation }) => {
+  const { user, setUser } = useContext(AuthenticatedUserContext);
+  const [token, setToken] = useState(null);
+
   const [customStyleIndex, setCustomStyleIndex] = useState(0);
   const [spotsTodayList, setSpotsTodayList] = useState(null);
   const [currentDate, setCurrentDate] = useState(null);
@@ -45,9 +49,11 @@ const ParkingScreen = ({ navigation }) => {
     navigation.navigate("ParkingStack");
   };
   useEffect(() => {
+    setToken(user.accessToken);
     const date = new Date();
     setCurrentDate(date.toString().slice(4, 10));
-    getAllParkingSpots().then((results) => setSpotsTodayList(results));
+    getAllParkingSpots(token).then((results) => setSpotsTodayList(results));
+
   }, []);
 
   return (
