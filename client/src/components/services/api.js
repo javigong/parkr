@@ -49,3 +49,19 @@ export const postNewParkingSpot = async (
     throw error;
   }
 };
+
+
+export const getCarListByUser = async (email) => {
+  const configurationObject = {
+    method: "get",
+    url: `${BASE_URL}/parkingslot/carlist/${email}`,
+  };
+  try {
+    const response = await axios(configurationObject);
+
+    const results = response.data.userProfiles;
+    return results;
+  } catch (error) {
+    throw error;
+  }
+};
