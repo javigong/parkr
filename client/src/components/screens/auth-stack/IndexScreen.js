@@ -59,7 +59,7 @@ const IndexScreen = ({ navigation }) => {
         <Center>
           <Center w="100%">
             <Box safeArea py="8" w="90%" maxW="290">
-              <Box style={{ paddingVertical: 60 }}>
+              <Box style={{ paddingTop: 50, paddingBottom: 80 }}>
                 <Center>
                   <Image
                     source={require("../../../../assets/login-image.png")}
@@ -68,7 +68,7 @@ const IndexScreen = ({ navigation }) => {
                 </Center>
               </Box>
 
-              <VStack space={3} mt="5" justifyContent="center">
+              <VStack mb="12" space={3} mt="5" >
                 <Button
                   py={3}
                   px={1}
