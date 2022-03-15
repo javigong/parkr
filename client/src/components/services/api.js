@@ -12,7 +12,7 @@ export const getAllParkingSpots = async (token) => {
   };
   try {
     const response = await axios(configurationObject);
-    console.log(response.data.parkingSlots);
+    // console.log(response.data.parkingSlots);
     const results = response.data.parkingSlots;
     return results;
   } catch (error) {
@@ -42,7 +42,7 @@ export const postNewParkingSpot = async (
   };
   try {
     const response = await axios(configurationObject);
-    console.log(response.data.results);
+    // console.log(response.data.results);
     const results = response.data.results;
     return results;
   } catch (error) {

@@ -48,10 +48,10 @@ const ParkingScreen = ({ navigation }) => {
     navigation.navigate("ParkingStack");
   };
   useEffect(() => { 
-    const token = user.accessToken;
+    const tokenJwt = user.accessToken;
     const date = new Date();
     setCurrentDate(date.toString().slice(4, 10));
-    getAllParkingSpots(token).then((results) => setSpotsTodayList(results));
+    getAllParkingSpots(tokenJwt).then((results) => setSpotsTodayList(results));
 
   }, []);
 
