@@ -69,6 +69,8 @@ const ParkingScreen = ({ navigation }) => {
             justifyContent="space-between"
           >
             <Box>
+              {buildingInfo != undefined ?
+              <>
               <Text
                 mt={5}
                 ml={8}
@@ -82,6 +84,10 @@ const ParkingScreen = ({ navigation }) => {
               <Text ml={8} fontSize="md" fontWeight="bold" color="white">
                 {buildingInfo[0].biAddress}
               </Text>
+              </>
+              :
+              <Text ml={8} fontSize="2xl" fontWeight="bold" color="white">Building Info</Text>
+              }
             </Box>
             <Icon
               mt={8}
