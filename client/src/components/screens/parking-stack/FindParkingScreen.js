@@ -7,6 +7,7 @@ import EndTimeSvg from "../../UI/EndTimeSvg";
 import ParkingTypeButton from "../../UI/ParkingTypeButton";
 import OutlineButton from "../../UI/OutlineButton";
 import SolidOrangeButton from "../../UI/SolidOrangeButton";
+
 // import { TouchableOpacity } from "react-native";
 
 const FindParkingScreen = ({ navigation, route }) => {
@@ -18,7 +19,7 @@ const FindParkingScreen = ({ navigation, route }) => {
   const onStartDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
-    setStartDate(currentDate);
+    setStartDate();
   };
   const onEndDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;

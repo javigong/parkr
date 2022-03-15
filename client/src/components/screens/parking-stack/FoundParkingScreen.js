@@ -1,4 +1,5 @@
 import { Box, Text } from "native-base";
+import { format } from "date-fns";
 
 const FoundParkingScreen = ({ navigation, route }) => {
   const { startDate, endDate } = route.params;
@@ -7,7 +8,8 @@ const FoundParkingScreen = ({ navigation, route }) => {
     <Box>
       <Text>Results</Text>
       <Text>
-        {startDate} - {endDate}
+        {format(startDate, "EEE,d,MMM, hh:mm b ")} -{" "}
+        {format(endDate, "EEE,d,MMM, hh:mm b ")}
       </Text>
     </Box>
   );
