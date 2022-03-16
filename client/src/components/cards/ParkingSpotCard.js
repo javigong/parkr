@@ -9,7 +9,6 @@ import {
   VStack,
 } from "native-base";
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialIcons } from "@expo/vector-icons";
 
 const ParkingSpotCard = ({ item, currentDate, type, navigation }) => {
@@ -25,6 +24,22 @@ const ParkingSpotCard = ({ item, currentDate, type, navigation }) => {
   const detailsHandler = () => {
     navigation.navigate("MyActivityStack", {
       screen: "DetailsScreen",
+      params: { item: item, currentDate: currentDate, type: type },
+    });
+  };
+
+  const hostDetailsHandler = () => {
+    console.log("type:", type);
+    navigation.navigate("HostStack", {
+      screen: "HostDetailsScreen",
+      params: { item: item, currentDate: currentDate, type: type },
+    });
+  };
+
+  const hostEditHandler = () => {
+    console.log("type:", type);
+    navigation.navigate("HostStack", {
+      screen: "HostEditScreen",
       params: { item: item, currentDate: currentDate, type: type },
     });
   };
@@ -120,15 +135,27 @@ const ParkingSpotCard = ({ item, currentDate, type, navigation }) => {
                 <Box>
                   <Button
                     onPress={() => {
-                      if (
-                        type === "today" ||
-                        type === "thisWeek" ||
-                        type === "thisMonth"
-                      )
-                        findParkingHandler();
-                      if (type === "inUse") detailsHandler();
-                      if (type === "upcoming") detailsHandler();
-                      if (type === "expired") detailsHandler();
+                      switch (type) {
+                        case "today":
+                        case "thisWeek":
+                        case "thisMonth":
+                          findParkingHandler();
+                          break;
+                        case "inUse":
+                        case "upcoming":
+                        case "expired":
+                          detailsHandler();
+                          break;
+                        case "hostReservation":
+                        case "hostArchive":
+                          hostDetailsHandler();
+                          break;
+                        case "hostSpot":
+                          hostEditHandler();
+                          break;
+                        default:
+                         return;
+                      }
                     }}
                     background="transparent"
                     startIcon={
