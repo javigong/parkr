@@ -25,6 +25,7 @@ const HomeTab = () => {
         name="Park"
         component={ParkingScreen}
         options={{
+          headerShown: false,
           tabBarLabel: "Park",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="parking" color={color} size={26} />
