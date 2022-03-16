@@ -23,7 +23,7 @@ router
     .get("/current/:useremail", verifyToken, getMyActivityCurrent)
     .get("/expired/:useremail", verifyToken, getMyActivityExpired)
     .get("/carlist/:useremail", verifyToken, getCarListByUser)
-    .get("/checkavailability/:date", getAvailabilityByDate)
-    .post("/saveparkingarea/:slotid", postNewParkingArea);
+    .get("/checkavailability/:date", verifyToken, getAvailabilityByDate)
+    .post("/saveparkingarea/:slotid", verifyToken, postNewParkingArea);
 
 module.exports = router;
