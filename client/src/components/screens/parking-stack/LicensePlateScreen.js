@@ -4,13 +4,13 @@
 
 import React, { useState, useEffect } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
-import { Box, Text, VStack, FormControl, Input, WarningOutlineIcon, Button, Image, ScrollView } from "native-base";
+import { Box, Text, VStack, FormControl, Input, WarningOutlineIcon, Image, ScrollView, Button } from "native-base";
 import * as ImagePicker from 'expo-image-picker';
 import { RNS3 } from 'react-native-aws3';
 import { Camera } from 'expo-camera';
 import axios from "axios";
 
-const LicensePlateScreen = () => {
+const LicensePlateScreen = ({ navigation }) => {
 
   const [hasPermission, setHasPermission] = useState(null);
   const [camera, setCamera] = useState(null);
@@ -220,6 +220,8 @@ const LicensePlateScreen = () => {
       ) : <Text></Text>}
       </Box>
       {plateNum ? <Text>Is your license plate number: {plateNum} </Text> : <Text></Text>}
+      
+      <Button mb={10} borderRadius="20px" backgroundColor="#FD6B36" width="80%" onPress={()=> navigation.navigate('ParkingStack', { screen: 'ConfirmReservationScreen'})}>NEXT</Button>
 
     </SafeAreaView>
     </ScrollView>
