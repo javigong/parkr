@@ -15,8 +15,9 @@ const ParkingSpotCard = ({ item, currentDate }) => {
         borderWidth="1"
         rounded="2xl"
         borderColor="coolGray.300"
-        borderRadius="md"
+        borderRadius="20px"
         backgroundColor="white"
+        shadow={4}
       >
         <VStack space="4">
           <HStack space="4">
