@@ -52,7 +52,7 @@ function RootNavigator() {
     return <Loading />;
   }
 
-  return <>{user ? <AppStack /> : <AuthStack />}</>;
+  // return <>{user ? <AppStack /> : <AuthStack />}</>;
 
   // return <AuthStack />;
   // return <WelcomeScreen />;
@@ -60,7 +60,7 @@ function RootNavigator() {
   // return <AppStack />;
   // return <LicensePlateScreen />;
   // return <WhoParksScreen />;
-  // return <ChooseCarScreen />;
+  return <ChooseCarScreen />;
   // return <ConfirmDateTimeScreen />;
 }
 

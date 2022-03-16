@@ -7,11 +7,13 @@ import { AuthenticatedUserContext } from "../../contexts/AuthenticatedUserContex
 
 const ChooseCarScreen = ({ navigation }) => {
   const [carList, setCarList] = useState([]);
-  const [carType, setCarType] = useState();
+  const [carType, setCarType] = useState("newCar");
   const { user, setUser } = useContext(AuthenticatedUserContext);
 
   //Will get this email when user logs in
   const loggedUserEmail = "deboramorris@testing.com";
+
+  console.log("user email:", user.providerData[0].email)
 
   let color = {
     backgroundColor: "#43D3A4"
@@ -26,7 +28,7 @@ const ChooseCarScreen = ({ navigation }) => {
 
   useEffect(() => {
     const tokenJwt = user.accessToken;
-    getCarListByUser(loggedUserEmail, tokenJwt).then((results) =>
+    getCarListByUser(user.providerData[0].email, tokenJwt).then((results) =>
       setCarList(results)
     );
   }, []);
