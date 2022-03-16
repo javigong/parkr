@@ -5,17 +5,22 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { getCarListByUser } from "../../services/api";
 import { AuthenticatedUserContext } from "../../contexts/AuthenticatedUserContext";
 
-// import ChooseCarRadioButton from "../../UI/ChooseCarRadioButton";
-
 const ChooseCarScreen = ({ navigation }) => {
   const [carList, setCarList] = useState([]);
-  // const [chooseColor, setChooseColor] = useState("white");
+  const [carType, setCarType] = useState();
   const { user, setUser } = useContext(AuthenticatedUserContext);
 
   //Will get this email when user logs in
   const loggedUserEmail = "deboramorris@testing.com";
 
+  let color = {
+    backgroundColor: "#43D3A4"
+  }
+
+// This will handle the selection of car and passed as a params in route
+
   const handlePress = (car) => {
+    setCarType(car);
     console.log("pressed", car);
   };
 
@@ -26,7 +31,7 @@ const ChooseCarScreen = ({ navigation }) => {
     );
   }, []);
 
-  console.log("car list: ", carList);
+  // console.log("car list: ", carList);
 
   return (
     <SafeAreaView flex="1" alignItems="center">
@@ -37,6 +42,31 @@ const ChooseCarScreen = ({ navigation }) => {
               Select the visitor car
             </Text>
           </Center>
+          <HStack justifyContent="space-around" mb={3}>
+                  
+            <Text style={styles.carmodel}>
+              New Car 
+            </Text>
+                    
+            <Pressable borderWidth={2}
+              borderColor="#43D3A4"
+              borderRadius={50}
+              padding={1}
+              alignSelf="center">                     
+              <Pressable
+              borderWidth={2}
+              borderColor="#43D3A4"
+              borderRadius={20}
+              padding={1}
+              alignSelf="center"
+              style={(carType == "newCar") ? color : {} }
+              onPress={() => {
+                handlePress("newCar");
+              }}
+              ></Pressable>
+            </Pressable>
+          </HStack>
+          <Text>Choose from previously registered cars</Text>
           {carList.length > 0 ? (
             carList.map((car, index) => {
               return (
@@ -51,29 +81,24 @@ const ChooseCarScreen = ({ navigation }) => {
                     {car.rsvcarplateno}
                     </Text>
                     </VStack>
-                    {/* <ChooseCarRadioButton onPress={() => {
-              handlePress(car.rsvcarmodel);
-              setChooseColor("#FD6B36")}} 
-              bg={chooseColor} /> */}
-                    <Box borderWidth={2}
+                    <Pressable borderWidth={2}
                       borderColor="#43D3A4"
                       borderRadius={50}
                       padding={1}
-                      alignSelf="center">
-                    <Pressable
+                      alignSelf="center">                     
+                      <Pressable
                       borderWidth={2}
                       borderColor="#43D3A4"
                       borderRadius={20}
                       padding={1}
                       alignSelf="center"
                       key={index}
-                      // bg={chooseColor}
+                      style={(carType == car.rsvcarmodel) ? color : {} }
                       onPress={() => {
                         handlePress(car.rsvcarmodel);
-                        // setChooseColor("#43D3A4");
                       }}
                     ></Pressable>
-                    </Box>
+                    </Pressable>
                   </HStack>
                   </Box>
                 </>
