@@ -52,14 +52,14 @@ function RootNavigator() {
     return <Loading />;
   }
 
-  // return <>{user ? <AppStack /> : <AuthStack />}</>;
+  return <>{user ? <AppStack /> : <AuthStack />}</>;
 
   // return <AuthStack />;
   // return <WelcomeScreen />;
   // return <SignupFormScreen />;
   // return <AppStack />;
   // return <LicensePlateScreen />;
-  return <WhoParksScreen />;
+  // return <WhoParksScreen />;
   // return <ChooseCarScreen />;
   // return <ConfirmDateTimeScreen />;
 }
