@@ -83,7 +83,7 @@ const ChooseCarScreen = ({ navigation }) => {
             <Text></Text>
           )}
         </Box>
-        <Button borderRadius="20px" backgroundColor="#FD6B36">
+        <Button borderRadius="20px" backgroundColor="#FD6B36" onPress={()=> navigation.navigate('ParkingStack', { screen: 'LicensePlateScreen'})}>
           Next
         </Button>
       </Box>

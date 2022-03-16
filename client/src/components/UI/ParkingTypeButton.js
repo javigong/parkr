@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "native-base";
+import { Button, View } from "native-base";
 
 const ParkingTypeButton = (props) => {
   const [colorState, setColorState] = useState(false);
@@ -9,18 +9,18 @@ const ParkingTypeButton = (props) => {
   };
 
   return (
-    <Button
-      borderRadius="17"
-      width="1/4"
-      m="1.5"
-      alignSelf="center"
-      width="fitContent"
-      _text={colorState ? { color: "white" } : { color: "gray.500" }}
-      backgroundColor={colorState ? "orange.400" : "gray.300"}
-      onPress={colorHandler}
-    >
-      {props.buttonText}
-    </Button>
+    <View style={{ display: "flex", flexDirection: "row" }}>
+      <Button
+        borderRadius="17"
+        m="1.5"
+        alignSelf="center"
+        _text={colorState ? { color: "white" } : { color: "gray.500" }}
+        backgroundColor={colorState ? "orange.400" : "gray.300"}
+        onPress={colorHandler}
+      >
+        {props.buttonText}
+      </Button>
+    </View>
   );
 };
 
