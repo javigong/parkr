@@ -13,7 +13,7 @@ const ChooseCarScreen = ({ navigation }) => {
   //Will get this email when user logs in
   const loggedUserEmail = "deboramorris@testing.com";
 
-  console.log("user email:", user.providerData[0].email)
+  // console.log("user email:", user.providerData[0].email)
 
   let color = {
     backgroundColor: "#43D3A4"
@@ -28,7 +28,7 @@ const ChooseCarScreen = ({ navigation }) => {
 
   useEffect(() => {
     const tokenJwt = user.accessToken;
-    getCarListByUser(user.providerData[0].email, tokenJwt).then((results) =>
+    getCarListByUser(loggedUserEmail, tokenJwt).then((results) =>
       setCarList(results)
     );
   }, []);
