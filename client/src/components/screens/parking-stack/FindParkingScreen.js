@@ -9,6 +9,7 @@ import OutlineButton from "../../UI/OutlineButton";
 import SolidOrangeButton from "../../UI/SolidOrangeButton";
 
 const FindParkingScreen = ({ route, navigation }) => {
+  const {item, currentDate, type}= route.params;
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [mode, setMode] = useState("datetime");
