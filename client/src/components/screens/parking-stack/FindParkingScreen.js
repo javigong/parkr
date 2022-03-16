@@ -10,7 +10,7 @@ import OutlineButton from "../../UI/OutlineButton";
 import SolidOrangeButton from "../../UI/SolidOrangeButton";
 import { TouchableOpacity } from "react-native";
 
-const FindParkingScreen = () => {
+const FindParkingScreen = ({ navigation }) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [mode, setMode] = useState("datetime");
