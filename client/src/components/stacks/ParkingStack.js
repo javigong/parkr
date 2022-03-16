@@ -13,21 +13,36 @@ const Stack = createNativeStackNavigator();
 const ParkingStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="FindParkingScreen" component={FindParkingScreen} />
+      <Stack.Screen
+        name="FindParkingScreen"
+        component={FindParkingScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="ConfirmDateTimeScreen"
         component={ConfirmDateTimeScreen}
+        options={{ headerShown: false }}
       />
       <Stack.Screen name="WhoParksScreen" component={WhoParksScreen} />
       <Stack.Screen
         name="AvailableTodayScreen"
         component={AvailableTodayScreen}
+        options={{ headerShown: false }}
       />
-      <Stack.Screen name="ChooseCarScreen" component={ChooseCarScreen} />
-      <Stack.Screen name="LicensePlateScreen" component={LicensePlateScreen} />
+      <Stack.Screen
+        name="ChooseCarScreen"
+        component={ChooseCarScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="LicensePlateScreen"
+        component={LicensePlateScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="ConfirmReservationScreen"
         component={ConfirmReservationScreen}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
