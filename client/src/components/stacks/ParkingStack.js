@@ -20,6 +20,11 @@ const ParkingStack = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name="FoundParkingScreen"
+        component={FoundParkingScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name="ConfirmDateTimeScreen"
         component={ConfirmDateTimeScreen}
         options={{ headerShown: false }}
