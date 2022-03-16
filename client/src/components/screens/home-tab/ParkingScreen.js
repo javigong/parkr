@@ -188,7 +188,6 @@ const ParkingScreen = ({ navigation }) => {
                   </Tab.Screen>
                 </Tab.Navigator>
               </Box>
-              <Box></Box>
             </Box>
           )}
           {customStyleIndex === 1 && (

@@ -2,16 +2,16 @@ import React from "react";
 import { Box, Center, Text } from "native-base";
 import { SafeAreaView } from "react-native";
 
-const ProfileScreen = ({ route, navigation }) => {
+const HostDetailsScreen = ({ route, navigation }) => {
   const { type } = route.params;
 
   return (
     <SafeAreaView>
       <Center>
-        <Text>ProfileScreen</Text>
+        <Text>HostDetailsScreen</Text>
       </Center>
     </SafeAreaView>
   );
 };
 
-export default ProfileScreen;
+export default HostDetailsScreen;

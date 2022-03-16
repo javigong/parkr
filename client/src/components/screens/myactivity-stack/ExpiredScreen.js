@@ -1,11 +1,15 @@
 import React from "react";
 import { Box, Text } from "native-base";
 
-const ExpiredScreen = () => {
+const ExpiredScreen = ({ route, navigation }) => {
+  const { type } = route.params;
+
   return (
-    <Box>
-      <Text></Text>
-    </Box>
+    <SafeAreaView>
+      <Center>
+        <Text>ExpiredScreen</Text>
+      </Center>
+    </SafeAreaView>
   );
 };
 

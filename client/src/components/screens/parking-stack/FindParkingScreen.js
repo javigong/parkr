@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Pressable } from "react-native";
+import { LogBox, Pressable } from "react-native";
 import { Box, Text, View, Button, Flex } from "native-base";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import StartTimeSvg from "../../UI/StartTimeSvg";
@@ -8,8 +8,12 @@ import ParkingTypeButton from "../../UI/ParkingTypeButton";
 import OutlineButton from "../../UI/OutlineButton";
 import SolidOrangeButton from "../../UI/SolidOrangeButton";
 
+LogBox.ignoreLogs([
+  "NativeBase: The contrast ratio of 2.863815068413143:1 for white on",
+]); // Ignore log notification by message
+
 const FindParkingScreen = ({ route, navigation }) => {
-  const {item, currentDate, type}= route.params;
+  const { item, currentDate, type } = route.params;
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [mode, setMode] = useState("datetime");
