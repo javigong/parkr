@@ -2,8 +2,8 @@ import React from "react";
 import { Box, Center, Text } from "native-base";
 import { SafeAreaView } from "react-native";
 
-const DetailsScreen = ({route}) => {
-  const type = route.params.type;
+const DetailsScreen = ({ route }) => {
+  const { type } = route.params;
 
   return (
     <SafeAreaView>

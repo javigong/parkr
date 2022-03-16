@@ -18,14 +18,14 @@ const ParkingSpotCard = ({ item, currentDate, type, navigation }) => {
   const findParkingHandler = () => {
     navigation.navigate("ParkingStack", {
       screen: "FindParkingScreen",
-      params: { item: item, currentDate: currentDate, type: type, navigation: navigation },
+      params: { item: item, currentDate: currentDate, type: type },
     });
   };
 
   const detailsHandler = () => {
     navigation.navigate("MyActivityStack", {
       screen: "DetailsScreen",
-      params: { item: item, currentDate: currentDate, type: type, navigation: navigation },
+      params: { item: item, currentDate: currentDate, type: type },
     });
   };
 
