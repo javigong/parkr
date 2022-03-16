@@ -1,4 +1,5 @@
 const ParkingArea = require("../model/parkingArea.js");
+const db = require("../config/config.js");
 
 exports.getAllParkingSlots = async(req, res, next) => {
     try {
@@ -94,6 +95,19 @@ exports.getMyActivityExpired = async(req, res, next) => {
 };
 
 
+
+exports.getAvailabilityByDate = async(req, res, next) => {
+    try {
+        console.log(req.params.date);
+        const [spotAvailability, _] = await ParkingArea.checkAvailabilityByDate(req.params.date);
+        res.status(200).json({ spotAvailability });
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+};
+
+
 exports.getCarListByUser = async(req, res, next) => {
     try {
         const [userProfiles, _] = await ParkingArea.getCarHistoryByUser(req.params.useremail);
@@ -110,10 +124,17 @@ exports.postNewParkingArea = (req, res, next) => {
 
     try {
         console.log(req.body);
+        let _parkingInfo = req.body;
+        console.log(req.body);
+        let sql = `INSERT INTO parkingarea (idParkingSlot,paUnitNo,paVehicleType,paStatus,paVisitorId,paFee)VALUES(?,?,?,?,?,?)`;
 
-        const newParkingArea = _ParkingArea.save();
+        db.query(sql, [_parkingInfo.idParkingSlot, _parkingInfo.paUnitNo, _parkingInfo.paVehicleType, _parkingInfo.paStatus, _parkingInfo.paVisitorId, _parkingInfo.paFee], (err, results) => {
 
-        res.status(201).json({ message: "Saved new parking slot" });
+                if (!err) {
+                    return res.status(200).json({ message: "Parking slot added" });
+                }
+            })
+            //const [_parkingSlotInformation, _] = ParkingArea.save(req.body);
 
     } catch (error) {
         console.log(error);
