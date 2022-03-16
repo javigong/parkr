@@ -28,7 +28,7 @@ const ChooseCarScreen = ({ navigation }) => {
 
   useEffect(() => {
     const tokenJwt = user.accessToken;
-    getCarListByUser(loggedUserEmail, tokenJwt).then((results) =>
+    getCarListByUser(user.providerData[0].email, tokenJwt).then((results) =>
       setCarList(results)
     );
   }, []);
