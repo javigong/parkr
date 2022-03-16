@@ -9,6 +9,7 @@ const SolidOrangeButton = (props) => {
       variant="solid"
       m="1.5"
       size="lg"
+      onPress={props.onPress}
     >
       {props.buttonText}
     </Button>
