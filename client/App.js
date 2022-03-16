@@ -19,7 +19,7 @@ import ChooseCarScreen from "./src/components/screens/parking-stack/ChooseCarScr
 import ConfirmDateTimeScreen from "./src/components/screens/parking-stack/ConfirmDateTimeScreen";
 
 import { LogBox } from "react-native";
-import TodaySpotList from "./src/components/lists/TodaySpotList";
+import ParkingSpotList from "./src/components/lists/ParkingSpotList";
 import ParkingScreen from "./src/components/screens/home-tab/ParkingScreen";
 
 LogBox.ignoreLogs([

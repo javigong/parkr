@@ -1,9 +1,33 @@
-import { Box, Center, Divider, HStack, Text, VStack } from "native-base";
+import {
+  Box,
+  Button,
+  Center,
+  Divider,
+  HStack,
+  Icon,
+  Text,
+  VStack,
+} from "native-base";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { MaterialIcons } from "@expo/vector-icons";
 
-const ParkingSpotCard = ({ item, currentDate }) => {
+const ParkingSpotCard = ({ item, currentDate, type, navigation }) => {
   // type 1 -standard\\ntype 2 - large\\ntype 3 - electric car\\ntype 4 - motorcycle
+
+  const findParkingHandler = () => {
+    navigation.navigate("ParkingStack", {
+      screen: "FindParkingScreen",
+      params: { item: item, currentDate: currentDate, type: type },
+    });
+  };
+
+  const detailsHandler = () => {
+    navigation.navigate("MyActivityStack", {
+      screen: "DetailsScreen",
+      params: { item: item, currentDate: currentDate, type: type },
+    });
+  };
 
   return (
     <>
@@ -38,60 +62,87 @@ const ParkingSpotCard = ({ item, currentDate }) => {
               <Box>
                 <Text fontSize="xl">Spot {item.idParkingSlot}</Text>
               </Box>
-              <Box>
-                {item.paVehicleType == "1" && (
-                  <Box
-                    width="75"
-                    px="2"
-                    borderWidth="1"
-                    borderColor="#0CB183"
-                    rounded="full"
-                  >
-                    <Text fontSize="13" color="#0CB183">
-                      Standard
-                    </Text>
-                  </Box>
-                )}
-                {item.paVehicleType == "2" && (
-                  <Box
-                    width="55"
-                    px="2"
-                    borderWidth="1"
-                    borderColor="#FD6B36"
-                    rounded="full"
-                  >
-                    <Text fontSize="13" color="#FD6B36">
-                      Large
-                    </Text>
-                  </Box>
-                )}
-                {item.paVehicleType == "3" && (
-                  <Box
-                    width="90"
-                    px="2"
-                    borderWidth="1"
-                    borderColor="#09A1C6"
-                    rounded="full"
-                  >
-                    <Text fontSize="13" color="#09A1C6">
-                      EV Charger
-                    </Text>
-                  </Box>
-                )}
-                {item.paVehicleType == "4" && (
-                  <Box
-                    width="87"
-                    px="2"
-                    borderWidth="1"
-                    borderColor="#DB7D16"
-                    rounded="full"
-                  >
-                    <Text fontSize="13" color="#DB7D16">
-                      Motorcycle
-                    </Text>
-                  </Box>
-                )}
-              </Box>
+              <HStack>
+                <Box width="79%">
+                  {item.paVehicleType == "1" && (
+                    <Box
+                      width="75"
+                      px="2"
+                      borderWidth="1"
+                      borderColor="#0CB183"
+                      rounded="full"
+                    >
+                      <Text flex="1" fontSize="13" color="#0CB183">
+                        Standard
+                      </Text>
+                    </Box>
+                  )}
+                  {item.paVehicleType == "2" && (
+                    <Box
+                      width="55"
+                      px="2"
+                      borderWidth="1"
+                      borderColor="#FD6B36"
+                      rounded="full"
+                    >
+                      <Text fontSize="13" color="#FD6B36">
+                        Large
+                      </Text>
+                    </Box>
+                  )}
+                  {item.paVehicleType == "3" && (
+                    <Box
+                      width="90"
+                      px="2"
+                      borderWidth="1"
+                      borderColor="#09A1C6"
+                      rounded="full"
+                    >
+                      <Text fontSize="13" color="#09A1C6">
+                        EV Charger
+                      </Text>
+                    </Box>
+                  )}
+                  {item.paVehicleType == "4" && (
+                    <Box
+                      width="87"
+                      px="2"
+                      borderWidth="1"
+                      borderColor="#DB7D16"
+                      rounded="full"
+                    >
+                      <Text fontSize="13" color="#DB7D16">
+                        Motorcycle
+                      </Text>
+                    </Box>
+                  )}
+                </Box>
+                <Box>
+                  <Button
+                    onPress={() => {
+                      if (
+                        type === "today" ||
+                        type === "thisWeek" ||
+                        type === "thisMonth"
+                      )
+                        findParkingHandler();
+                      if (type === "inUse") detailsHandler();
+                      if (type === "upcoming") detailsHandler();
+                      if (type === "expired") detailsHandler();
+                    }}
+                    background="transparent"
+                    startIcon={
+                      <Icon
+                        color="black"
+                        size={5}
+                        ml={2}
+                        as={MaterialIcons}
+                        name="navigate-next"
+                      />
+                    }
+                  />
+                </Box>
+              </HStack>
             </VStack>
           </HStack>
           <HStack space="4" justifyContent="space-between">
