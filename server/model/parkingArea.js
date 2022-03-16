@@ -10,14 +10,20 @@ class ParkingArea {
         this.objParkingArea.paFee = objParkingArea.Rate;
     }
 
-    async save() {
-        let sql = `INSERT INTO parkingarea (idParkingSlot,paUnitNo,paVehicleType,paStatus,paVisitorId,paFee)VALUES
-        ('${this.objParkingArea.idParkingSlot}','${this.objParkingArea.paUnitNo}','${this.objParkingArea.paVehicleType}',
-        '${this.objParkingArea.paStatus}','${this.objParkingArea.paVisitorId}','${this.objParkingArea.paFee}')`;
+    async save(parkingAreaInfo) {
 
-        const [newParkingArea, _] = await db.execute(sql);
+        let _parkingInfo = new ParkingArea.objParkingArea(parkingAreaInfo);
 
-        return newParkingArea;
+        let sql = `INSERT INTO parkingarea (idParkingSlot,paUnitNo,paVehicleType,paStatus,paVisitorId,paFee)VALUES(?,?,?,?,?,?)`;
+
+        db.query(sql, [_parkingInfo.idParkingSlot, _parkingInfo.paUnitNo, _parkingInfo.paVehicleType, _parkingInfo.paStatus, _parkingInfo.paVisitorId, _parkingInfo.paFee], (err, results) => {
+
+            if (!err) {
+                return _parkingInfo;
+            }
+        })
+
+        return "error"
     }
 
     static findAll() {
@@ -37,6 +43,11 @@ class ParkingArea {
 
     static checkAvailability(userId, dtStart, dtEnd) {
         let sql = "SELECT idParkingSlot, paUnitNo, paOwnerId, upFirstName, upLastName, paVehicleType, paStatus, paVisitorId, paFee, rsrv_start, rsrv_end, IF(paVisitorID<>null, 0, 1) as availability FROM dbparkr.parkingarea INNER JOIN dbparkr.slotlist ON paOwnerId = userid INNER JOIN dbparkr.userprofile ON paOwnerId = idUserProfile";
+        return db.execute(sql);
+    }
+
+    static checkAvailabilityByDate(availabilityDate) {
+        let sql = `SELECT idslot, buildingId, unitid, userid, rsrv_start, rsrv_end, idbooking, rsvparkingslotid, rsvvisitorid, upFirstName, upLastName, rsvdtstart, rsvdtend, rsvstatus, rsvtype, rsvfee, rsvcarplateno, rsvcarmodel FROM dbparkr.slotlist INNER JOIN reservations ON idslot = rsvparkingslotid INNER JOIN dbparkr.userprofile ON rsvvisitorid = idUserProfile WHERE DATE_FORMAT(rsvdtstart, "%Y-%M-%d") = DATE_FORMAT("${availabilityDate}", "%Y-%M-%d") ORDER BY rsvdtstart`;
         return db.execute(sql);
     }
 
@@ -60,6 +71,8 @@ class ParkingArea {
         let sql = `SELECT idbooking, rsvparkingslotid, rsvvisitorid, userid, rsvdtstart, rsvdtend, rsvstatus, rsvtype, rsvfee, rsvcarplateno, rsvcarmodel FROM dbparkr.reservations INNER JOIN dbparkr.slotlist on rsvparkingslotid = idslot WHERE rsvvisitorid = '${userId}' AND CONVERT_TZ( NOW(),'+00:00','-08:00') > rsvdtend`;
         return db.execute(sql);
     }
+
+
 }
 
 module.exports = ParkingArea;

@@ -10,6 +10,7 @@ const {
     getMyActivityIncoming,
     getMyActivityExpired,
     getCarListByUser,
+    getAvailabilityByDate,
     postNewParkingArea
 } = require("../controllers/parkingSlotControllers.js")
 
@@ -22,6 +23,7 @@ router
     .get("/current/:useremail", verifyToken, getMyActivityCurrent)
     .get("/expired/:useremail", verifyToken, getMyActivityExpired)
     .get("/carlist/:useremail", verifyToken, getCarListByUser)
+    .get("/checkavailability/:date", verifyToken, getAvailabilityByDate)
     .post("/saveparkingarea/:slotid", verifyToken, postNewParkingArea);
 
 module.exports = router;
