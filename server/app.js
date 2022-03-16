@@ -10,8 +10,6 @@ app.use(cors({
 //const cookieParser = require("cookie-parser");
 const PORT = process.env.PORT || 4000;
 
-
-
 //app.use(cookieParser);
 app.use(morgan('tiny'));
 
@@ -28,3 +26,4 @@ app.use("/", router);
 /////////////////////////////////////////////////////////////
 
 app.listen(PORT, () => console.log(`Server is starting at ${PORT}`));
+

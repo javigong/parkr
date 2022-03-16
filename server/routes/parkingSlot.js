@@ -1,4 +1,5 @@
 const express = require('express');
+const verifyToken = require('../auth/middleware.js');
 const router = express.Router();
 
 const {
@@ -14,13 +15,13 @@ const {
 
 //user profile routes
 router
-    .get("/allslots", getAllParkingSlots)
-    .get("/buildinginfo", getBuildingInfo)
-    .get("/userprofiles", getUserProfiles)
-    .get("/incoming/:useremail", getMyActivityIncoming)
-    .get("/current/:useremail", getMyActivityCurrent)
-    .get("/expired/:useremail", getMyActivityExpired)
-    .get("/carlist/:useremail", getCarListByUser)
-    .post("/saveparkingarea/:slotid", postNewParkingArea);
+    .get("/allslots", verifyToken, getAllParkingSlots)
+    .get("/buildinginfo", verifyToken, getBuildingInfo)
+    .get("/userprofiles", verifyToken, getUserProfiles)
+    .get("/incoming/:useremail", verifyToken, getMyActivityIncoming)
+    .get("/current/:useremail", verifyToken, getMyActivityCurrent)
+    .get("/expired/:useremail", verifyToken, getMyActivityExpired)
+    .get("/carlist/:useremail", verifyToken, getCarListByUser)
+    .post("/saveparkingarea/:slotid", verifyToken, postNewParkingArea);
 
 module.exports = router;

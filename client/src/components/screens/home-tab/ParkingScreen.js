@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Center, Box, Text, Icon, Container } from "native-base";
 import { SafeAreaView, StyleSheet } from "react-native";
 import { signOut } from "firebase/auth";
@@ -6,8 +6,9 @@ import { auth } from "../../config/firebase";
 import SegmentedControlTab from "react-native-segmented-control-tab";
 import { Ionicons } from "@expo/vector-icons";
 import TodaySpotList from "../../lists/TodaySpotList";
-import { getAllParkingSpots } from "../../services/api";
+import { getAllParkingSpots, getBuildingInfo } from "../../services/api";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { AuthenticatedUserContext } from "../../contexts/AuthenticatedUserContext";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -29,8 +30,11 @@ const _exampleDataStructure = [
 ];
 
 const ParkingScreen = ({ navigation }) => {
+  const { user, setUser } = useContext(AuthenticatedUserContext);
+
   const [customStyleIndex, setCustomStyleIndex] = useState(0);
   const [spotsTodayList, setSpotsTodayList] = useState(null);
+  const [buildingInfo, setBuildingInfo] = useState();
   const [currentDate, setCurrentDate] = useState(null);
 
   const handleCustomIndexSelect = (index) => {
@@ -44,11 +48,15 @@ const ParkingScreen = ({ navigation }) => {
   const findParkingHandler = () => {
     navigation.navigate("ParkingStack");
   };
-  useEffect(() => {
+  useEffect(() => { 
+    const tokenJwt = user.accessToken;
     const date = new Date();
     setCurrentDate(date.toString().slice(4, 10));
-    getAllParkingSpots().then((results) => setSpotsTodayList(results));
+    getAllParkingSpots(tokenJwt).then((results) => setSpotsTodayList(results));
+    getBuildingInfo(tokenJwt).then((results) => setBuildingInfo(results));
   }, []);
+
+  console.log("Building info is:", buildingInfo);
 
   return (
     <>
@@ -61,6 +69,8 @@ const ParkingScreen = ({ navigation }) => {
             justifyContent="space-between"
           >
             <Box>
+              {buildingInfo != undefined ?
+              <>
               <Text
                 mt={5}
                 ml={8}
@@ -69,11 +79,15 @@ const ParkingScreen = ({ navigation }) => {
                 fontSize="2xl"
                 color="white"
               >
-                Park
+                {buildingInfo[0].biName}
               </Text>
               <Text ml={8} fontSize="md" fontWeight="bold" color="white">
-                5470 Ormidale Street, Vancouver
+                {buildingInfo[0].biAddress}
               </Text>
+              </>
+              :
+              <Text></Text>
+              }
             </Box>
             <Icon
               mt={8}

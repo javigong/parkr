@@ -25,7 +25,7 @@ const WhoParksScreen = ({ navigation }) => {
             </Radio.Group>
 
         </Box>
-        <Button mb={10} borderRadius="20px" backgroundColor="#FD6B36" width="80%" onPress={()=> navigation.navigate("")}>NEXT</Button>
+        <Button mb={10} borderRadius="20px" backgroundColor="#FD6B36" width="80%" onPress={()=> navigation.navigate('ParkingStack', { screen: 'ChooseCarScreen'})}>NEXT</Button>
       </Box>
     </>
   );
