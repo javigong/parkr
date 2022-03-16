@@ -46,7 +46,10 @@ const ParkingScreen = ({ navigation }) => {
   };
 
   const findParkingHandler = () => {
-    navigation.navigate("ParkingStack");
+    navigation.navigate("ParkingStack", {
+      screen: "FindParkingScreen",
+      params: { type: "search" },
+    });
   };
   useEffect(() => { 
     const tokenJwt = user.accessToken;
