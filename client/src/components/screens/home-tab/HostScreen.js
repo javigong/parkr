@@ -45,12 +45,6 @@ const HostScreen = ({ navigation }) => {
     signOut(auth).catch((error) => console.log("Error logging out: ", error));
   };
 
-  const findParkingHandler = () => {
-    navigation.navigate("ParkingStack", {
-      screen: "FindHostScreen",
-      params: { type: "search" },
-    });
-  };
   useEffect(() => { 
     const tokenJwt = user.accessToken;
     const date = new Date();
@@ -58,8 +52,6 @@ const HostScreen = ({ navigation }) => {
     getAllParkingSpots(tokenJwt).then((results) => setSpotsTodayList(results));
     getBuildingInfo(tokenJwt).then((results) => setBuildingInfo(results));
   }, []);
-
-  console.log("Building info is:", buildingInfo);
 
   return (
     <>
@@ -104,7 +96,7 @@ const HostScreen = ({ navigation }) => {
             <Box width="100%" backgroundColor="#FD6B36">
               <Center>
                 <SegmentedControlTab
-                  values={["Reservation", "Archive"]}
+                  values={["Activity", "Spots"]}
                   selectedIndex={customStyleIndex}
                   onTabPress={handleCustomIndexSelect}
                   borderRadius={20}
@@ -141,84 +133,39 @@ const HostScreen = ({ navigation }) => {
                     tabBarLabelStyle: { fontSize: 12 },
                   }}
                 >
-                  <Tab.Screen name="Today">
+                  <Tab.Screen name="Reservation">
                     {() => (
                       <ParkingSpotList
                         data={spotsTodayList}
                         currentDate={currentDate}
-                        type={"today"}
+                        type={"hostReservation"}
                         navigation={navigation}
                       />
                     )}
                   </Tab.Screen>
-                  <Tab.Screen name="This Week">
+                  <Tab.Screen name="Archive">
                     {() => (
                       <ParkingSpotList
                         data={spotsTodayList}
                         currentDate={currentDate}
-                        type={"thisWeek"}
-                        navigation={navigation}
-                      />
-                    )}
-                  </Tab.Screen>
-                  <Tab.Screen name="This Month">
-                    {() => (
-                      <ParkingSpotList
-                        data={spotsTodayList}
-                        currentDate={currentDate}
-                        type={"thisMonth"}
+                        type={"hostArchive"}
                         navigation={navigation}
                       />
                     )}
                   </Tab.Screen>
                 </Tab.Navigator>
               </Box>
-              <Box></Box>
             </Box>
           )}
           {customStyleIndex === 1 && (
             <Box flex="1" width="100%">
               <Box flex="1">
-                <Tab.Navigator
-                  screenOptions={{
-                    tabBarIndicatorStyle: {
-                      borderBottomColor: "#FD6B36",
-                      borderBottomWidth: 3,
-                    },
-                    tabBarLabelStyle: { fontSize: 12 },
-                  }}
-                >
-                  <Tab.Screen name="In Use">
-                    {() => (
-                      <ParkingSpotList
+              <ParkingSpotList
                         data={spotsTodayList}
                         currentDate={currentDate}
-                        type={"inUse"}
+                        type={"hostSpot"}
                         navigation={navigation}
                       />
-                    )}
-                  </Tab.Screen>
-                  <Tab.Screen name="Upcoming">
-                    {() => (
-                      <ParkingSpotList
-                        data={spotsTodayList}
-                        currentDate={currentDate}
-                        type={"upcoming"}
-                        navigation={navigation}
-                      />
-                    )}
-                  </Tab.Screen>
-                  <Tab.Screen name="Expired">
-                    {() => (
-                      <ParkingSpotList
-                        data={spotsTodayList}
-                        currentDate={currentDate}
-                        type={"expired"}
-                        navigation={navigation}
-                      />
-                    )}
-                  </Tab.Screen>
-                </Tab.Navigator>
               </Box>
             </Box>
           )}
