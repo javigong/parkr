@@ -169,6 +169,7 @@ const ParkingScreen = ({ navigation }) => {
                         data={spotsTodayList}
                         currentDate={currentDate}
                         type={"thisWeek"}
+                        navigation={navigation}
                       />
                     )}
                   </Tab.Screen>
@@ -178,6 +179,7 @@ const ParkingScreen = ({ navigation }) => {
                         data={spotsTodayList}
                         currentDate={currentDate}
                         type={"thisMonth"}
+                        navigation={navigation}
                       />
                     )}
                   </Tab.Screen>
@@ -204,6 +206,7 @@ const ParkingScreen = ({ navigation }) => {
                         data={spotsTodayList}
                         currentDate={currentDate}
                         type={"inUse"}
+                        navigation={navigation}
                       />
                     )}
                   </Tab.Screen>
@@ -213,6 +216,7 @@ const ParkingScreen = ({ navigation }) => {
                         data={spotsTodayList}
                         currentDate={currentDate}
                         type={"upcoming"}
+                        navigation={navigation}
                       />
                     )}
                   </Tab.Screen>
@@ -222,6 +226,7 @@ const ParkingScreen = ({ navigation }) => {
                         data={spotsTodayList}
                         currentDate={currentDate}
                         type={"expired"}
+                        navigation={navigation}
                       />
                     )}
                   </Tab.Screen>

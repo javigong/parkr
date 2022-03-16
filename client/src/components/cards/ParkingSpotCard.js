@@ -18,7 +18,14 @@ const ParkingSpotCard = ({ item, currentDate, type, navigation }) => {
   const findParkingHandler = () => {
     navigation.navigate("ParkingStack", {
       screen: "FindParkingScreen",
-      params: { item: item, currentDate: currentDate, type: type },
+      params: { item: item, currentDate: currentDate, type: type, navigation: navigation },
+    });
+  };
+
+  const detailsHandler = () => {
+    navigation.navigate("MyActivityStack", {
+      screen: "DetailsScreen",
+      params: { item: item, currentDate: currentDate, type: type, navigation: navigation },
     });
   };
 
@@ -112,7 +119,17 @@ const ParkingSpotCard = ({ item, currentDate, type, navigation }) => {
                 </Box>
                 <Box>
                   <Button
-                    onPress={findParkingHandler}
+                    onPress={() => {
+                      if (
+                        type === "today" ||
+                        type === "thisWeek" ||
+                        type === "thisMonth"
+                      )
+                        findParkingHandler();
+                      if (type === "inUse") detailsHandler();
+                      if (type === "upcoming") detailsHandler();
+                      if (type === "expired") detailsHandler();
+                    }}
                     background="transparent"
                     startIcon={
                       <Icon
