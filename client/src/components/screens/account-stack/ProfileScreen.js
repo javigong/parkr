@@ -1,11 +1,16 @@
 import React from "react";
-import { Box, Text } from "native-base";
+import { Box, Center, Text } from "native-base";
+import { SafeAreaView } from "react-native";
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ route, navigation }) => {
+  const { type } = route.params;
+
   return (
-    <Box>
-      <Text></Text>
-    </Box>
+    <SafeAreaView>
+      <Center>
+        <Text>ProfileScreen</Text>
+      </Center>
+    </SafeAreaView>
   );
 };
 

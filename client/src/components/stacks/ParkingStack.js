@@ -24,7 +24,11 @@ const ParkingStack = () => {
         component={ConfirmDateTimeScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="WhoParksScreen" component={WhoParksScreen} />
+      <Stack.Screen
+        name="WhoParksScreen"
+        component={WhoParksScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="AvailableTodayScreen"
         component={AvailableTodayScreen}
