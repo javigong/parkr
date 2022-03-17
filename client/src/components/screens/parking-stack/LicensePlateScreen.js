@@ -188,7 +188,17 @@ const LicensePlateScreen = ({ navigation }) => {
           </VStack>
         </FormControl>
 
-        <Box width="100%" height="50%">
+        <Box
+          shadow={4}
+          borderWidth={1}
+          borderColor="gray.200"
+          borderRadius="20px"
+          width="85%"
+          mt={5}
+          mb="60px"
+          py={7}
+          height="40%"
+        >
           <ScrollView width="100%">
             <Box
               style={{
@@ -211,7 +221,7 @@ const LicensePlateScreen = ({ navigation }) => {
               {filePath.uri ? (
                 <>
                   <Button style={styles.button2} onPress={uploadFile}>
-                    <Text style={{ color: "#FD6B36" }}>Upload Image</Text>
+                    <Text style={{ color: "#0CB183" }}>Upload Image</Text>
                   </Button>
                 </>
               ) : null}
@@ -249,7 +259,14 @@ const LicensePlateScreen = ({ navigation }) => {
               )}
             </Box>
             {plateNum ? (
-              <Text>Is your license plate number: {plateNum} </Text>
+              <>
+                <Center>
+                  <Text>Is your license plate number: </Text>
+                  <Text fontWeight="bold" fontSize="2xl">
+                    {plateNum}
+                  </Text>
+                </Center>
+              </>
             ) : (
               <Text></Text>
             )}
@@ -279,7 +296,7 @@ export default LicensePlateScreen;
 const styles = StyleSheet.create({
   button: {
     alignSelf: "center",
-    backgroundColor: "#FD6B36",
+    backgroundColor: "#0CB183",
     marginVertical: 10,
     borderRadius: 20,
     width: "80%",
@@ -287,7 +304,7 @@ const styles = StyleSheet.create({
   button2: {
     alignSelf: "center",
     backgroundColor: "white",
-    borderColor: "#FD6B36",
+    borderColor: "#0CB183",
     borderWidth: 2,
     marginVertical: 10,
     borderRadius: 20,
