@@ -1,16 +1,16 @@
 import React from "react";
-import { Box, Center, Text } from "native-base";
-import { SafeAreaView } from "react-native";
+import ParkingSpotDetailsCard from "../../cards/ParkingSpotDetailsCard";
 
 const HostEditScreen = ({ route, navigation }) => {
-  const { type } = route.params;
+  const { item, currentDate, type } = route.params;
 
   return (
-    <SafeAreaView>
-      <Center>
-        <Text>HostEditScreen</Text>
-      </Center>
-    </SafeAreaView>
+    <ParkingSpotDetailsCard
+      item={item}
+      currentDate={currentDate}
+      type={type}
+      navigation={navigation}
+    />
   );
 };
 
