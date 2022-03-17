@@ -25,6 +25,10 @@ import { LogBox } from "react-native";
 import ParkingSpotList from "./src/components/lists/ParkingSpotList";
 import ParkingScreen from "./src/components/screens/home-tab/ParkingScreen";
 import HostScreen from "./src/components/screens/home-tab/HostScreen";
+import ConfirmReservationScreen from "./src/components/screens/parking-stack/ConfirmReservationScreen";
+import ParkingSpotDetailsCard from "./src/components/cards/ParkingSpotDetailsCard";
+import DetailsScreen from "./src/components/screens/myactivity-stack/DetailsScreen";
+import FindParkingScreen from "./src/components/screens/parking-stack/FindParkingScreen";
 
 LogBox.ignoreLogs(
   [
@@ -70,6 +74,8 @@ function RootNavigator() {
   // return <ChooseCarScreen />;
   // return <ConfirmDateTimeScreen />;
   // return <HostScreen />
+  // return <ConfirmReservationScreen/>
+  // return <ParkingSpotDetailsCard />
 }
 
 const App = () => {
