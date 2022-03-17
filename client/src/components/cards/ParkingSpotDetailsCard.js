@@ -79,31 +79,31 @@ const ParkingSpotDetailsCard = ({ item, currentDate, type, navigation }) => {
                 </Text>
               </VStack>
             </Box>
-            
+
             <HStack justifyContent="space-between" alignItems="center">
-            <Box>
-              <VStack space={2}>
-                <Text fontSize={16} fontWeight="bold">
-                  Spot Owner
-                </Text>
-                <HStack space={4} mb={4}>
-                  <Box py={2} px={3} borderRadius="20px" bg="#FD6B36">
-                    <Text color="white">
-                      {item.upFirstName.charAt(0).toUpperCase()}
-                      {item.upLastName.charAt(0).toUpperCase()}
-                    </Text>
-                  </Box>
-                  <VStack>
-                    <Text fontSize={14}>
-                      {item.upFirstName} {item.upLastName}
-                    </Text>
-                    <Text color="grey" fontSize={13}>
-                      Registered Jan 1, 2022
-                    </Text>
-                  </VStack>
-                </HStack>
-              </VStack>
-            </Box>
+              <Box>
+                <VStack space={2}>
+                  <Text fontSize={16} fontWeight="bold">
+                    Spot Owner
+                  </Text>
+                  <HStack space={4} mb={4}>
+                    <Box py={2} px={3} borderRadius="20px" bg="#FD6B36">
+                      <Text color="white">
+                        {item.upFirstName.charAt(0).toUpperCase()}
+                        {item.upLastName.charAt(0).toUpperCase()}
+                      </Text>
+                    </Box>
+                    <VStack>
+                      <Text fontSize={14}>
+                        {item.upFirstName} {item.upLastName}
+                      </Text>
+                      <Text color="grey" fontSize={13}>
+                        Registered Jan 1, 2022
+                      </Text>
+                    </VStack>
+                  </HStack>
+                </VStack>
+              </Box>
               <Box>
                 <Button
                   onPress={() => ChatHandler()}
@@ -128,15 +128,30 @@ const ParkingSpotDetailsCard = ({ item, currentDate, type, navigation }) => {
             </HStack>
           </VStack>
         </Box>
-        <Button borderRadius="20px" backgroundColor="#FD6B36" mb={7}>
-          {type === "inUse"
-            ? "LEAVE SPOT"
-            : type === "upcoming"
-            ? "CANCEL RESERVATION"
-            : type === "expired"
-            ? "DELETE"
-            : ""}
-        </Button>
+        {type !== "hostReservation" && type !== "hostArchive" && (
+          <Button borderRadius="20px" backgroundColor="#FD6B36" mb={4}>
+            {type === "inUse"
+              ? "LEAVE SPOT"
+              : type === "upcoming"
+              ? "CANCEL RESERVATION"
+              : type === "expired"
+              ? "DELETE"
+              : type === "hostSpot"
+              ? "SAVE"
+              : ""}
+          </Button>
+        )}
+        {type === "hostSpot" && (
+          <Button
+            borderRadius="20px"
+            borderWidth="1px"
+            borderColor="#FD6B36"
+            backgroundColor="white"
+            mb={7}
+          >
+            <Text>DELETE SPOT</Text>
+          </Button>
+        )}
       </Box>
     </SafeAreaView>
   );
