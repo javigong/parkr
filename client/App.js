@@ -34,9 +34,7 @@ LogBox.ignoreLogs(
   [
     "AsyncStorage has been extracted from react-native core and will be removed in a future release",
   ],
-  [
-    "NativeBase: The contrast ratio of 2.863815068413143:1 for white on"
-  ],
+  ["NativeBase: The contrast ratio of 2.863815068413143:1 for white on"]
 ); // Ignore log notification by message
 
 // root navigator:
