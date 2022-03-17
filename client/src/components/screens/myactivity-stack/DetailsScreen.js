@@ -6,8 +6,6 @@ import ParkingSpotDetailsCard from "../../cards/ParkingSpotDetailsCard";
 const DetailsScreen = ({ route, navigation }) => {
   const { item, currentDate, type } = route.params;
 
-  console.log(item);
-
   return (
     <ParkingSpotDetailsCard
       item={item}
