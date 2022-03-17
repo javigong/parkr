@@ -30,7 +30,6 @@ const ParkingSpotCard = ({ item, currentDate, type, navigation }) => {
   };
 
   const hostDetailsHandler = () => {
-    console.log("type:", type);
     navigation.navigate("HostStack", {
       screen: "HostDetailsScreen",
       params: { item: item, currentDate: currentDate, type: type },
@@ -38,7 +37,6 @@ const ParkingSpotCard = ({ item, currentDate, type, navigation }) => {
   };
 
   const hostEditHandler = () => {
-    console.log("type:", type);
     navigation.navigate("HostStack", {
       screen: "HostEditScreen",
       params: { item: item, currentDate: currentDate, type: type },
