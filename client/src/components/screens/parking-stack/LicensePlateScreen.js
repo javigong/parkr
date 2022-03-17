@@ -157,119 +157,138 @@ const LicensePlateScreen = ({ navigation }) => {
 
   return (
     <>
-      <SafeAreaView flex={1} alignItems="center">
-        <Text fontWeight="bold" fontSize="3xl">
-          Car Information
-        </Text>
-        <FormControl padding={5} isRequired>
-          <VStack mx="4" space="2">
-            <FormControl.Label>Car Model</FormControl.Label>
-            <Input type="text" placeholder="i.e. Mazda MX-5" />
-            <FormControl.HelperText>
-              Please provide brand and model
-            </FormControl.HelperText>
-            <FormControl.ErrorMessage
-              leftIcon={<WarningOutlineIcon size="xs" />}
-            >
-              At least 3 characters are required.
-            </FormControl.ErrorMessage>
+      <Box flex="1" bg="white">
+        <SafeAreaView flex={1} alignItems="center">
+          <Text fontWeight="bold" fontSize="2xl" mt={10}>
+            Car Information
+          </Text>
+          <FormControl padding={5} isRequired>
+            <VStack mx="4" space="2">
+              <FormControl.Label>Car Model</FormControl.Label>
+              <Input type="text" placeholder="i.e. Mazda MX-5" />
+              <FormControl.HelperText>
+                Please provide brand and model
+              </FormControl.HelperText>
+              <FormControl.ErrorMessage
+                leftIcon={<WarningOutlineIcon size="xs" />}
+              >
+                At least 3 characters are required.
+              </FormControl.ErrorMessage>
 
-            <FormControl.Label>License Plate</FormControl.Label>
-            <Input type="text" placeholder="i.e. 291 VSA" />
-            <FormControl.HelperText>
-              Please provide license plate number or upload a clear photo of
-              your license plate.
-            </FormControl.HelperText>
-            <FormControl.ErrorMessage
-              leftIcon={<WarningOutlineIcon size="xs" />}
-            >
-              At least 6 characters are required.
-            </FormControl.ErrorMessage>
-          </VStack>
-        </FormControl>
+              <FormControl.Label>License Plate</FormControl.Label>
+              <Input type="text" placeholder="i.e. 291 VSA" />
+              <FormControl.HelperText>
+                Please provide license plate number or upload a clear photo of
+                your license plate.
+              </FormControl.HelperText>
+              <FormControl.ErrorMessage
+                leftIcon={<WarningOutlineIcon size="xs" />}
+              >
+                At least 6 characters are required.
+              </FormControl.ErrorMessage>
+            </VStack>
+          </FormControl>
 
-        <Box width="100%" height="50%">
-          <ScrollView width="100%">
-            <Box
-              style={{
-                flex: "1",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "100%",
-              }}
-            >
-              {image && (
-                <Image
-                  source={{ uri: image }}
-                  alt="car photo"
-                  style={{ width: 300, height: 150, borderRadius: 10 }}
-                />
-              )}
-              <Button style={styles.button} onPress={pickImage}>
-                Go To Gallery
-              </Button>
-              {filePath.uri ? (
+          <Box
+            shadow={4}
+            borderWidth={1}
+            borderColor="gray.200"
+            borderRadius="20px"
+            width="85%"
+            mb={6}
+            py={7}
+            height="40%"
+          >
+            <ScrollView width="100%">
+              <Box
+                style={{
+                  flex: "1",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "100%",
+                }}
+              >
+                {image && (
+                  <Image
+                    source={{ uri: image }}
+                    alt="car photo"
+                    style={{ width: 300, height: 150, borderRadius: 10 }}
+                  />
+                )}
+                <Button style={styles.button} onPress={pickImage}>
+                  Go To Gallery
+                </Button>
+                {filePath.uri ? (
+                  <>
+                    <Button style={styles.button2} onPress={uploadFile}>
+                      <Text style={{ color: "#0CB183" }}>Upload Image</Text>
+                    </Button>
+                  </>
+                ) : null}
+                {uploadSuccessMessage ? (
+                  <Text style={{ color: "#FD6B36" }}>
+                    {uploadSuccessMessage}
+                  </Text>
+                ) : null}
+              </Box>
+
+              <Box
+                style={{
+                  flex: "1",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "100%",
+                }}
+              >
+                <Button style={styles.button} onPress={() => openCamera()}>
+                  {cameraText}
+                </Button>
+                {cameraOn ? (
+                  <>
+                    <Box style={styles.cameraContainer}>
+                      <Camera
+                        ref={(ref) => setCamera(ref)}
+                        style={styles.fixedRatio}
+                      />
+                    </Box>
+
+                    <Button style={styles.button} onPress={() => takePicture()}>
+                      Take Picture
+                    </Button>
+                  </>
+                ) : (
+                  <Text></Text>
+                )}
+              </Box>
+              {plateNum ? (
                 <>
-                  <Button style={styles.button2} onPress={uploadFile}>
-                    <Text style={{ color: "#FD6B36" }}>Upload Image</Text>
-                  </Button>
-                </>
-              ) : null}
-              {uploadSuccessMessage ? (
-                <Text style={{ color: "#FD6B36" }}>{uploadSuccessMessage}</Text>
-              ) : null}
-            </Box>
-
-            <Box
-              style={{
-                flex: "1",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "100%",
-              }}
-            >
-              <Button style={styles.button} onPress={() => openCamera()}>
-                {cameraText}
-              </Button>
-              {cameraOn ? (
-                <>
-                  <Box style={styles.cameraContainer}>
-                    <Camera
-                      ref={(ref) => setCamera(ref)}
-                      style={styles.fixedRatio}
-                    />
-                  </Box>
-
-                  <Button style={styles.button} onPress={() => takePicture()}>
-                    Take Picture
-                  </Button>
+                  <Center>
+                    <Text>Is your license plate number: </Text>
+                    <Text fontWeight="bold" fontSize="2xl">
+                      {plateNum}
+                    </Text>
+                  </Center>
                 </>
               ) : (
                 <Text></Text>
               )}
-            </Box>
-            {plateNum ? (
-              <Text>Is your license plate number: {plateNum} </Text>
-            ) : (
-              <Text></Text>
-            )}
-          </ScrollView>
-        </Box>
-        <Button
-          borderRadius="20px"
-          backgroundColor="#FD6B36"
-          width="80%"
-          z-index={1}
-          bottom={0}
-          onPress={() =>
-            navigation.navigate("ParkingStack", {
-              screen: "ConfirmReservationScreen",
-            })
-          }
-        >
-          NEXT
-        </Button>
-      </SafeAreaView>
+            </ScrollView>
+          </Box>
+          <Button
+            borderRadius="20px"
+            backgroundColor="#FD6B36"
+            width="80%"
+            z-index={1}
+            onPress={() =>
+              navigation.navigate("ParkingStack", {
+                screen: "ConfirmReservationScreen",
+              })
+            }
+          >
+            NEXT
+          </Button>
+        </SafeAreaView>
+      </Box>
     </>
   );
 };
@@ -279,7 +298,7 @@ export default LicensePlateScreen;
 const styles = StyleSheet.create({
   button: {
     alignSelf: "center",
-    backgroundColor: "#FD6B36",
+    backgroundColor: "#0CB183",
     marginVertical: 10,
     borderRadius: 20,
     width: "80%",
@@ -287,7 +306,7 @@ const styles = StyleSheet.create({
   button2: {
     alignSelf: "center",
     backgroundColor: "white",
-    borderColor: "#FD6B36",
+    borderColor: "#0CB183",
     borderWidth: 2,
     marginVertical: 10,
     borderRadius: 20,
