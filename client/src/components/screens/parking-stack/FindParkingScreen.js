@@ -53,6 +53,10 @@ const FindParkingScreen = ({ route, navigation }) => {
     navigation.navigate("FoundParkingScreen", { startDate, endDate });
   };
 
+  const cancelFindParking = () => {
+    navigation.navigate("AvailableTodayScreen");
+  };
+
   return (
     <Flex justifyContent="space-between">
       <Box>
@@ -107,7 +111,11 @@ const FindParkingScreen = ({ route, navigation }) => {
         </Flex>
       </Box>
       <Flex flexDirection="row" justifyContent="space-around">
-        <OutlineButton style={{ flex: 1 }} buttonText="CANCEL" />
+        <OutlineButton
+          style={{ flex: 1 }}
+          buttonText="CANCEL"
+          onPress={cancelFindParking}
+        />
         <SolidOrangeButton buttonText="SAVE" onPress={saveDateTimeHandler} />
       </Flex>
     </Flex>
