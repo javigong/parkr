@@ -1,11 +1,15 @@
 import React from "react";
 import { Box, Text } from "native-base";
 
-const UpcomingScreen = () => {
+const UpcomingScreen = ({ route, navigation }) => {
+  const { type } = route.params;
+
   return (
-    <Box>
-      <Text></Text>
-    </Box>
+    <SafeAreaView>
+      <Center>
+        <Text>UpcomingScreen</Text>
+      </Center>
+    </SafeAreaView>
   );
 };
 

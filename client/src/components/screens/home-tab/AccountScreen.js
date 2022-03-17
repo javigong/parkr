@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase";
 
-const AccountScreen = () => {
+const AccountScreen = ({ navigation }) => {
   const onSignOut = () => {
     signOut(auth).catch((error) => console.log("Error logging out: ", error));
   };

@@ -3,7 +3,10 @@ import { NativeBaseProvider } from "native-base";
 import { NavigationContainer } from "@react-navigation/native";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./src/components/config/firebase";
-import { AuthenticatedUserContext, AuthenticatedUserProvider } from "./src/components/contexts/AuthenticatedUserContext";
+import {
+  AuthenticatedUserContext,
+  AuthenticatedUserProvider,
+} from "./src/components/contexts/AuthenticatedUserContext";
 import Loading from "./src/components/layout/Loading";
 import AuthStack from "./src/components/stacks/AuthStack";
 import AppStack from "./src/components/stacks/AppStack";
@@ -19,14 +22,18 @@ import ChooseCarScreen from "./src/components/screens/parking-stack/ChooseCarScr
 import ConfirmDateTimeScreen from "./src/components/screens/parking-stack/ConfirmDateTimeScreen";
 
 import { LogBox } from "react-native";
-import TodaySpotList from "./src/components/lists/TodaySpotList";
+import ParkingSpotList from "./src/components/lists/ParkingSpotList";
 import ParkingScreen from "./src/components/screens/home-tab/ParkingScreen";
+import HostScreen from "./src/components/screens/home-tab/HostScreen";
 
-LogBox.ignoreLogs([
-  "AsyncStorage has been extracted from react-native core and will be removed in a future release. It can now be installed and imported from '@react-native-async-storage/async-storage' instead of 'react-native'. See https://github.com/react-native-async-storage/async-storage",
-]); // Ignore log notification by message
-
-
+LogBox.ignoreLogs(
+  [
+    "AsyncStorage has been extracted from react-native core and will be removed in a future release",
+  ],
+  [
+    "NativeBase: The contrast ratio of 2.863815068413143:1 for white on"
+  ],
+); // Ignore log notification by message
 
 // root navigator:
 
@@ -62,6 +69,7 @@ function RootNavigator() {
   // return <WhoParksScreen />;
   // return <ChooseCarScreen />;
   // return <ConfirmDateTimeScreen />;
+  // return <HostScreen />
 }
 
 const App = () => {
