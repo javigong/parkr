@@ -4,11 +4,12 @@ import { format } from "date-fns";
 import { getAllParkingSpots } from "../../services/api";
 import ParkingSpotList from "../../lists/ParkingSpotList";
 import { AuthenticatedUserContext } from "../../contexts/AuthenticatedUserContext";
+import { SafeAreaView, StyleSheet } from "react-native";
 
 const FoundParkingScreen = ({ navigation, route }) => {
-  const { startDate, endDate, currentDate } = route.params;
-  const [filteredSpotsList, setFilteredSpotsList] = useState();
   const { user, setUser } = useContext(AuthenticatedUserContext);
+  const { item, currentDate, type } = route.params;
+  const [filteredSpotsList, setFilteredSpotsList] = useState(null);
 
   useEffect(() => {
     const tokenJwt = user.accessToken;
@@ -22,23 +23,35 @@ const FoundParkingScreen = ({ navigation, route }) => {
   }, []);
 
   return (
-    <Box>
+    <Box style={styles.container}>
       <Text>Results</Text>
       <Text>
-        {format(startDate, "EEE,d MMM, hh:mm b ")} - {""}
-        {format(endDate, "EEE,d MMM, hh:mm b ")}
+        {/* {format(startDate, "EEE,d MMM, hh:mm b ")} - {""}
+        {format(endDate, "EEE,d MMM, hh:mm b ")} */}
       </Text>
-
-      {() => (
-        <ParkingSpotList
-          data={filteredSpotsList}
-          type="searchResults"
-          currentDate={currentDate}
-          navigation={navigation}
-        />
-      )}
+      <ParkingSpotList
+        data={filteredSpotsList}
+        type={"searchResults"}
+        currentDate={currentDate}
+        navigation={navigation}
+      />
     </Box>
   );
 };
 
 export default FoundParkingScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: "100%",
+  },
+  tabContent: {
+    flex: 1,
+    textAlign: "center",
+    height: "100%",
+    color: "black",
+    backgroundColor: "white",
+    fontSize: 18,
+  },
+});
