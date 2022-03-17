@@ -30,9 +30,7 @@ LogBox.ignoreLogs(
   [
     "AsyncStorage has been extracted from react-native core and will be removed in a future release",
   ],
-  [
-    "NativeBase: The contrast ratio of 2.863815068413143:1 for white on"
-  ],
+  ["NativeBase: The contrast ratio of 2.863815068413143:1 for white on"]
 ); // Ignore log notification by message
 
 // root navigator:
@@ -59,13 +57,13 @@ function RootNavigator() {
     return <Loading />;
   }
 
-  return <>{user ? <AppStack /> : <AuthStack />}</>;
+  // return <>{user ? <AppStack /> : <AuthStack />}</>;
 
   // return <AuthStack />;
   // return <WelcomeScreen />;
   // return <SignupFormScreen />;
   // return <AppStack />;
-  // return <LicensePlateScreen />;
+  return <LicensePlateScreen />;
   // return <WhoParksScreen />;
   // return <ChooseCarScreen />;
   // return <ConfirmDateTimeScreen />;
