@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { LogBox, Pressable } from "react-native";
 import { Box, Text, View, Button, Flex } from "native-base";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -7,6 +7,8 @@ import EndTimeSvg from "../../UI/EndTimeSvg";
 import ParkingTypeButton from "../../UI/ParkingTypeButton";
 import OutlineButton from "../../UI/OutlineButton";
 import SolidOrangeButton from "../../UI/SolidOrangeButton";
+import { getAllParkingSpots } from "../../services/api";
+import { AuthenticatedUserContext } from "../../contexts/AuthenticatedUserContext";
 
 LogBox.ignoreLogs([
   "NativeBase: The contrast ratio of 2.863815068413143:1 for white on",
@@ -18,6 +20,9 @@ const FindParkingScreen = ({ route, navigation }) => {
   const [endDate, setEndDate] = useState(new Date());
   const [mode, setMode] = useState("datetime");
   const [show, setShow] = useState(false);
+
+  const [filteredSpotsList, setFilteredSpotsList] = useState();
+  const { user, setUser } = useContext(AuthenticatedUserContext);
 
   const onStartDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -48,9 +53,22 @@ const FindParkingScreen = ({ route, navigation }) => {
     "Small Car",
   ];
 
+  // useEffect(() => {
+  //   const tokenJwt = user.accessToken;
+  //   getAllParkingSpots(tokenJwt).then((results) => {
+  //     setFilteredSpotsList(results);
+  //     console.log(`the list of cards: ${results}`);
+  //   });
+  //   // console.log(filteredSpotsList);
+  // }, []);
+
   const saveDateTimeHandler = () => {
-    // console.log("Save Clicked");
-    navigation.navigate("FoundParkingScreen", { startDate, endDate });
+    navigation.navigate("FoundParkingScreen", {
+      startDate,
+      endDate,
+      filteredSpotsList,
+      currentDate,
+    });
   };
 
   const cancelFindParking = () => {
