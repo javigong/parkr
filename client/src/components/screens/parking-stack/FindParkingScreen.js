@@ -53,8 +53,13 @@ const FindParkingScreen = ({ route, navigation }) => {
     navigation.navigate("FoundParkingScreen", { startDate, endDate });
   };
 
+  const cancelFindParking = () => {
+    console.log("Cancel Click");
+    navigation.popToTop();
+  };
+
   return (
-    <Flex justifyContent="space-between">
+    <Box m="5" mb="12" flex="1" justifyContent="space-between">
       <Box>
         <Text>Select the period for parking</Text>
         <Flex
@@ -106,11 +111,20 @@ const FindParkingScreen = ({ route, navigation }) => {
           })}
         </Flex>
       </Box>
-      <Flex flexDirection="row" justifyContent="space-around">
-        <OutlineButton style={{ flex: 1 }} buttonText="CANCEL" />
-        <SolidOrangeButton buttonText="SAVE" onPress={saveDateTimeHandler} />
+      <Flex
+        flex="1"
+        flexDirection="row"
+        alignItems="flex-end"
+        // justifyContent="space-around"
+      >
+        <View flex="1">
+          <OutlineButton buttonText="CANCEL" onPress={cancelFindParking} />
+        </View>
+        <View flex="1">
+          <SolidOrangeButton buttonText="SAVE" onPress={saveDateTimeHandler} />
+        </View>
       </Flex>
-    </Flex>
+    </Box>
   );
 };
 
