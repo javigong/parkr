@@ -55,7 +55,7 @@ const IndexScreen = ({ navigation }) => {
 
   return (
     <>
-      <Box style={{ backgroundColor: "white" }}>
+       <Box flex="1" bg="white">
         <Center>
           <Center w="100%">
             <Box safeArea py="8" w="90%" maxW="290">
