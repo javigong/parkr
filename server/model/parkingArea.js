@@ -47,7 +47,7 @@ class ParkingArea {
     }
 
     static checkAvailabilityByDate(availabilityDate) {
-        let sql = `SELECT idslot, buildingId, unitid, userid, rsrv_start, rsrv_end, idbooking, rsvparkingslotid, rsvvisitorid, upFirstName, upLastName, rsvdtstart, rsvdtend, rsvstatus, rsvtype, rsvfee, rsvcarplateno, rsvcarmodel FROM dbparkr.slotlist INNER JOIN reservations ON idslot = rsvparkingslotid INNER JOIN dbparkr.userprofile ON rsvvisitorid = idUserProfile WHERE DATE_FORMAT(rsvdtstart, "%Y-%M-%d") = DATE_FORMAT("${availabilityDate}", "%Y-%M-%d") ORDER BY rsvdtstart`;
+        let sql = `SELECT idslot, buildingId, unitid, userid, upFirstName, upLastName, paVehicleType, paStatus, paFee, CONCAT(DATE_FORMAT("${availabilityDate}", "%Y-%m-%d"), " ",rsrv_start) as dtstart, CONCAT(DATE_FORMAT("${availabilityDate}", "%Y-%m-%d"), " ",rsrv_end) as dtend , IF(ISNULL(idbooking),true,false) as AVAILABLE FROM dbparkr.slotlist left join (SELECT * FROM dbparkr.reservations WHERE DATE_FORMAT(rsvdtstart, "%Y-%M-%d") = DATE_FORMAT("${availabilityDate}", "%Y-%M-%d")) AS RESERVE_TABLE on idslot = rsvparkingslotid INNER JOIN dbparkr.userprofile ON userid = idUserProfile INNER JOIN dbparkr.parkingarea ON paOwnerId = userid WHERE NOT ISNULL(userid) ORDER BY dtstart, idslot`
         return db.execute(sql);
     }
 
@@ -55,6 +55,7 @@ class ParkingArea {
         let sql = `SELECT idbooking, rsvparkingslotid, rsvvisitorid, userid, rsvdtstart, rsvdtend, rsvstatus, rsvtype, rsvfee, rsvcarplateno, rsvcarmodel FROM dbparkr.reservations INNER JOIN dbparkr.slotlist on rsvparkingslotid = idslot WHERE rsvvisitorid = '${userId}'`;
         return db.execute(sql);
     }
+
 
 
     static userActivityInUse(userId) {

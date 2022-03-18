@@ -68,7 +68,7 @@ const IndexScreen = ({ navigation }) => {
                 </Center>
               </Box>
 
-              <VStack mb="12" space={3} mt="5" >
+              <VStack mb="12" space={3} mt="5">
                 <Button
                   py={3}
                   px={1}
@@ -102,13 +102,14 @@ const IndexScreen = ({ navigation }) => {
                 </Button>
                 <Center>
                   <Text
-                    fontSize="md"
-                    color="coolGray.600"
+                    fontSize="16px"
+                    fontWeight="bold"
+                    color="#FD6B36"
                     _dark={{
                       color: "warmGray.200",
                     }}
                   >
-                    Or{" "}
+                    OR{" "}
                   </Text>
                 </Center>
                 <Ionicons.Button
