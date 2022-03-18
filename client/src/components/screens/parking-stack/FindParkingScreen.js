@@ -12,7 +12,7 @@ LogBox.ignoreLogs([
   "NativeBase: The contrast ratio of 2.863815068413143:1 for white on",
 ]); // Ignore log notification by message
 
-const FindParkingScreen = ({ route, navigation: { goBack } }) => {
+const FindParkingScreen = ({ route, navigation }) => {
   const { item, currentDate, type } = route.params;
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -54,13 +54,8 @@ const FindParkingScreen = ({ route, navigation: { goBack } }) => {
   };
 
   const cancelFindParking = () => {
+    console.log("Cancel Click");
     navigation.popToTop();
-    navigation.navigate("AppStack", {
-      screen: "HomeTab",
-      params: {
-        screen: "ParkingScreen",
-      },
-    });
   };
 
   return (
