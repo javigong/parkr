@@ -8,7 +8,7 @@ import { SafeAreaView, StyleSheet } from "react-native";
 
 const FoundParkingScreen = ({ navigation, route }) => {
   const { user, setUser } = useContext(AuthenticatedUserContext);
-  const { item, currentDate, type } = route.params;
+  const { item, startDate, endDate, currentDate, type } = route.params;
   const [filteredSpotsList, setFilteredSpotsList] = useState(null);
 
   useEffect(() => {
@@ -26,8 +26,8 @@ const FoundParkingScreen = ({ navigation, route }) => {
     <Box style={styles.container}>
       <Text>Results</Text>
       <Text>
-        {/* {format(startDate, "EEE,d MMM, hh:mm b ")} - {""}
-        {format(endDate, "EEE,d MMM, hh:mm b ")} */}
+        {format(startDate, "EEE,d MMM, hh:mm  ")} - {""}
+        {format(endDate, "EEE,d MMM, hh:mm  ")}
       </Text>
       <ParkingSpotList
         data={filteredSpotsList}
