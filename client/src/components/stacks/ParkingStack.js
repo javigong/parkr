@@ -35,7 +35,9 @@ const ParkingStack = () => {
       <Stack.Screen
         name="FindParkingScreen"
         component={FindParkingScreen}
-        options={{ headerShown: true }}
+        options={{
+          title: "Find Parking",
+        }}
       />
       <Stack.Screen
         name="FoundParkingScreen"
