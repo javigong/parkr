@@ -31,7 +31,7 @@ const FoundParkingScreen = ({ navigation, route }) => {
       </Text>
       <ParkingSpotList
         data={filteredSpotsList}
-        type={"searchResults"}
+        type={"searchResult"}
         currentDate={currentDate}
         navigation={navigation}
       />

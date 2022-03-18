@@ -19,7 +19,7 @@ const AppStack = () => (
     <Stack.Screen
       name="ParkingStack"
       component={ParkingStack}
-      options={(headerShown = false)}
+      options={{ headerShown: false }}
     />
     <Stack.Screen name="MyActivityStack" component={MyActivityStack} />
     <Stack.Screen name="HostStack" component={HostStack} />
