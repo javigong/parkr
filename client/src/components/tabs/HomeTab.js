@@ -15,6 +15,7 @@ const HomeTab = () => {
 
   return (
     <Tab.Navigator
+      shifting={false}
       initialRouteName="Park"
       activeColor="#FD6B36"
       inactiveColor="#818181"
