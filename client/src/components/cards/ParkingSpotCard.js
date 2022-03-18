@@ -75,6 +75,9 @@ const ParkingSpotCard = ({ item, currentDate, type, navigation }) => {
             case "hostSpot":
               hostEditHandler();
               break;
+              case "searchResult":
+                whoParksHandler();
+              break;
             default:
               return;
           }
