@@ -300,7 +300,6 @@ const LicensePlateScreen = ({ route, navigation }) => {
             borderRadius="20px"
             backgroundColor="#FD6B36"
             width="80%"
-            z-index={1}
             onPress={() =>
               navigation.navigate("ParkingStack", {
                 screen: "ConfirmReservationScreen",

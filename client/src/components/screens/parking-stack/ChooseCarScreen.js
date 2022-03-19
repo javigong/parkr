@@ -150,7 +150,7 @@ const ChooseCarScreen = ({ route, navigation }) => {
           <Button
             borderRadius="20px"
             backgroundColor="#FD6B36"
-            mb={3}
+            mb={1}
             onPress={() => handleCarSelect()}
           >
             NEXT
