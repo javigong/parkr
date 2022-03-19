@@ -46,7 +46,17 @@ const ReservationDoneScreen = () => {
         </Center>
       </Box>
 
-      <Button borderRadius="20px" backgroundColor="#FD6B36" width="80%" mb={10}>
+      <Button
+        borderRadius="20px"
+        backgroundColor="#FD6B36"
+        width="80%"
+        mb={10}
+        onPress={() =>
+          navigation.navigate("HomeTab", {
+            screen: "ParkingScreen",
+          })
+        }
+      >
         DONE
       </Button>
     </Box>
