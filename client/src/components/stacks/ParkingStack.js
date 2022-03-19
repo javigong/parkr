@@ -42,19 +42,19 @@ const ParkingStack = () => {
       <Stack.Screen
         name="FoundParkingScreen"
         component={FoundParkingScreen}
-        options={{ headerShown: true }}
+        options={{ headerShown: true, title: "Results" }}
       />
       <Stack.Screen
         name="ConfirmDateTimeScreen"
         component={ConfirmDateTimeScreen}
-        options={{ headerShown: true }}
+        options={{ headerShown: true, title: "Date Confirmation" }}
       />
       <Stack.Screen
         name="WhoParksScreen"
         component={WhoParksScreen}
-        options={{ headerShown: true }}
+        options={{ headerShown: true, title: "Who's Parking?" }}
       />
-      {/* <Stack.Screen
+      <Stack.Screen
         name="AvailableTodayScreen"
         component={AvailableTodayScreen}
         options={{ headerShown: true }}
@@ -62,17 +62,17 @@ const ParkingStack = () => {
       <Stack.Screen
         name="ChooseCarScreen"
         component={ChooseCarScreen}
-        options={{ headerShown: true }}
+        options={{ headerShown: true, title: "Select Car" }}
       />
       <Stack.Screen
         name="LicensePlateScreen"
         component={LicensePlateScreen}
-        options={{ headerShown: true }}
+        options={{ headerShown: true, title: "Car Information" }}
       />
       <Stack.Screen
         name="ConfirmReservationScreen"
         component={ConfirmReservationScreen}
-        options={{ headerShown: true }}
+        options={{ headerShown: true, title: "Confirm Reservation" }}
       />
     </Stack.Navigator>
   );
