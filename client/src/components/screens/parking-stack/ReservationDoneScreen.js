@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Center, Text, Button, Icon } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 
-const ReservationDoneScreen = () => {
+const ReservationDoneScreen = ({ navigation }) => {
   return (
     <Box flex="1" justifyContent="space-between" alignItems="center" bg="white">
       <Box flex={1} justifyContent="flex-start" alignItems="center">
