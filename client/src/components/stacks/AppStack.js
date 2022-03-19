@@ -69,7 +69,11 @@ const AppStack = () => (
         },
       }}
     />
-    <Stack.Screen name="AccountStack" component={AccountStack} />
+    <Stack.Screen
+      name="AccountStack"
+      component={AccountStack}
+      options={{ headerShown: false }}
+    />
   </Stack.Navigator>
 );
 
