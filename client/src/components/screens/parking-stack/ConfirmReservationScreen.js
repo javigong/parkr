@@ -2,7 +2,9 @@ import React from "react";
 import { Box, Button, Text, VStack, HStack } from "native-base";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const ConfirmReservationScreen = ({ navigation }) => {
+const ConfirmReservationScreen = ({ route, navigation }) => {
+  const { userType, carType, plateNum } = route.params;
+
   return (
     <Box flex="1" bg="white">
       <SafeAreaView flex="1" alignItems="center">
@@ -30,7 +32,7 @@ const ConfirmReservationScreen = ({ navigation }) => {
                   <Text fontSize={16} fontWeight="bold">
                     Who's Parking
                   </Text>
-                  <Text>Visitor</Text>
+                  <Text>{userType}</Text>
                 </VStack>
               </Box>
               <Box borderBottomWidth={1} borderBottomColor="#FD6B36">
@@ -75,8 +77,11 @@ const ConfirmReservationScreen = ({ navigation }) => {
                   Reservation For
                 </Text>
                 <HStack>
-                  <Text>Me, </Text>
-                  <Text> Benz, LMO2356</Text>
+                  <Text>{userType}, </Text>
+                  <Text>
+                    {" "}
+                    {carType}, {plateNum}
+                  </Text>
                 </HStack>
               </Box>
             </VStack>

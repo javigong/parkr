@@ -47,9 +47,9 @@ const WhoParksScreen = ({ navigation }) => {
                   borderRadius={20}
                   padding={1}
                   alignSelf="center"
-                  style={userType == "me" ? color : {}}
+                  style={userType == "Me" ? color : {}}
                   onPress={() => {
-                    handlePress("me");
+                    handlePress("Me");
                   }}
                 ></Pressable>
               </Pressable>
@@ -72,9 +72,9 @@ const WhoParksScreen = ({ navigation }) => {
                   borderRadius={20}
                   padding={1}
                   alignSelf="center"
-                  style={userType == "visitor" ? color : {}}
+                  style={userType == "Visitor" ? color : {}}
                   onPress={() => {
-                    handlePress("visitor");
+                    handlePress("Visitor");
                   }}
                 ></Pressable>
               </Pressable>
@@ -101,7 +101,12 @@ const WhoParksScreen = ({ navigation }) => {
           backgroundColor="#FD6B36"
           width="80%"
           onPress={() =>
-            navigation.navigate("ParkingStack", { screen: "ChooseCarScreen" })
+            navigation.navigate("ParkingStack", {
+              screen: "ChooseCarScreen",
+              params: {
+                userType: userType,
+              },
+            })
           }
         >
           NEXT
