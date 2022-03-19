@@ -2,7 +2,9 @@ import React from "react";
 import { Box, Button, Text, VStack, HStack } from "native-base";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const ConfirmReservationScreen = ({ navigation }) => {
+const ConfirmReservationScreen = ({ route, navigation }) => {
+  const { userType, carType, plateNum, item } = route.params;
+
   return (
     <Box flex="1" bg="white">
       <SafeAreaView flex="1" alignItems="center">
@@ -30,7 +32,7 @@ const ConfirmReservationScreen = ({ navigation }) => {
                   <Text fontSize={16} fontWeight="bold">
                     Who's Parking
                   </Text>
-                  <Text>Visitor</Text>
+                  <Text>{userType}</Text>
                 </VStack>
               </Box>
               <Box borderBottomWidth={1} borderBottomColor="#FD6B36">
@@ -39,8 +41,11 @@ const ConfirmReservationScreen = ({ navigation }) => {
                     Payment
                   </Text>
                   <HStack justifyContent="space-between">
-                    <Text>CAD $1.50 total</Text>
-                    <Text>Free</Text>
+                    {item != null ? (
+                      <Text>CAD ${item.paFee} total</Text>
+                    ) : (
+                      <Text>Free</Text>
+                    )}
                   </HStack>
                 </VStack>
               </Box>
@@ -59,10 +64,27 @@ const ConfirmReservationScreen = ({ navigation }) => {
                   </Text>
                   <HStack space={4} mb={4}>
                     <Box py={2} px={3} borderRadius="20px" bg="#FD6B36">
-                      <Text color="white">JS</Text>
+                      <Text color="white">
+                        {item != null ? (
+                          <>
+                            {item.upFirstName.charAt(0).toUpperCase()}
+                            {item.upLastName.charAt(0).toUpperCase()}
+                          </>
+                        ) : (
+                          {}
+                        )}
+                      </Text>
                     </Box>
                     <VStack>
-                      <Text fontSize={14}>John Smith</Text>
+                      <Text fontSize={14}>
+                        {item != null ? (
+                          <>
+                            {item.upFirstName} {item.upLastName}
+                          </>
+                        ) : (
+                          {}
+                        )}
+                      </Text>
                       <Text color="grey" fontSize={13}>
                         Registered Jan 1, 2022
                       </Text>
@@ -75,14 +97,27 @@ const ConfirmReservationScreen = ({ navigation }) => {
                   Reservation For
                 </Text>
                 <HStack>
-                  <Text>Me, </Text>
-                  <Text> Benz, LMO2356</Text>
+                  <Text>{userType}, </Text>
+                  <Text>
+                    {" "}
+                    {carType}, {plateNum}
+                  </Text>
                 </HStack>
               </Box>
             </VStack>
           </Box>
-          <Button borderRadius="20px" backgroundColor="#FD6B36" mb={1}>
-            Reserve
+          <Button
+            borderRadius="20px"
+            backgroundColor="#FD6B36"
+            mb={1}
+            onPress={() => {
+              // make POST request here
+              navigation.navigate("ParkingStack", {
+                screen: "ReservationDoneScreen",
+              });
+            }}
+          >
+            RESERVE
           </Button>
         </Box>
       </SafeAreaView>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { LogBox, Pressable } from "react-native";
 import { Box, Text, View, Button, Flex } from "native-base";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -7,6 +7,8 @@ import EndTimeSvg from "../../UI/EndTimeSvg";
 import ParkingTypeButton from "../../UI/ParkingTypeButton";
 import OutlineButton from "../../UI/OutlineButton";
 import SolidOrangeButton from "../../UI/SolidOrangeButton";
+import { getAllParkingSpots } from "../../services/api";
+import { AuthenticatedUserContext } from "../../contexts/AuthenticatedUserContext";
 
 LogBox.ignoreLogs([
   "NativeBase: The contrast ratio of 2.863815068413143:1 for white on",
@@ -14,10 +16,14 @@ LogBox.ignoreLogs([
 
 const FindParkingScreen = ({ route, navigation }) => {
   const { item, currentDate, type } = route.params;
+
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [mode, setMode] = useState("datetime");
   const [show, setShow] = useState(false);
+
+  const [filteredSpotsList, setFilteredSpotsList] = useState();
+  const { user, setUser } = useContext(AuthenticatedUserContext);
 
   const onStartDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -48,13 +54,33 @@ const FindParkingScreen = ({ route, navigation }) => {
     "Small Car",
   ];
 
+  // useEffect(() => {
+  //   const tokenJwt = user.accessToken;
+  //   getAllParkingSpots(tokenJwt).then((results) => {
+  //     setFilteredSpotsList(results);
+  //     console.log(`the list of cards: ${results}`);
+  //   });
+  //   // console.log(filteredSpotsList);
+  // }, []);
+
   const saveDateTimeHandler = () => {
     // console.log("Save Clicked");
-    navigation.navigate("FoundParkingScreen", { startDate, endDate });
+    navigation.navigate("FoundParkingScreen", {
+      item: item,
+      currentDate: currentDate.toString(),
+      type: type,
+      startDate: startDate.toString(),
+      endDate: endDate.toString(),
+    });
+  };
+
+  const cancelFindParking = () => {
+    console.log("Cancel Click");
+    navigation.popToTop();
   };
 
   return (
-    <Flex justifyContent="space-between">
+    <Box m="5" mb="12" flex="1" justifyContent="space-between">
       <Box>
         <Text>Select the period for parking</Text>
         <Flex
@@ -106,11 +132,20 @@ const FindParkingScreen = ({ route, navigation }) => {
           })}
         </Flex>
       </Box>
-      <Flex flexDirection="row" justifyContent="space-around">
-        <OutlineButton style={{ flex: 1 }} buttonText="CANCEL" />
-        <SolidOrangeButton buttonText="SAVE" onPress={saveDateTimeHandler} />
+      <Flex
+        flex="1"
+        flexDirection="row"
+        alignItems="flex-end"
+        // justifyContent="space-around"
+      >
+        <View flex="1">
+          <OutlineButton buttonText="CANCEL" onPress={cancelFindParking} />
+        </View>
+        <View flex="1">
+          <SolidOrangeButton buttonText="SAVE" onPress={saveDateTimeHandler} />
+        </View>
       </Flex>
-    </Flex>
+    </Box>
   );
 };
 

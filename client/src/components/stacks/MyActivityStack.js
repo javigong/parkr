@@ -10,14 +10,28 @@ const Stack = createNativeStackNavigator();
 const MyActivityStack = () => {
   return (
     <Stack.Navigator>
-    <Stack.Screen name="DetailsScreen" component={DetailsScreen} options={{ headerShown: false }} />
-    <Stack.Screen name="InUseScreen" component={InUseScreen} options={{ headerShown: false }} />
-    <Stack.Screen name="UpcomingScreen" component={UpcomingScreen} options={{ headerShown: false }} />
-    <Stack.Screen name="ExpiredScreen" component={ExpiredScreen} options={{ headerShown: false }} />
-    
-    
-  </Stack.Navigator>
-  )
-}
+      <Stack.Screen
+        name="DetailsScreen"
+        component={DetailsScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="InUseScreen"
+        component={InUseScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="UpcomingScreen"
+        component={UpcomingScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ExpiredScreen"
+        component={ExpiredScreen}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+};
 
-export default MyActivityStack
+export default MyActivityStack;

@@ -114,7 +114,7 @@ const LoginScreen = ({ navigation }) => {
                 colorScheme="rgb(94,39,161)"
                 onPress={onHandleLogin}
               >
-                <Text fontSize="16px" fontWeight="bold" color="white">
+                <Text fontSize="16" fontWeight="bold" color="white">
                   Sign in
                 </Text>
               </Button>

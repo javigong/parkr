@@ -13,9 +13,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { getCarListByUser } from "../../services/api";
 import { AuthenticatedUserContext } from "../../contexts/AuthenticatedUserContext";
 
-const ChooseCarScreen = ({ navigation }) => {
+const ChooseCarScreen = ({ route, navigation }) => {
+  const { userType, item } = route.params;
+
   const [carList, setCarList] = useState([]);
   const [carType, setCarType] = useState("newCar");
+  const [plateNum, setPlateNum] = useState(null);
   const { user, setUser } = useContext(AuthenticatedUserContext);
 
   //Will get this email when user logs in
@@ -29,9 +32,32 @@ const ChooseCarScreen = ({ navigation }) => {
 
   // This will handle the selection of car and passed as a params in route
 
-  const handlePress = (car) => {
+  const handlePress = (car, plateNo) => {
     setCarType(car);
-    console.log("pressed", car);
+    setPlateNum(plateNo);
+    console.log("pressed", car + " " + plateNo);
+  };
+
+  const handleCarSelect = () => {
+    if (carType == "newCar") {
+      navigation.navigate("ParkingStack", {
+        screen: "LicensePlateScreen",
+        params: {
+          userType: userType,
+          item: item,
+        },
+      });
+    } else {
+      navigation.navigate("ParkingStack", {
+        screen: "ConfirmReservationScreen",
+        params: {
+          userType: userType,
+          carType: carType,
+          plateNum: plateNum,
+          item: item,
+        },
+      });
+    }
   };
 
   useEffect(() => {
@@ -81,13 +107,15 @@ const ChooseCarScreen = ({ navigation }) => {
               carList.map((car, index) => {
                 return (
                   <>
-                    <Box borderBottomWidth={1} borderBottomColor="#FD6B36">
-                      <HStack justifyContent="space-around">
+                    <Box
+                      key={car.idbooking}
+                      borderBottomWidth={1}
+                      borderBottomColor="#FD6B36"
+                    >
+                      <HStack key={index} justifyContent="space-around">
                         <VStack>
-                          <Text key={car.idbooking} style={styles.carmodel}>
-                            {car.rsvcarmodel}
-                          </Text>
-                          <Text key={car.rsvcarplateno} style={styles.carplate}>
+                          <Text style={styles.carmodel}>{car.rsvcarmodel}</Text>
+                          <Text style={styles.carplate}>
                             {car.rsvcarplateno}
                           </Text>
                         </VStack>
@@ -104,10 +132,9 @@ const ChooseCarScreen = ({ navigation }) => {
                             borderRadius={20}
                             padding={1}
                             alignSelf="center"
-                            key={index}
                             style={carType == car.rsvcarmodel ? color : {}}
                             onPress={() => {
-                              handlePress(car.rsvcarmodel);
+                              handlePress(car.rsvcarmodel, car.rsvcarplateno);
                             }}
                           ></Pressable>
                         </Pressable>
@@ -123,12 +150,8 @@ const ChooseCarScreen = ({ navigation }) => {
           <Button
             borderRadius="20px"
             backgroundColor="#FD6B36"
-            mb={3}
-            onPress={() =>
-              navigation.navigate("ParkingStack", {
-                screen: "LicensePlateScreen",
-              })
-            }
+            mb={1}
+            onPress={() => handleCarSelect()}
           >
             NEXT
           </Button>

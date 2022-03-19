@@ -8,6 +8,7 @@ const OutlineButton = (props) => {
       borderRadius="20"
       m="1.5"
       size="lg"
+      onPress={props.onPress}
     >
       {props.buttonText}
     </Button>
