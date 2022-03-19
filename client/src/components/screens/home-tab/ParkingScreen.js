@@ -131,8 +131,8 @@ const ParkingScreen = ({ navigation }) => {
                       }}
                       tabStyle={{
                         backgroundColor: "rgba(255,255,255,0.4)",
-                        borderWidth: 0,
-                        borderColor: "#FD6B36",
+                        borderWidth: 1,
+                        borderColor: "white",
                       }}
                       activeTabStyle={{
                         backgroundColor: "white",
