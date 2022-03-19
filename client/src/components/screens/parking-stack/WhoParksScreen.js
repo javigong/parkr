@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Box, Center, Text, HStack, Button, Pressable } from "native-base";
 
-const WhoParksScreen = ({ navigation }) => {
+const WhoParksScreen = ({ route, navigation }) => {
+  const { item } = route.params;
   const [userType, setUserType] = useState();
 
   let color = {
@@ -105,6 +106,7 @@ const WhoParksScreen = ({ navigation }) => {
               screen: "ChooseCarScreen",
               params: {
                 userType: userType,
+                item: item,
               },
             })
           }

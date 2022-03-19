@@ -3,7 +3,7 @@ import { Box, Button, Text, VStack, HStack } from "native-base";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const ConfirmReservationScreen = ({ route, navigation }) => {
-  const { userType, carType, plateNum } = route.params;
+  const { userType, carType, plateNum, item } = route.params;
 
   return (
     <Box flex="1" bg="white">
@@ -41,8 +41,11 @@ const ConfirmReservationScreen = ({ route, navigation }) => {
                     Payment
                   </Text>
                   <HStack justifyContent="space-between">
-                    <Text>CAD $1.50 total</Text>
-                    <Text>Free</Text>
+                    {item != null ? (
+                      <Text>CAD ${item.paFee} total</Text>
+                    ) : (
+                      <Text>Free</Text>
+                    )}
                   </HStack>
                 </VStack>
               </Box>
@@ -61,10 +64,27 @@ const ConfirmReservationScreen = ({ route, navigation }) => {
                   </Text>
                   <HStack space={4} mb={4}>
                     <Box py={2} px={3} borderRadius="20px" bg="#FD6B36">
-                      <Text color="white">JS</Text>
+                      <Text color="white">
+                        {item != null ? (
+                          <>
+                            {item.upFirstName.charAt(0).toUpperCase()}
+                            {item.upLastName.charAt(0).toUpperCase()}
+                          </>
+                        ) : (
+                          {}
+                        )}
+                      </Text>
                     </Box>
                     <VStack>
-                      <Text fontSize={14}>John Smith</Text>
+                      <Text fontSize={14}>
+                        {item != null ? (
+                          <>
+                            {item.upFirstName} {item.upLastName}
+                          </>
+                        ) : (
+                          {}
+                        )}
+                      </Text>
                       <Text color="grey" fontSize={13}>
                         Registered Jan 1, 2022
                       </Text>

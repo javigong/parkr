@@ -14,7 +14,7 @@ import { getCarListByUser } from "../../services/api";
 import { AuthenticatedUserContext } from "../../contexts/AuthenticatedUserContext";
 
 const ChooseCarScreen = ({ route, navigation }) => {
-  const { userType } = route.params;
+  const { userType, item } = route.params;
 
   const [carList, setCarList] = useState([]);
   const [carType, setCarType] = useState("newCar");
@@ -44,6 +44,7 @@ const ChooseCarScreen = ({ route, navigation }) => {
         screen: "LicensePlateScreen",
         params: {
           userType: userType,
+          item: item,
         },
       });
     } else {
@@ -53,6 +54,7 @@ const ChooseCarScreen = ({ route, navigation }) => {
           userType: userType,
           carType: carType,
           plateNum: plateNum,
+          item: item,
         },
       });
     }
@@ -110,7 +112,7 @@ const ChooseCarScreen = ({ route, navigation }) => {
                       borderBottomWidth={1}
                       borderBottomColor="#FD6B36"
                     >
-                      <HStack justifyContent="space-around">
+                      <HStack key={index} justifyContent="space-around">
                         <VStack>
                           <Text style={styles.carmodel}>{car.rsvcarmodel}</Text>
                           <Text style={styles.carplate}>
@@ -130,7 +132,6 @@ const ChooseCarScreen = ({ route, navigation }) => {
                             borderRadius={20}
                             padding={1}
                             alignSelf="center"
-                            key={index}
                             style={carType == car.rsvcarmodel ? color : {}}
                             onPress={() => {
                               handlePress(car.rsvcarmodel, car.rsvcarplateno);
