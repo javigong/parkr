@@ -105,13 +105,15 @@ const ChooseCarScreen = ({ route, navigation }) => {
               carList.map((car, index) => {
                 return (
                   <>
-                    <Box borderBottomWidth={1} borderBottomColor="#FD6B36">
+                    <Box
+                      key={car.idbooking}
+                      borderBottomWidth={1}
+                      borderBottomColor="#FD6B36"
+                    >
                       <HStack justifyContent="space-around">
                         <VStack>
-                          <Text key={car.idbooking} style={styles.carmodel}>
-                            {car.rsvcarmodel}
-                          </Text>
-                          <Text key={car.rsvcarplateno} style={styles.carplate}>
+                          <Text style={styles.carmodel}>{car.rsvcarmodel}</Text>
+                          <Text style={styles.carplate}>
                             {car.rsvcarplateno}
                           </Text>
                         </VStack>
