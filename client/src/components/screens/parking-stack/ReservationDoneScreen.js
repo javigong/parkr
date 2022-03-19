@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Center, Text, Button, Icon } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 
-const ReservationDoneScreen = () => {
+const ReservationDoneScreen = ({ navigation }) => {
   return (
     <Box flex="1" justifyContent="space-between" alignItems="center" bg="white">
       <Box flex={1} justifyContent="flex-start" alignItems="center">
@@ -46,7 +46,17 @@ const ReservationDoneScreen = () => {
         </Center>
       </Box>
 
-      <Button borderRadius="20px" backgroundColor="#FD6B36" width="80%" mb={10}>
+      <Button
+        borderRadius="20px"
+        backgroundColor="#FD6B36"
+        width="80%"
+        mb={10}
+        onPress={() =>
+          navigation.navigate("HomeTab", {
+            screen: "ParkingScreen",
+          })
+        }
+      >
         DONE
       </Button>
     </Box>
