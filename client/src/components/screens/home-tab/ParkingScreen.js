@@ -37,6 +37,9 @@ const ParkingScreen = ({ navigation }) => {
   const [buildingInfo, setBuildingInfo] = useState();
   const [currentDate, setCurrentDate] = useState(null);
 
+  const date = new Date();
+  const dateString = date.toString();
+
   const handleCustomIndexSelect = (index) => {
     setCustomStyleIndex(index);
   };
@@ -48,12 +51,13 @@ const ParkingScreen = ({ navigation }) => {
   const findParkingHandler = () => {
     navigation.navigate("ParkingStack", {
       screen: "FindParkingScreen",
-      params: { type: "search" },
+      params: { item: null, currentDate: dateString, type: "search" },
     });
   };
-  useEffect(() => { 
+
+  useEffect(() => {
     const tokenJwt = user.accessToken;
-    const date = new Date();
+    
     setCurrentDate(date.toString().slice(4, 10));
     getAllParkingSpots(tokenJwt).then((results) => setSpotsTodayList(results));
     getBuildingInfo(tokenJwt).then((results) => setBuildingInfo(results));
@@ -72,25 +76,25 @@ const ParkingScreen = ({ navigation }) => {
             justifyContent="space-between"
           >
             <Box>
-              {buildingInfo != undefined ?
-              <>
-              <Text
-                mt={5}
-                ml={8}
-                fontFamily="heading"
-                fontWeight="bold"
-                fontSize="2xl"
-                color="white"
-              >
-                {buildingInfo[0].biName}
-              </Text>
-              <Text ml={8} fontSize="md" fontWeight="bold" color="white">
-                {buildingInfo[0].biAddress}
-              </Text>
-              </>
-              :
-              <Text></Text>
-              }
+              {buildingInfo != undefined ? (
+                <>
+                  <Text
+                    mt={5}
+                    ml={8}
+                    fontFamily="heading"
+                    fontWeight="bold"
+                    fontSize="2xl"
+                    color="white"
+                  >
+                    {buildingInfo[0].biName}
+                  </Text>
+                  <Text ml={8} fontSize="md" fontWeight="bold" color="white">
+                    {buildingInfo[0].biAddress}
+                  </Text>
+                </>
+              ) : (
+                <Text></Text>
+              )}
             </Box>
             <Icon
               mt={8}

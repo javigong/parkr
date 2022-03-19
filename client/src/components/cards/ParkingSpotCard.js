@@ -30,7 +30,7 @@ const ParkingSpotCard = ({ item, currentDate, type, navigation }) => {
   };
 
   const hostDetailsHandler = () => {
-    console.log("type:", type);
+    // console.log("type:", type);
     navigation.navigate("HostStack", {
       screen: "HostDetailsScreen",
       params: { item: item, currentDate: currentDate, type: type },
@@ -38,7 +38,7 @@ const ParkingSpotCard = ({ item, currentDate, type, navigation }) => {
   };
 
   const hostEditHandler = () => {
-    console.log("type:", type);
+    // console.log("type:", type);
     navigation.navigate("HostStack", {
       screen: "HostEditScreen",
       params: { item: item, currentDate: currentDate, type: type },
@@ -46,7 +46,7 @@ const ParkingSpotCard = ({ item, currentDate, type, navigation }) => {
   };
 
   const whoParksHandler = () => {
-    console.log("type:", type);
+    // console.log("type:", type);
     navigation.navigate("ParkingStack", {
       screen: "WhoParksScreen",
       params: { item: item, currentDate: currentDate, type: type },
@@ -75,8 +75,8 @@ const ParkingSpotCard = ({ item, currentDate, type, navigation }) => {
             case "hostSpot":
               hostEditHandler();
               break;
-              case "searchResult":
-                whoParksHandler();
+            case "searchResult":
+              whoParksHandler();
               break;
             default:
               return;

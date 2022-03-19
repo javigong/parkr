@@ -16,6 +16,7 @@ LogBox.ignoreLogs([
 
 const FindParkingScreen = ({ route, navigation }) => {
   const { item, currentDate, type } = route.params;
+
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [mode, setMode] = useState("datetime");
@@ -63,11 +64,13 @@ const FindParkingScreen = ({ route, navigation }) => {
   // }, []);
 
   const saveDateTimeHandler = () => {
+    // console.log("Save Clicked");
     navigation.navigate("FoundParkingScreen", {
-      startDate,
-      endDate,
-      filteredSpotsList,
-      currentDate,
+      item: item,
+      currentDate: currentDate.toString(),
+      type: type,
+      startDate: startDate.toString(),
+      endDate: endDate.toString(),
     });
   };
 

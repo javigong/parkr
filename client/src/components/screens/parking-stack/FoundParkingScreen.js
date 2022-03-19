@@ -26,13 +26,15 @@ const FoundParkingScreen = ({ navigation, route }) => {
     <Box style={styles.container}>
       <Text>Results</Text>
       <Text>
-        {format(startDate, "EEE,d MMM, hh:mm  ")} - {""}
-        {format(endDate, "EEE,d MMM, hh:mm  ")}
+        {/* {format(startDate, "EEE,d MMM, hh:mm  ")} - {""}
+        {format(endDate, "EEE,d MMM, hh:mm  ")} */}
+        {`${startDate.slice(4, 10)}, ${startDate.slice(16, 21)}`} - {""}
+        {`${endDate.slice(4, 10)}, ${endDate.slice(16, 21)}`}
       </Text>
       <ParkingSpotList
         data={filteredSpotsList}
         type={"searchResult"}
-        currentDate={currentDate}
+        currentDate={currentDate.slice(4, 10)}
         navigation={navigation}
       />
     </Box>
