@@ -67,7 +67,7 @@ const FindParkingScreen = ({ route, navigation }) => {
     // console.log("Save Clicked");
     navigation.navigate("FoundParkingScreen", {
       item: item,
-      currentDate: currentDate,
+      currentDate: currentDate.toString(),
       type: type,
       startDate: startDate.toString(),
       endDate: endDate.toString(),
