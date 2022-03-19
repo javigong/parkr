@@ -106,8 +106,18 @@ const ConfirmReservationScreen = ({ route, navigation }) => {
               </Box>
             </VStack>
           </Box>
-          <Button borderRadius="20px" backgroundColor="#FD6B36" mb={1}>
-            Reserve
+          <Button
+            borderRadius="20px"
+            backgroundColor="#FD6B36"
+            mb={1}
+            onPress={() => {
+              // make POST request here
+              navigation.navigate("ParkingStack", {
+                screen: "ReservationDoneScreen",
+              });
+            }}
+          >
+            RESERVE
           </Button>
         </Box>
       </SafeAreaView>

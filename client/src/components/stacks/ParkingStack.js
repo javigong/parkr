@@ -11,6 +11,7 @@ import AvailableTodayScreen from "../screens/parking-stack/AvailableTodayScreen"
 import ChooseCarScreen from "../screens/parking-stack/ChooseCarScreen";
 import LicensePlateScreen from "../screens/parking-stack/LicensePlateScreen";
 import ConfirmReservationScreen from "../screens/parking-stack/ConfirmReservationScreen";
+import ReservationDoneScreen from "../screens/parking-stack/ReservationDoneScreen";
 import { Button } from "native-base";
 import { HeaderBackButton } from "@react-navigation/elements";
 import { ms } from "date-fns/locale";
@@ -73,6 +74,11 @@ const ParkingStack = () => {
         name="ConfirmReservationScreen"
         component={ConfirmReservationScreen}
         options={{ headerShown: true, title: "Confirm Reservation" }}
+      />
+      <Stack.Screen
+        name="ReservationDoneScreen"
+        component={ReservationDoneScreen}
+        options={{ headerShown: true, title: "Reservation Complete" }}
       />
     </Stack.Navigator>
   );

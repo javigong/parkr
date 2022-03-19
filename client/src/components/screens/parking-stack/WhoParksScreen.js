@@ -97,7 +97,7 @@ const WhoParksScreen = ({ route, navigation }) => {
             </Radio.Group> */}
         </Box>
         <Button
-          mb={10}
+          mb={9}
           borderRadius="20px"
           backgroundColor="#FD6B36"
           width="80%"
