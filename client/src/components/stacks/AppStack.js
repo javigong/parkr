@@ -21,10 +21,59 @@ const AppStack = () => (
       component={ParkingStack}
       options={{ headerShown: false }}
     />
-    <Stack.Screen name="MyActivityStack" component={MyActivityStack} />
-    <Stack.Screen name="HostStack" component={HostStack} />
-    <Stack.Screen name="ChatStack" component={ChatStack} />
-    <Stack.Screen name="AccountStack" component={AccountStack} />
+    <Stack.Screen
+      name="MyActivityStack"
+      component={MyActivityStack}
+      options={{
+        title: "Spot Details",
+        headerShown: true,
+        headerBackTitleVisible: false,
+        headerStyle: {
+          backgroundColor: "#FD6B36",
+        },
+        headerTintColor: "#FFF",
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+      }}
+    />
+    <Stack.Screen
+      name="HostStack"
+      component={HostStack}
+      options={{
+        title: "Spot Details",
+        headerShown: true,
+        headerBackTitleVisible: false,
+        headerStyle: {
+          backgroundColor: "#FD6B36",
+        },
+        headerTintColor: "#FFF",
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+      }}
+    />
+    <Stack.Screen
+      name="ChatStack"
+      component={ChatStack}
+      options={{
+        title: "Chat",
+        headerShown: true,
+        headerBackTitleVisible: false,
+        headerStyle: {
+          backgroundColor: "#FD6B36",
+        },
+        headerTintColor: "#FFF",
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+      }}
+    />
+    <Stack.Screen
+      name="AccountStack"
+      component={AccountStack}
+      options={{ headerShown: false }}
+    />
   </Stack.Navigator>
 );
 

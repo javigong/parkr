@@ -14,7 +14,14 @@ import ParkingLocationScreen from "../screens/auth-stack/ParkingLocationScreen";
 const Stack = createNativeStackNavigator();
 
 const AuthStack = () => (
-  <Stack.Navigator>
+  <Stack.Navigator
+    screenOptions={{
+      headerTintColor: "#FD6B36",
+      headerTitleStyle: {
+        color: "white",
+      },
+    }}
+  >
     <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
     <Stack.Screen name="IndexScreen" component={IndexScreen} />
     <Stack.Screen name="LoginScreen" component={LoginScreen} />
