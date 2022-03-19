@@ -4,6 +4,8 @@
 
 import React, { useState, useEffect } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
+import { Center, Icon } from "native-base";
+import { Ionicons } from "@expo/vector-icons";
 import {
   Box,
   Text,
@@ -20,8 +22,11 @@ import { RNS3 } from "react-native-aws3";
 import { Camera } from "expo-camera";
 import axios from "axios";
 
-const LicensePlateScreen = ({ navigation }) => {
+const LicensePlateScreen = ({ route, navigation }) => {
+  const { userType, item } = route.params;
+
   const [hasPermission, setHasPermission] = useState(null);
+  const [carType, setCarType] = useState("");
   const [camera, setCamera] = useState(null);
   const [cameraOn, setCameraOn] = useState(false);
   const [cameraText, setCameraText] = useState("Turn On Camera");
@@ -165,7 +170,12 @@ const LicensePlateScreen = ({ navigation }) => {
           <FormControl padding={5} isRequired>
             <VStack mx="4" space="2">
               <FormControl.Label>Car Model</FormControl.Label>
-              <Input type="text" placeholder="i.e. Mazda MX-5" />
+              <Input
+                type="text"
+                value={carType}
+                placeholder="i.e. Mazda MX-5"
+                onChangeText={(text) => setCarType(text)}
+              />
               <FormControl.HelperText>
                 Please provide brand and model
               </FormControl.HelperText>
@@ -176,7 +186,12 @@ const LicensePlateScreen = ({ navigation }) => {
               </FormControl.ErrorMessage>
 
               <FormControl.Label>License Plate</FormControl.Label>
-              <Input type="text" placeholder="i.e. 291 VSA" />
+              <Input
+                type="text"
+                value={plateNum}
+                placeholder="i.e. 291VSA"
+                onChangeText={(text) => setPlateNum(text)}
+              />
               <FormControl.HelperText>
                 Please provide license plate number or upload a clear photo of
                 your license plate.
@@ -272,6 +287,13 @@ const LicensePlateScreen = ({ navigation }) => {
               ) : (
                 <Text></Text>
               )}
+              <Center>
+                <Icon
+                  color="lightgray"
+                  size={8}
+                  as={<Ionicons name="chevron-down-outline" />}
+                />
+              </Center>
             </ScrollView>
           </Box>
           <Button
@@ -282,6 +304,12 @@ const LicensePlateScreen = ({ navigation }) => {
             onPress={() =>
               navigation.navigate("ParkingStack", {
                 screen: "ConfirmReservationScreen",
+                params: {
+                  userType: userType,
+                  carType: carType,
+                  plateNum: plateNum,
+                  item: item,
+                },
               })
             }
           >
