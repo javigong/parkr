@@ -30,12 +30,7 @@ import ParkingSpotDetailsCard from "./src/components/cards/ParkingSpotDetailsCar
 import DetailsScreen from "./src/components/screens/myactivity-stack/DetailsScreen";
 import FindParkingScreen from "./src/components/screens/parking-stack/FindParkingScreen";
 
-LogBox.ignoreLogs(
-  [
-    "AsyncStorage has been extracted from react-native core and will be removed in a future release",
-  ],
-  ["NativeBase: The contrast ratio of 2.863815068413143:1 for white on"]
-); // Ignore log notification by message
+LogBox.ignoreAllLogs(); // Ignore all notifications
 
 // root navigator:
 
