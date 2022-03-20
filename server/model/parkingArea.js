@@ -1,14 +1,42 @@
 const db = require("../config/config.js");
 
 class ParkingArea {
-    constructor(objParkingArea) {
-        this.objParkingArea.idParkingSlot = objParkingArea.ParkingSlotNo;
-        this.objParkingArea.paUnitNo = objParkingArea.UnitNo;
-        this.objParkingArea.paVehicleType = objParkingArea.VehicleType;
-        this.objParkingArea.paStatus = objParkingArea.Status;
-        this.objParkingArea.paVisitorId = objParkingArea.VisitorId;
-        this.objParkingArea.paFee = objParkingArea.Rate;
-    }
+
+    objParkingArea = new function(parkingarea) {
+        this.idParkingSlot = parkingarea.ParkingSlotNo;
+        this.paUnitNo = parkingarea.UnitNo;
+        this.paVehicleType = parkingarea.VehicleType;
+        this.paStatus = parkingarea.Status;
+        this.paVisitorId = parkingarea.VisitorId;
+        this.paFee = parkingarea.Rate;
+    };
+
+    objReservation = new function(parkingreservation) {
+        this.idbooking = parkingreservation.idbooking;
+        this.rsvparkingslotid = parkingreservation.rsvparkingslotid;
+        this.rsvvisitorid = parkingreservation.rsvvisitorid;
+        this.rsvdtstart = parkingreservation.rsvdtstart;
+        this.rsvdtstart = parkingreservation.rsvdtstart;
+        this.rsvdtend = parkingreservation.rsvdtend;
+        this.rsvtype = parkingreservation.rsvtype;
+        this.rsvfee = parkingreservation.rsvfee;
+        this.rsvcarplateno = parkingreservation.rsvcarplateno;
+        this.rsvcarmodel = parkingreservation.rsvcarmodel;
+    };
+
+    saveReservation = (newReservation, result) => {
+        sql.query("INSERT INTO dbparkr.reservations SET ?", newReservation, (err, res) => {
+            if (err) {
+                console.log("error: ", err);
+                result(err, null);
+                return;
+            }
+
+            console.log("created reservation: ", { id: res.insertId, ...newReservation });
+            result(null, { id: res.insertId, ...newTutorial });
+        });
+    };
+
 
     async save(parkingAreaInfo) {
 

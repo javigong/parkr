@@ -1,6 +1,38 @@
 const ParkingArea = require("../model/parkingArea.js");
 const db = require("../config/config.js");
 
+exports.createReservation = (req, res) => {
+    // Validate request
+    console.log(req.body);
+    if (!req.body) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+    }
+
+    const _reservation = new ParkingArea({
+        idbooking: req.body.idbooking,
+        rsvparkingslotid: req.body.rsvparkingslotid,
+        rsvvisitorid: req.body.rsvvisitorid,
+        rsvdtstart: req.body.rsvdtstart,
+        rsvdtstart: req.body.rsvdtstart,
+        rsvdtend: req.body.rsvdtend,
+        rsvtype: req.body.rsvtype,
+        rsvfee: req.body.rsvfee,
+        rsvcarplateno: req.body.rsvcarplateno,
+        rsvcarmodel: req.body.rsvcarmodel
+    });
+
+    ParkingArea.saveReservation(_reservation, (err, data) => {
+        if (err)
+            res.status(500).send({
+                message: err.message || "Some error occurred while saving reservation."
+            });
+        else res.send(data);
+    });
+};
+
+
 exports.getAllParkingSlots = async(req, res, next) => {
     try {
         const [parkingSlots, _] = await ParkingArea.findAll();
