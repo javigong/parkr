@@ -6,6 +6,7 @@ import MyActivityStack from "./MyActivityStack";
 import HostStack from "./HostStack";
 import ChatStack from "./ChatStack";
 import AccountStack from "./AccountStack";
+import { ImageHeader } from "../layout/ImageHeader";
 
 const Stack = createNativeStackNavigator();
 
@@ -29,8 +30,9 @@ const AppStack = () => (
         headerShown: true,
         headerBackTitleVisible: false,
         headerStyle: {
-          backgroundColor: "#FD6B36",
+          backgroundColor: "transparent",
         },
+        headerBackground: () => <ImageHeader />,
         headerTintColor: "#FFF",
         headerTitleStyle: {
           fontWeight: "bold",
@@ -45,8 +47,9 @@ const AppStack = () => (
         headerShown: true,
         headerBackTitleVisible: false,
         headerStyle: {
-          backgroundColor: "#FD6B36",
+          backgroundColor: "transparent",
         },
+        headerBackground: () => <ImageHeader />,
         headerTintColor: "#FFF",
         headerTitleStyle: {
           fontWeight: "bold",
@@ -61,8 +64,9 @@ const AppStack = () => (
         headerShown: true,
         headerBackTitleVisible: false,
         headerStyle: {
-          backgroundColor: "#FD6B36",
+          backgroundColor: "transparent",
         },
+        headerBackground: () => <ImageHeader />,
         headerTintColor: "#FFF",
         headerTitleStyle: {
           fontWeight: "bold",
