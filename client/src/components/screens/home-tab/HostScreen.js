@@ -45,7 +45,7 @@ const HostScreen = ({ navigation }) => {
     signOut(auth).catch((error) => console.log("Error logging out: ", error));
   };
 
-  useEffect(() => { 
+  useEffect(() => {
     const tokenJwt = user.accessToken;
     const date = new Date();
     setCurrentDate(date.toString().slice(4, 10));
@@ -64,25 +64,25 @@ const HostScreen = ({ navigation }) => {
             justifyContent="space-between"
           >
             <Box>
-              {buildingInfo != undefined ?
-              <>
-              <Text
-                mt={5}
-                ml={8}
-                fontFamily="heading"
-                fontWeight="bold"
-                fontSize="2xl"
-                color="white"
-              >
-                {buildingInfo[0].biName}
-              </Text>
-              <Text ml={8} fontSize="md" fontWeight="bold" color="white">
-                {buildingInfo[0].biAddress}
-              </Text>
-              </>
-              :
-              <Text></Text>
-              }
+              {buildingInfo != undefined ? (
+                <>
+                  <Text
+                    mt={5}
+                    ml={8}
+                    fontFamily="heading"
+                    fontWeight="bold"
+                    fontSize="2xl"
+                    color="white"
+                  >
+                    {buildingInfo[0].biName}
+                  </Text>
+                  <Text ml={8} fontSize="md" fontWeight="bold" color="white">
+                    {buildingInfo[0].biAddress}
+                  </Text>
+                </>
+              ) : (
+                <Text></Text>
+              )}
             </Box>
             <Icon
               mt={8}
@@ -111,8 +111,8 @@ const HostScreen = ({ navigation }) => {
                   }}
                   tabStyle={{
                     backgroundColor: "rgba(255,255,255,0.4)",
-                    borderWidth: 0,
-                    borderColor: "#FD6B36",
+                    borderWidth: 1,
+                    borderColor: "white",
                   }}
                   activeTabStyle={{ backgroundColor: "white", marginTop: 0 }}
                   tabTextStyle={{ color: "white", fontWeight: "bold" }}
@@ -160,12 +160,12 @@ const HostScreen = ({ navigation }) => {
           {customStyleIndex === 1 && (
             <Box flex="1" width="100%">
               <Box flex="1">
-              <ParkingSpotList
-                        data={spotsTodayList}
-                        currentDate={currentDate}
-                        type={"hostSpot"}
-                        navigation={navigation}
-                      />
+                <ParkingSpotList
+                  data={spotsTodayList}
+                  currentDate={currentDate}
+                  type={"hostSpot"}
+                  navigation={navigation}
+                />
               </Box>
             </Box>
           )}
