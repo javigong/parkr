@@ -1,6 +1,10 @@
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { auth } from "../config/firebase";
+import AccountIcon from "../icons/AccountIcon";
+import ChatIcon from "../icons/ChatIcon";
+import HostIcon from "../icons/HostIcon";
+import ParkIcon from "../icons/ParkIcon";
 import AccountScreen from "../screens/home-tab/AccountScreen";
 import ChatScreen from "../screens/home-tab/ChatScreen";
 import HostScreen from "../screens/home-tab/HostScreen";
@@ -29,7 +33,7 @@ const HomeTab = () => {
           headerShown: false,
           tabBarLabel: "Park",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="parking" color={color} size={26} />
+            <ParkIcon color={color} />
           ),
         }}
       />
@@ -39,7 +43,7 @@ const HomeTab = () => {
         options={{
           tabBarLabel: "Host",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="table-cog" color={color} size={26} />
+            <HostIcon color={color} />
           ),
         }}
       />
@@ -49,11 +53,7 @@ const HomeTab = () => {
         options={{
           tabBarLabel: "Chat",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="chat-processing"
-              color={color}
-              size={26}
-            />
+            <ChatIcon color={color} />
           ),
         }}
       />
@@ -63,11 +63,7 @@ const HomeTab = () => {
         options={{
           tabBarLabel: "Account",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="account-circle"
-              color={color}
-              size={26}
-            />
+            <AccountIcon color={color} />
           ),
         }}
       />
