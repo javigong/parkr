@@ -1,6 +1,5 @@
-const express = require('express');
 const verifyToken = require('../auth/middleware.js');
-const router = express.Router();
+const router = require('express').Router({ mergeParams: true });
 
 const {
     getAllParkingSlots,
@@ -11,8 +10,7 @@ const {
     getMyActivityExpired,
     getCarListByUser,
     getAvailabilityByDate,
-    postNewParkingArea,
-    createReservation
+    postNewParkingArea
 } = require("../controllers/parkingSlotControllers.js")
 
 //user profile routes
@@ -25,7 +23,5 @@ router
     .get("/expired/:useremail", verifyToken, getMyActivityExpired)
     .get("/carlist/:useremail", verifyToken, getCarListByUser)
     .get("/checkavailability/:date", verifyToken, getAvailabilityByDate)
-    .post("/saveparkingarea/:slotid", verifyToken, postNewParkingArea)
-    .post("/savereservation", createReservation);
-
+    .post("/saveparkingarea/:slotid", verifyToken, postNewParkingArea);
 module.exports = router;
