@@ -6,7 +6,7 @@ const ChatIcon = ({ color }) => {
     <Svg
       width="27"
       height="25"
-      viewBox="0 0 27 32"
+      viewBox="0 0 27 29"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >

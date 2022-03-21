@@ -24,7 +24,7 @@ const HomeTab = () => {
       activeColor="#FD6B36"
       inactiveColor="#818181"
       labelStyle={{ fontSize: 12 }}
-      barStyle={{ backgroundColor: "white", paddingTop: 5 }}
+      barStyle={{ backgroundColor: "white", paddingTop: 3 }}
     >
       <Tab.Screen
         name="Park"
