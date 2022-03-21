@@ -13,8 +13,8 @@ import LicensePlateScreen from "../screens/parking-stack/LicensePlateScreen";
 import ConfirmReservationScreen from "../screens/parking-stack/ConfirmReservationScreen";
 import ReservationDoneScreen from "../screens/parking-stack/ReservationDoneScreen";
 import { Button } from "native-base";
-import { HeaderBackButton } from "@react-navigation/elements";
 import { ms } from "date-fns/locale";
+import { ImageHeader } from "../layout/ImageHeader";
 
 const Stack = createNativeStackNavigator();
 
@@ -25,8 +25,9 @@ const ParkingStack = () => {
         headerShown: true,
         headerBackTitleVisible: false,
         headerStyle: {
-          backgroundColor: "#FD6B36",
+          backgroundColor: "transparent",
         },
+        headerBackground: () => <ImageHeader />,
         headerTintColor: "#FFF",
         headerTitleStyle: {
           fontWeight: "bold",
