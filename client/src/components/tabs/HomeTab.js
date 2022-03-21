@@ -24,7 +24,7 @@ const HomeTab = () => {
       activeColor="#FD6B36"
       inactiveColor="#818181"
       labelStyle={{ fontSize: 12 }}
-      barStyle={{ backgroundColor: "white" }}
+      barStyle={{ backgroundColor: "white", paddingTop: 5 }}
     >
       <Tab.Screen
         name="Park"
@@ -32,9 +32,7 @@ const HomeTab = () => {
         options={{
           headerShown: false,
           tabBarLabel: "Park",
-          tabBarIcon: ({ color }) => (
-            <ParkIcon color={color} />
-          ),
+          tabBarIcon: ({ color }) => <ParkIcon mb="12" color={color} />,
         }}
       />
       <Tab.Screen
@@ -42,9 +40,7 @@ const HomeTab = () => {
         component={HostScreen}
         options={{
           tabBarLabel: "Host",
-          tabBarIcon: ({ color }) => (
-            <HostIcon color={color} />
-          ),
+          tabBarIcon: ({ color }) => <HostIcon color={color} />,
         }}
       />
       <Tab.Screen
@@ -52,9 +48,7 @@ const HomeTab = () => {
         component={ChatScreen}
         options={{
           tabBarLabel: "Chat",
-          tabBarIcon: ({ color }) => (
-            <ChatIcon color={color} />
-          ),
+          tabBarIcon: ({ color }) => <ChatIcon color={color} />,
         }}
       />
       <Tab.Screen
@@ -62,9 +56,7 @@ const HomeTab = () => {
         component={AccountScreen}
         options={{
           tabBarLabel: "Account",
-          tabBarIcon: ({ color }) => (
-            <AccountIcon color={color} />
-          ),
+          tabBarIcon: ({ color }) => <AccountIcon color={color} />,
         }}
       />
     </Tab.Navigator>
