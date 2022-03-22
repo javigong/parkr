@@ -13,13 +13,25 @@ const FoundParkingScreen = ({ navigation, route }) => {
 
   useEffect(() => {
     const tokenJwt = user.accessToken;
+    const filteredSpotsArray = [];
     // const date = new Date();
     // setCurrentDate(date.toString().slice(4, 10));
-    getAllParkingSpots(tokenJwt).then(
-      (results) => setFilteredSpotsList(results)
-      // console.log(results)
-    );
-    console.log(filteredSpotsList);
+    getAllParkingSpots(tokenJwt).then((results) => {
+      // setFilteredSpotsList(results);
+      results.filter((each) => {
+        if (
+          each.rsrv_start <= startDate.slice(16, 24) &&
+          each.rsrv_end >= endDate.slice(16, 24)
+        ) {
+          // console.log(each);
+          filteredSpotsArray.push(each);
+
+          // console.log(filteredSpotsArray);
+        }
+      });
+      setFilteredSpotsList(filteredSpotsArray);
+    });
+    // console.log(filteredSpotsList);
   }, []);
 
   return (

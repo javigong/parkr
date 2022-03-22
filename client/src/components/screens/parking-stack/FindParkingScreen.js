@@ -64,7 +64,6 @@ const FindParkingScreen = ({ route, navigation }) => {
   // }, []);
 
   const saveDateTimeHandler = () => {
-    // console.log("Save Clicked");
     navigation.navigate("FoundParkingScreen", {
       item: item,
       currentDate: currentDate.toString(),
@@ -75,7 +74,6 @@ const FindParkingScreen = ({ route, navigation }) => {
   };
 
   const cancelFindParking = () => {
-    console.log("Cancel Click");
     navigation.popToTop();
   };
 
