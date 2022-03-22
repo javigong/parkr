@@ -23,21 +23,19 @@ const FoundParkingScreen = ({ navigation, route }) => {
           each.rsrv_start <= startDate.slice(16, 24) &&
           each.rsrv_end >= endDate.slice(16, 24)
         ) {
-          // console.log(each);
           filteredSpotsArray.push(each);
-
-          // console.log(filteredSpotsArray);
         }
       });
       setFilteredSpotsList(filteredSpotsArray);
     });
-    // console.log(filteredSpotsList);
   }, []);
 
   return (
     <Box style={styles.container}>
-      <Text>Results</Text>
-      <Text>
+      <Text ml="5" mt="3" fontSize="lg" bold>
+        Results
+      </Text>
+      <Text ml="5" mb="5">
         {/* {format(startDate, "EEE,d MMM, hh:mm  ")} - {""}
         {format(endDate, "EEE,d MMM, hh:mm  ")} */}
         {`${startDate.slice(4, 10)}, ${startDate.slice(16, 21)}`} - {""}
