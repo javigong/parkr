@@ -69,6 +69,7 @@ function RootNavigator() {
   // return <HostScreen />
   // return <ConfirmReservationScreen/>
   // return <ParkingSpotDetailsCard />
+  // return <ParkingLocationScreen />;
 }
 
 const App = () => {
