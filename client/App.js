@@ -11,7 +11,10 @@ import Loading from "./src/components/layout/Loading";
 import AuthStack from "./src/components/stacks/AuthStack";
 import AppStack from "./src/components/stacks/AppStack";
 import { LogBox } from "react-native";
-import { HasBuildingContext, HasBuildingProvider } from "./src/components/contexts/HasBuildingContext";
+import {
+  HasBuildingContext,
+  HasBuildingProvider,
+} from "./src/components/contexts/HasBuildingContext";
 import SignupFormScreen from "./src/components/screens/auth-stack/SignupFormScreen";
 
 import SignupScreen from "./src/components/screens/auth-stack/SignupScreen";
@@ -32,7 +35,6 @@ import DetailsScreen from "./src/components/screens/myactivity-stack/DetailsScre
 import FindParkingScreen from "./src/components/screens/parking-stack/FindParkingScreen";
 import OutlineButton from "./src/components/UI/OutlineButton";
 import SolidOrangeButton from "./src/components/UI/SolidOrangeButton";
-import { ParkingLotProvider } from "./src/components/contexts/ParkingLot";
 
 LogBox.ignoreAllLogs(); // Ignore all notifications
 
@@ -61,7 +63,17 @@ function RootNavigator() {
     return <Loading />;
   }
 
-  return <>{(!user) ? <AuthStack /> : (hasBuilding) ? <AppStack /> : <SignupFormScreen />  }</>;
+  return (
+    <>
+      {!user ? (
+        <AuthStack />
+      ) : hasBuilding ? (
+        <AppStack />
+      ) : (
+        <SignupFormScreen />
+      )}
+    </>
+  );
 
   // return <AuthStack />;
   // return <WelcomeScreen />;
@@ -85,11 +97,9 @@ const App = () => {
     <NativeBaseProvider>
       <AuthenticatedUserProvider>
         <HasBuildingProvider>
-        <ParkingLotProvider>
           <NavigationContainer>
             <RootNavigator />
           </NavigationContainer>
-          </ParkingLotProvider>
         </HasBuildingProvider>
       </AuthenticatedUserProvider>
     </NativeBaseProvider>

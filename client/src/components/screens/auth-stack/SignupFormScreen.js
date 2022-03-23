@@ -23,14 +23,10 @@ import { HasBuildingContext } from "../../contexts/HasBuildingContext";
 
 const SignupFormScreen = ({ navigation, route }) => {
   const { hasBuilding, setHasBuilding } = useContext(HasBuildingContext);
-  
   const [parkingLot, setParkingLot] = useState("");
   const [haveParking, setHaveParking] = useState();
   const [haveCar, setHaveCar] = useState();
 
-  const SingupFormHandler = () => {
-    navigation.push("SignupFormScreen");
-  };
 
   // const { parkingLot } = route.params;
 
@@ -88,8 +84,7 @@ const SignupFormScreen = ({ navigation, route }) => {
           onPress={(data, details = null) => {
             // 'details' is provided when fetchDetails = true
 
-            console.log(data, details);
-            setParkingLot(data.description);
+            // console.log(data, details);
           }}
           query={{
             key: "AIzaSyB59OVgaJ7bRTw8ZbF2VDRaW2Qb1XcMn5Y",
