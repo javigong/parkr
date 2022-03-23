@@ -6,6 +6,23 @@ const ParkingTypeButton = (props) => {
 
   const colorHandler = () => {
     setColorState(!colorState);
+
+    switch (props.buttonText) {
+      case "Standard":
+        props.setParkingTypeFilter(1);
+        break;
+      case "Large":
+        props.setParkingTypeFilter(2);
+        break;
+      case "EV Charger":
+        props.setParkingTypeFilter(3);
+        break;
+      case "Motorcycle":
+        props.setParkingTypeFilter(4);
+        break;
+      default:
+        props.setParkingTypeFilter(0);
+    }
   };
 
   return (
