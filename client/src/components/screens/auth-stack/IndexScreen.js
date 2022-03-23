@@ -88,7 +88,9 @@ const IndexScreen = ({ navigation }) => {
                   borderWidth="2px"
                   borderRadius="50px"
                   borderColor="#FD6B36"
-                  onPress={() => navigation.navigate("SignupScreen")}
+                  onPress={() => {
+                    navigation.navigate("SignupScreen");
+                    }}
                 >
                   <Text
                     style={{
