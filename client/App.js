@@ -10,18 +10,22 @@ import {
 import Loading from "./src/components/layout/Loading";
 import AuthStack from "./src/components/stacks/AuthStack";
 import AppStack from "./src/components/stacks/AppStack";
+import { LogBox } from "react-native";
+import {
+  HasBuildingContext,
+  HasBuildingProvider,
+} from "./src/components/contexts/HasBuildingContext";
+import SignupFormScreen from "./src/components/screens/auth-stack/SignupFormScreen";
+
 import SignupScreen from "./src/components/screens/auth-stack/SignupScreen";
 import LoginScreen from "./src/components/screens/auth-stack/LoginScreen";
 import WelcomeScreen from "./src/components/screens/auth-stack/WelcomeScreen";
-import SignupFormScreen from "./src/components/screens/auth-stack/SignupFormScreen";
 import ParkingLocationScreen from "./src/components/screens/auth-stack/ParkingLocationScreen";
 import ParkingSpotCard from "./src/components/cards/ParkingSpotCard";
 import LicensePlateScreen from "./src/components/screens/parking-stack/LicensePlateScreen";
 import WhoParksScreen from "./src/components/screens/parking-stack/WhoParksScreen";
 import ChooseCarScreen from "./src/components/screens/parking-stack/ChooseCarScreen";
 import ConfirmDateTimeScreen from "./src/components/screens/parking-stack/ConfirmDateTimeScreen";
-
-import { LogBox } from "react-native";
 import ParkingSpotList from "./src/components/lists/ParkingSpotList";
 import ParkingScreen from "./src/components/screens/home-tab/ParkingScreen";
 import HostScreen from "./src/components/screens/home-tab/HostScreen";
@@ -29,6 +33,8 @@ import ConfirmReservationScreen from "./src/components/screens/parking-stack/Con
 import ParkingSpotDetailsCard from "./src/components/cards/ParkingSpotDetailsCard";
 import DetailsScreen from "./src/components/screens/myactivity-stack/DetailsScreen";
 import FindParkingScreen from "./src/components/screens/parking-stack/FindParkingScreen";
+import OutlineButton from "./src/components/UI/OutlineButton";
+import SolidOrangeButton from "./src/components/UI/SolidOrangeButton";
 
 LogBox.ignoreAllLogs(); // Ignore all notifications
 
@@ -36,6 +42,7 @@ LogBox.ignoreAllLogs(); // Ignore all notifications
 
 function RootNavigator() {
   const { user, setUser } = useContext(AuthenticatedUserContext);
+  const { hasBuilding, setHasBuilding } = useContext(HasBuildingContext);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -56,7 +63,17 @@ function RootNavigator() {
     return <Loading />;
   }
 
-  return <>{user ? <AppStack /> : <AuthStack />}</>;
+  return (
+    <>
+      {!user ? (
+        <AuthStack />
+      ) : hasBuilding ? (
+        <AppStack />
+      ) : (
+        <SignupFormScreen />
+      )}
+    </>
+  );
 
   // return <AuthStack />;
   // return <WelcomeScreen />;
@@ -69,15 +86,21 @@ function RootNavigator() {
   // return <HostScreen />
   // return <ConfirmReservationScreen/>
   // return <ParkingSpotDetailsCard />
+  // return <ParkingLocationScreen />;
+  // return <SignupFormScreen />;
+  // return <OutlineButton />;
+  // return <SolidOrangeButton />;
 }
 
 const App = () => {
   return (
     <NativeBaseProvider>
       <AuthenticatedUserProvider>
-        <NavigationContainer>
-          <RootNavigator />
-        </NavigationContainer>
+        <HasBuildingProvider>
+          <NavigationContainer>
+            <RootNavigator />
+          </NavigationContainer>
+        </HasBuildingProvider>
       </AuthenticatedUserProvider>
     </NativeBaseProvider>
   );

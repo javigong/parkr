@@ -8,24 +8,36 @@ import { SafeAreaView, StyleSheet } from "react-native";
 
 const FoundParkingScreen = ({ navigation, route }) => {
   const { user, setUser } = useContext(AuthenticatedUserContext);
-  const { item, startDate, endDate, currentDate, type } = route.params;
+  const { item, startDate, endDate, currentDate, type, parkingTypeFilter } =
+    route.params;
   const [filteredSpotsList, setFilteredSpotsList] = useState(null);
 
   useEffect(() => {
     const tokenJwt = user.accessToken;
+    const filteredSpotsArray = [];
     // const date = new Date();
     // setCurrentDate(date.toString().slice(4, 10));
-    getAllParkingSpots(tokenJwt).then(
-      (results) => setFilteredSpotsList(results)
-      // console.log(results)
-    );
-    console.log(filteredSpotsList);
+    getAllParkingSpots(tokenJwt).then((results) => {
+      // setFilteredSpotsList(results);
+      results.filter((each) => {
+        if (
+          each.rsrv_start <= startDate.slice(16, 24) &&
+          each.rsrv_end >= endDate.slice(16, 24) &&
+          each.paVehicleType === parkingTypeFilter
+        ) {
+          filteredSpotsArray.push(each);
+        }
+      });
+      setFilteredSpotsList(filteredSpotsArray);
+    });
   }, []);
 
   return (
     <Box style={styles.container}>
-      <Text>Results</Text>
-      <Text>
+      <Text ml="5" mt="3" fontSize="lg" bold>
+        Results
+      </Text>
+      <Text ml="5" mb="5">
         {/* {format(startDate, "EEE,d MMM, hh:mm  ")} - {""}
         {format(endDate, "EEE,d MMM, hh:mm  ")} */}
         {`${startDate.slice(4, 10)}, ${startDate.slice(16, 21)}`} - {""}
