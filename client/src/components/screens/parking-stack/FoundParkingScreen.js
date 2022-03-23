@@ -8,7 +8,8 @@ import { SafeAreaView, StyleSheet } from "react-native";
 
 const FoundParkingScreen = ({ navigation, route }) => {
   const { user, setUser } = useContext(AuthenticatedUserContext);
-  const { item, startDate, endDate, currentDate, type } = route.params;
+  const { item, startDate, endDate, currentDate, type, parkingTypeFilter } =
+    route.params;
   const [filteredSpotsList, setFilteredSpotsList] = useState(null);
 
   useEffect(() => {
@@ -21,7 +22,8 @@ const FoundParkingScreen = ({ navigation, route }) => {
       results.filter((each) => {
         if (
           each.rsrv_start <= startDate.slice(16, 24) &&
-          each.rsrv_end >= endDate.slice(16, 24)
+          each.rsrv_end >= endDate.slice(16, 24) &&
+          each.paVehicleType === parkingTypeFilter
         ) {
           filteredSpotsArray.push(each);
         }

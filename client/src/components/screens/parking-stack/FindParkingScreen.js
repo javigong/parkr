@@ -21,7 +21,7 @@ const FindParkingScreen = ({ route, navigation }) => {
   const [endDate, setEndDate] = useState(new Date());
   const [mode, setMode] = useState("datetime");
   const [show, setShow] = useState(false);
-
+  const [parkingTypeFilter, setParkingTypeFilter] = useState();
   const [filteredSpotsList, setFilteredSpotsList] = useState();
   const { user, setUser } = useContext(AuthenticatedUserContext);
 
@@ -54,15 +54,6 @@ const FindParkingScreen = ({ route, navigation }) => {
     "Small Car",
   ];
 
-  // useEffect(() => {
-  //   const tokenJwt = user.accessToken;
-  //   getAllParkingSpots(tokenJwt).then((results) => {
-  //     setFilteredSpotsList(results);
-  //     console.log(`the list of cards: ${results}`);
-  //   });
-  //   // console.log(filteredSpotsList);
-  // }, []);
-
   const saveDateTimeHandler = () => {
     navigation.navigate("FoundParkingScreen", {
       item: item,
@@ -70,6 +61,7 @@ const FindParkingScreen = ({ route, navigation }) => {
       type: type,
       startDate: startDate.toString(),
       endDate: endDate.toString(),
+      parkingTypeFilter: parkingTypeFilter,
     });
   };
 
@@ -123,7 +115,11 @@ const FindParkingScreen = ({ route, navigation }) => {
         <Flex flexDirection="row" flexWrap="wrap">
           {parkingTypesArray.map((each) => {
             return (
-              <ParkingTypeButton key={each} buttonText={each}>
+              <ParkingTypeButton
+                key={each}
+                buttonText={each}
+                setParkingTypeFilter={setParkingTypeFilter}
+              >
                 {each}
               </ParkingTypeButton>
             );
