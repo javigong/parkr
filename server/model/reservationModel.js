@@ -23,7 +23,7 @@ Reservation.saveReservation = (newReservation, result) => {
             return;
         }
 
-        console.log("created tutorial: ", { id: res.rsvparkingslotid, ...newReservation });
+        console.log("created reservation: ", { id: res.rsvparkingslotid, ...newReservation });
         result(null, { id: res.rsvparkingslotid, ...newReservation });
     });
 };
