@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Box,
   Text,
@@ -14,18 +14,23 @@ import {
 } from "native-base";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebase";
+import { HasBuildingContext } from "../../contexts/HasBuildingContext";
 
 const SignupScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { hasBuilding, setHasBuilding } = useContext(HasBuildingContext);
 
   const onHandleSignup = () => {
     if (email !== "" && password !== "") {
       createUserWithEmailAndPassword(auth, email, password)
-        .then(() => console.log("Signup success"))
+        .then(() => {
+          console.log("Signup success");
+          setHasBuilding(false);
+        })
         .catch((err) => console.log(`Login err: ${err}`));
     }
-    navigation.navigate("ParkingLocationScreen");
+    // navigation.navigate("ParkingLocationScreen");
   };
 
   return (
