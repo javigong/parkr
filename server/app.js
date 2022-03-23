@@ -3,15 +3,22 @@ const morgan = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
+
 app.use(cors({
-    origin: ['http://localhost:4000']
+    origin: ['http://localhost:4000', 'http://127.0.0.1:4000', 'https://www.parkr-api.com']
 }));
 
 //const cookieParser = require("cookie-parser");
 const PORT = process.env.PORT || 4000;
 
-//app.use(cookieParser);
 app.use(morgan('tiny'));
+
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({
+    limit: '50mb',
+    extended: false,
+    parameterLimit: 50000
+}));
 
 app.get('/api/test', (req, res) => {
     const message = {
