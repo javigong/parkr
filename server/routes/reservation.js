@@ -8,6 +8,6 @@ const {
 //reservation routes
 router
     .get("/", verifyToken, findAll)
-    .post("/savereservation", verifyToken, createReservation);
+    .put("/savereservation", verifyToken, createReservation);
 
 module.exports = router;
