@@ -47,7 +47,7 @@ const FoundParkingScreen = ({ navigation, route }) => {
         data={filteredSpotsList}
         type={"searchResult"}
         item={item}
-        currentDate={currentDate.slice(4, 10)}
+        currentDate={currentDate.slice(0, 6)}
         navigation={navigation}
         startDate={startDate}
         endDate={endDate}
@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
+    backgroundColor: "white",
   },
   tabContent: {
     flex: 1,
