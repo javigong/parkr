@@ -1,12 +1,19 @@
 const sql = require("../config/config.js");
 
+const formatedTimestamp = (datetime) => {
+    const d = new Date(datetime);
+    const date = d.toISOString().split('T')[0];
+    const time = d.toTimeString().split(' ')[0];
+    return `${date} ${time}`
+}
+
 // constructor
 const Reservation = function(newReservation) {
     this.rsvparkingslotid = newReservation.rsvparkingslotid;
     this.rsvvisitorid = newReservation.rsvvisitorid;
     this.rsvdtstart = newReservation.rsvdtstart;
-    this.rsvdtstart = newReservation.rsvdtstart;
-    this.rsvdtend = newReservation.rsvdtend;
+    this.rsvdtstart = formatedTimestamp(newReservation.rsvdtstart);
+    this.rsvdtend = formatedTimestamp(newReservation.rsvdtend);
     this.rsvstatus = newReservation.rsvstatus;
     this.rsvtype = newReservation.rsvtype;
     this.rsvfee = newReservation.rsvfee;
@@ -15,6 +22,21 @@ const Reservation = function(newReservation) {
 };
 
 Reservation.saveReservation = (newReservation, result) => {
+
+
+    sql.query(`SELECT rsvvisitorid, rsvdtstart FROM dbparkr.reservations WHERE rsvvisitorid= ? AND rsvdtstart =  ?`, [newReservation.rsvvisitorid, newReservation.rsvdtstart], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        if (res && res[0]) {
+            console.log('data exists:', res);
+            throw new Error('data already exists')
+        }
+    });
+
 
     sql.query("INSERT INTO dbparkr.reservations SET ?", newReservation, (err, res) => {
         if (err) {
@@ -27,6 +49,7 @@ Reservation.saveReservation = (newReservation, result) => {
         result(null, { id: res.rsvparkingslotid, ...newReservation });
     });
 };
+
 
 Reservation.getAll = (result) => {
     let query = "SELECT * FROM dbparkr.reservations";
