@@ -16,9 +16,11 @@ LogBox.ignoreLogs([
 
 const FindParkingScreen = ({ route, navigation }) => {
   const { item, currentDate, type } = route.params;
-
   const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const date = new Date();
+  const h = 2;
+  date.setTime(date.getTime() + h * 60 * 60 * 1000);
+  const [endDate, setEndDate] = useState(date);
   const [mode, setMode] = useState("datetime");
   const [show, setShow] = useState(false);
   const [parkingTypeFilter, setParkingTypeFilter] = useState();
