@@ -12,8 +12,8 @@ export const getAllParkingSpots = async (token) => {
   };
   try {
     const response = await axios(configurationObject);
-    // console.log(response.data.parkingSlots);
-    const results = response.data.parkingSlots;
+    // console.log("get allslots", response.data);
+    const results = response.data;
     return results;
   } catch (error) {
     throw error;
@@ -42,8 +42,8 @@ export const postNewParkingSpot = async (
   };
   try {
     const response = await axios(configurationObject);
-    // console.log(response.data.results);
-    const results = response.data.results;
+    // console.log("post saveparkingarea/idParkingSlot", response.data);
+    const results = response.data;
     return results;
   } catch (error) {
     throw error;
@@ -62,9 +62,9 @@ export const getBuildingInfo = async (token) => {
   try {
     const response = await axios(configurationObject);
 
-    // console.log(response.data);
+    // console.log("building info:", response.data);
 
-    const results = response.data.buildingInfo;
+    const results = response.data;
 
     return results;
   } catch (error) {
@@ -86,9 +86,9 @@ export const getCarListByUser = async (email, token) => {
   try {
     const response = await axios(configurationObject);
 
-    console.log(response.data);
+    // console.log("get carlist:", response.data);
 
-    const results = response.data.userProfiles;
+    const results = response.data;
 
     return results;
   } catch (error) {
