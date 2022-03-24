@@ -10,7 +10,7 @@ const ParkingLocationScreen = ({ navigation }) => {
   const [parkingLot, setParkingLot] = useState("");
 
   return (
-    <SafeAreaView flex="1" width="100%">
+    <SafeAreaView flex="1" width="100%" backgroundColor="white">
       <View h="35%" w="100%">
         <ImageBackground
           source={require("../../../../assets/orange-background.png")}
@@ -60,16 +60,14 @@ const ParkingLocationScreen = ({ navigation }) => {
       />
       <Box alignItems="center" w="100%" safeArea>
         <OrangeSolidButton
-          width="80%"
-          buttonText="Next"
+          width="330"
+          buttonText="NEXT"
           onPress={() =>
             navigation.navigate("SignupFormScreen", {
               parkingLot,
             })
           }
-        >
-          Next
-        </OrangeSolidButton>
+        />
       </Box>
     </SafeAreaView>
   );
