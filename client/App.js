@@ -67,10 +67,10 @@ function RootNavigator() {
     <>
       {!user ? (
         <AuthStack />
-      ) : hasBuilding ? (
-        <AppStack />
-      ) : (
+      ) : (user && !hasBuilding) ? (
         <SignupFormScreen />
+      ) : (
+        <AppStack />
       )}
     </>
   );
