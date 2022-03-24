@@ -31,7 +31,6 @@ const AuthStack = () => (
         headerBackTitleVisible: false,
       }}
     />
-    <Stack.Screen name="SignupFormScreen" component={SignupFormScreen} />
     <Stack.Screen name="ForgotPwdScreen" component={ForgotPwdScreen} />
     <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
     <Stack.Screen name="RegistrationStack" component={RegistrationStack} />
