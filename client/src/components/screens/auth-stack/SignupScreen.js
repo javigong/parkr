@@ -23,22 +23,18 @@ const SignupScreen = ({ navigation }) => {
 
   storeBuilding = async () => {
     try {
-      await AsyncStorage.setItem(
-        'building',
-        'false'
-      );
+      await AsyncStorage.setItem("hasBuilding", "");
     } catch (error) {
       console.log(error);
     }
   };
 
   const onHandleSignup = () => {
+    setHasBuilding("");
     if (email !== "" && password !== "") {
       createUserWithEmailAndPassword(auth, email, password)
         .then(() => {
           console.log("Signup success");
-          setHasBuilding(false);
-          storeBuilding();
         })
         .catch((err) => console.log(`Login err: ${err}`));
     }
