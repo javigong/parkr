@@ -23,7 +23,7 @@ import { Camera } from "expo-camera";
 import axios from "axios";
 
 const LicensePlateScreen = ({ route, navigation }) => {
-  const { userType, item } = route.params;
+  const { userType, item, currentDate, startDate, endDate } = route.params;
 
   const [hasPermission, setHasPermission] = useState(null);
   const [carType, setCarType] = useState("");
@@ -308,6 +308,9 @@ const LicensePlateScreen = ({ route, navigation }) => {
                   carType: carType,
                   plateNum: plateNum,
                   item: item,
+                  currentDate: currentDate,
+                  startDate: startDate,
+                  endDate: endDate,
                 },
               })
             }
