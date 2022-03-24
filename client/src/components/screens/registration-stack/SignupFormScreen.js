@@ -10,18 +10,18 @@ import {
   Button,
   Flex,
 } from "native-base";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { HasBuildingContext } from "../../contexts/HasBuildingContext";
 import OrangeSolidButton from "../../UI/SolidOrangeButton";
 
 const SignupFormScreen = ({ navigation, route }) => {
+  const { hasBuilding, setHasBuilding } = useContext(HasBuildingContext);
   const { parkingLot } = route.params;
   const [haveParking, setHaveParking] = useState();
   const [haveCar, setHaveCar] = useState();
 
   const handleRegister = () => {
-    navigation.navigate("AppStack", {
-      parkingLot,
-    });
+    setHasBuilding("yes");
   };
 
   return (
