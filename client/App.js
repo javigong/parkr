@@ -1,7 +1,7 @@
 import React, { useState, createContext, useContext, useEffect } from "react";
 import { NativeBaseProvider } from "native-base";
 import { NavigationContainer } from "@react-navigation/native";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./src/components/config/firebase";
 import {
   AuthenticatedUserContext,
@@ -25,6 +25,10 @@ function RootNavigator() {
   const { user, setUser } = useContext(AuthenticatedUserContext);
   const { hasBuilding, setHasBuilding } = useContext(HasBuildingContext);
   const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    signOut(auth).catch((error) => console.log("Error logging out: ", error));
+  }, []);
 
   useEffect(() => {
     // onAuthStateChanged returns an unsubscriber
