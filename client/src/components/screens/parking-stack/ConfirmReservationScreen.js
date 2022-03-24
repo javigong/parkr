@@ -3,7 +3,8 @@ import { Box, Button, Text, VStack, HStack } from "native-base";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const ConfirmReservationScreen = ({ route, navigation }) => {
-  const { userType, carType, plateNum, item } = route.params;
+  const { userType, carType, plateNum, item, currentDate, startDate, endDate } =
+    route.params;
 
   const parkingType = () => {
     switch (item.paVehicleType) {
@@ -39,11 +40,17 @@ const ConfirmReservationScreen = ({ route, navigation }) => {
                 </Text>
                 <HStack>
                   <Text fontWeight="bold">Start</Text>
-                  <Text color="grey"> Feb 1, 10:00</Text>
+                  <Text color="grey">
+                    {" "}
+                    {startDate.slice(0, 10)}, {startDate.slice(16, 21)}
+                  </Text>
                 </HStack>
                 <HStack mb={3}>
                   <Text fontWeight="bold">End</Text>
-                  <Text color="grey"> Feb 1, 20:00</Text>
+                  <Text color="grey">
+                    {" "}
+                    {endDate.slice(0, 10)}, {endDate.slice(16, 21)}
+                  </Text>
                 </HStack>
               </Box>
               <Box borderBottomWidth={1} borderBottomColor="#FD6B36">
