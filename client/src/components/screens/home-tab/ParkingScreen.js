@@ -31,7 +31,6 @@ const _exampleDataStructure = [
 
 const ParkingScreen = ({ navigation }) => {
   const { user, setUser } = useContext(AuthenticatedUserContext);
-
   const [customStyleIndex, setCustomStyleIndex] = useState(0);
   const [spotsTodayList, setSpotsTodayList] = useState(null);
   const [buildingInfo, setBuildingInfo] = useState();
@@ -89,7 +88,8 @@ const ParkingScreen = ({ navigation }) => {
                         fontSize="2xl"
                         color="white"
                       >
-                        {buildingInfo[0].biName}
+                        Parkr
+                        {/* {buildingInfo[0].biName} */}
                       </Text>
                       <Text
                         ml={8}
@@ -166,6 +166,7 @@ const ParkingScreen = ({ navigation }) => {
               </Center>
               <Box flex="1">
                 <Tab.Navigator
+                  sceneContainerStyle={{ backgroundColor: "white" }}
                   screenOptions={{
                     tabBarIndicatorStyle: {
                       borderBottomColor: "#FD6B36",
@@ -212,6 +213,7 @@ const ParkingScreen = ({ navigation }) => {
             <Box flex="1" width="100%">
               <Box flex="1">
                 <Tab.Navigator
+                  sceneContainerStyle={{ backgroundColor: "white" }}
                   screenOptions={{
                     tabBarIndicatorStyle: {
                       borderBottomColor: "#FD6B36",

@@ -15,4 +15,4 @@ const pool = mysql.createPool({
     password: DB_PASSWORD
 });
 
-module.exports = pool.promise();
+module.exports = pool;

@@ -1,31 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Button, Center, Text, VStack } from "native-base";
 import { StyleSheet } from "react-native";
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase";
+import OutlineButton from "../../UI/OutlineButton";
+import { HasBuildingContext } from "../../contexts/HasBuildingContext";
+import SolidOrangeButton from "../../UI/SolidOrangeButton";
 
 const AccountScreen = ({ navigation }) => {
+  const { hasBuilding, setHasBuilding } = useContext(HasBuildingContext);
+
   const onSignOut = () => {
     signOut(auth).catch((error) => console.log("Error logging out: ", error));
   };
 
+  const onChangeBld = () => {
+    setHasBuilding(false);
+  };
+
   return (
-    <Center flex={1} w="100%">
+    <Center flex={1} w="100%" bg="white">
       <Box safeArea p="2" py="8" w="90%">
         <VStack>
-          <Button
-            colorScheme="rgb(253,107,54)"
-            height={42}
-            width="100%"
-            mt="2"
-            size="lg"
-            borderRadius={20}
-            onPress={onSignOut}
-          >
-            <Text color="white" fontWeight="bold">
-              Log Out
-            </Text>
-          </Button>
+          <OutlineButton buttonText="CHANGE BUILDING" onPress={onChangeBld} />
+          <SolidOrangeButton buttonText="LOG OUT" onPress={onSignOut} />
         </VStack>
       </Box>
     </Center>

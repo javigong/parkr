@@ -25,16 +25,22 @@ const AuthStack = () => (
     <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
     <Stack.Screen name="IndexScreen" component={IndexScreen} />
     <Stack.Screen name="LoginScreen" component={LoginScreen} />
-    <Stack.Screen name="SignupScreen" component={SignupScreen} />
     <Stack.Screen
+      name="SignupScreen"
+      component={SignupScreen}
+      options={{
+        headerBackTitleVisible: false,
+      }}
+    />
+    {/* <Stack.Screen
       name="ParkingLocationScreen"
       component={ParkingLocationScreen}
-    />
+    /> */}
     <Stack.Screen
       name="SignupFormScreen"
-      options={({ route }) => ({
-        parkingLot: route.params,
-      })}
+      // options={({ route }) => ({
+      //   parkingLot: route.params,
+      // })}
       component={SignupFormScreen}
     />
     <Stack.Screen name="ForgotPwdScreen" component={ForgotPwdScreen} />

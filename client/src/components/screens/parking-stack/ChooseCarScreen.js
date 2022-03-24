@@ -14,7 +14,7 @@ import { getCarListByUser } from "../../services/api";
 import { AuthenticatedUserContext } from "../../contexts/AuthenticatedUserContext";
 
 const ChooseCarScreen = ({ route, navigation }) => {
-  const { userType, item } = route.params;
+  const { userType, item, currentDate, startDate, endDate } = route.params;
 
   const [carList, setCarList] = useState([]);
   const [carType, setCarType] = useState("newCar");
@@ -55,6 +55,9 @@ const ChooseCarScreen = ({ route, navigation }) => {
           carType: carType,
           plateNum: plateNum,
           item: item,
+          currentDate: currentDate,
+          startDate: startDate,
+          endDate: endDate,
         },
       });
     }
