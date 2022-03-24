@@ -70,75 +70,80 @@ const FindParkingScreen = ({ route, navigation }) => {
   };
 
   return (
-    <Box m="5" mb="12" flex="1" justifyContent="space-between">
-      <Box>
-        <Text>Select the period for parking</Text>
+    <Box flex="1" backgroundColor="white">
+      <Box m="5" mb="12" flex="1" justifyContent="space-between">
+        <Box>
+          <Text>Select the period for parking</Text>
+          <Flex
+            flexDirection="row"
+            justifyContent="space-around"
+            alignItems="center"
+            m="3"
+          >
+            <StartTimeSvg />
+            <Text width="20%">Start</Text>
+            <View width="60%">
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={startDate}
+                mode={mode}
+                is24Hour={true}
+                display="compact"
+                onChange={onStartDateChange}
+              />
+            </View>
+          </Flex>
+          <Flex
+            flexDirection="row"
+            justifyContent="space-around"
+            alignItems="center"
+            m="3"
+          >
+            <EndTimeSvg />
+            <Text width="20%">End</Text>
+            <View width="60%">
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={endDate}
+                mode={mode}
+                is24Hour={true}
+                display="compact"
+                onChange={onEndDateChange}
+              />
+            </View>
+          </Flex>
+          <Text>Select the parking type</Text>
+          <Flex flexDirection="row" flexWrap="wrap">
+            {parkingTypesArray.map((each) => {
+              return (
+                <ParkingTypeButton
+                  key={each}
+                  buttonText={each}
+                  setParkingTypeFilter={setParkingTypeFilter}
+                >
+                  {each}
+                </ParkingTypeButton>
+              );
+            })}
+          </Flex>
+        </Box>
         <Flex
+          flex="1"
           flexDirection="row"
-          justifyContent="space-around"
-          alignItems="center"
-          m="3"
+          alignItems="flex-end"
+          // justifyContent="space-around"
         >
-          <StartTimeSvg />
-          <Text width="20%">Start</Text>
-          <View width="60%">
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={startDate}
-              mode={mode}
-              is24Hour={true}
-              display="compact"
-              onChange={onStartDateChange}
+          <View flex="1">
+            <OutlineButton buttonText="CANCEL" onPress={cancelFindParking} />
+          </View>
+          <View flex="1">
+            <SolidOrangeButton
+              buttonText="SAVE"
+              onPress={saveDateTimeHandler}
             />
           </View>
-        </Flex>
-        <Flex
-          flexDirection="row"
-          justifyContent="space-around"
-          alignItems="center"
-          m="3"
-        >
-          <EndTimeSvg />
-          <Text width="20%">End</Text>
-          <View width="60%">
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={endDate}
-              mode={mode}
-              is24Hour={true}
-              display="compact"
-              onChange={onEndDateChange}
-            />
-          </View>
-        </Flex>
-        <Text>Select the parking type</Text>
-        <Flex flexDirection="row" flexWrap="wrap">
-          {parkingTypesArray.map((each) => {
-            return (
-              <ParkingTypeButton
-                key={each}
-                buttonText={each}
-                setParkingTypeFilter={setParkingTypeFilter}
-              >
-                {each}
-              </ParkingTypeButton>
-            );
-          })}
         </Flex>
       </Box>
-      <Flex
-        flex="1"
-        flexDirection="row"
-        alignItems="flex-end"
-        // justifyContent="space-around"
-      >
-        <View flex="1">
-          <OutlineButton buttonText="CANCEL" onPress={cancelFindParking} />
-        </View>
-        <View flex="1">
-          <SolidOrangeButton buttonText="SAVE" onPress={saveDateTimeHandler} />
-        </View>
-      </Flex>
     </Box>
   );
 };
