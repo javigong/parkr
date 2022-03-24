@@ -5,13 +5,32 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const ConfirmReservationScreen = ({ route, navigation }) => {
   const { userType, carType, plateNum, item } = route.params;
 
+  const parkingType = () => {
+    switch (item.paVehicleType) {
+      case 1:
+        return <Text>Standard</Text>;
+        break;
+      case 2:
+        return <Text>Large</Text>;
+        break;
+      case 3:
+        return <Text>EV Charger</Text>;
+        break;
+      case 4:
+        return <Text>Motorcycle</Text>;
+        break;
+      default:
+        return <Text>Standard</Text>;
+    }
+  };
+
   return (
     <Box flex="1" bg="white">
       <SafeAreaView flex="1" alignItems="center">
         <Box flex="1" width="80%" justifyContent="space-between">
           <Box flex="1" justifyContent="flex-start">
             <Text fontWeight="bold" fontSize="2xl" mb={5}>
-              Spot 13
+              {item.idParkingSlot}
             </Text>
             <VStack space={4}>
               <Box borderBottomWidth={1} borderBottomColor="#FD6B36">
@@ -54,7 +73,7 @@ const ConfirmReservationScreen = ({ route, navigation }) => {
                   <Text fontSize={16} fontWeight="bold">
                     Spot Features
                   </Text>
-                  <Text>EV Charger</Text>
+                  {parkingType()}
                 </VStack>
               </Box>
               <Box borderBottomWidth={1} borderBottomColor="#FD6B36">
