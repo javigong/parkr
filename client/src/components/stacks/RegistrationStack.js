@@ -1,16 +1,8 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import ParkingLocationScreen from "../screens/registration-stack/ParkingLocationScreen";
+import SignupFormScreen from "../screens/registration-stack/SignupFormScreen";
 
-import IndexScreen from "../screens/auth-stack/IndexScreen";
-import LoginScreen from "../screens/auth-stack/LoginScreen";
-import SignupScreen from "../screens/auth-stack/SignupScreen";
-import ForgotPwdScreen from "../screens/auth-stack/ForgotPwdScreen";
-import AppStack from "./AppStack";
-import WelcomeScreen from "../screens/auth-stack/WelcomeScreen";
-import OnboardingScreen from "../screens/auth-stack/OnboardingScreen";
-import SignupFormScreen from "../screens/auth-stack/SignupFormScreen";
-
-import ParkingLocationScreen from "../screens/auth-stack/ParkingLocationScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -24,8 +16,8 @@ const RegistrationStack = () => (
     }}
   >
     <Stack.Screen
-      name="FindBuildingScreen"
-      component={FindBuildingScreen}
+      name="ParkingLocationScreen"
+      component={ParkingLocationScreen}
       options={{
         headerBackTitleVisible: false,
       }}
@@ -33,6 +25,9 @@ const RegistrationStack = () => (
     <Stack.Screen
       name="SignupFormScreen"
       component={SignupFormScreen}
+      options={{
+        headerBackTitleVisible: false,
+      }}
     />
   </Stack.Navigator>
 );

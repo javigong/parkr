@@ -15,26 +15,7 @@ import {
   HasBuildingContext,
   HasBuildingProvider,
 } from "./src/components/contexts/HasBuildingContext";
-import SignupFormScreen from "./src/components/screens/auth-stack/SignupFormScreen";
-
-import SignupScreen from "./src/components/screens/auth-stack/SignupScreen";
-import LoginScreen from "./src/components/screens/auth-stack/LoginScreen";
-import WelcomeScreen from "./src/components/screens/auth-stack/WelcomeScreen";
-import ParkingLocationScreen from "./src/components/screens/auth-stack/ParkingLocationScreen";
-import ParkingSpotCard from "./src/components/cards/ParkingSpotCard";
-import LicensePlateScreen from "./src/components/screens/parking-stack/LicensePlateScreen";
-import WhoParksScreen from "./src/components/screens/parking-stack/WhoParksScreen";
-import ChooseCarScreen from "./src/components/screens/parking-stack/ChooseCarScreen";
-import ConfirmDateTimeScreen from "./src/components/screens/parking-stack/ConfirmDateTimeScreen";
-import ParkingSpotList from "./src/components/lists/ParkingSpotList";
-import ParkingScreen from "./src/components/screens/home-tab/ParkingScreen";
-import HostScreen from "./src/components/screens/home-tab/HostScreen";
-import ConfirmReservationScreen from "./src/components/screens/parking-stack/ConfirmReservationScreen";
-import ParkingSpotDetailsCard from "./src/components/cards/ParkingSpotDetailsCard";
-import DetailsScreen from "./src/components/screens/myactivity-stack/DetailsScreen";
-import FindParkingScreen from "./src/components/screens/parking-stack/FindParkingScreen";
-import OutlineButton from "./src/components/UI/OutlineButton";
-import SolidOrangeButton from "./src/components/UI/SolidOrangeButton";
+import RegistrationStack from "./src/components/stacks/RegistrationStack";
 
 LogBox.ignoreAllLogs(); // Ignore all notifications
 
@@ -68,7 +49,7 @@ function RootNavigator() {
       {!user ? (
         <AuthStack />
       ) : (user && !hasBuilding) ? (
-        <SignupFormScreen />
+        <RegistrationStack />
       ) : (
         <AppStack />
       )}
