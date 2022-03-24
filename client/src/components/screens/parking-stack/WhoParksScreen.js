@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import { Box, Center, Text, HStack, Button, Pressable } from "native-base";
 
 const WhoParksScreen = ({ route, navigation }) => {
-  const { item } = route.params;
+  const { item, startDate, endDate } = route.params;
   const [userType, setUserType] = useState();
 
   let color = {
@@ -107,6 +107,8 @@ const WhoParksScreen = ({ route, navigation }) => {
               params: {
                 userType: userType,
                 item: item,
+                startDate: startDate,
+                endDate: endDate,
               },
             })
           }

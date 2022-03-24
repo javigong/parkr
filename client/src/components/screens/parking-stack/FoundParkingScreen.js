@@ -49,6 +49,8 @@ const FoundParkingScreen = ({ navigation, route }) => {
         item={item}
         currentDate={currentDate.slice(4, 10)}
         navigation={navigation}
+        startDate={startDate}
+        endDate={endDate}
       />
     </Box>
   );

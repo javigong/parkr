@@ -12,7 +12,14 @@ import {
 import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 
-const ParkingSpotCard = ({ item, currentDate, type, navigation }) => {
+const ParkingSpotCard = ({
+  item,
+  currentDate,
+  type,
+  navigation,
+  startDate,
+  endDate,
+}) => {
   // type 1 -standard\\ntype 2 - large\\ntype 3 - electric car\\ntype 4 - motorcycle
 
   const findParkingHandler = () => {
@@ -49,7 +56,13 @@ const ParkingSpotCard = ({ item, currentDate, type, navigation }) => {
     // console.log("type:", type);
     navigation.navigate("ParkingStack", {
       screen: "WhoParksScreen",
-      params: { item: item, currentDate: currentDate, type: type },
+      params: {
+        item: item,
+        currentDate: currentDate,
+        type: type,
+        startDate: startDate,
+        endDate: endDate,
+      },
     });
   };
 
