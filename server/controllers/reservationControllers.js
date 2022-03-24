@@ -34,6 +34,27 @@ exports.createReservation = (req, res) => {
     });
 };
 
+exports.cancelReservation = (req, res) => {
+    // Validate request
+    if (!req.body) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+    }
+
+    // Create a reservation
+    const reservationId = req.params.bookingid;
+
+    // Save Reservation in the database
+    Reservation.setReservationToCancel(reservationId, (err, data) => {
+        if (err)
+            res.status(500).send({
+                message: err.message || "Some error occurred while creating the reservation."
+            });
+        else res.send(data);
+    });
+};
+
 exports.findAll = (req, res) => {
 
     Reservation.getAll((err, data) => {
