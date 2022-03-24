@@ -130,6 +130,7 @@ const HostScreen = ({ navigation }) => {
             <Box flex="1" width="100%" backgroundColor="white">
               <Box flex="1">
                 <Tab.Navigator
+                  sceneContainerStyle={{ backgroundColor: "white" }}
                   screenOptions={{
                     tabBarIndicatorStyle: {
                       borderBottomColor: "#FD6B36",

@@ -3,7 +3,27 @@ import { Box, Button, Text, VStack, HStack } from "native-base";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const ConfirmReservationScreen = ({ route, navigation }) => {
-  const { userType, carType, plateNum, item } = route.params;
+  const { userType, carType, plateNum, item, currentDate, startDate, endDate } =
+    route.params;
+
+  const parkingType = () => {
+    switch (item.paVehicleType) {
+      case 1:
+        return <Text>Standard</Text>;
+        break;
+      case 2:
+        return <Text>Large</Text>;
+        break;
+      case 3:
+        return <Text>EV Charger</Text>;
+        break;
+      case 4:
+        return <Text>Motorcycle</Text>;
+        break;
+      default:
+        return <Text>Standard</Text>;
+    }
+  };
 
   return (
     <Box flex="1" bg="white">
@@ -11,7 +31,7 @@ const ConfirmReservationScreen = ({ route, navigation }) => {
         <Box flex="1" width="80%" justifyContent="space-between">
           <Box flex="1" justifyContent="flex-start">
             <Text fontWeight="bold" fontSize="2xl" mb={5}>
-              Spot 13
+              {item.idParkingSlot}
             </Text>
             <VStack space={4}>
               <Box borderBottomWidth={1} borderBottomColor="#FD6B36">
@@ -20,11 +40,17 @@ const ConfirmReservationScreen = ({ route, navigation }) => {
                 </Text>
                 <HStack>
                   <Text fontWeight="bold">Start</Text>
-                  <Text color="grey"> Feb 1, 10:00</Text>
+                  <Text color="grey">
+                    {" "}
+                    {startDate.slice(0, 10)}, {startDate.slice(16, 21)}
+                  </Text>
                 </HStack>
                 <HStack mb={3}>
                   <Text fontWeight="bold">End</Text>
-                  <Text color="grey"> Feb 1, 20:00</Text>
+                  <Text color="grey">
+                    {" "}
+                    {endDate.slice(0, 10)}, {endDate.slice(16, 21)}
+                  </Text>
                 </HStack>
               </Box>
               <Box borderBottomWidth={1} borderBottomColor="#FD6B36">
@@ -54,7 +80,7 @@ const ConfirmReservationScreen = ({ route, navigation }) => {
                   <Text fontSize={16} fontWeight="bold">
                     Spot Features
                   </Text>
-                  <Text>EV Charger</Text>
+                  {parkingType()}
                 </VStack>
               </Box>
               <Box borderBottomWidth={1} borderBottomColor="#FD6B36">

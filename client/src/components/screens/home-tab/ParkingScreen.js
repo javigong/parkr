@@ -88,7 +88,7 @@ const ParkingScreen = ({ navigation }) => {
                         fontSize="2xl"
                         color="white"
                       >
-                      Parkr
+                        Parkr
                         {/* {buildingInfo[0].biName} */}
                       </Text>
                       <Text
@@ -166,6 +166,7 @@ const ParkingScreen = ({ navigation }) => {
               </Center>
               <Box flex="1">
                 <Tab.Navigator
+                  sceneContainerStyle={{ backgroundColor: "white" }}
                   screenOptions={{
                     tabBarIndicatorStyle: {
                       borderBottomColor: "#FD6B36",
@@ -212,6 +213,7 @@ const ParkingScreen = ({ navigation }) => {
             <Box flex="1" width="100%">
               <Box flex="1">
                 <Tab.Navigator
+                  sceneContainerStyle={{ backgroundColor: "white" }}
                   screenOptions={{
                     tabBarIndicatorStyle: {
                       borderBottomColor: "#FD6B36",
