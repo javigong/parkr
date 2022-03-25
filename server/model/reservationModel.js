@@ -12,7 +12,6 @@ const Reservation = function(newReservation) {
     this.rsvparkingslotid = newReservation.rsvparkingslotid;
     this.rsvvisitorid = newReservation.rsvvisitorid;
     this.rsvdtstart = newReservation.rsvdtstart;
-    this.rsvdtstart = newReservation.rsvdtstart;
     this.rsvdtend = newReservation.rsvdtend;
     this.rsvstatus = newReservation.rsvstatus;
     this.rsvtype = newReservation.rsvtype;
