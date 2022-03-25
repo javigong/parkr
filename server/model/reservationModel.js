@@ -12,8 +12,7 @@ const Reservation = function(newReservation) {
     this.rsvparkingslotid = newReservation.rsvparkingslotid;
     this.rsvvisitorid = newReservation.rsvvisitorid;
     this.rsvdtstart = newReservation.rsvdtstart;
-    this.rsvdtstart = formatedTimestamp(newReservation.rsvdtstart);
-    this.rsvdtend = formatedTimestamp(newReservation.rsvdtend);
+    this.rsvdtend = newReservation.rsvdtend;
     this.rsvstatus = newReservation.rsvstatus;
     this.rsvtype = newReservation.rsvtype;
     this.rsvfee = newReservation.rsvfee;
@@ -50,6 +49,20 @@ Reservation.saveReservation = (newReservation, result) => {
     });
 };
 
+Reservation.setReservationToCancel = (bookingId, result) => {
+
+    sql.query("UPDATE dbparkr.reservations SET rsvstatus = 0 WHERE idbooking = ?", bookingId, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        console.log(`reservation id ${bookingId} has been cancelled.`, { id: bookingId });
+        result(null, { id: bookingId });
+    });
+
+};
 
 Reservation.getAll = (result) => {
     let query = "SELECT * FROM dbparkr.reservations";
