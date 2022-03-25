@@ -31,7 +31,11 @@ const ConfirmReservationScreen = ({ route, navigation }) => {
   let ISOStartDate = "";
   let ISOEndDate = "";
 
-  if (startDate && endDate != undefined) {
+  if (startDate == undefined && endDate == undefined) {
+    const onlyDate = new Date().toISOString().split("T")[0];
+    ISOStartDate = onlyDate + " " + item.rsrv_start;
+    ISOEndDate = onlyDate + " " + item.rsrv_end;
+  } else {
     const UTCStartDate = new Date(startDate);
     const UTCEndDate = new Date(endDate);
     const StartTime = startDate.split(" ")[4];
@@ -39,6 +43,7 @@ const ConfirmReservationScreen = ({ route, navigation }) => {
     ISOStartDate = UTCStartDate.toISOString().split("T")[0] + " " + StartTime;
     ISOEndDate = UTCEndDate.toISOString().split("T")[0] + " " + EndTime;
   }
+
   const ReservationDoneHandler = () => {
     const tokenJwt = user.accessToken;
 
@@ -87,7 +92,10 @@ const ConfirmReservationScreen = ({ route, navigation }) => {
                         {startDate.slice(0, 10)}, {startDate.slice(16, 21)}
                       </>
                     ) : (
-                      <Text></Text>
+                      <Text>
+                        {" "}
+                        {currentDate}, {item.rsrv_start}
+                      </Text>
                     )}
                   </Text>
                 </HStack>
@@ -100,7 +108,10 @@ const ConfirmReservationScreen = ({ route, navigation }) => {
                         {endDate.slice(0, 10)}, {endDate.slice(16, 21)}
                       </>
                     ) : (
-                      <Text></Text>
+                      <Text>
+                        {" "}
+                        {currentDate}, {item.rsrv_end}
+                      </Text>
                     )}
                   </Text>
                 </HStack>

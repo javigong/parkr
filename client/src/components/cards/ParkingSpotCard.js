@@ -24,7 +24,7 @@ const ParkingSpotCard = ({
 
   const findParkingHandler = () => {
     navigation.navigate("ParkingStack", {
-      screen: "FindParkingScreen",
+      screen: "WhoParksScreen",
       params: { item: item, currentDate: currentDate, type: type },
     });
   };
