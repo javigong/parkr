@@ -15,7 +15,6 @@ exports.createReservation = (req, res) => {
         rsvparkingslotid: req.body.rsvparkingslotid,
         rsvvisitorid: req.body.rsvvisitorid,
         rsvdtstart: req.body.rsvdtstart,
-        rsvdtstart: req.body.rsvdtstart,
         rsvdtend: req.body.rsvdtend,
         rsvstatus: req.body.rsvstatus,
         rsvtype: req.body.rsvtype,
