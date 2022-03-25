@@ -45,6 +45,9 @@ const ChooseCarScreen = ({ route, navigation }) => {
         params: {
           userType: userType,
           item: item,
+          currentDate: currentDate,
+          startDate: startDate,
+          endDate: endDate,
         },
       });
     } else {

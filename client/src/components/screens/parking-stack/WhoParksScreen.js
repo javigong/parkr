@@ -14,7 +14,6 @@ const WhoParksScreen = ({ route, navigation }) => {
 
   const handlePress = (user) => {
     setUserType(user);
-    console.log("pressed", user);
   };
 
   return (
@@ -81,20 +80,6 @@ const WhoParksScreen = ({ route, navigation }) => {
               </Pressable>
             </HStack>
           </Box>
-
-          {/* <Radio.Group
-              defaultValue="1"
-              name="userGroup"
-              accessibilityLabel="who is parking"
-            >
-              <Radio colorScheme="emerald" value="1" my={1}>
-                Me
-              </Radio>
-
-              <Radio colorScheme="emerald" value="2" my={1}>
-                My Visitor
-              </Radio>
-            </Radio.Group> */}
         </Box>
         <Button
           mb={9}
