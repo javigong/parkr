@@ -15,7 +15,6 @@ exports.createReservation = (req, res) => {
         rsvparkingslotid: req.body.rsvparkingslotid,
         rsvvisitorid: req.body.rsvvisitorid,
         rsvdtstart: req.body.rsvdtstart,
-        rsvdtstart: req.body.rsvdtstart,
         rsvdtend: req.body.rsvdtend,
         rsvstatus: req.body.rsvstatus,
         rsvtype: req.body.rsvtype,
@@ -26,6 +25,27 @@ exports.createReservation = (req, res) => {
 
     // Save Reservation in the database
     Reservation.saveReservation(reservation, (err, data) => {
+        if (err)
+            res.status(500).send({
+                message: err.message || "Some error occurred while creating the reservation."
+            });
+        else res.send(data);
+    });
+};
+
+exports.cancelReservation = (req, res) => {
+    // Validate request
+    if (!req.body) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+    }
+
+    // Create a reservation
+    const reservationId = req.params.bookingid;
+
+    // Save Reservation in the database
+    Reservation.setReservationToCancel(reservationId, (err, data) => {
         if (err)
             res.status(500).send({
                 message: err.message || "Some error occurred while creating the reservation."
