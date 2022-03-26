@@ -34,7 +34,7 @@ export const postNewParkingSpot = async (
     data: {
       idParkingSlot: idParkingSlot,
       paUnitNo: paUnitNo,
-      paVehicleTyp: paVehicleType,
+      paVehicleType: paVehicleType,
       paStatus: paStatus,
       paVisitorId: paVisitorId,
       paFee: paFee,
@@ -72,8 +72,6 @@ export const getBuildingInfo = async (token) => {
   }
 };
 
-
-
 export const getCarListByUser = async (email, token) => {
   const configurationObject = {
     method: "get",
@@ -90,6 +88,46 @@ export const getCarListByUser = async (email, token) => {
 
     const results = response.data;
 
+    return results;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const postReservation = async (
+  rsvparkingslotid,
+  rsvvisitorid,
+  rsvdtstart,
+  rsvdtend,
+  rsvstatus,
+  rsvtype,
+  rsvfee,
+  rsvcarplateno,
+  rsvcarmodel,
+  token
+) => {
+  const configurationObject = {
+    method: "put",
+    url: `${BASE_URL}/reservation/savereservation`,
+    headers: {
+      "content-type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    data: {
+      rsvparkingslotid: rsvparkingslotid,
+      rsvvisitorid: rsvvisitorid,
+      rsvdtstart: rsvdtstart,
+      rsvdtend: rsvdtend,
+      rsvstatus: rsvstatus,
+      rsvtype: rsvtype,
+      rsvfee: rsvfee,
+      rsvcarplateno: rsvcarplateno,
+      rsvcarmodel: rsvcarmodel,
+    },
+  };
+  try {
+    const response = await axios(configurationObject);
+    const results = response.data;
     return results;
   } catch (error) {
     throw error;
