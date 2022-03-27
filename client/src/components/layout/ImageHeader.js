@@ -7,6 +7,7 @@ export const ImageHeader = (props) => (
     <Image
       style={StyleSheet.absoluteFill}
       source={require("../../../assets/orange-background.png")}
+      alt="background"
     />
     <Header {...props} style={{ backgroundColor: "transparent" }} />
   </View>
