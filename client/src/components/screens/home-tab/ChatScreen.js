@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Dimensions, TouchableOpacity, View } from "react-native";
+import {
+  Dimensions,
+  TouchableOpacity,
+  View,
+  ImageBackground,
+  StyleSheet,
+  SafeAreaView,
+} from "react-native";
 import { SwipeListView } from "react-native-swipe-list-view";
 import {
   NativeBaseProvider,
@@ -144,21 +151,21 @@ const ChatScreen = ({ navigation }) => {
         <Pressable
           w="70"
           ml="auto"
-          bg="coolGray.200"
+          bg="#0CB183"
           justifyContent="center"
           onPress={() => closeRow(rowMap, data.item.key)}
           _pressed={{
             opacity: 0.5,
           }}
         >
-          <VStack alignItems="center" space={2}>
+          <VStack alignItems="center" space={1}>
             <Icon
-              as={<Entypo name="dots-three-horizontal" />}
-              size="xs"
-              color="coolGray.800"
+              as={<Ionicons name="volume-mute" />}
+              size="sm"
+              color="white"
             />
-            <Text fontSize="xs" fontWeight="medium" color="coolGray.800">
-              More
+            <Text fontSize="xs" fontWeight="medium" color="white">
+              Mute
             </Text>
           </VStack>
         </Pressable>
@@ -171,13 +178,13 @@ const ChatScreen = ({ navigation }) => {
             opacity: 0.5,
           }}
         >
-          <VStack alignItems="center" space={2}>
+          <VStack alignItems="center" space={1}>
             <Icon
-              as={<MaterialIcons name="delete" />}
+              as={<Ionicons name="trash-outline" />}
               color="white"
-              size="xs"
+              size="sm"
             />
-            <Text color="white" fontSize="xs" fontWeight="medium">
+            <Text color="white" fontSize="sm" fontWeight="medium">
               Delete
             </Text>
           </VStack>
@@ -201,28 +208,38 @@ const ChatScreen = ({ navigation }) => {
   };
 
   return (
-    <Center h="290px">
-      <Box
-        _dark={{
-          bg: "coolGray.800",
-        }}
-        _light={{
-          bg: "white",
-        }}
-        flex="1"
-        safeAreaTop
-        maxW="400px"
-        w="100%"
-      >
-        <Heading p="4" pb="3" size="lg">
-          Inbox
-        </Heading>
+    <SafeAreaView flex="1" width="100%">
+      <View flex="1" h="10%" w="100%">
+        <ImageBackground
+          source={require("../../../../assets/orange-background.png")}
+          resizeMode="cover"
+          alt="background"
+          style={styles.backgroundImage}
+        >
+          <Heading style={styles.chatHeading} size="lg">
+            CHAT
+          </Heading>
+        </ImageBackground>
+      </View>
+
+      <View flex="7">
         <ScrollView showsVerticalScrollIndicator={false}>
           <Basic />
         </ScrollView>
-      </Box>
-    </Center>
+      </View>
+    </SafeAreaView>
   );
 };
 
 export default ChatScreen;
+
+const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+  },
+  chatHeading: {
+    padding: "8%",
+    textAlign: "center",
+    color: "#ffffff",
+  },
+});
