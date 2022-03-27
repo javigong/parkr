@@ -6,7 +6,7 @@ exports.createReservation = (req, res) => {
     // Validate request
     if (!req.body) {
         res.status(400).send({
-            message: "Content can not be empty!"
+            message: "Content can not be empty!",
         });
     }
 
@@ -20,14 +20,14 @@ exports.createReservation = (req, res) => {
         rsvtype: req.body.rsvtype,
         rsvfee: req.body.rsvfee,
         rsvcarplateno: req.body.rsvcarplateno,
-        rsvcarmodel: req.body.rsvcarmodel
+        rsvcarmodel: req.body.rsvcarmodel,
     });
 
     // Save Reservation in the database
     Reservation.saveReservation(reservation, (err, data) => {
         if (err)
             res.status(500).send({
-                message: err.message || "Some error occurred while creating the reservation."
+                message: err.message || "Some error occurred while creating the reservation.",
             });
         else res.send(data);
     });
@@ -37,7 +37,7 @@ exports.cancelReservation = (req, res) => {
     // Validate request
     if (!req.body) {
         res.status(400).send({
-            message: "Content can not be empty!"
+            message: "Content can not be empty!",
         });
     }
 
@@ -48,7 +48,7 @@ exports.cancelReservation = (req, res) => {
     Reservation.setReservationToCancel(reservationId, (err, data) => {
         if (err)
             res.status(500).send({
-                message: err.message || "Some error occurred while creating the reservation."
+                message: err.message || "Some error occurred while creating the reservation.",
             });
         else res.send(data);
     });

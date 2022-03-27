@@ -55,7 +55,7 @@ const IndexScreen = ({ navigation }) => {
 
   return (
     <>
-       <Box flex="1" bg="white">
+      <Box flex="1" bg="white">
         <Center>
           <Center w="100%">
             <Box safeArea py="8" w="90%" maxW="290">
@@ -90,12 +90,12 @@ const IndexScreen = ({ navigation }) => {
                   borderColor="#FD6B36"
                   onPress={() => {
                     navigation.navigate("SignupScreen");
-                    }}
+                  }}
                 >
                   <Text
                     style={{
                       fontWeight: "bold",
-                      fontSize: "16px",
+                      fontSize: 16,
                       color: "#FD6B36",
                     }}
                   >

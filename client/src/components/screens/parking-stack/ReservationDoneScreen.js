@@ -2,7 +2,16 @@ import React from "react";
 import { Box, Center, Text, Button, Icon } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 
-const ReservationDoneScreen = ({ navigation }) => {
+const ReservationDoneScreen = ({ navigation, route }) => {
+  const { item } = route.params;
+
+  const ChatHandler = () => {
+    navigation.navigate("ChatStack", {
+      screen: "LiveChatScreen",
+      // params: { item: item, currentDate: currentDate, type: type },
+    });
+  };
+
   return (
     <Box flex="1" justifyContent="space-between" alignItems="center" bg="white">
       <Box flex={1} justifyContent="flex-start" alignItems="center">
@@ -11,15 +20,19 @@ const ReservationDoneScreen = ({ navigation }) => {
             Parking spot is reserved!
           </Text>
           <Text fontWeight="bold" fontSize="2xl" mt={10}>
-            Spot 13
+            Spot {item.idParkingSlot}
           </Text>
           <Box py={2} px={3} borderRadius="50px" my={6} bg="#FD6B36">
             <Text fontWeight="bold" fontSize="2xl" color="white">
-              JS
+              {item.upFirstName.charAt(0).toUpperCase()}
+              {item.upLastName.charAt(0).toUpperCase()}
             </Text>
           </Box>
-          <Text>John Smith</Text>
+          <Text>
+            {item.upFirstName} {item.upLastName}
+          </Text>
           <Button
+            onPress={() => ChatHandler()}
             my={6}
             borderRadius="30px"
             backgroundColor="#0CB183"

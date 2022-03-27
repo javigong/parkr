@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Button, Text, VStack, HStack } from "native-base";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { postReservation } from "../../services/api";
+import { AuthenticatedUserContext } from "../../contexts/AuthenticatedUserContext";
 
 const ConfirmReservationScreen = ({ route, navigation }) => {
+  const { user, setUser } = useContext(AuthenticatedUserContext);
   const { userType, carType, plateNum, item, currentDate, startDate, endDate } =
     route.params;
 
@@ -25,6 +28,48 @@ const ConfirmReservationScreen = ({ route, navigation }) => {
     }
   };
 
+  let ISOStartDate = "";
+  let ISOEndDate = "";
+
+  if (startDate == undefined && endDate == undefined) {
+    const onlyDate = new Date().toISOString().split("T")[0];
+    ISOStartDate = onlyDate + " " + item.rsrv_start;
+    ISOEndDate = onlyDate + " " + item.rsrv_end;
+  } else {
+    const UTCStartDate = new Date(startDate);
+    const UTCEndDate = new Date(endDate);
+    const StartTime = startDate.split(" ")[4];
+    const EndTime = endDate.split(" ")[4];
+    ISOStartDate = UTCStartDate.toISOString().split("T")[0] + " " + StartTime;
+    ISOEndDate = UTCEndDate.toISOString().split("T")[0] + " " + EndTime;
+  }
+
+  const ReservationDoneHandler = () => {
+    const tokenJwt = user.accessToken;
+
+    postReservation(
+      item.idParkingSlot,
+      user.providerData[0].email,
+      ISOStartDate,
+      ISOEndDate,
+      item.paFee,
+      item.paStatus,
+      item.paVehicleType,
+      plateNum,
+      carType,
+      tokenJwt
+    )
+      .then(console.log("reservation complete!"))
+      .catch((error) => console.log("error", error));
+
+    navigation.navigate("ParkingStack", {
+      screen: "ReservationDoneScreen",
+      params: {
+        item: item,
+      },
+    });
+  };
+
   return (
     <Box flex="1" bg="white">
       <SafeAreaView flex="1" alignItems="center">
@@ -41,15 +86,33 @@ const ConfirmReservationScreen = ({ route, navigation }) => {
                 <HStack>
                   <Text fontWeight="bold">Start</Text>
                   <Text color="grey">
-                    {" "}
-                    {startDate.slice(0, 10)}, {startDate.slice(16, 21)}
+                    {startDate ? (
+                      <>
+                        {" "}
+                        {startDate.slice(0, 10)}, {startDate.slice(16, 21)}
+                      </>
+                    ) : (
+                      <Text>
+                        {" "}
+                        {currentDate}, {item.rsrv_start}
+                      </Text>
+                    )}
                   </Text>
                 </HStack>
                 <HStack mb={3}>
                   <Text fontWeight="bold">End</Text>
                   <Text color="grey">
-                    {" "}
-                    {endDate.slice(0, 10)}, {endDate.slice(16, 21)}
+                    {endDate ? (
+                      <>
+                        {" "}
+                        {endDate.slice(0, 10)}, {endDate.slice(16, 21)}
+                      </>
+                    ) : (
+                      <Text>
+                        {" "}
+                        {currentDate}, {item.rsrv_end}
+                      </Text>
+                    )}
                   </Text>
                 </HStack>
               </Box>
@@ -136,12 +199,7 @@ const ConfirmReservationScreen = ({ route, navigation }) => {
             borderRadius="20px"
             backgroundColor="#FD6B36"
             mb={1}
-            onPress={() => {
-              // make POST request here
-              navigation.navigate("ParkingStack", {
-                screen: "ReservationDoneScreen",
-              });
-            }}
+            onPress={() => ReservationDoneHandler()}
           >
             RESERVE
           </Button>
