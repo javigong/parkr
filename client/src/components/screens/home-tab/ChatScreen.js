@@ -102,8 +102,14 @@ const ChatScreen = ({ navigation }) => {
             bg: "white",
           }}
         >
-          <Box pl="4" pr="5" py="2">
-            <HStack alignItems="center" space={3}>
+          <Box>
+            <HStack
+              p="3"
+              alignItems="center"
+              space={3}
+              borderBottomColor="#636366"
+              borderBottomWidth="0.5"
+            >
               <Avatar
                 size="48px"
                 source={{
@@ -192,7 +198,7 @@ const ChatScreen = ({ navigation }) => {
       </HStack>
     );
     return (
-      <Box bg="white" safeArea flex="1">
+      <Box bg="white" flex="1">
         <SwipeListView
           data={listData}
           renderItem={renderItem}
@@ -208,7 +214,7 @@ const ChatScreen = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView flex="1" width="100%">
+    <SafeAreaView flex="1" width="100%" backgroundColor="white">
       <View flex="1" h="10%" w="100%">
         <ImageBackground
           source={require("../../../../assets/orange-background.png")}
@@ -222,7 +228,7 @@ const ChatScreen = ({ navigation }) => {
         </ImageBackground>
       </View>
 
-      <View flex="7">
+      <View flex="7" bg="white">
         <ScrollView showsVerticalScrollIndicator={false}>
           <Basic />
         </ScrollView>
