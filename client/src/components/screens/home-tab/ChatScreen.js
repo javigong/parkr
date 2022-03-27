@@ -94,7 +94,9 @@ const ChatScreen = ({ navigation }) => {
     const renderItem = ({ item, index }) => (
       <Box>
         <Pressable
-          onPress={() => console.log("You touched me")}
+          onPress={() =>
+            navigation.navigate("ChatStack", { screen: "LiveChatScreen" })
+          }
           _dark={{
             bg: "coolGray.800",
           }}
