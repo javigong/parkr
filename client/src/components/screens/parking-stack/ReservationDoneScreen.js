@@ -5,6 +5,13 @@ import { Ionicons } from "@expo/vector-icons";
 const ReservationDoneScreen = ({ navigation, route }) => {
   const { item } = route.params;
 
+  const ChatHandler = () => {
+    navigation.navigate("ChatStack", {
+      screen: "LiveChatScreen",
+      // params: { item: item, currentDate: currentDate, type: type },
+    });
+  };
+
   return (
     <Box flex="1" justifyContent="space-between" alignItems="center" bg="white">
       <Box flex={1} justifyContent="flex-start" alignItems="center">
@@ -25,6 +32,7 @@ const ReservationDoneScreen = ({ navigation, route }) => {
             {item.upFirstName} {item.upLastName}
           </Text>
           <Button
+            onPress={() => ChatHandler()}
             my={6}
             borderRadius="30px"
             backgroundColor="#0CB183"
