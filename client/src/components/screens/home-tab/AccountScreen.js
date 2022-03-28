@@ -49,7 +49,16 @@ const AccountScreen = ({ navigation }) => {
                 uri: photoURL,
               }}
               alt="Alternate Text"
+              alt="Profile photo"
             />
+            <Box h="100">
+              <Heading mb="2" size="lg" textAlign="center">
+                {fullName}
+              </Heading>
+              <Text mb="5" size="md" textAlign="center">
+                {email}
+              </Text>
+            </Box>
           </Center>
           <Text mb={5} fontSize={16} fontWeight="bold" textAlign="center">
             {fullName}
