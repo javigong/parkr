@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Box, Button, Center, Image, Text, VStack } from "native-base";
 import { Box, Button, Center, Heading, Image, Text, VStack } from "native-base";
 import { StyleSheet } from "react-native";
 import { signOut } from "firebase/auth";
@@ -19,12 +18,10 @@ const AccountScreen = ({ navigation }) => {
 
   useEffect(() => {
     if (user) {
-      setPhotoURL(user.photoURL);
-      setFullName(user.displayName);
-      console.log("Account Screen:", user.displayName);
       setPhotoURL(user.providerData[0].photoURL);
       setFullName(user.providerData[0].displayName);
       setEmail(user.providerData[0].email);
+      // console.log("Account Screen:", user.providerData[0].email);
     }
   }, []);
 
@@ -49,7 +46,6 @@ const AccountScreen = ({ navigation }) => {
               source={{
                 uri: photoURL,
               }}
-              alt="Alternate Text"
               alt="Profile photo"
             />
             <Box h="100">
@@ -61,9 +57,6 @@ const AccountScreen = ({ navigation }) => {
               </Text>
             </Box>
           </Center>
-          <Text mb={5} fontSize={16} fontWeight="bold" textAlign="center">
-            {fullName}
-          </Text>
           <OutlineButton buttonText="CHANGE BUILDING" onPress={onChangeBld} />
           <SolidOrangeButton buttonText="LOG OUT" onPress={onSignOut} />
         </VStack>
