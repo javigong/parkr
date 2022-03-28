@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
-import { Box, Center, Text, HStack, Button, Pressable } from "native-base";
+import { Box, Center, Text, HStack, Button, Pressable, Flex, View } from "native-base";
+import OutlineButton from "../../UI/OutlineButton";
+import SolidOrangeButton from "../../UI/SolidOrangeButton";
 
 const WhoParksScreen = ({ route, navigation }) => {
-  const { item, currentDate, startDate, endDate } = route.params;
+  const { item, currentDate, startDate, endDate, cancelButton } = route.params;
   const [userType, setUserType] = useState();
+
+  const cancelFindParking = () => {
+    navigation.popToTop();
+  };
 
   let color = {
     backgroundColor: "#43D3A4",
@@ -81,26 +87,58 @@ const WhoParksScreen = ({ route, navigation }) => {
             </HStack>
           </Box>
         </Box>
-        <Button
+        {!cancelButton ? (
+          <Button
+            mb={9}
+            borderRadius="20px"
+            backgroundColor="#FD6B36"
+            width="80%"
+            onPress={() =>
+              navigation.navigate("ParkingStack", {
+                screen: "ChooseCarScreen",
+                params: {
+                  userType: userType,
+                  item: item,
+                  currentDate: currentDate,
+                  startDate: startDate,
+                  endDate: endDate,
+                },
+              })
+            }
+          >
+            NEXT
+          </Button>
+        ) : (
+          <Flex
+          width="90%"
           mb={9}
-          borderRadius="20px"
-          backgroundColor="#FD6B36"
-          width="80%"
-          onPress={() =>
-            navigation.navigate("ParkingStack", {
-              screen: "ChooseCarScreen",
-              params: {
-                userType: userType,
-                item: item,
-                currentDate: currentDate,
-                startDate: startDate,
-                endDate: endDate,
-              },
-            })
-          }
-        >
-          NEXT
-        </Button>
+            flex="1"
+            flexDirection="row"
+            alignItems="flex-end"
+            // justifyContent="space-around"
+          >
+            <View flex="1">
+              <OutlineButton buttonText="CANCEL" onPress={cancelFindParking} />
+            </View>
+            <View flex="1">
+              <SolidOrangeButton
+                buttonText="SAVE"
+                onPress={() =>
+                  navigation.navigate("ParkingStack", {
+                    screen: "ChooseCarScreen",
+                    params: {
+                      userType: userType,
+                      item: item,
+                      currentDate: currentDate,
+                      startDate: startDate,
+                      endDate: endDate,
+                    },
+                  })
+                }
+              />
+            </View>
+          </Flex>
+        )}
       </Box>
     </>
   );
