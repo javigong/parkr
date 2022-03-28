@@ -11,6 +11,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import { AuthenticatedUserContext } from "../../contexts/AuthenticatedUserContext";
 
 import { NotificationContext } from "../../contexts/NotificationContext";
+import SolidOrangeButton from "../../UI/SolidOrangeButton";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -180,20 +181,8 @@ const ParkingScreen = ({ navigation }) => {
 
           {customStyleIndex === 0 && (
             <Box flex="1" width="100%" backgroundColor="white">
-              <Center>
-                <Button
-                  height="40px"
-                  width="85%"
-                  mt="4"
-                  mb="3"
-                  borderRadius="20"
-                  backgroundColor="#FD6B36"
-                  onPress={findParkingHandler}
-                >
-                  <Text color="white" fontWeight="bold">
-                    FIND PARKING
-                  </Text>
-                </Button>
+              <Center mt="2">
+                <SolidOrangeButton width="90%" buttonText="FIND PARKING" onPress={findParkingHandler}/>
               </Center>
               <Box flex="1">
                 <Tab.Navigator
