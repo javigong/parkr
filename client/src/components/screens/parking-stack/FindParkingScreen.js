@@ -210,7 +210,8 @@ const FindParkingScreen = ({ route, navigation }) => {
               <Input
                 type="number"
                 value={minutes}
-                width="12"
+                variant="filled"
+                width="16"
                 ml={5}
                 mt={5}
                 onChangeText={(text) => setMinutes(text)}
