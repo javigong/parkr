@@ -88,13 +88,15 @@ const FindParkingScreen = ({ route, navigation }) => {
 
   //notification code
 
-  Notifications.setNotificationHandler({
-    handleNotification: async () => ({
-      shouldShowAlert: enable,
-      shouldPlaySound: enable,
-      shouldSetBadge: false,
-    }),
-  });
+  useEffect(() => {
+    Notifications.setNotificationHandler({
+      handleNotification: async () => ({
+        shouldShowAlert: enable,
+        shouldPlaySound: enable,
+        shouldSetBadge: false,
+      }),
+    });
+  }, [enable]);
 
   const [expoPushToken, setExpoPushToken] = useState("");
   const [notification, setNotification] = useState(false);
