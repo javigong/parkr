@@ -122,7 +122,7 @@ const WhoParksScreen = ({ route, navigation }) => {
             </View>
             <View flex="1">
               <SolidOrangeButton
-                buttonText="SAVE"
+                buttonText="NEXT"
                 onPress={() =>
                   navigation.navigate("ParkingStack", {
                     screen: "ChooseCarScreen",
