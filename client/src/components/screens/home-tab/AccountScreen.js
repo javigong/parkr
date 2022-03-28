@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Box, Button, Center, Image, Text, VStack } from "native-base";
+import { Box, Button, Center, Heading, Image, Text, VStack } from "native-base";
 import { StyleSheet } from "react-native";
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase";
