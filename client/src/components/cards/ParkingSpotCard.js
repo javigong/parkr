@@ -22,10 +22,17 @@ const ParkingSpotCard = ({
 }) => {
   // type 1 -standard\\ntype 2 - large\\ntype 3 - electric car\\ntype 4 - motorcycle
 
-  const findParkingHandler = () => {
+  const whoParksDirectHandler = () => {
     navigation.navigate("ParkingStack", {
       screen: "WhoParksScreen",
-      params: { item: item, currentDate: currentDate, type: type },
+      params: {
+        item: item,
+        currentDate: currentDate,
+        type: type,
+        startDate: startDate,
+        endDate: endDate,
+        cancelButton: true,
+      },
     });
   };
 
@@ -74,7 +81,7 @@ const ParkingSpotCard = ({
             case "today":
             case "thisWeek":
             case "thisMonth":
-              findParkingHandler();
+              whoParksDirectHandler();
               break;
             case "inUse":
             case "upcoming":
