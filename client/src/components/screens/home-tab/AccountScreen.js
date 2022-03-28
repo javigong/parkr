@@ -1,14 +1,27 @@
-import React, { useContext } from "react";
-import { Box, Button, Center, Text, VStack } from "native-base";
+import React, { useContext, useEffect, useState } from "react";
+import { Box, Button, Center, Image, Text, VStack } from "native-base";
 import { StyleSheet } from "react-native";
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase";
 import OutlineButton from "../../UI/OutlineButton";
 import { HasBuildingContext } from "../../contexts/HasBuildingContext";
 import SolidOrangeButton from "../../UI/SolidOrangeButton";
+import { AuthenticatedUserContext } from "../../contexts/AuthenticatedUserContext";
 
 const AccountScreen = ({ navigation }) => {
+  const { user, setUser } = useContext(AuthenticatedUserContext);
   const { hasBuilding, setHasBuilding } = useContext(HasBuildingContext);
+
+  const [photoURL, setPhotoURL] = useState(null);
+  const [fullName, setFullName] = useState(null);
+
+  useEffect(() => {
+    if (user) {
+      setPhotoURL(user.photoURL);
+      setFullName(user.displayName);
+      console.log("Account Screen:", user.displayName);
+    }
+  }, []);
 
   const onSignOut = () => {
     signOut(auth).catch((error) => console.log("Error logging out: ", error));
@@ -22,6 +35,21 @@ const AccountScreen = ({ navigation }) => {
     <Center flex={1} w="100%" bg="white">
       <Box safeArea p="2" py="8" w="90%">
         <VStack>
+          <Center>
+            <Image
+              mb={5}
+              size={185}
+              resizeMode={"contain"}
+              borderRadius={100}
+              source={{
+                uri: photoURL,
+              }}
+              alt="Alternate Text"
+            />
+          </Center>
+          <Text mb={5} fontSize={16} fontWeight="bold" textAlign="center">
+            {fullName}
+          </Text>
           <OutlineButton buttonText="CHANGE BUILDING" onPress={onChangeBld} />
           <SolidOrangeButton buttonText="LOG OUT" onPress={onSignOut} />
         </VStack>
