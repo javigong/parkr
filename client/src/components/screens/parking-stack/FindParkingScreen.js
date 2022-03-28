@@ -136,7 +136,7 @@ const FindParkingScreen = ({ route, navigation }) => {
       await Notifications.scheduleNotificationAsync({
         content: {
           title: "A Message from Parkr 🚗",
-          body: `Your parking will expire in ${minutes}.  Would you like to extend it?`,
+          body: `Your parking will expire in ${minutes} minute(s).  Would you like to extend it?`,
         },
         trigger: { seconds: timeInSeconds },
       });
