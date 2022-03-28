@@ -19,17 +19,10 @@ import OutlineButton from "../../UI/OutlineButton";
 import SolidOrangeButton from "../../UI/SolidOrangeButton";
 import { getAllParkingSpots } from "../../services/api";
 import { AuthenticatedUserContext } from "../../contexts/AuthenticatedUserContext";
+import { NotificationContext } from "../../contexts/NotificationContext";
 import * as Notifications from "expo-notifications";
 import Constants from "expo-constants";
 import { Ionicons } from "@expo/vector-icons";
-
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: false,
-  }),
-});
 
 LogBox.ignoreLogs([
   "NativeBase: The contrast ratio of 2.863815068413143:1 for white on",
@@ -47,6 +40,7 @@ const FindParkingScreen = ({ route, navigation }) => {
   const [parkingTypeFilter, setParkingTypeFilter] = useState();
   const [filteredSpotsList, setFilteredSpotsList] = useState();
   const { user, setUser } = useContext(AuthenticatedUserContext);
+  const { enable, setEnable } = useContext(NotificationContext);
 
   const onStartDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -93,6 +87,14 @@ const FindParkingScreen = ({ route, navigation }) => {
   };
 
   //notification code
+
+  Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: enable,
+      shouldPlaySound: enable,
+      shouldSetBadge: false,
+    }),
+  });
 
   const [expoPushToken, setExpoPushToken] = useState("");
   const [notification, setNotification] = useState(false);
@@ -206,7 +208,7 @@ const FindParkingScreen = ({ route, navigation }) => {
               <Input
                 type="number"
                 value={minutes}
-                width="16"
+                width="12"
                 ml={5}
                 mt={5}
                 onChangeText={(text) => setMinutes(text)}
