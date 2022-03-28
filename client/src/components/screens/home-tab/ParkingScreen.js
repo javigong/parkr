@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Center, Box, Text, Icon, useToast } from "native-base";
+import { Button, Center, Box, Text, Icon } from "native-base";
 import { ImageBackground, SafeAreaView, StyleSheet } from "react-native";
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase";
@@ -38,7 +38,6 @@ const ParkingScreen = ({ navigation }) => {
   const [spotsTodayList, setSpotsTodayList] = useState(null);
   const [buildingInfo, setBuildingInfo] = useState();
   const [currentDate, setCurrentDate] = useState(null);
-  const toast = useToast();
 
   const date = new Date();
   const dateString = date.toString();
@@ -71,18 +70,8 @@ const ParkingScreen = ({ navigation }) => {
   const handleEnable = () => {
     if (enable === true) {
       setEnable(false);
-      toast.show({
-        title: "Notification disabled",
-        placement: "top-right",
-        backgroundColor: "#107a57",
-      });
     } else {
       setEnable(true);
-      toast.show({
-        title: "Notification enabled",
-        placement: "top-right",
-        backgroundColor: "#107a57",
-      });
     }
   };
 
@@ -126,18 +115,33 @@ const ParkingScreen = ({ navigation }) => {
                     <Text></Text>
                   )}
                 </Box>
-                <Icon
-                  mt={8}
-                  mr={8}
-                  color="white"
-                  size={8}
-                  as={
-                    <Ionicons
-                      name="notifications-outline"
-                      onPress={() => handleEnable()}
-                    />
-                  }
-                />
+                {enable ? (
+                  <Icon
+                    mt={8}
+                    mr={8}
+                    color="white"
+                    size={8}
+                    as={
+                      <Ionicons
+                        name="notifications-outline"
+                        onPress={() => handleEnable()}
+                      />
+                    }
+                  />
+                ) : (
+                  <Icon
+                    mt={8}
+                    mr={8}
+                    color="white"
+                    size={8}
+                    as={
+                      <Ionicons
+                        name="notifications-off-outline"
+                        onPress={() => handleEnable()}
+                      />
+                    }
+                  />
+                )}
               </Box>
               <Center>
                 <Box width="100%">
