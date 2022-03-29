@@ -19,6 +19,7 @@ const ChooseCarScreen = ({ route, navigation }) => {
   const [carList, setCarList] = useState([]);
   const [carType, setCarType] = useState("newCar");
   const [plateNum, setPlateNum] = useState(null);
+  const [idbooking, setIdBooking] = useState(null);
   const { user, setUser } = useContext(AuthenticatedUserContext);
 
   //Will get this email when user logs in
@@ -32,10 +33,11 @@ const ChooseCarScreen = ({ route, navigation }) => {
 
   // This will handle the selection of car and passed as a params in route
 
-  const handlePress = (car, plateNo) => {
+  const handlePress = (car, plateNo, idbooking) => {
     setCarType(car);
     setPlateNum(plateNo);
-    console.log("pressed", car + " " + plateNo);
+    setIdBooking(idbooking);
+    // console.log("pressed", car + " " + plateNo);
   };
 
   const handleCarSelect = () => {
@@ -138,9 +140,13 @@ const ChooseCarScreen = ({ route, navigation }) => {
                             borderRadius={20}
                             padding={1}
                             alignSelf="center"
-                            style={carType == car.rsvcarmodel ? color : {}}
+                            style={idbooking == car.idbooking ? color : {}}
                             onPress={() => {
-                              handlePress(car.rsvcarmodel, car.rsvcarplateno);
+                              handlePress(
+                                car.rsvcarmodel,
+                                car.rsvcarplateno,
+                                car.idbooking
+                              );
                             }}
                           ></Pressable>
                         </Pressable>

@@ -10,6 +10,9 @@ import { getAllParkingSpots, getBuildingInfo } from "../../services/api";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { AuthenticatedUserContext } from "../../contexts/AuthenticatedUserContext";
 
+import { NotificationContext } from "../../contexts/NotificationContext";
+import SolidOrangeButton from "../../UI/SolidOrangeButton";
+
 const Tab = createMaterialTopTabNavigator();
 
 const _exampleDataStructure = [
@@ -31,6 +34,7 @@ const _exampleDataStructure = [
 
 const ParkingScreen = ({ navigation }) => {
   const { user, setUser } = useContext(AuthenticatedUserContext);
+  const { enable, setEnable } = useContext(NotificationContext);
   const [customStyleIndex, setCustomStyleIndex] = useState(0);
   const [spotsTodayList, setSpotsTodayList] = useState(null);
   const [buildingInfo, setBuildingInfo] = useState();
@@ -63,6 +67,14 @@ const ParkingScreen = ({ navigation }) => {
   }, []);
 
   // console.log("Building info is:", buildingInfo);
+
+  const handleEnable = () => {
+    if (enable === true) {
+      setEnable(false);
+    } else {
+      setEnable(true);
+    }
+  };
 
   return (
     <>
@@ -104,13 +116,33 @@ const ParkingScreen = ({ navigation }) => {
                     <Text></Text>
                   )}
                 </Box>
-                <Icon
-                  mt={8}
-                  mr={8}
-                  color="white"
-                  size={8}
-                  as={<Ionicons name="notifications-outline" />}
-                />
+                {enable ? (
+                  <Icon
+                    mt={8}
+                    mr={8}
+                    color="white"
+                    size={8}
+                    as={
+                      <Ionicons
+                        name="notifications-outline"
+                        onPress={() => handleEnable()}
+                      />
+                    }
+                  />
+                ) : (
+                  <Icon
+                    mt={8}
+                    mr={8}
+                    color="white"
+                    size={8}
+                    as={
+                      <Ionicons
+                        name="notifications-off-outline"
+                        onPress={() => handleEnable()}
+                      />
+                    }
+                  />
+                )}
               </Box>
               <Center>
                 <Box width="100%">
@@ -149,20 +181,8 @@ const ParkingScreen = ({ navigation }) => {
 
           {customStyleIndex === 0 && (
             <Box flex="1" width="100%" backgroundColor="white">
-              <Center>
-                <Button
-                  height="40px"
-                  width="85%"
-                  mt="4"
-                  mb="3"
-                  borderRadius="20"
-                  backgroundColor="#FD6B36"
-                  onPress={findParkingHandler}
-                >
-                  <Text color="white" fontWeight="bold">
-                    FIND PARKING
-                  </Text>
-                </Button>
+              <Center mt="2">
+                <SolidOrangeButton width="90%" buttonText="FIND PARKING" onPress={findParkingHandler}/>
               </Center>
               <Box flex="1">
                 <Tab.Navigator
