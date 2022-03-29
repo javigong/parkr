@@ -77,7 +77,8 @@ const HostScreen = ({ navigation }) => {
                       fontSize="2xl"
                       color="white"
                     >
-                      {buildingInfo[0].biName}
+                      {/* {buildingInfo[0].biName} */}
+                      Host
                     </Text>
                     <Text ml={8} fontSize="md" fontWeight="bold" color="white">
                       {buildingInfo[0].biAddress}
