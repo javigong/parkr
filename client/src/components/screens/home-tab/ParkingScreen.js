@@ -100,7 +100,7 @@ const ParkingScreen = ({ navigation }) => {
                         fontSize="2xl"
                         color="white"
                       >
-                        Parkr
+                        Park
                         {/* {buildingInfo[0].biName} */}
                       </Text>
                       <Text
