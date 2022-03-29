@@ -93,7 +93,6 @@ const FindParkingScreen = ({ route, navigation }) => {
       handleNotification: async () => ({
         shouldShowAlert: enable,
         shouldPlaySound: enable,
-        shouldSetBadge: false,
       }),
     });
   }, [enable]);
@@ -131,7 +130,9 @@ const FindParkingScreen = ({ route, navigation }) => {
   async function schedulePushNotification() {
     let timeInSeconds = 0;
 
-    if (minutes * 60 > (endDate - Date.now()) / 1000) {
+    if (enable === false) {
+      return;
+    } else if (minutes * 60 > (endDate - Date.now()) / 1000) {
       timeInSeconds = 0;
       setNotify("Minutes have to be within expiry and now.");
     } else {
@@ -208,7 +209,7 @@ const FindParkingScreen = ({ route, navigation }) => {
             <Text mt={5}>Please specify minutes before expiry: </Text>
             <FormControl>
               <Input
-                type="number"
+                type="text"
                 value={minutes}
                 variant="filled"
                 width="16"
@@ -226,7 +227,11 @@ const FindParkingScreen = ({ route, navigation }) => {
               mb={3}
               onPress={async () => {
                 await schedulePushNotification();
-                if (minutes == 1) {
+                if (enable === false) {
+                  setNotify(
+                    `You have disabled notifications. Please enable it again.`
+                  );
+                } else if (minutes === 1) {
                   setNotify(
                     `Great! We will notify you ${minutes} minute before it expires.`
                   );
