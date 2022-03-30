@@ -21,6 +21,26 @@ exports.getAllParkingSlots = (req, res) => {
 
 };
 
+exports.getAllHostSlots = (req, res) => {
+
+    ParkingArea.hostParkingSlots(req.params.hostemail, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `No parking slots info.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error retrieving parking slots info"
+                });
+            }
+        } else res.send(data);
+    });
+
+
+};
+
+
 exports.getBuildingInfo = (req, res) => {
     ParkingArea.getBuildingInformation((err, data) => {
         if (err) {
@@ -107,9 +127,83 @@ exports.getMyActivityExpired = (req, res) => {
 
 };
 
+exports.getHostCurrentIncoming = (req, res) => {
+
+    ParkingArea.hostActivityCurrentIncoming(req.params.hostemail, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found expired activity with user id ${req.params.useremail}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error retrieving expired activity with user id" + req.params.useremail
+                });
+            }
+        } else res.send(data);
+    });
+
+};
+
+exports.getHostExpired = (req, res) => {
+
+    ParkingArea.hostActivityExpired(req.params.hostemail, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found expired activity with user id ${req.params.useremail}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error retrieving expired activity with user id" + req.params.useremail
+                });
+            }
+        } else res.send(data);
+    });
+
+};
+
+
+
 exports.getAvailabilityByDate = (req, res) => {
 
     ParkingArea.checkAvailabilityByDate(req.params.date, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found availability with date ${req.params.date}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error availability with date" + req.params.date
+                });
+            }
+        } else res.send(data);
+    });
+
+};
+
+exports.getAvailabilityByDateWeekly = (req, res) => {
+
+    ParkingArea.checkAvailabilityByDateWeekly(req.params.date, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found availability with date ${req.params.date}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error availability with date" + req.params.date
+                });
+            }
+        } else res.send(data);
+    });
+
+};
+
+exports.getAvailabilityByDateMonthly = (req, res) => {
+
+    ParkingArea.checkAvailabilityByDateMonthly(req.params.date, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
@@ -142,4 +236,37 @@ exports.getCarListByUser = (req, res) => {
         } else res.send(data);
     });
 
+};
+
+
+exports.putParkingSlot = (req, res) => {
+    // Validate request
+    if (!req.body) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+    }
+
+
+    // Create a parking slot
+    const parkingslot = [{
+        idParkingSlot: req.body.idParkingSlot,
+        paUnitNo: req.body.paUnitNo,
+        paOwnerId: req.body.paOwnerId,
+        paVehicleType: req.body.paVehicleType,
+        paStatus: req.body.paStatus,
+        paVisitorId: req.body.paVisitorId,
+        paFee: req.body.paFee
+    }];
+
+    console.log(JSON.stringify(parkingslot));
+
+    // Register new parking slot in the database
+    ParkingArea.saveParkingSlot(parkingslot, (err, data) => {
+        if (err)
+            res.status(500).send({
+                message: err.message || "Some error occurred while registering new parking slot."
+            });
+        else res.send(data);
+    });
 };

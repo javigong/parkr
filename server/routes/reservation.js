@@ -10,6 +10,6 @@ const {
 router
     .get("/", verifyToken, findAll)
     .put("/savereservation", verifyToken, createReservation)
-    .patch("/cancelreservation/:bookingid", verifyToken, cancelReservation);
+    .patch("/cancelreservation/:bookingid", verifyToken, cancelReservation)
 
 module.exports = router;
