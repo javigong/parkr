@@ -168,6 +168,7 @@ const FindParkingScreen = ({ route, navigation }) => {
                 mode={mode}
                 is24Hour={true}
                 display="compact"
+                locale="en-GB"
                 onChange={onStartDateChange}
               />
             </View>
@@ -186,6 +187,7 @@ const FindParkingScreen = ({ route, navigation }) => {
                 value={endDate}
                 mode={mode}
                 is24Hour={true}
+                locale="en-GB"
                 display="compact"
                 onChange={onEndDateChange}
               />
