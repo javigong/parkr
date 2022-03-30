@@ -22,6 +22,16 @@ const ParkingSpotCard = ({
 }) => {
   // type 1 -standard\\ntype 2 - large\\ntype 3 - electric car\\ntype 4 - motorcycle
 
+  // date time readable format:
+  const rsrv_start_date = new Date(item.rsrv_start.slice(0, 10))
+    .toString()
+    .slice(0, 10);
+  const rsrv_start_time = item.rsrv_start.slice(11, 16);
+  const rsrv_end_date = new Date(item.rsrv_end.slice(0, 10))
+    .toString()
+    .slice(0, 10);
+  const rsrv_end_time = item.rsrv_end.slice(11, 16);
+
   const whoParksDirectHandler = () => {
     navigation.navigate("ParkingStack", {
       screen: "WhoParksScreen",
