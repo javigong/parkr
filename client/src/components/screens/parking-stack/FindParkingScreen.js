@@ -46,6 +46,9 @@ const FindParkingScreen = ({ route, navigation }) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
     setStartDate(currentDate);
+    const endDate = new Date(currentDate);
+    endDate.setHours(endDate.getHours() + 2);
+    setEndDate(endDate);
   };
   const onEndDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
