@@ -14,7 +14,7 @@ class ParkingArea {
     };
 
     static findAll = (result) => {
-        let sql = `SELECT idslot, buildingId, unitid, userid, upFirstName, upLastName, paVehicleType, paStatus, paFee, CONCAT(DATE_FORMAT(CONVERT_TZ( NOW(),'+00:00','-07:00'), "%Y-%m-%d"), " ",rsrv_start) as dtstart, CONCAT(DATE_FORMAT(CONVERT_TZ( NOW(),'+00:00','-07:00'), "%Y-%m-%d"), " ",rsrv_end) as dtend , IF((number_of_reservation >=0 OR ISNULL(number_of_reservation)),true,false) as AVAILABLE FROM dbparkr.slotlist left join (SELECT COUNT(*) number_of_reservation, rsvparkingslotid FROM dbparkr.reservations GROUP BY rsvparkingslotid) AS RESERVE_TABLE on idslot = rsvparkingslotid INNER JOIN dbparkr.userprofile ON userid = idUserProfile INNER JOIN dbparkr.parkingarea ON paOwnerId = userid ORDER BY dtstart, idslot`
+        let sql = `SELECT idslot as idParkingSlot, buildingId, unitid as paUnitNo, userid as paOwnerId, upFirstName, upLastName, paVehicleType, paStatus, paFee, CONCAT(DATE_FORMAT(CONVERT_TZ( NOW(),'+00:00','-07:00'), "%Y-%m-%d"), " ",rsrv_start) as rsrv_start, CONCAT(DATE_FORMAT(CONVERT_TZ( NOW(),'+00:00','-07:00'), "%Y-%m-%d"), " ",rsrv_end) as rsrv_end , IF((number_of_reservation >=0 OR ISNULL(number_of_reservation)),true,false) as availability FROM dbparkr.slotlist left join (SELECT COUNT(*) number_of_reservation, rsvparkingslotid FROM dbparkr.reservations GROUP BY rsvparkingslotid) AS RESERVE_TABLE on idslot = rsvparkingslotid INNER JOIN dbparkr.userprofile ON userid = idUserProfile INNER JOIN dbparkr.parkingarea ON paOwnerId = userid ORDER BY rsrv_start, idParkingSlot`
 
         db.query(sql, (err, res) => {
             if (err) {
@@ -92,7 +92,7 @@ class ParkingArea {
     }
 
     static checkAvailabilityByDate = (availabilityDate, result) => {
-        let sql = `SELECT idslot, buildingId, unitid, userid, upFirstName, upLastName, paVehicleType, paStatus, paFee, CONCAT(DATE_FORMAT("${availabilityDate}", "%Y-%m-%d"), " ",rsrv_start) as dtstart, CONCAT(DATE_FORMAT("${availabilityDate}", "%Y-%m-%d"), " ",rsrv_end) as dtend , IF((number_of_reservation = 1 OR ISNULL(number_of_reservation)),true,false) as AVAILABLE FROM dbparkr.slotlist left join (SELECT COUNT(*) number_of_reservation, rsvparkingslotid FROM dbparkr.reservations WHERE DATE_FORMAT(rsvdtstart, "%Y-%M-%d") BETWEEN DATE_FORMAT("${availabilityDate}", "%Y-%m-%d") AND DATE_FORMAT("${availabilityDate}", "%Y-%m-%d") GROUP BY rsvparkingslotid) AS RESERVE_TABLE on idslot = rsvparkingslotid INNER JOIN dbparkr.userprofile ON userid = idUserProfile INNER JOIN dbparkr.parkingarea ON paOwnerId = userid ORDER BY dtstart, idslot`
+        let sql = `SELECT idslot as idParkingSlot, buildingId, unitid as paUnitNo, userid as paOwnerId, upFirstName, upLastName, paVehicleType, paStatus, paFee, CONCAT(DATE_FORMAT("${availabilityDate}", "%Y-%m-%d"), " ",rsrv_start) as rsrv_start, CONCAT(DATE_FORMAT("${availabilityDate}", "%Y-%m-%d"), " ",rsrv_end) as rsrv_end , IF((number_of_reservation = 1 OR ISNULL(number_of_reservation)),true,false) as availability  FROM dbparkr.slotlist left join (SELECT COUNT(*) number_of_reservation, rsvparkingslotid FROM dbparkr.reservations WHERE DATE_FORMAT(rsvdtstart, "%Y-%M-%d") BETWEEN DATE_FORMAT("${availabilityDate}", "%Y-%m-%d") AND DATE_FORMAT("${availabilityDate}", "%Y-%m-%d") GROUP BY rsvparkingslotid) AS RESERVE_TABLE on idslot = rsvparkingslotid INNER JOIN dbparkr.userprofile ON userid = idUserProfile INNER JOIN dbparkr.parkingarea ON paOwnerId = userid ORDER BY rsrv_start, idParkingSlot`
 
         db.query(sql, (err, res) => {
             if (err) {
@@ -107,7 +107,7 @@ class ParkingArea {
     }
 
     static checkAvailabilityByDateWeekly = (availabilityDate, result) => {
-        let sql = `SELECT idslot, buildingId, unitid, userid, upFirstName, upLastName, paVehicleType, paStatus, paFee, CONCAT(DATE_FORMAT("${availabilityDate}", "%Y-%m-%d"), " ",rsrv_start) as dtstart, CONCAT(DATE_FORMAT("${availabilityDate}", "%Y-%m-%d"), " ",rsrv_end) as dtend , IF((number_of_reservation < 7 OR ISNULL(number_of_reservation)),true,false) as AVAILABLE FROM dbparkr.slotlist left join (SELECT COUNT(*) number_of_reservation, rsvparkingslotid FROM dbparkr.reservations WHERE DATE_FORMAT(rsvdtstart, "%Y-%M-%d") BETWEEN DATE_FORMAT("${availabilityDate}", "%Y-%M-%d") AND DATE_ADD(STR_TO_DATE("${availabilityDate}", "%Y-%m-%d"), INTERVAL 7 DAY) GROUP BY rsvparkingslotid) AS RESERVE_TABLE on idslot = rsvparkingslotid INNER JOIN dbparkr.userprofile ON userid = idUserProfile INNER JOIN dbparkr.parkingarea ON paOwnerId = userid ORDER BY dtstart, idslot`
+        let sql = `SELECT idslot as idParkingSlot, buildingId, unitid as paUnitNo, userid as paOwnerId, upFirstName, upLastName, paVehicleType, paStatus, paFee, CONCAT(DATE_FORMAT("${availabilityDate}", "%Y-%m-%d"), " ",rsrv_start) as rsrv_start, CONCAT(DATE_FORMAT("${availabilityDate}", "%Y-%m-%d"), " ",rsrv_end) as rsrv_end, IF((number_of_reservation < 7 OR ISNULL(number_of_reservation)),true,false) as availability  FROM dbparkr.slotlist left join (SELECT COUNT(*) number_of_reservation, rsvparkingslotid FROM dbparkr.reservations WHERE DATE_FORMAT(rsvdtstart, "%Y-%M-%d") BETWEEN DATE_FORMAT("${availabilityDate}", "%Y-%M-%d") AND DATE_ADD(STR_TO_DATE("${availabilityDate}", "%Y-%m-%d"), INTERVAL 7 DAY) GROUP BY rsvparkingslotid) AS RESERVE_TABLE on idslot = rsvparkingslotid INNER JOIN dbparkr.userprofile ON userid = idUserProfile INNER JOIN dbparkr.parkingarea ON paOwnerId = userid ORDER BY  rsrv_start, idParkingSlot`
 
         db.query(sql, (err, res) => {
             if (err) {
@@ -122,7 +122,7 @@ class ParkingArea {
     }
 
     static checkAvailabilityByDateMonthly = (availabilityDate, result) => {
-        let sql = `SELECT idslot, buildingId, unitid, userid, upFirstName, upLastName, paVehicleType, paStatus, paFee, CONCAT(DATE_FORMAT("${availabilityDate}", "%Y-%m-%d"), " ",rsrv_start) as dtstart, CONCAT(DATE_FORMAT("${availabilityDate}", "%Y-%m-%d"), " ",rsrv_end) as dtend , IF((number_of_reservation < 30 OR ISNULL(number_of_reservation)),true,false) as AVAILABLE FROM dbparkr.slotlist left join (SELECT COUNT(*) number_of_reservation, rsvparkingslotid FROM dbparkr.reservations WHERE DATE_FORMAT(rsvdtstart, "%Y-%M-%d") BETWEEN DATE_FORMAT("${availabilityDate}", "%Y-%M-%d") AND DATE_ADD(STR_TO_DATE("${availabilityDate}", "%Y-%m-%d"), INTERVAL 30 DAY) GROUP BY rsvparkingslotid) AS RESERVE_TABLE on idslot = rsvparkingslotid INNER JOIN dbparkr.userprofile ON userid = idUserProfile INNER JOIN dbparkr.parkingarea ON paOwnerId = userid ORDER BY dtstart, idslot`
+        let sql = `SELECT idslot as idParkingSlot, buildingId, unitid as paUnitNo, userid as paOwnerId, upFirstName, upLastName, paVehicleType, paStatus, paFee, CONCAT(DATE_FORMAT("${availabilityDate}", "%Y-%m-%d"), " ",rsrv_start) as rsrv_start, CONCAT(DATE_FORMAT("${availabilityDate}", "%Y-%m-%d"), " ",rsrv_end) as rsrv_end , IF((number_of_reservation < 30 OR ISNULL(number_of_reservation)),true,false) as availability  FROM dbparkr.slotlist left join (SELECT COUNT(*) number_of_reservation, rsvparkingslotid FROM dbparkr.reservations WHERE DATE_FORMAT(rsvdtstart, "%Y-%M-%d") BETWEEN DATE_FORMAT("${availabilityDate}", "%Y-%M-%d") AND DATE_ADD(STR_TO_DATE("${availabilityDate}", "%Y-%m-%d"), INTERVAL 30 DAY) GROUP BY rsvparkingslotid) AS RESERVE_TABLE on idslot = rsvparkingslotid INNER JOIN dbparkr.userprofile ON userid = idUserProfile INNER JOIN dbparkr.parkingarea ON paOwnerId = userid ORDER BY  rsrv_start, idParkingSlot`
 
         db.query(sql, (err, res) => {
             if (err) {
@@ -154,7 +154,7 @@ class ParkingArea {
 
 
     static userActivityInUse = (userId, result) => {
-        let sql = `SELECT idbooking, rsvparkingslotid, rsvvisitorid, userid, rsvdtstart, rsvdtend, rsvstatus, rsvtype, rsvfee, rsvcarplateno, rsvcarmodel FROM dbparkr.reservations INNER JOIN dbparkr.slotlist on rsvparkingslotid = idslot WHERE rsvstatus > 0 AND rsvvisitorid = '${userId}' AND CAST(CONVERT_TZ( NOW(),'+00:00','-08:00') AS DATETIME) BETWEEN rsvdtstart AND rsvdtend`;
+        let sql = `SELECT idbooking, rsvparkingslotid, rsvvisitorid, userid as paOwnerId, rsvdtstart as rsrv_start, rsvdtend as rsrv_end, rsvstatus, rsvtype as paVehicleType, rsvfee, rsvcarplateno, rsvcarmodel FROM dbparkr.reservations INNER JOIN dbparkr.slotlist on rsvparkingslotid = idslot WHERE rsvstatus > 0 AND rsvvisitorid = '${userId}' AND CAST(CONVERT_TZ( NOW(),'+00:00','-08:00') AS DATETIME) BETWEEN rsvdtstart AND rsvdtend`;
 
         db.query(sql, (err, res) => {
             if (err) {
@@ -169,10 +169,8 @@ class ParkingArea {
 
     }
 
-
-
     static hostActivityCurrentIncoming = (userId, result) => {
-        let sql = `SELECT idbooking, rsvparkingslotid, rsvvisitorid, userid, rsvdtstart, rsvdtend, rsvstatus, rsvtype, rsvfee, rsvcarplateno, rsvcarmodel FROM dbparkr.reservations INNER JOIN dbparkr.slotlist on rsvparkingslotid = idslot WHERE userid = '${userId}' AND (rsvdtstart > CONVERT_TZ( NOW(),'+00:00','-08:00') OR CAST(CONVERT_TZ( NOW(),'+00:00','-08:00') AS DATETIME) BETWEEN rsvdtstart AND rsvdtend)`;
+        let sql = `SELECT idbooking, rsvparkingslotid, rsvvisitorid, userid as paOwnerId, rsvdtstart as rsrv_start, rsvdtend as rsrv_end, rsvstatus, rsvtype as paVehicleType, rsvfee, rsvcarplateno, rsvcarmodel FROM dbparkr.reservations INNER JOIN dbparkr.slotlist on rsvparkingslotid = idslot WHERE userid = '${userId}' AND (rsvdtstart > CONVERT_TZ( NOW(),'+00:00','-08:00') OR CAST(CONVERT_TZ( NOW(),'+00:00','-08:00') AS DATETIME) BETWEEN rsvdtstart AND rsvdtend)`;
 
         db.query(sql, (err, res) => {
             if (err) {
@@ -188,7 +186,7 @@ class ParkingArea {
     }
 
     static hostActivityExpired = (userId, result) => {
-        let sql = `SELECT idbooking, rsvparkingslotid, rsvvisitorid, userid, rsvdtstart, rsvdtend, rsvstatus, rsvtype, rsvfee, rsvcarplateno, rsvcarmodel FROM dbparkr.reservations INNER JOIN dbparkr.slotlist on rsvparkingslotid = idslot WHERE userid = '${userId}' AND (CONVERT_TZ( NOW(),'+00:00','-08:00') > rsvdtend OR rsvstatus = 0)`;
+        let sql = `SELECT idbooking, rsvparkingslotid, rsvvisitorid, userid as paOwnerId,rsvdtstart as rsrv_start, rsvdtend as rsrv_end, rsvstatus, rsvtype as paVehicleType, rsvfee, rsvcarplateno, rsvcarmodel FROM dbparkr.reservations INNER JOIN dbparkr.slotlist on rsvparkingslotid = idslot WHERE userid = '${userId}' AND (CONVERT_TZ( NOW(),'+00:00','-08:00') > rsvdtend OR rsvstatus = 0)`;
 
         db.query(sql, (err, res) => {
             if (err) {
@@ -204,7 +202,7 @@ class ParkingArea {
     }
 
     static userActivityUpcoming = (userId, result) => {
-        let sql = `SELECT idbooking, rsvparkingslotid, rsvvisitorid, userid, rsvdtstart, rsvdtend, rsvstatus, rsvtype, rsvfee, rsvcarplateno, rsvcarmodel FROM dbparkr.reservations INNER JOIN dbparkr.slotlist on rsvparkingslotid = idslot WHERE rsvstatus > 0 AND rsvvisitorid = '${userId}' AND rsvdtstart > CONVERT_TZ( NOW(),'+00:00','-08:00')`;
+        let sql = `SELECT idbooking, rsvparkingslotid, rsvvisitorid, userid as paOwnerId, rsvdtstart as rsrv_start, rsvdtend as rsrv_end, rsvstatus, rsvtype as paVehicleType, rsvfee, rsvcarplateno, rsvcarmodel FROM dbparkr.reservations INNER JOIN dbparkr.slotlist on rsvparkingslotid = idslot WHERE rsvstatus > 0 AND rsvvisitorid = '${userId}' AND rsvdtstart > CONVERT_TZ( NOW(),'+00:00','-08:00')`;
 
         db.query(sql, (err, res) => {
             if (err) {
@@ -220,7 +218,7 @@ class ParkingArea {
     }
 
     static userActivityExpired = (userId, result) => {
-        let sql = `SELECT idbooking, rsvparkingslotid, rsvvisitorid, userid, rsvdtstart, rsvdtend, rsvstatus, rsvtype, rsvfee, rsvcarplateno, rsvcarmodel FROM dbparkr.reservations INNER JOIN dbparkr.slotlist on rsvparkingslotid = idslot WHERE rsvvisitorid = '${userId}' AND (CONVERT_TZ( NOW(),'+00:00','-08:00') > rsvdtend OR rsvstatus = 0)`;
+        let sql = `SELECT idbooking, rsvparkingslotid, rsvvisitorid, userid as paOwnerId, rsvdtstart, rsvdtend, rsvstatus, rsvtype as paVehicleType, rsvfee, rsvcarplateno, rsvcarmodel FROM dbparkr.reservations INNER JOIN dbparkr.slotlist on rsvparkingslotid = idslot WHERE rsvvisitorid = '${userId}' AND (CONVERT_TZ( NOW(),'+00:00','-08:00') > rsvdtend OR rsvstatus = 0)`;
 
         db.query(sql, (err, res) => {
             if (err) {
