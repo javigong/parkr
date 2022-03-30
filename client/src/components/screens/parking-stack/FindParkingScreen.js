@@ -64,11 +64,11 @@ const FindParkingScreen = ({ route, navigation }) => {
 
   const parkingTypesArray = [
     "All",
-    "Standard",
+    "Handicap",
     "EV Charger",
     "Large",
     "Motorcycle",
-    "Small Car",
+    "Compact",
   ];
 
   const saveDateTimeHandler = () => {

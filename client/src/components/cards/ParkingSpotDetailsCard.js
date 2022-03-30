@@ -70,7 +70,7 @@ const ParkingSpotDetailsCard = ({ item, currentDate, type, navigation }) => {
                 </Text>
                 <Text>
                   {item.paVehicleType === "1"
-                    ? "Standard"
+                    ? "Handicap"
                     : type === "2"
                     ? "Large"
                     : type === "3"
