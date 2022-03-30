@@ -229,8 +229,9 @@ const ParkingSpotCard = ({
                   <HStack space="4" justifyContent="space-between">
                     <Box>
                       <Text>
-                        {currentDate}, {item.rsrv_start.slice(0, 5)} -{" "}
-                        {item.rsrv_end.slice(0, 5)}
+                        {rsrv_start_date}, {rsrv_start_time} -{" "}
+                        {/* {type === "today" && `${rsrv_end_date}, `} */}
+                        {rsrv_end_time}
                       </Text>
                     </Box>
                     <Box>
