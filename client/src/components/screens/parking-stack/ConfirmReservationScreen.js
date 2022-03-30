@@ -12,7 +12,7 @@ const ConfirmReservationScreen = ({ route, navigation }) => {
   const parkingType = () => {
     switch (item.paVehicleType) {
       case 1:
-        return <Text>Standard</Text>;
+        return <Text>Handicap</Text>;
         break;
       case 2:
         return <Text>Large</Text>;

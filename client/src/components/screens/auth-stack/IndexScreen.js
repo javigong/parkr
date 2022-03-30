@@ -5,6 +5,7 @@ import * as Google from "expo-auth-session/providers/google";
 import * as Facebook from "expo-auth-session/providers/facebook";
 import { Text, Center, Box, VStack, Button, Heading, Image } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
+import ParkrLogoSVG from "../../UI/ParkrLogoSVG";
 import {
   getAuth,
   GoogleAuthProvider,
@@ -61,10 +62,7 @@ const IndexScreen = ({ navigation }) => {
             <Box safeArea py="8" w="90%" maxW="290">
               <Box style={{ paddingTop: 50, paddingBottom: 80 }}>
                 <Center>
-                  <Image
-                    source={require("../../../../assets/login-image.png")}
-                    alt="onboarding image"
-                  />
+                  <ParkrLogoSVG />
                 </Center>
               </Box>
 

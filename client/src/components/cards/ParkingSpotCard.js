@@ -20,7 +20,7 @@ const ParkingSpotCard = ({
   startDate,
   endDate,
 }) => {
-  // type 1 -standard\\ntype 2 - large\\ntype 3 - electric car\\ntype 4 - motorcycle
+  // type 1 -standard -> handicap \\ntype 2 - large\\ntype 3 - electric car\\ntype 4 - motorcycle
 
   const whoParksDirectHandler = () => {
     navigation.navigate("ParkingStack", {
@@ -148,14 +148,14 @@ const ParkingSpotCard = ({
                         <Box width="79%">
                           {item.paVehicleType == "1" && (
                             <Box
-                              width="75"
+                              width="78"
                               px="2"
                               borderWidth="1"
                               borderColor="#0CB183"
                               rounded="full"
                             >
                               <Text flex="1" fontSize="13" color="#0CB183">
-                                Standard
+                                Handicap
                               </Text>
                             </Box>
                           )}

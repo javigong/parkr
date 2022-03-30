@@ -8,7 +8,7 @@ const ParkingTypeButton = (props) => {
     setColorState(!colorState);
 
     switch (props.buttonText) {
-      case "Standard":
+      case "Handicap":
         props.setParkingTypeFilter(1);
         break;
       case "Large":

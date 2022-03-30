@@ -10,7 +10,7 @@ const FoundParkingScreen = ({ navigation, route }) => {
   const { user, setUser } = useContext(AuthenticatedUserContext);
   const { item, startDate, endDate, currentDate, type, parkingTypeFilter } =
     route.params;
-  const [filteredSpotsList, setFilteredSpotsList] = useState(null);
+  const [filteredSpotsList, setFilteredSpotsList] = useState([]);
 
   useEffect(() => {
     const tokenJwt = user.accessToken;
@@ -43,15 +43,21 @@ const FoundParkingScreen = ({ navigation, route }) => {
         {`${startDate.slice(4, 10)}, ${startDate.slice(16, 21)}`} - {""}
         {`${endDate.slice(4, 10)}, ${endDate.slice(16, 21)}`}
       </Text>
-      <ParkingSpotList
-        data={filteredSpotsList}
-        type={"searchResult"}
-        item={item}
-        currentDate={currentDate.slice(0, 6)}
-        navigation={navigation}
-        startDate={startDate}
-        endDate={endDate}
-      />
+      {filteredSpotsList.length === 0 ? (
+        <Text style={styles.noResultsTxt}>
+          Sorry, no spots available for the requested period
+        </Text>
+      ) : (
+        <ParkingSpotList
+          data={filteredSpotsList}
+          type={"searchResult"}
+          item={item}
+          currentDate={currentDate.slice(0, 6)}
+          navigation={navigation}
+          startDate={startDate}
+          endDate={endDate}
+        />
+      )}
     </Box>
   );
 };
@@ -71,5 +77,14 @@ const styles = StyleSheet.create({
     color: "black",
     backgroundColor: "white",
     fontSize: 18,
+  },
+  noResultsTxt: {
+    textAlign: "center",
+    color: "gray",
+    fontSize: 20,
+    flex: 1,
+    marginTop: "30%",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

@@ -46,6 +46,9 @@ const FindParkingScreen = ({ route, navigation }) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
     setStartDate(currentDate);
+    const endDate = new Date(currentDate);
+    endDate.setHours(endDate.getHours() + 2);
+    setEndDate(endDate);
   };
   const onEndDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -64,11 +67,11 @@ const FindParkingScreen = ({ route, navigation }) => {
 
   const parkingTypesArray = [
     "All",
-    "Standard",
+    "Handicap",
     "EV Charger",
     "Large",
     "Motorcycle",
-    "Small Car",
+    "Compact",
   ];
 
   const saveDateTimeHandler = () => {
@@ -168,6 +171,7 @@ const FindParkingScreen = ({ route, navigation }) => {
                 mode={mode}
                 is24Hour={true}
                 display="compact"
+                locale="en-GB"
                 onChange={onStartDateChange}
               />
             </View>
@@ -186,6 +190,7 @@ const FindParkingScreen = ({ route, navigation }) => {
                 value={endDate}
                 mode={mode}
                 is24Hour={true}
+                locale="en-GB"
                 display="compact"
                 onChange={onEndDateChange}
               />
