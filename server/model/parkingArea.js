@@ -14,7 +14,7 @@ class ParkingArea {
     };
 
     static findAll = (result) => {
-        let sql = "SELECT idParkingSlot, paUnitNo, paOwnerId, upFirstName, upLastName, paVehicleType, paStatus, paVisitorId, paFee, rsrv_start, rsrv_end, IF(paVisitorID<>null, 0, 1) as availability FROM dbparkr.parkingarea INNER JOIN dbparkr.slotlist ON paOwnerId = userid INNER JOIN dbparkr.userprofile ON paOwnerId =  idUserProfile";
+        let sql = `SELECT idslot, buildingId, unitid, userid, upFirstName, upLastName, paVehicleType, paStatus, paFee, CONCAT(DATE_FORMAT(CONVERT_TZ( NOW(),'+00:00','-07:00'), "%Y-%m-%d"), " ",rsrv_start) as dtstart, CONCAT(DATE_FORMAT(CONVERT_TZ( NOW(),'+00:00','-07:00'), "%Y-%m-%d"), " ",rsrv_end) as dtend , IF((number_of_reservation >=0 OR ISNULL(number_of_reservation)),true,false) as AVAILABLE FROM dbparkr.slotlist left join (SELECT COUNT(*) number_of_reservation, rsvparkingslotid FROM dbparkr.reservations GROUP BY rsvparkingslotid) AS RESERVE_TABLE on idslot = rsvparkingslotid INNER JOIN dbparkr.userprofile ON userid = idUserProfile INNER JOIN dbparkr.parkingarea ON paOwnerId = userid ORDER BY dtstart, idslot`
 
         db.query(sql, (err, res) => {
             if (err) {
@@ -92,7 +92,7 @@ class ParkingArea {
     }
 
     static checkAvailabilityByDate = (availabilityDate, result) => {
-        let sql = `SELECT idslot, buildingId, unitid, userid, upFirstName, upLastName, paVehicleType, paStatus, paFee, CONCAT(DATE_FORMAT("${availabilityDate}", "%Y-%m-%d"), " ",rsrv_start) as dtstart, CONCAT(DATE_FORMAT("${availabilityDate}", "%Y-%m-%d"), " ",rsrv_end) as dtend , IF(ISNULL(idbooking),true,false) as AVAILABLE, IFNULL(rsvstatus,0) as reservation_status FROM dbparkr.slotlist left join (SELECT * FROM dbparkr.reservations WHERE DATE_FORMAT(rsvdtstart, "%Y-%M-%d") = DATE_FORMAT("${availabilityDate}", "%Y-%M-%d")) AS RESERVE_TABLE on idslot = rsvparkingslotid INNER JOIN dbparkr.userprofile ON userid = idUserProfile INNER JOIN dbparkr.parkingarea ON paOwnerId = userid WHERE NOT ISNULL(userid) AND IFNULL(rsvstatus,0) > 0 ORDER BY dtstart, idslot`
+        let sql = `SELECT idslot, buildingId, unitid, userid, upFirstName, upLastName, paVehicleType, paStatus, paFee, CONCAT(DATE_FORMAT("${availabilityDate}", "%Y-%m-%d"), " ",rsrv_start) as dtstart, CONCAT(DATE_FORMAT("${availabilityDate}", "%Y-%m-%d"), " ",rsrv_end) as dtend , IF((number_of_reservation = 1 OR ISNULL(number_of_reservation)),true,false) as AVAILABLE FROM dbparkr.slotlist left join (SELECT COUNT(*) number_of_reservation, rsvparkingslotid FROM dbparkr.reservations WHERE DATE_FORMAT(rsvdtstart, "%Y-%M-%d") BETWEEN DATE_FORMAT("${availabilityDate}", "%Y-%m-%d") AND DATE_FORMAT("${availabilityDate}", "%Y-%m-%d") GROUP BY rsvparkingslotid) AS RESERVE_TABLE on idslot = rsvparkingslotid INNER JOIN dbparkr.userprofile ON userid = idUserProfile INNER JOIN dbparkr.parkingarea ON paOwnerId = userid ORDER BY dtstart, idslot`
 
         db.query(sql, (err, res) => {
             if (err) {
@@ -122,7 +122,7 @@ class ParkingArea {
     }
 
     static checkAvailabilityByDateMonthly = (availabilityDate, result) => {
-        let sql = `SELECT idslot, buildingId, unitid, userid, upFirstName, upLastName, paVehicleType, paStatus, paFee, CONCAT(DATE_FORMAT("${availabilityDate}", "%Y-%m-%d"), " ",rsrv_start) as dtstart, CONCAT(DATE_FORMAT("${availabilityDate}", "%Y-%m-%d"), " ",rsrv_end) as dtend , IF((number_of_reservation < 7 OR ISNULL(number_of_reservation)),true,false) as AVAILABLE FROM dbparkr.slotlist left join (SELECT COUNT(*) number_of_reservation, rsvparkingslotid FROM dbparkr.reservations WHERE DATE_FORMAT(rsvdtstart, "%Y-%M-%d") BETWEEN DATE_FORMAT("${availabilityDate}", "%Y-%M-%d") AND DATE_ADD(STR_TO_DATE("${availabilityDate}", "%Y-%m-%d"), INTERVAL 30 DAY) GROUP BY rsvparkingslotid) AS RESERVE_TABLE on idslot = rsvparkingslotid INNER JOIN dbparkr.userprofile ON userid = idUserProfile INNER JOIN dbparkr.parkingarea ON paOwnerId = userid ORDER BY dtstart, idslot`
+        let sql = `SELECT idslot, buildingId, unitid, userid, upFirstName, upLastName, paVehicleType, paStatus, paFee, CONCAT(DATE_FORMAT("${availabilityDate}", "%Y-%m-%d"), " ",rsrv_start) as dtstart, CONCAT(DATE_FORMAT("${availabilityDate}", "%Y-%m-%d"), " ",rsrv_end) as dtend , IF((number_of_reservation < 30 OR ISNULL(number_of_reservation)),true,false) as AVAILABLE FROM dbparkr.slotlist left join (SELECT COUNT(*) number_of_reservation, rsvparkingslotid FROM dbparkr.reservations WHERE DATE_FORMAT(rsvdtstart, "%Y-%M-%d") BETWEEN DATE_FORMAT("${availabilityDate}", "%Y-%M-%d") AND DATE_ADD(STR_TO_DATE("${availabilityDate}", "%Y-%m-%d"), INTERVAL 30 DAY) GROUP BY rsvparkingslotid) AS RESERVE_TABLE on idslot = rsvparkingslotid INNER JOIN dbparkr.userprofile ON userid = idUserProfile INNER JOIN dbparkr.parkingarea ON paOwnerId = userid ORDER BY dtstart, idslot`
 
         db.query(sql, (err, res) => {
             if (err) {
