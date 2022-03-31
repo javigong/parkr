@@ -46,6 +46,7 @@ const ParkingScreen = ({ navigation }) => {
   const [currentDate, setCurrentDate] = useState(null);
 
   const date = new Date();
+  const dateString = date.toString();
   const dateISOString = date.toISOString();
   // console.log(dateISOString);
 
