@@ -20,6 +20,67 @@ export const getAllParkingSpots = async (token) => {
   }
 };
 
+// Parking availability: today, this week and this month
+
+export const getAvailabilityByDate = async (date, token) => {
+  const configurationObject = {
+    method: "get",
+    url: `${BASE_URL}/parkingslot/checkavailability/${date}`,
+    headers: {
+      "content-type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const response = await axios(configurationObject);
+    console.log("getAvailabilityByDate", response.data);
+    const results = response.data;
+    return results;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getAvailabilityByDateWeekly = async (date, token) => {
+  const configurationObject = {
+    method: "get",
+    url: `${BASE_URL}/parkingslot/checkavailabilityweekly/${date}`,
+    headers: {
+      "content-type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const response = await axios(configurationObject);
+    console.log("getAvailabilityByDateWeekly", response.data);
+    const results = response.data;
+    return results;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getAvailabilityByDateMonthly = async (date, token) => {
+  const configurationObject = {
+    method: "get",
+    url: `${BASE_URL}/parkingslot/checkavailabilitymonthly/${date}`,
+    headers: {
+      "content-type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const response = await axios(configurationObject);
+    console.log("getAvailabilityByDateMonthly", response.data);
+    const results = response.data;
+    return results;
+  } catch (error) {
+    throw error;
+  }
+};
+
+//
+
 export const postNewParkingSpot = async (
   idParkingSlot,
   paUnitNo,

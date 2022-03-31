@@ -6,7 +6,7 @@ import { auth } from "../../config/firebase";
 import SegmentedControlTab from "react-native-segmented-control-tab";
 import { Ionicons } from "@expo/vector-icons";
 import ParkingSpotList from "../../lists/ParkingSpotList";
-import { getAllParkingSpots, getBuildingInfo } from "../../services/api";
+import { getAllParkingSpots, getAvailabilityByDate, getAvailabilityByDateMonthly, getAvailabilityByDateWeekly, getBuildingInfo } from "../../services/api";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { AuthenticatedUserContext } from "../../contexts/AuthenticatedUserContext";
 
@@ -15,34 +15,40 @@ import SolidOrangeButton from "../../UI/SolidOrangeButton";
 
 const Tab = createMaterialTopTabNavigator();
 
-const _exampleDataStructure = [
-  {
-    idParkingSlot: "P1-20",
-    paUnitNo: "703",
-    paOwnerId: "mariasmith@testing.com",
-    upFirstName: "Maria",
-    upLastName: "Smith",
-    paVehicleType: 4,
-    paStatus: 1,
-    paVisitorId: null,
-    paFee: "3.00",
-    rsrv_start: "12:00:00",
-    rsrv_end: "20:00:00",
-    availability: 1,
-  },
-];
+// Object structure sample:
+//   {
+//     "idParkingSlot": "P1-13",
+//     "buildingId": 1001,
+//     "paUnitNo": "504",
+//     "paOwnerId": "sandracoleman@testing.com",
+//     "upFirstName": "Sandra",
+//     "upLastName": "Coleman",
+//     "paVehicleType": 2,
+//     "paStatus": 1,
+//     "paFee": "2.80",
+//     "rsrv_start": "2022-04-07 06:30:00",
+//     "rsrv_end": "2022-04-07 18:00:00",
+//     "availability": 1
+// }
 
 const ParkingScreen = ({ navigation }) => {
   const { user, setUser } = useContext(AuthenticatedUserContext);
   const [email, setEmail] = useState(null);
   const { enable, setEnable } = useContext(NotificationContext);
   const [customStyleIndex, setCustomStyleIndex] = useState(0);
+
   const [spotsTodayList, setSpotsTodayList] = useState(null);
+  const [spotsWeekList, setSpotsWeekList] = useState(null);
+  const [spotsMonthList, setSpotsMonthList] = useState(null);
+  
+
   const [buildingInfo, setBuildingInfo] = useState();
   const [currentDate, setCurrentDate] = useState(null);
 
   const date = new Date();
   const dateString = date.toString();
+  const dateISOString = date.toISOString();
+  // console.log(dateISOString);
 
   const handleCustomIndexSelect = (index) => {
     setCustomStyleIndex(index);
@@ -61,13 +67,23 @@ const ParkingScreen = ({ navigation }) => {
 
   useEffect(() => {
     const tokenJwt = user.accessToken;
+
     setEmail(user.providerData[0].email);
     setCurrentDate(date.toString().slice(4, 10));
-    getAllParkingSpots(tokenJwt).then((results) => setSpotsTodayList(results));
+    
     getBuildingInfo(tokenJwt).then((results) => setBuildingInfo(results));
-  }, []);
 
-  // console.log("Building info is:", buildingInfo);
+    // console.log("Building info is:", buildingInfo);
+
+    // getAllParkingSpots(tokenJwt).then((results) => setSpotsTodayList(results));
+
+    getAvailabilityByDate(dateISOString, tokenJwt).then((results) => setSpotsTodayList(results));
+
+    getAvailabilityByDateWeekly(dateISOString, tokenJwt).then((results) => setSpotsWeekList(results));
+
+    getAvailabilityByDateMonthly(dateISOString, tokenJwt).then((results) => setSpotsMonthList(results));
+
+  }, []);
 
   const handleEnable = () => {
     if (enable === true) {
@@ -256,7 +272,7 @@ const ParkingScreen = ({ navigation }) => {
                   <Tab.Screen name="Upcoming">
                     {() => (
                       <ParkingSpotList
-                        data={spotsTodayList}
+                        data={spotsWeekList}
                         currentDate={currentDate}
                         type={"upcoming"}
                         navigation={navigation}
@@ -266,7 +282,7 @@ const ParkingScreen = ({ navigation }) => {
                   <Tab.Screen name="Expired">
                     {() => (
                       <ParkingSpotList
-                        data={spotsTodayList}
+                        data={spotsMonthList}
                         currentDate={currentDate}
                         type={"expired"}
                         navigation={navigation}
