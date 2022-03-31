@@ -34,6 +34,7 @@ const _exampleDataStructure = [
 
 const ParkingScreen = ({ navigation }) => {
   const { user, setUser } = useContext(AuthenticatedUserContext);
+  const [email, setEmail] = useState(null);
   const { enable, setEnable } = useContext(NotificationContext);
   const [customStyleIndex, setCustomStyleIndex] = useState(0);
   const [spotsTodayList, setSpotsTodayList] = useState(null);
@@ -60,7 +61,7 @@ const ParkingScreen = ({ navigation }) => {
 
   useEffect(() => {
     const tokenJwt = user.accessToken;
-
+    setEmail(user.providerData[0].email);
     setCurrentDate(date.toString().slice(4, 10));
     getAllParkingSpots(tokenJwt).then((results) => setSpotsTodayList(results));
     getBuildingInfo(tokenJwt).then((results) => setBuildingInfo(results));
