@@ -20,6 +20,22 @@ const ParkingSpotCard = ({
   startDate,
   endDate,
 }) => {
+  // Object structure sample:
+  //   {
+  //     "idParkingSlot": "P1-13",
+  //     "buildingId": 1001,
+  //     "paUnitNo": "504",
+  //     "paOwnerId": "sandracoleman@testing.com",
+  //     "upFirstName": "Sandra",
+  //     "upLastName": "Coleman",
+  //     "paVehicleType": 2,
+  //     "paStatus": 1,
+  //     "paFee": "2.80",
+  //     "rsrv_start": "2022-04-07 06:30:00",
+  //     "rsrv_end": "2022-04-07 18:00:00",
+  //     "availability": 1
+  // }
+
   // type 1 -standard -> handicap \\ntype 2 - large\\ntype 3 - electric car\\ntype 4 - motorcycle
 
   // date time readable format:
@@ -231,19 +247,26 @@ const ParkingSpotCard = ({
                         </HStack>
                       </VStack>
                     ) : (
-                      <HStack pt="3" pb="3" space="1" w="100%" justifyContent="space-between" alignItems="center">
+                      <HStack
+                        pt="3"
+                        pb="3"
+                        space="1"
+                        w="100%"
+                        justifyContent="space-between"
+                        alignItems="center"
+                      >
                         <Box>
                           <Text fontSize="xl">Spot {item.idParkingSlot}</Text>
                         </Box>
-                        {item.availability?
-                        <Text fontSize="13" color="#0CB183">
-                          Available
-                        </Text>
-                        :
-                        <Text fontSize="13" color="#C33905">
-                          Not Available
-                        </Text>
-                        }
+                        {item.availability ? (
+                          <Text fontSize="13" color="#0CB183">
+                            Available
+                          </Text>
+                        ) : (
+                          <Text fontSize="13" color="#C33905">
+                            Not Available
+                          </Text>
+                        )}
                       </HStack>
                     )}
                   </HStack>
