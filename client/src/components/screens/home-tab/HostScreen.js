@@ -6,34 +6,44 @@ import { auth } from "../../config/firebase";
 import SegmentedControlTab from "react-native-segmented-control-tab";
 import { Ionicons } from "@expo/vector-icons";
 import ParkingSpotList from "../../lists/ParkingSpotList";
-import { getAllHostSlots, getAllParkingSpots, getBuildingInfo } from "../../services/api";
+import {
+  getAllHostSlots,
+  getAllParkingSpots,
+  getBuildingInfo,
+  getHostCurrentIncoming,
+  getHostExpired,
+} from "../../services/api";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { AuthenticatedUserContext } from "../../contexts/AuthenticatedUserContext";
+import HostSpotList from "../../lists/HostSpotList";
 
 const Tab = createMaterialTopTabNavigator();
 
-const _exampleDataStructure = [
-  {
-    idParkingSlot: "P1-20",
-    paUnitNo: "703",
-    paOwnerId: "mariasmith@testing.com",
-    upFirstName: "Maria",
-    upLastName: "Smith",
-    paVehicleType: 4,
-    paStatus: 1,
-    paVisitorId: null,
-    paFee: "3.00",
-    rsrv_start: "12:00:00",
-    rsrv_end: "20:00:00",
-    availability: 1,
-  },
-];
+// Object structure sample:
+// {
+//   "idbooking": 92,
+//   "rsvparkingslotid": "P2-09",
+//   "rsvvisitorid": "eugenetollefson@testing.com",
+//   "paOwnerId": "john.doe.parkr@gmail.com",
+//   "rsrv_start": "2022-04-03T19:00:00.000Z",
+//   "rsrv_end": "2022-04-03T21:00:00.000Z",
+//   "rsvstatus": 1,
+//   "paVehicleType": 1,
+//   "rsvfee": "3.05",
+//   "rsvcarplateno": "VLS432",
+//   "rsvcarmodel": "Nissan"
+// }
 
 const HostScreen = ({ navigation }) => {
   const { user, setUser } = useContext(AuthenticatedUserContext);
+  const [email, setEmail] = useState(null);
   const [customStyleIndex, setCustomStyleIndex] = useState(0);
+
   const [spotsTodayList, setSpotsTodayList] = useState(null);
   const [allHostSlotsList, setAllHostSlotsList] = useState(null);
+  const [spotsReservationList, setSpotsReservationList] = useState(null);
+  const [spotsArchiveList, setSpotsArchiveList] = useState(null);
+
   const [buildingInfo, setBuildingInfo] = useState();
   const [currentDate, setCurrentDate] = useState(null);
 
@@ -47,11 +57,27 @@ const HostScreen = ({ navigation }) => {
 
   useEffect(() => {
     const tokenJwt = user.accessToken;
+
+    setEmail(user.providerData[0].email);
+
     const date = new Date();
+
     setCurrentDate(date.toString().slice(4, 10));
     getBuildingInfo(tokenJwt).then((results) => setBuildingInfo(results));
+
     getAllParkingSpots(tokenJwt).then((results) => setSpotsTodayList(results));
-    getAllHostSlots(user.providerData[0].email, tokenJwt).then((results) => setAllHostSlotsList(results));
+
+    getHostCurrentIncoming(user.providerData[0].email, tokenJwt).then(
+      (results) => setSpotsReservationList(results)
+    );
+
+    getHostExpired(user.providerData[0].email, tokenJwt).then((results) =>
+      setSpotsArchiveList(results)
+    );
+
+    getAllHostSlots(user.providerData[0].email, tokenJwt).then((results) =>
+      setAllHostSlotsList(results)
+    );
   }, []);
 
   return (
@@ -143,8 +169,8 @@ const HostScreen = ({ navigation }) => {
                 >
                   <Tab.Screen name="Reservation">
                     {() => (
-                      <ParkingSpotList
-                        data={spotsTodayList}
+                      <HostSpotList
+                        data={spotsReservationList}
                         currentDate={currentDate}
                         type={"hostReservation"}
                         navigation={navigation}
@@ -153,8 +179,8 @@ const HostScreen = ({ navigation }) => {
                   </Tab.Screen>
                   <Tab.Screen name="Archive">
                     {() => (
-                      <ParkingSpotList
-                        data={spotsTodayList}
+                      <HostSpotList
+                        data={spotsArchiveList}
                         currentDate={currentDate}
                         type={"hostArchive"}
                         navigation={navigation}

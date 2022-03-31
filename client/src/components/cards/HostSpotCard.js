@@ -12,7 +12,7 @@ import {
 import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 
-const ParkingSpotCard = ({
+const HostSpotCard = ({
   item,
   currentDate,
   type,
@@ -21,31 +21,26 @@ const ParkingSpotCard = ({
   endDate,
 }) => {
   // Object structure sample:
-  //   {
-  //     "idParkingSlot": "P1-13",
-  //     "buildingId": 1001,
-  //     "paUnitNo": "504",
-  //     "paOwnerId": "sandracoleman@testing.com",
-  //     "upFirstName": "Sandra",
-  //     "upLastName": "Coleman",
-  //     "paVehicleType": 2,
-  //     "paStatus": 1,
-  //     "paFee": "2.80",
-  //     "rsrv_start": "2022-04-07 06:30:00",
-  //     "rsrv_end": "2022-04-07 18:00:00",
-  //     "availability": 1
+  // {
+  //   "idbooking": 92,
+  //   "rsvparkingslotid": "P2-09",
+  //   "rsvvisitorid": "eugenetollefson@testing.com",
+  //   "paOwnerId": "john.doe.parkr@gmail.com",
+  //   "rsrv_start": "2022-04-03T19:00:00.000Z",
+  //   "rsrv_end": "2022-04-03T21:00:00.000Z",
+  //   "rsvstatus": 1,
+  //   "paVehicleType": 1,
+  //   "rsvfee": "3.05",
+  //   "rsvcarplateno": "VLS432",
+  //   "rsvcarmodel": "Nissan"
   // }
 
   // type 1 -standard -> handicap \\ntype 2 - large\\ntype 3 - electric car\\ntype 4 - motorcycle
 
   // date time readable format:
-  const rsrv_start_date = new Date(item.rsrv_start.slice(0, 10))
-    .toString()
-    .slice(0, 10);
+  const rsrv_start_date = item.rsrv_start.slice(0, 10);
   const rsrv_start_time = item.rsrv_start.slice(11, 16);
-  const rsrv_end_date = new Date(item.rsrv_end.slice(0, 10))
-    .toString()
-    .slice(0, 10);
+  const rsrv_end_date = item.rsrv_end.slice(0, 10);
   const rsrv_end_time = item.rsrv_end.slice(11, 16);
 
   const whoParksDirectHandler = () => {
@@ -153,26 +148,12 @@ const ParkingSpotCard = ({
               >
                 <VStack space="4">
                   <HStack space="4">
-                    {type !== "hostSpot" && (
-                      <Box
-                        width="39"
-                        height="39"
-                        rounded="full"
-                        backgroundColor="#FD6B36"
-                      >
-                        <Center h="39">
-                          <Text color="white" fontSize="xl">
-                            {item.upFirstName.charAt(0).toUpperCase()}
-                            {item.upLastName.charAt(0).toUpperCase()}
-                          </Text>
-                        </Center>
-                      </Box>
-                    )}
-
                     {type !== "hostSpot" ? (
-                      <VStack space="1">
-                        <Box>
-                          <Text fontSize="xl">Spot {item.idParkingSlot}</Text>
+                      <HStack space="1" alignItems="center">
+                        <Box mr="2">
+                          <Text fontSize="xl">
+                            Spot {item.rsvparkingslotid}
+                          </Text>
                         </Box>
                         <HStack>
                           <Box width="79%">
@@ -229,23 +210,8 @@ const ParkingSpotCard = ({
                               </Box>
                             )}
                           </Box>
-
-                          <Box>
-                            <Button
-                              background="transparent"
-                              startIcon={
-                                <Icon
-                                  color="black"
-                                  size={5}
-                                  ml={2}
-                                  as={MaterialIcons}
-                                  name="navigate-next"
-                                />
-                              }
-                            />
-                          </Box>
                         </HStack>
-                      </VStack>
+                      </HStack>
                     ) : (
                       <HStack
                         pt="3"
@@ -270,20 +236,32 @@ const ParkingSpotCard = ({
                       </HStack>
                     )}
                   </HStack>
-                  {type !== "hostSpot" && (
-                    <HStack space="4" justifyContent="space-between">
-                      <Box>
-                        <Text>
-                          {rsrv_start_date}, {rsrv_start_time} -{" "}
-                          {/* {type === "today" && `${rsrv_end_date}, `} */}
-                          {rsrv_end_time}
-                        </Text>
-                      </Box>
-                      <Box>
-                        <Text>CAD ${item.paFee}</Text>
+
+                  <VStack>
+                    <Box>
+                      <Text>Start: {rsrv_start_date}</Text>
+                    </Box>
+                    <HStack w="105%" alignItems="center" justifyContent="space-between">
+                      <Text>Vehicle license: {item.rsvcarplateno}</Text>
+                      <Box >
+                        <HStack alignItems="center">
+                          <Text>Details</Text>
+                          <Button
+                            background="transparent"
+                            startIcon={
+                              <Icon
+                                color="black"
+                                size={5}
+                                ml={0}
+                                as={MaterialIcons}
+                                name="navigate-next"
+                              />
+                            }
+                          />
+                        </HStack>
                       </Box>
                     </HStack>
-                  )}
+                  </VStack>
                 </VStack>
               </Box>
             </>
@@ -294,4 +272,4 @@ const ParkingSpotCard = ({
   );
 };
 
-export default ParkingSpotCard;
+export default HostSpotCard;
