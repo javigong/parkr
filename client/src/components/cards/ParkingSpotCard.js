@@ -137,107 +137,130 @@ const ParkingSpotCard = ({
               >
                 <VStack space="4">
                   <HStack space="4">
-                    <Box
-                      width="39"
-                      height="39"
-                      rounded="full"
-                      backgroundColor="#FD6B36"
-                    >
-                      <Center h="39">
-                        <Text color="white" fontSize="xl">
-                          {item.upFirstName.charAt(0).toUpperCase()}
-                          {item.upLastName.charAt(0).toUpperCase()}
-                        </Text>
-                      </Center>
-                    </Box>
-                    <VStack space="1">
-                      <Box>
-                        <Text fontSize="xl">Spot {item.idParkingSlot}</Text>
+                    {type !== "hostSpot" && (
+                      <Box
+                        width="39"
+                        height="39"
+                        rounded="full"
+                        backgroundColor="#FD6B36"
+                      >
+                        <Center h="39">
+                          <Text color="white" fontSize="xl">
+                            {item.upFirstName.charAt(0).toUpperCase()}
+                            {item.upLastName.charAt(0).toUpperCase()}
+                          </Text>
+                        </Center>
                       </Box>
-                      <HStack>
-                        <Box width="79%">
-                          {item.paVehicleType == "1" && (
-                            <Box
-                              width="78"
-                              px="2"
-                              borderWidth="1"
-                              borderColor="#0CB183"
-                              rounded="full"
-                            >
-                              <Text flex="1" fontSize="13" color="#0CB183">
-                                Handicap
-                              </Text>
-                            </Box>
-                          )}
-                          {item.paVehicleType == "2" && (
-                            <Box
-                              width="55"
-                              px="2"
-                              borderWidth="1"
-                              borderColor="#FD6B36"
-                              rounded="full"
-                            >
-                              <Text fontSize="13" color="#FD6B36">
-                                Large
-                              </Text>
-                            </Box>
-                          )}
-                          {item.paVehicleType == "3" && (
-                            <Box
-                              width="90"
-                              px="2"
-                              borderWidth="1"
-                              borderColor="#09A1C6"
-                              rounded="full"
-                            >
-                              <Text fontSize="13" color="#09A1C6">
-                                EV Charger
-                              </Text>
-                            </Box>
-                          )}
-                          {item.paVehicleType == "4" && (
-                            <Box
-                              width="87"
-                              px="2"
-                              borderWidth="1"
-                              borderColor="#DB7D16"
-                              rounded="full"
-                            >
-                              <Text fontSize="13" color="#DB7D16">
-                                Motorcycle
-                              </Text>
-                            </Box>
-                          )}
-                        </Box>
+                    )}
+
+                    {type !== "hostSpot" ? (
+                      <VStack space="1">
                         <Box>
-                          <Button
-                            background="transparent"
-                            startIcon={
-                              <Icon
-                                color="black"
-                                size={5}
-                                ml={2}
-                                as={MaterialIcons}
-                                name="navigate-next"
-                              />
-                            }
-                          />
+                          <Text fontSize="xl">Spot {item.idParkingSlot}</Text>
                         </Box>
+                        <HStack>
+                          <Box width="79%">
+                            {item.paVehicleType == "1" && (
+                              <Box
+                                width="78"
+                                px="2"
+                                borderWidth="1"
+                                borderColor="#0CB183"
+                                rounded="full"
+                              >
+                                <Text flex="1" fontSize="13" color="#0CB183">
+                                  Handicap
+                                </Text>
+                              </Box>
+                            )}
+                            {item.paVehicleType == "2" && (
+                              <Box
+                                width="55"
+                                px="2"
+                                borderWidth="1"
+                                borderColor="#FD6B36"
+                                rounded="full"
+                              >
+                                <Text fontSize="13" color="#FD6B36">
+                                  Large
+                                </Text>
+                              </Box>
+                            )}
+                            {item.paVehicleType == "3" && (
+                              <Box
+                                width="90"
+                                px="2"
+                                borderWidth="1"
+                                borderColor="#09A1C6"
+                                rounded="full"
+                              >
+                                <Text fontSize="13" color="#09A1C6">
+                                  EV Charger
+                                </Text>
+                              </Box>
+                            )}
+                            {item.paVehicleType == "4" && (
+                              <Box
+                                width="87"
+                                px="2"
+                                borderWidth="1"
+                                borderColor="#DB7D16"
+                                rounded="full"
+                              >
+                                <Text fontSize="13" color="#DB7D16">
+                                  Motorcycle
+                                </Text>
+                              </Box>
+                            )}
+                          </Box>
+
+                          <Box>
+                            <Button
+                              background="transparent"
+                              startIcon={
+                                <Icon
+                                  color="black"
+                                  size={5}
+                                  ml={2}
+                                  as={MaterialIcons}
+                                  name="navigate-next"
+                                />
+                              }
+                            />
+                          </Box>
+                        </HStack>
+                      </VStack>
+                    ) : (
+                      <HStack pt="3" pb="3" space="1" w="100%" justifyContent="space-between" alignItems="center">
+                        <Box>
+                          <Text fontSize="xl">Spot {item.idParkingSlot}</Text>
+                        </Box>
+                        {item.availability?
+                        <Text fontSize="13" color="#0CB183">
+                          Available
+                        </Text>
+                        :
+                        <Text fontSize="13" color="#C33905">
+                          Not Available
+                        </Text>
+                        }
                       </HStack>
-                    </VStack>
+                    )}
                   </HStack>
-                  <HStack space="4" justifyContent="space-between">
-                    <Box>
-                      <Text>
-                        {rsrv_start_date}, {rsrv_start_time} -{" "}
-                        {/* {type === "today" && `${rsrv_end_date}, `} */}
-                        {rsrv_end_time}
-                      </Text>
-                    </Box>
-                    <Box>
-                      <Text>CAD ${item.paFee}</Text>
-                    </Box>
-                  </HStack>
+                  {type !== "hostSpot" && (
+                    <HStack space="4" justifyContent="space-between">
+                      <Box>
+                        <Text>
+                          {rsrv_start_date}, {rsrv_start_time} -{" "}
+                          {/* {type === "today" && `${rsrv_end_date}, `} */}
+                          {rsrv_end_time}
+                        </Text>
+                      </Box>
+                      <Box>
+                        <Text>CAD ${item.paFee}</Text>
+                      </Box>
+                    </HStack>
+                  )}
                 </VStack>
               </Box>
             </>

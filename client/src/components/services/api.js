@@ -94,6 +94,30 @@ export const getCarListByUser = async (email, token) => {
   }
 };
 
+///////
+export const getAllHostSlots = async (email, token) => {
+  const configurationObject = {
+    method: "get",
+    url: `${BASE_URL}/parkingslot/hostslots/${email}`,
+    headers: {
+      "content-type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const response = await axios(configurationObject);
+
+    // console.log("get carlist:", response.data);
+
+    const results = response.data;
+
+    return results;
+  } catch (error) {
+    throw error;
+  }
+};
+///////
+
 export const postReservation = async (
   rsvparkingslotid,
   rsvvisitorid,
