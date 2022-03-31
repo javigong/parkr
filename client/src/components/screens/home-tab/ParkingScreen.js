@@ -6,7 +6,7 @@ import { auth } from "../../config/firebase";
 import SegmentedControlTab from "react-native-segmented-control-tab";
 import { Ionicons } from "@expo/vector-icons";
 import ParkingSpotList from "../../lists/ParkingSpotList";
-import { getAllParkingSpots, getBuildingInfo } from "../../services/api";
+import { getAllParkingSpots, getAvailabilityByDate, getAvailabilityByDateMonthly, getAvailabilityByDateWeekly, getBuildingInfo } from "../../services/api";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { AuthenticatedUserContext } from "../../contexts/AuthenticatedUserContext";
 
@@ -66,13 +66,23 @@ const ParkingScreen = ({ navigation }) => {
 
   useEffect(() => {
     const tokenJwt = user.accessToken;
+
     setEmail(user.providerData[0].email);
     setCurrentDate(date.toString().slice(4, 10));
-    getAllParkingSpots(tokenJwt).then((results) => setSpotsTodayList(results));
+    
     getBuildingInfo(tokenJwt).then((results) => setBuildingInfo(results));
-  }, []);
 
-  // console.log("Building info is:", buildingInfo);
+    // console.log("Building info is:", buildingInfo);
+
+    // getAllParkingSpots(tokenJwt).then((results) => setSpotsTodayList(results));
+
+    getAvailabilityByDate(dateISOString, tokenJwt).then((results) => setSpotsTodayList(results));
+
+    getAvailabilityByDateWeekly(dateISOString, tokenJwt).then((results) => setSpotsWeekList(results));
+
+    getAvailabilityByDateMonthly(dateISOString, tokenJwt).then((results) => setSpotsMonthList(results));
+
+  }, []);
 
   const handleEnable = () => {
     if (enable === true) {
@@ -261,7 +271,7 @@ const ParkingScreen = ({ navigation }) => {
                   <Tab.Screen name="Upcoming">
                     {() => (
                       <ParkingSpotList
-                        data={spotsTodayList}
+                        data={spotsWeekList}
                         currentDate={currentDate}
                         type={"upcoming"}
                         navigation={navigation}
@@ -271,7 +281,7 @@ const ParkingScreen = ({ navigation }) => {
                   <Tab.Screen name="Expired">
                     {() => (
                       <ParkingSpotList
-                        data={spotsTodayList}
+                        data={spotsMonthList}
                         currentDate={currentDate}
                         type={"expired"}
                         navigation={navigation}
