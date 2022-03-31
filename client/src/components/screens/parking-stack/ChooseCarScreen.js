@@ -112,7 +112,9 @@ const ChooseCarScreen = ({ route, navigation }) => {
                 ></Pressable>
               </Pressable>
             </HStack>
-            <Text>Choose from previously registered cars</Text>
+            <Text bold mt="10" mb="4" fontSize="md">
+              Choose from previously registered cars:
+            </Text>
             {carList.length > 0 ? (
               carList.map((car, index) => {
                 return (
