@@ -6,7 +6,7 @@ import { auth } from "../../config/firebase";
 import SegmentedControlTab from "react-native-segmented-control-tab";
 import { Ionicons } from "@expo/vector-icons";
 import ParkingSpotList from "../../lists/ParkingSpotList";
-import { getAllParkingSpots, getBuildingInfo } from "../../services/api";
+import { getAllHostSlots, getAllParkingSpots, getBuildingInfo } from "../../services/api";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { AuthenticatedUserContext } from "../../contexts/AuthenticatedUserContext";
 
@@ -31,9 +31,10 @@ const _exampleDataStructure = [
 
 const HostScreen = ({ navigation }) => {
   const { user, setUser } = useContext(AuthenticatedUserContext);
-
+  const [email, setEmail] = useState(null);
   const [customStyleIndex, setCustomStyleIndex] = useState(0);
   const [spotsTodayList, setSpotsTodayList] = useState(null);
+  const [allHostSlotsList, setAllHostSlotsList] = useState(null);
   const [buildingInfo, setBuildingInfo] = useState();
   const [currentDate, setCurrentDate] = useState(null);
 
@@ -46,11 +47,13 @@ const HostScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
+    setEmail(user.providerData[0].email);
     const tokenJwt = user.accessToken;
     const date = new Date();
     setCurrentDate(date.toString().slice(4, 10));
-    getAllParkingSpots(tokenJwt).then((results) => setSpotsTodayList(results));
     getBuildingInfo(tokenJwt).then((results) => setBuildingInfo(results));
+    getAllParkingSpots(tokenJwt).then((results) => setSpotsTodayList(results));
+    getAllHostSlots(email, tokenJwt).then((results) => setAllHostSlotsList(results));
   }, []);
 
   return (
@@ -168,7 +171,7 @@ const HostScreen = ({ navigation }) => {
             <Box flex="1" width="100%">
               <Box flex="1">
                 <ParkingSpotList
-                  data={spotsTodayList}
+                  data={allHostSlotsList}
                   currentDate={currentDate}
                   type={"hostSpot"}
                   navigation={navigation}
