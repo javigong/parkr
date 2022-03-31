@@ -15,29 +15,33 @@ import SolidOrangeButton from "../../UI/SolidOrangeButton";
 
 const Tab = createMaterialTopTabNavigator();
 
-const _exampleDataStructure = [
-  {
-    idParkingSlot: "P1-20",
-    paUnitNo: "703",
-    paOwnerId: "mariasmith@testing.com",
-    upFirstName: "Maria",
-    upLastName: "Smith",
-    paVehicleType: 4,
-    paStatus: 1,
-    paVisitorId: null,
-    paFee: "3.00",
-    rsrv_start: "12:00:00",
-    rsrv_end: "20:00:00",
-    availability: 1,
-  },
-];
+// Object structure sample:
+//   {
+//     "idParkingSlot": "P1-13",
+//     "buildingId": 1001,
+//     "paUnitNo": "504",
+//     "paOwnerId": "sandracoleman@testing.com",
+//     "upFirstName": "Sandra",
+//     "upLastName": "Coleman",
+//     "paVehicleType": 2,
+//     "paStatus": 1,
+//     "paFee": "2.80",
+//     "rsrv_start": "2022-04-07 06:30:00",
+//     "rsrv_end": "2022-04-07 18:00:00",
+//     "availability": 1
+// }
 
 const ParkingScreen = ({ navigation }) => {
   const { user, setUser } = useContext(AuthenticatedUserContext);
   const [email, setEmail] = useState(null);
   const { enable, setEnable } = useContext(NotificationContext);
   const [customStyleIndex, setCustomStyleIndex] = useState(0);
+
   const [spotsTodayList, setSpotsTodayList] = useState(null);
+  const [spotsWeekList, setSpotsWeekList] = useState(null);
+  const [spotsMonthList, setSpotsMonthList] = useState(null);
+  
+
   const [buildingInfo, setBuildingInfo] = useState();
   const [currentDate, setCurrentDate] = useState(null);
 
