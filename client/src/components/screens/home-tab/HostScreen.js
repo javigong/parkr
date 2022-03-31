@@ -31,7 +31,6 @@ const _exampleDataStructure = [
 
 const HostScreen = ({ navigation }) => {
   const { user, setUser } = useContext(AuthenticatedUserContext);
-  const [email, setEmail] = useState(null);
   const [customStyleIndex, setCustomStyleIndex] = useState(0);
   const [spotsTodayList, setSpotsTodayList] = useState(null);
   const [allHostSlotsList, setAllHostSlotsList] = useState(null);
@@ -47,13 +46,12 @@ const HostScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
-    setEmail(user.providerData[0].email);
     const tokenJwt = user.accessToken;
     const date = new Date();
     setCurrentDate(date.toString().slice(4, 10));
     getBuildingInfo(tokenJwt).then((results) => setBuildingInfo(results));
     getAllParkingSpots(tokenJwt).then((results) => setSpotsTodayList(results));
-    getAllHostSlots(email, tokenJwt).then((results) => setAllHostSlotsList(results));
+    getAllHostSlots(user.providerData[0].email, tokenJwt).then((results) => setAllHostSlotsList(results));
   }, []);
 
   return (
