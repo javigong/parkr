@@ -49,7 +49,7 @@ const OnboardingScreen = ({ navigation }) => {
             backgroundColor: "white",
             image: (
               <Image
-                style={{ width: 315, height: 300 }}
+                style={{ width: 300, height: 300 }}
                 source={require("../../../../assets/onboard_image1.png")}
                 alt="onboarding image"
                 ml={3}
