@@ -15,22 +15,6 @@ import SolidOrangeButton from "../../UI/SolidOrangeButton";
 
 const Tab = createMaterialTopTabNavigator();
 
-// Object structure sample:
-//   {
-//     "idParkingSlot": "P1-13",
-//     "buildingId": 1001,
-//     "paUnitNo": "504",
-//     "paOwnerId": "sandracoleman@testing.com",
-//     "upFirstName": "Sandra",
-//     "upLastName": "Coleman",
-//     "paVehicleType": 2,
-//     "paStatus": 1,
-//     "paFee": "2.80",
-//     "rsrv_start": "2022-04-07 06:30:00",
-//     "rsrv_end": "2022-04-07 18:00:00",
-//     "availability": 1
-// }
-
 const ParkingScreen = ({ navigation }) => {
   const { user, setUser } = useContext(AuthenticatedUserContext);
   const [email, setEmail] = useState(null);
@@ -41,11 +25,11 @@ const ParkingScreen = ({ navigation }) => {
   const [spotsWeekList, setSpotsWeekList] = useState(null);
   const [spotsMonthList, setSpotsMonthList] = useState(null);
   
-
   const [buildingInfo, setBuildingInfo] = useState();
   const [currentDate, setCurrentDate] = useState(null);
 
   const date = new Date();
+  const dateString = date.toString();
   const dateISOString = date.toISOString();
   // console.log(dateISOString);
 
