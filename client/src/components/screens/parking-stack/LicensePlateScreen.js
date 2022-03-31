@@ -6,6 +6,7 @@ import React, { useState, useEffect } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 import { Center, Icon } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
+import SolidOrangeButton from "../../UI/SolidOrangeButton";
 import {
   Box,
   Text,
@@ -16,6 +17,7 @@ import {
   Image,
   ScrollView,
   Button,
+  View,
 } from "native-base";
 import * as ImagePicker from "expo-image-picker";
 import { RNS3 } from "react-native-aws3";
@@ -164,38 +166,50 @@ const LicensePlateScreen = ({ route, navigation }) => {
     <>
       <Box flex="1" bg="white">
         <SafeAreaView flex={1} alignItems="center">
-          <Text fontWeight="bold" fontSize="2xl" mt={10}>
-            Car Information
-          </Text>
+          <Text style={styles.pageTitle}>Car Information</Text>
           <FormControl padding={5} isRequired>
             <VStack mx="4" space="2">
-              <FormControl.Label>Car Model</FormControl.Label>
-              <Input
-                type="text"
-                value={carType}
-                placeholder="i.e. Mazda MX-5"
-                onChangeText={(text) => setCarType(text)}
-              />
-              <FormControl.HelperText>
-                Please provide brand and model
-              </FormControl.HelperText>
-              <FormControl.ErrorMessage
-                leftIcon={<WarningOutlineIcon size="xs" />}
-              >
-                At least 3 characters are required.
-              </FormControl.ErrorMessage>
+              <Box>
+                <FormControl.Label m="0" mb="1">
+                  Car Make & Model
+                </FormControl.Label>
+                <Input
+                  type="text"
+                  value={carType}
+                  placeholder="i.e. Mazda MX-5"
+                  onChangeText={(text) => setCarType(text)}
+                  style={styles.inputCar}
+                  borderColor="#FD6B36"
+                  height="40px"
+                  borderRadius="17"
+                />
 
-              <FormControl.Label>License Plate</FormControl.Label>
-              <Input
-                type="text"
-                value={plateNum}
-                placeholder="i.e. 291VSA"
-                onChangeText={(text) => setPlateNum(text)}
-              />
-              <FormControl.HelperText>
-                Please provide license plate number or upload a clear photo of
-                your license plate.
-              </FormControl.HelperText>
+                {/* <FormControl.HelperText>
+                Please provide brand and model
+              </FormControl.HelperText> */}
+                <FormControl.ErrorMessage
+                  leftIcon={<WarningOutlineIcon size="xs" />}
+                >
+                  At least 3 characters are required.
+                </FormControl.ErrorMessage>
+              </Box>
+              <Box>
+                <FormControl.Label m="0" mb="1">
+                  License Plate
+                </FormControl.Label>
+                <Input
+                  type="text"
+                  value={plateNum}
+                  placeholder="i.e. 291VSA"
+                  onChangeText={(text) => setPlateNum(text)}
+                  borderColor="#FD6B36"
+                  height="40px"
+                  borderRadius="17"
+                />
+              </Box>
+              {/* <FormControl.HelperText>
+                Type license plate number or take a photo.
+              </FormControl.HelperText> */}
               <FormControl.ErrorMessage
                 leftIcon={<WarningOutlineIcon size="xs" />}
               >
@@ -205,14 +219,14 @@ const LicensePlateScreen = ({ route, navigation }) => {
           </FormControl>
 
           <Box
-            shadow={4}
+            // shadow={4}
             borderWidth={1}
             borderColor="gray.200"
             borderRadius="20px"
             width="85%"
             mb={6}
-            py={7}
-            height="40%"
+            p={2}
+            height="53%"
           >
             <ScrollView width="100%">
               <Box
@@ -287,36 +301,35 @@ const LicensePlateScreen = ({ route, navigation }) => {
               ) : (
                 <Text></Text>
               )}
-              <Center>
+              {/* <Center>
                 <Icon
                   color="lightgray"
                   size={8}
                   as={<Ionicons name="chevron-down-outline" />}
                 />
-              </Center>
+              </Center> */}
             </ScrollView>
           </Box>
-          <Button
-            borderRadius="20px"
-            backgroundColor="#FD6B36"
-            width="80%"
-            onPress={() =>
-              navigation.navigate("ParkingStack", {
-                screen: "ConfirmReservationScreen",
-                params: {
-                  userType: userType,
-                  carType: carType,
-                  plateNum: plateNum,
-                  item: item,
-                  currentDate: currentDate,
-                  startDate: startDate,
-                  endDate: endDate,
-                },
-              })
-            }
-          >
-            NEXT
-          </Button>
+          <View flex="1" width="80%">
+            <SolidOrangeButton
+              width="100%"
+              buttonText="NEXT"
+              onPress={() =>
+                navigation.navigate("ParkingStack", {
+                  screen: "ConfirmReservationScreen",
+                  params: {
+                    userType: userType,
+                    carType: carType,
+                    plateNum: plateNum,
+                    item: item,
+                    currentDate: currentDate,
+                    startDate: startDate,
+                    endDate: endDate,
+                  },
+                })
+              }
+            />
+          </View>
         </SafeAreaView>
       </Box>
     </>
@@ -326,6 +339,17 @@ const LicensePlateScreen = ({ route, navigation }) => {
 export default LicensePlateScreen;
 
 const styles = StyleSheet.create({
+  pageTitle: {
+    fontWeight: "bold",
+    fontSize: 25,
+    lineHeight: 30,
+    marginTop: "5%",
+  },
+  inputCar: {
+    borderColor: "#FD6B36",
+    height: "20%",
+    borderRadius: 17,
+  },
   button: {
     alignSelf: "center",
     backgroundColor: "#0CB183",
@@ -337,8 +361,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     backgroundColor: "white",
     borderColor: "#0CB183",
-    borderWidth: 2,
-    marginVertical: 10,
+    borderWidth: 1,
+    // marginVertical: 10,
     borderRadius: 20,
     width: "80%",
   },
