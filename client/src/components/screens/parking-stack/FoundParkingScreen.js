@@ -80,6 +80,8 @@ const styles = StyleSheet.create({
   },
   noResultsTxt: {
     textAlign: "center",
+    padding: "10%",
+    lineHeight: 25.5,
     color: "gray",
     fontSize: 20,
     flex: 1,

@@ -8,7 +8,9 @@ import {
   HStack,
   VStack,
   Pressable,
+  View,
 } from "native-base";
+import SolidOrangeButton from "../../UI/SolidOrangeButton";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getCarListByUser } from "../../services/api";
 import { AuthenticatedUserContext } from "../../contexts/AuthenticatedUserContext";
@@ -159,14 +161,13 @@ const ChooseCarScreen = ({ route, navigation }) => {
               <Text></Text>
             )}
           </Box>
-          <Button
-            borderRadius="20px"
-            backgroundColor="#FD6B36"
-            mb={1}
-            onPress={() => handleCarSelect()}
-          >
-            NEXT
-          </Button>
+          <View>
+            <SolidOrangeButton
+              buttonText="NEXT"
+              mb={1}
+              onPress={() => handleCarSelect()}
+            />
+          </View>
         </Box>
       </SafeAreaView>
     </Box>
