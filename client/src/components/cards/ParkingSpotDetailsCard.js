@@ -12,12 +12,24 @@ const ParkingSpotDetailsCard = ({ item, currentDate, type, navigation }) => {
     });
   };
 
+  // date time readable format:
+  const rsrv_start_date = new Date(item.rsrv_start.slice(0, 10))
+    .toString()
+    .slice(0, 10);
+  const rsrv_start_time = item.rsrv_start.slice(11, 16);
+  const rsrv_end_date = new Date(item.rsrv_end.slice(0, 10))
+    .toString()
+    .slice(0, 10);
+  const rsrv_end_time = item.rsrv_end.slice(11, 16);
+
   return (
     <SafeAreaView flex="1" alignItems="center" backgroundColor="white">
       <Box flex="1" width="80%" justifyContent="space-between" mt={6}>
         <Box flex="1" justifyContent="flex-start">
           <Text fontWeight="bold" fontSize="2xl" mb={5}>
-            Spot {item.idParkingSlot}
+            {type === "hostReservation" || type === "hostArchive"
+              ? `Spot ${item.rsvparkingslotid}`
+              : `Spot ${item.idParkingSlot}`}
           </Text>
           <VStack space={4}>
             <Box borderBottomWidth={1} borderBottomColor="#FD6B36">
@@ -27,15 +39,17 @@ const ParkingSpotDetailsCard = ({ item, currentDate, type, navigation }) => {
               <HStack>
                 <Text fontWeight="bold">Start</Text>
                 <Text color="grey">
-                  {" "}
-                  {currentDate}, {item.rsrv_start.slice(0, 5)}
+                  {type === "hostReservation" || type === "hostArchive"
+                    ? ` ${rsrv_start_date}, ${rsrv_start_time}`
+                    : ` ${currentDate}, ${item.rsrv_start.slice(0, 5)}`}
                 </Text>
               </HStack>
               <HStack mb={3}>
                 <Text fontWeight="bold">End</Text>
                 <Text color="grey">
-                  {"   "}
-                  {currentDate}, {item.rsrv_end.slice(0, 5)}
+                  {type === "hostReservation" || type === "hostArchive"
+                    ? ` ${rsrv_end_date}, ${rsrv_end_time}`
+                    : ` ${currentDate}, ${item.rsrv_end.slice(0, 5)}`}
                 </Text>
               </HStack>
             </Box>
@@ -45,7 +59,9 @@ const ParkingSpotDetailsCard = ({ item, currentDate, type, navigation }) => {
                   Who's Parking
                 </Text>
                 <Text>
-                  {item.paVisitorId
+                  {type === "hostReservation" || type === "hostArchive"
+                    ? ` ${item.rsvvisitorid}`
+                    : item.paVisitorId
                     ? `${item.upFirstName} ${item.upLastName}`
                     : "Visitor"}
                 </Text>
@@ -58,7 +74,11 @@ const ParkingSpotDetailsCard = ({ item, currentDate, type, navigation }) => {
                 </Text>
                 <HStack justifyContent="space-between">
                   <Text>
-                    {item.paFee ? `CAD $${item.paFee} x hour` : `Free`}
+                    {type === "hostReservation" || type === "hostArchive"
+                      ? `CAD $${item.rsvfee} x hour`
+                      : item.paFee
+                      ? `CAD $${item.paFee} x hour`
+                      : `Free`}
                   </Text>
                 </HStack>
               </VStack>
@@ -81,29 +101,36 @@ const ParkingSpotDetailsCard = ({ item, currentDate, type, navigation }) => {
             </Box>
 
             <HStack justifyContent="space-between" alignItems="center">
-              <Box>
-                <VStack space={2}>
-                  <Text fontSize={16} fontWeight="bold">
-                    Spot Owner
-                  </Text>
-                  <HStack space={4} mb={4}>
-                    <Box py={2} px={3} borderRadius="20px" bg="#FD6B36">
-                      <Text color="white">
-                        {item.upFirstName.charAt(0).toUpperCase()}
-                        {item.upLastName.charAt(0).toUpperCase()}
-                      </Text>
-                    </Box>
-                    <VStack>
-                      <Text fontSize={14}>
-                        {item.upFirstName} {item.upLastName}
-                      </Text>
-                      <Text color="grey" fontSize={13}>
-                        Registered Jan 1, 2022
-                      </Text>
-                    </VStack>
-                  </HStack>
-                </VStack>
-              </Box>
+              {type === "hostReservation" || type === "hostArchive" ? (
+                <Text></Text>
+              ) : (
+                <Box>
+                  <VStack space={2}>
+                    <Text fontSize={16} fontWeight="bold">
+                      Spot Owner
+                    </Text>
+                    <HStack space={4} mb={4}>
+                      <Box py={2} px={3} borderRadius="20px" bg="#FD6B36">
+                        <Text color="white">
+                          {item.upFirstName &&
+                            item.upFirstName.charAt(0).toUpperCase()}
+                          {item.upLastName &&
+                            item.upLastName.charAt(0).toUpperCase()}
+                        </Text>
+                      </Box>
+                      <VStack>
+                        <Text fontSize={14}>
+                          {item.upFirstName && item.upFirstName}{" "}
+                          {item.upLastName && item.upLastName}
+                        </Text>
+                        <Text color="grey" fontSize={13}>
+                          Registered Jan 1, 2022
+                        </Text>
+                      </VStack>
+                    </HStack>
+                  </VStack>
+                </Box>
+              )}
               <Box>
                 <Button
                   onPress={() => ChatHandler()}
