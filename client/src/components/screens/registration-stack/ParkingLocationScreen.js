@@ -2,12 +2,14 @@ import { Box, Input, Button, View, Center, Heading } from "native-base";
 import { SafeAreaView, ImageBackground, StyleSheet } from "react-native";
 import BuildingSVG from "../../UI/BuildingSVG";
 import OrangeSolidButton from "../../UI/SolidOrangeButton";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { HasBuildingContext } from "../../contexts/HasBuildingContext";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import AutocompleteInput from "react-native-autocomplete-input";
 
 const ParkingLocationScreen = ({ navigation }) => {
   const [parkingLot, setParkingLot] = useState("");
+  const { hasBuilding, setHasBuilding } = useContext(HasBuildingContext);
 
   return (
     <SafeAreaView flex="1" width="100%" backgroundColor="white">
@@ -62,11 +64,9 @@ const ParkingLocationScreen = ({ navigation }) => {
         <OrangeSolidButton
           width="330"
           buttonText="NEXT"
-          onPress={() =>
-            navigation.navigate("SignupFormScreen", {
-              parkingLot,
-            })
-          }
+          onPress={() => {
+            setHasBuilding("yes");
+          }}
         />
       </Box>
     </SafeAreaView>

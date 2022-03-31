@@ -33,7 +33,7 @@ const ChatScreen = ({ navigation }) => {
     const data = [
       {
         id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        fullName: "Afreen Khan",
+        fullName: "Doug Leung",
         timeStamp: "12:47 PM",
         recentText: "Good Day!",
         avatarUrl:
