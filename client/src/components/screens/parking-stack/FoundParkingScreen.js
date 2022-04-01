@@ -20,9 +20,28 @@ const FoundParkingScreen = ({ navigation, route }) => {
     getAllParkingSpots(tokenJwt).then((results) => {
       // setFilteredSpotsList(results);
       results.filter((each) => {
+        // const eachResStart = each.rsrv_start;
+        // const startResDate = new Date(eachResStart);
+        // Split timestamp into [ Y, M, D, h, m, s ]
+        const t = each.rsrv_start.split(/[- :]/);
+
+        // Apply each element to the Date function
+        const eachResStartFormat = new Date(
+          Date.UTC(t[0], t[1] - 1, t[2], t[3], t[4], t[5])
+        );
+
+        const q = each.rsrv_end.split(/[- :]/);
+        // console.log(d.toString());
+        const eachResEndFormat = new Date(
+          Date.UTC(q[0], q[1] - 1, q[2], q[3], q[4], q[5])
+        );
+        // console.log(each.rsrv_start + " and " + startDate);
+        // console.log(startResDate);
+        console.log(eachResStartFormat);
+
         if (
-          each.rsrv_start <= startDate.slice(16, 24) &&
-          each.rsrv_end >= endDate.slice(16, 24) &&
+          eachResStartFormat.toString() <= startDate &&
+          eachResEndFormat.toString() >= endDate &&
           each.paVehicleType === parkingTypeFilter
         ) {
           filteredSpotsArray.push(each);
