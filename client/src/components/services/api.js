@@ -79,6 +79,45 @@ export const getAvailabilityByDateMonthly = async (date, token) => {
   }
 };
 
+// Host Activity: reservation and archive
+
+export const getHostCurrentIncoming = async (email, token) => {
+  const configurationObject = {
+    method: "get",
+    url: `${BASE_URL}/parkingslot/currentandincoming/${email}`,
+    headers: {
+      "content-type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const response = await axios(configurationObject);
+    console.log("getAvailabilityByDateMonthly", response.data);
+    const results = response.data;
+    return results;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getHostExpired = async (email, token) => {
+  const configurationObject = {
+    method: "get",
+    url: `${BASE_URL}/parkingslot/expiredhostactivity/${email}`,
+    headers: {
+      "content-type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const response = await axios(configurationObject);
+    console.log("getAvailabilityByDateMonthly", response.data);
+    const results = response.data;
+    return results;
+  } catch (error) {
+    throw error;
+  }
+};
 //
 
 export const postNewParkingSpot = async (

@@ -3,7 +3,7 @@ import React from "react";
 import HostSpotCard from "../cards/HostSpotCard";
 import ParkingSpotCard from "../cards/ParkingSpotCard";
 
-const ParkingSpotList = ({
+const HostSpotList = ({
   data,
   currentDate,
   type,
@@ -17,7 +17,7 @@ const ParkingSpotList = ({
         my="2"
         data={data}
         renderItem={({ item }) => (
-          <ParkingSpotCard
+          <HostSpotCard
             item={item}
             currentDate={currentDate}
             startDate={startDate}
@@ -26,11 +26,11 @@ const ParkingSpotList = ({
             navigation={navigation}
           />
         )}
-        keyExtractor={(item) => item.idParkingSlot.toString()}
+        keyExtractor={(item) => item.rsvparkingslotid.toString()}
         showsVerticalScrollIndicator={true}
       />
     </>
   );
 };
 
-export default ParkingSpotList;
+export default HostSpotList;
