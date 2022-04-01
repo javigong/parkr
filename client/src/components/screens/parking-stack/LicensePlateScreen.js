@@ -262,7 +262,11 @@ const LicensePlateScreen = ({ route, navigation }) => {
                   )}
                 </Box>
                 {uploadSuccessMessage ? (
-                  <Text style={{ color: "#FD6B36" }}>
+                  <Text
+                    fontWeight="bold"
+                    style={{ color: "#FD6B36" }}
+                    fontSize="16px"
+                  >
                     {uploadSuccessMessage}
                   </Text>
                 ) : null}
@@ -270,7 +274,9 @@ const LicensePlateScreen = ({ route, navigation }) => {
                 {plateNum ? (
                   <>
                     <Center>
-                      <Text>Is your license plate number: </Text>
+                      <Text fontSize="16px">
+                        Is your license plate number:{" "}
+                      </Text>
                       <Text fontWeight="bold" fontSize="2xl">
                         {plateNum}
                       </Text>
