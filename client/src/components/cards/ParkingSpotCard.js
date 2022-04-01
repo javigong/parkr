@@ -171,64 +171,74 @@ const ParkingSpotCard = ({
 
                     {type !== "hostSpot" ? (
                       <VStack space="1">
-                        <Box>
-                          <Text fontSize="xl">Spot {item.idParkingSlot}</Text>
-                        </Box>
-                        <HStack>
-                          <Box width="79%">
-                            {item.paVehicleType == "1" && (
-                              <Box
-                                width="78"
-                                px="2"
-                                borderWidth="1"
-                                borderColor="#0CB183"
-                                rounded="full"
-                              >
-                                <Text flex="1" fontSize="13" color="#0CB183">
-                                  Handicap
-                                </Text>
+                        <HStack alignItems="center" space="2">
+                          <HStack alignItems="center" space="2" w="260">
+                            <Box>
+                              <Text fontWeight="medium" fontSize="xl">
+                                Spot {item.idParkingSlot}
+                              </Text>
+                            </Box>
+                            <HStack justifyContent="space-between">
+                              <Box>
+                                {item.paVehicleType == "1" && (
+                                  <Box
+                                    width="78"
+                                    px="2"
+                                    borderWidth="1"
+                                    borderColor="#0CB183"
+                                    rounded="full"
+                                  >
+                                    <Text
+                                      flex="1"
+                                      fontSize="13"
+                                      color="#0CB183"
+                                    >
+                                      Handicap
+                                    </Text>
+                                  </Box>
+                                )}
+                                {item.paVehicleType == "2" && (
+                                  <Box
+                                    width="55"
+                                    px="2"
+                                    borderWidth="1"
+                                    borderColor="#FD6B36"
+                                    rounded="full"
+                                  >
+                                    <Text fontSize="13" color="#FD6B36">
+                                      Large
+                                    </Text>
+                                  </Box>
+                                )}
+                                {item.paVehicleType == "3" && (
+                                  <Box
+                                    width="90"
+                                    px="2"
+                                    borderWidth="1"
+                                    borderColor="#09A1C6"
+                                    rounded="full"
+                                  >
+                                    <Text fontSize="13" color="#09A1C6">
+                                      EV Charger
+                                    </Text>
+                                  </Box>
+                                )}
+                                {item.paVehicleType == "4" && (
+                                  <Box
+                                    width="87"
+                                    px="2"
+                                    borderWidth="1"
+                                    borderColor="#DB7D16"
+                                    rounded="full"
+                                  >
+                                    <Text fontSize="13" color="#DB7D16">
+                                      Motorcycle
+                                    </Text>
+                                  </Box>
+                                )}
                               </Box>
-                            )}
-                            {item.paVehicleType == "2" && (
-                              <Box
-                                width="55"
-                                px="2"
-                                borderWidth="1"
-                                borderColor="#FD6B36"
-                                rounded="full"
-                              >
-                                <Text fontSize="13" color="#FD6B36">
-                                  Large
-                                </Text>
-                              </Box>
-                            )}
-                            {item.paVehicleType == "3" && (
-                              <Box
-                                width="90"
-                                px="2"
-                                borderWidth="1"
-                                borderColor="#09A1C6"
-                                rounded="full"
-                              >
-                                <Text fontSize="13" color="#09A1C6">
-                                  EV Charger
-                                </Text>
-                              </Box>
-                            )}
-                            {item.paVehicleType == "4" && (
-                              <Box
-                                width="87"
-                                px="2"
-                                borderWidth="1"
-                                borderColor="#DB7D16"
-                                rounded="full"
-                              >
-                                <Text fontSize="13" color="#DB7D16">
-                                  Motorcycle
-                                </Text>
-                              </Box>
-                            )}
-                          </Box>
+                            </HStack>
+                          </HStack>
 
                           <Box>
                             <Button
@@ -256,7 +266,9 @@ const ParkingSpotCard = ({
                         alignItems="center"
                       >
                         <Box>
-                          <Text fontSize="xl">Spot {item.idParkingSlot}</Text>
+                          <Text fontWeight="medium" fontSize="xl">
+                            Spot {item.idParkingSlot}
+                          </Text>
                         </Box>
                         {item.availability ? (
                           <Text fontSize="13" color="#0CB183">
@@ -272,7 +284,7 @@ const ParkingSpotCard = ({
                   </HStack>
                   {type !== "hostSpot" && (
                     <HStack space="4" justifyContent="space-between">
-                      <Box>
+                      <Box ml="2">
                         <Text>
                           {rsrv_start_date}, {rsrv_start_time} -{" "}
                           {/* {type === "today" && `${rsrv_end_date}, `} */}
