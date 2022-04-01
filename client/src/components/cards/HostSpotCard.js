@@ -38,10 +38,13 @@ const HostSpotCard = ({
   // type 1 -standard -> handicap \\ntype 2 - large\\ntype 3 - electric car\\ntype 4 - motorcycle
 
   // date time readable format:
-  const rsrv_start_date = item.rsrv_start.slice(0, 10);
-  const rsrv_start_time = item.rsrv_start.slice(11, 16);
-  const rsrv_end_date = item.rsrv_end.slice(0, 10);
-  const rsrv_end_time = item.rsrv_end.slice(11, 16);
+
+  const rsrv_start = new Date(item.rsrv_start);
+  const rsrv_start_date = rsrv_start.toString().slice(0, 10);
+  const rsrv_start_time = rsrv_start.toString().slice(11, 16);
+  const rsrv_end = new Date(item.rsrv_end);
+  const rsrv_end_date = rsrv_end.toString().slice(0, 10);
+  const rsrv_end_time = rsrv_end.toString().slice(11, 16);
 
   const whoParksDirectHandler = () => {
     navigation.navigate("ParkingStack", {
@@ -151,7 +154,7 @@ const HostSpotCard = ({
                     {type !== "hostSpot" ? (
                       <HStack space="1" alignItems="center">
                         <Box mr="2">
-                          <Text fontSize="xl">
+                          <Text fontWeight="medium" fontSize="xl">
                             Spot {item.rsvparkingslotid}
                           </Text>
                         </Box>
@@ -239,13 +242,24 @@ const HostSpotCard = ({
 
                   <VStack>
                     <Box>
-                      <Text>Start: {rsrv_start_date}</Text>
+                      <VStack>
+                        <Text>
+                          <Text fontWeight="medium">Start:</Text> {rsrv_start_date}, {rsrv_start_time}
+                        </Text>
+                        <Text>
+                          <Text fontWeight="medium">End:</Text> {rsrv_end_date}, {rsrv_end_time}
+                        </Text>
+                      </VStack>
                     </Box>
-                    <HStack w="105%" alignItems="center" justifyContent="space-between">
-                      <Text>Vehicle license: {item.rsvcarplateno}</Text>
-                      <Box >
+                    <HStack
+                      w="105%"
+                      alignItems="center"
+                      justifyContent="space-between"
+                    >
+                      <Text><Text fontWeight="medium">Vehicle license:</Text> {item.rsvcarplateno}</Text>
+                      <Box>
                         <HStack alignItems="center">
-                          <Text>Details</Text>
+                          <Text fontWeight="medium">Details</Text>
                           <Button
                             background="transparent"
                             startIcon={
