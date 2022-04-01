@@ -4,7 +4,7 @@
 
 import React, { useState, useEffect } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
-import { Center, Icon } from "native-base";
+import { Center, HStack, Icon } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import SolidOrangeButton from "../../UI/SolidOrangeButton";
 import {
@@ -123,19 +123,11 @@ const LicensePlateScreen = ({ route, navigation }) => {
       }
     ).then((response) => {
       if (response.status !== 201) alert("Failed to upload image to S3");
-      // console.log(response.body);
       setFilePath("");
       let { bucket, etag, key, location } = response.body.postResponse;
 
       setUploadSuccessMessage("Uploaded successfully");
 
-      // setUploadSuccessMessage(
-      //   `Uploaded Successfully:
-      //   \n1. bucket => ${bucket}
-      //   \n2. etag => ${etag}
-      //   \n3. key => ${key}
-      //   \n4. location => ${location}`,
-      // );
       const options = {
         method: "POST",
         url: "https://zyanyatech1-license-plate-recognition-v1.p.rapidapi.com/recognize_url",
@@ -153,7 +145,6 @@ const LicensePlateScreen = ({ route, navigation }) => {
       axios
         .request(options)
         .then(function (response) {
-          // console.log(response.data);
           setPlateNum(response.data.results[0].plate);
         })
         .catch(function (error) {
@@ -184,9 +175,6 @@ const LicensePlateScreen = ({ route, navigation }) => {
                   borderRadius="17"
                 />
 
-                {/* <FormControl.HelperText>
-                Please provide brand and model
-              </FormControl.HelperText> */}
                 <FormControl.ErrorMessage
                   leftIcon={<WarningOutlineIcon size="xs" />}
                 >
@@ -207,9 +195,6 @@ const LicensePlateScreen = ({ route, navigation }) => {
                   borderRadius="17"
                 />
               </Box>
-              {/* <FormControl.HelperText>
-                Type license plate number or take a photo.
-              </FormControl.HelperText> */}
               <FormControl.ErrorMessage
                 leftIcon={<WarningOutlineIcon size="xs" />}
               >
@@ -219,21 +204,20 @@ const LicensePlateScreen = ({ route, navigation }) => {
           </FormControl>
 
           <Box
-            // shadow={4}
             borderWidth={1}
             borderColor="gray.200"
             borderRadius="20px"
             width="85%"
             mb={6}
-            p={2}
-            height="53%"
+            py={5}
+            height="50%"
           >
             <ScrollView width="100%">
               <Box
                 style={{
                   flex: "1",
                   alignItems: "center",
-                  justifyContent: "center",
+                  justifyContent: "space-between",
                   width: "100%",
                 }}
               >
@@ -244,73 +228,87 @@ const LicensePlateScreen = ({ route, navigation }) => {
                     style={{ width: 300, height: 150, borderRadius: 10 }}
                   />
                 )}
-                <Button style={styles.button} onPress={pickImage}>
-                  Go To Gallery
-                </Button>
-                {filePath.uri ? (
-                  <>
-                    <Button style={styles.button2} onPress={uploadFile}>
-                      <Text style={{ color: "#0CB183" }}>Upload Image</Text>
-                    </Button>
-                  </>
-                ) : null}
+
+                <Box
+                  style={{
+                    flex: "1",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "100%",
+                  }}
+                >
+                  {cameraOn ? (
+                    <>
+                      <Box style={styles.cameraContainer}>
+                        <Camera
+                          ref={(ref) => setCamera(ref)}
+                          style={styles.fixedRatio}
+                        />
+                      </Box>
+
+                      <Button
+                        style={styles.button2}
+                        onPress={() => takePicture()}
+                      >
+                        <Icon
+                          color="white"
+                          size={7}
+                          as={<Ionicons name="ellipse-outline" />}
+                        />
+                      </Button>
+                    </>
+                  ) : (
+                    <Text></Text>
+                  )}
+                </Box>
                 {uploadSuccessMessage ? (
                   <Text style={{ color: "#FD6B36" }}>
                     {uploadSuccessMessage}
                   </Text>
                 ) : null}
-              </Box>
 
-              <Box
-                style={{
-                  flex: "1",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: "100%",
-                }}
-              >
-                <Button style={styles.button} onPress={() => openCamera()}>
-                  {cameraText}
-                </Button>
-                {cameraOn ? (
+                {plateNum ? (
                   <>
-                    <Box style={styles.cameraContainer}>
-                      <Camera
-                        ref={(ref) => setCamera(ref)}
-                        style={styles.fixedRatio}
-                      />
-                    </Box>
-
-                    <Button style={styles.button} onPress={() => takePicture()}>
-                      Take Picture
-                    </Button>
+                    <Center>
+                      <Text>Is your license plate number: </Text>
+                      <Text fontWeight="bold" fontSize="2xl">
+                        {plateNum}
+                      </Text>
+                    </Center>
                   </>
                 ) : (
                   <Text></Text>
                 )}
               </Box>
-              {plateNum ? (
-                <>
-                  <Center>
-                    <Text>Is your license plate number: </Text>
-                    <Text fontWeight="bold" fontSize="2xl">
-                      {plateNum}
-                    </Text>
-                  </Center>
-                </>
-              ) : (
-                <Text></Text>
-              )}
-              {/* <Center>
-                <Icon
-                  color="lightgray"
-                  size={8}
-                  as={<Ionicons name="chevron-down-outline" />}
-                />
-              </Center> */}
             </ScrollView>
+
+            <HStack justifyContent="space-evenly">
+              <Button style={styles.button} onPress={pickImage}>
+                <Icon
+                  color="white"
+                  size={8}
+                  as={<Ionicons name="images-outline" />}
+                />
+              </Button>
+
+              <Button style={styles.button} onPress={() => openCamera()}>
+                <Icon
+                  color="white"
+                  size={8}
+                  as={<Ionicons name="camera-outline" />}
+                />
+              </Button>
+
+              <Button style={styles.button} onPress={uploadFile}>
+                <Icon
+                  color="white"
+                  size={8}
+                  as={<Ionicons name="cloud-upload-outline" />}
+                />
+              </Button>
+            </HStack>
           </Box>
-          <View flex="1" width="80%">
+          <View flex="1" mt="50px" width="80%">
             <SolidOrangeButton
               width="100%"
               buttonText="NEXT"
@@ -354,17 +352,15 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     backgroundColor: "#0CB183",
     marginVertical: 10,
-    borderRadius: 20,
-    width: "80%",
+    borderRadius: 50,
   },
   button2: {
+    marginTop: 20,
     alignSelf: "center",
-    backgroundColor: "white",
-    borderColor: "#0CB183",
-    borderWidth: 1,
-    // marginVertical: 10,
-    borderRadius: 20,
-    width: "80%",
+    backgroundColor: "#0CB183",
+    borderColor: "white",
+    borderWidth: 3,
+    borderRadius: 50,
   },
   cameraContainer: {
     flex: 1,
