@@ -89,32 +89,32 @@ const ChooseCarScreen = ({ route, navigation }) => {
                 Select the visitor car
               </Text>
             </Center>
-            <HStack justifyContent="space-around" mb={3}>
-              <Text style={styles.carmodel}>New Car</Text>
+            <Box borderBottomWidth={1} borderBottomColor="#FD6B36">
+              <HStack justifyContent="space-around" mb={3}>
+                <Text style={styles.carmodel}>New Car</Text>
 
-              <Pressable
-                borderWidth={2}
-                borderColor="#43D3A4"
-                borderRadius={50}
-                padding={1}
-                alignSelf="center"
-              >
                 <Pressable
+                  mt={2}
                   borderWidth={2}
                   borderColor="#43D3A4"
-                  borderRadius={20}
+                  borderRadius={50}
                   padding={1}
                   alignSelf="center"
-                  style={carType == "newCar" ? color : {}}
-                  onPress={() => {
-                    handlePress("newCar");
-                  }}
-                ></Pressable>
-              </Pressable>
-            </HStack>
-            <Text bold mt="10" mb="4" fontSize="md">
-              Choose from previously registered cars:
-            </Text>
+                >
+                  <Pressable
+                    borderWidth={2}
+                    borderColor="#43D3A4"
+                    borderRadius={20}
+                    padding={1}
+                    alignSelf="center"
+                    style={carType == "newCar" ? color : {}}
+                    onPress={() => {
+                      handlePress("newCar");
+                    }}
+                  ></Pressable>
+                </Pressable>
+              </HStack>
+            </Box>
             {carList.length > 0 ? (
               carList.map((car, index) => {
                 return (
