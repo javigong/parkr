@@ -4,7 +4,7 @@
 
 import React, { useState, useEffect } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
-import { Center, HStack, Icon } from "native-base";
+import { Center, HStack, Icon, Pressable } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import SolidOrangeButton from "../../UI/SolidOrangeButton";
 import {
@@ -211,6 +211,7 @@ const LicensePlateScreen = ({ route, navigation }) => {
             mb={6}
             py={5}
             height="50%"
+            shadow={2}
           >
             <ScrollView width="100%">
               <Box
@@ -246,16 +247,12 @@ const LicensePlateScreen = ({ route, navigation }) => {
                         />
                       </Box>
 
-                      <Button
-                        style={styles.button2}
-                        onPress={() => takePicture()}
-                      >
-                        <Icon
-                          color="white"
-                          size={7}
-                          as={<Ionicons name="ellipse-outline" />}
-                        />
-                      </Button>
+                      <Pressable style={styles.button2a}>
+                        <Pressable
+                          style={styles.button2b}
+                          onPress={() => takePicture()}
+                        ></Pressable>
+                      </Pressable>
                     </>
                   ) : (
                     <Text></Text>
@@ -289,29 +286,29 @@ const LicensePlateScreen = ({ route, navigation }) => {
             </ScrollView>
 
             <HStack justifyContent="space-evenly">
-              <Button style={styles.button} onPress={pickImage}>
+              <Pressable style={styles.button} onPress={pickImage}>
                 <Icon
                   color="white"
                   size={8}
                   as={<Ionicons name="images-outline" />}
                 />
-              </Button>
+              </Pressable>
 
-              <Button style={styles.button} onPress={() => openCamera()}>
+              <Pressable style={styles.button} onPress={() => openCamera()}>
                 <Icon
                   color="white"
                   size={8}
                   as={<Ionicons name="camera-outline" />}
                 />
-              </Button>
+              </Pressable>
 
-              <Button style={styles.button} onPress={uploadFile}>
+              <Pressable style={styles.button} onPress={uploadFile}>
                 <Icon
                   color="white"
                   size={8}
                   as={<Ionicons name="cloud-upload-outline" />}
                 />
-              </Button>
+              </Pressable>
             </HStack>
           </Box>
           <View flex="1" mt="50px" width="80%">
@@ -358,14 +355,23 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     backgroundColor: "#0CB183",
     marginVertical: 10,
+    padding: 12,
     borderRadius: 50,
   },
-  button2: {
-    marginTop: 20,
+  button2a: {
+    marginVertical: 20,
+    alignSelf: "center",
+    backgroundColor: "#0CB183",
+    borderColor: "white",
+    padding: 6,
+    borderRadius: 50,
+  },
+  button2b: {
     alignSelf: "center",
     backgroundColor: "#0CB183",
     borderColor: "white",
     borderWidth: 3,
+    padding: 20,
     borderRadius: 50,
   },
   cameraContainer: {
