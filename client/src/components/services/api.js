@@ -52,7 +52,7 @@ export const getAvailabilityByDateWeekly = async (date, token) => {
   };
   try {
     const response = await axios(configurationObject);
-    console.log("getAvailabilityByDateWeekly", response.data);
+    // console.log("getAvailabilityByDateWeekly", response.data);
     const results = response.data;
     return results;
   } catch (error) {
@@ -64,6 +64,65 @@ export const getAvailabilityByDateMonthly = async (date, token) => {
   const configurationObject = {
     method: "get",
     url: `${BASE_URL}/parkingslot/checkavailabilitymonthly/${date}`,
+    headers: {
+      "content-type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const response = await axios(configurationObject);
+    console.log("getAvailabilityByDateMonthly", response.data);
+    const results = response.data;
+    return results;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Parking Activity: in use, upcoming and expired
+
+export const getMyActivityIncoming = async (email, token) => {
+  const configurationObject = {
+    method: "get",
+    url: `${BASE_URL}/parkingslot/incoming/${email}`,
+    headers: {
+      "content-type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const response = await axios(configurationObject);
+    console.log("getAvailabilityByDateMonthly", response.data);
+    const results = response.data;
+    return results;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getMyActivityCurrent = async (email, token) => {
+  const configurationObject = {
+    method: "get",
+    url: `${BASE_URL}/parkingslot/current/${email}`,
+    headers: {
+      "content-type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const response = await axios(configurationObject);
+    console.log("getAvailabilityByDateMonthly", response.data);
+    const results = response.data;
+    return results;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getMyActivityExpired = async (email, token) => {
+  const configurationObject = {
+    method: "get",
+    url: `${BASE_URL}/parkingslot/expired/${email}`,
     headers: {
       "content-type": "application/json",
       authorization: `Bearer ${token}`,

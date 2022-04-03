@@ -12,7 +12,7 @@ import {
 import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 
-const ParkingSpotCard = ({
+const ActivitySpotCard = ({
   item,
   currentDate,
   type,
@@ -21,32 +21,30 @@ const ParkingSpotCard = ({
   endDate,
 }) => {
   // Object structure sample:
-  //   {
-  //     "idParkingSlot": "P1-13",
-  //     "buildingId": 1001,
-  //     "paUnitNo": "504",
-  //     "paOwnerId": "sandracoleman@testing.com",
-  //     "upFirstName": "Sandra",
-  //     "upLastName": "Coleman",
-  //     "paVehicleType": 2,
-  //     "paStatus": 1,
-  //     "paFee": "2.80",
-  //     "rsrv_start": "2022-04-07 06:30:00",
-  //     "rsrv_end": "2022-04-07 18:00:00",
-  //     "availability": 1
+  // {
+  //   "idbooking": 92,
+  //   "rsvparkingslotid": "P2-09",
+  //   "rsvvisitorid": "eugenetollefson@testing.com",
+  //   "paOwnerId": "john.doe.parkr@gmail.com",
+  //   "rsrv_start": "2022-04-03T19:00:00.000Z",
+  //   "rsrv_end": "2022-04-03T21:00:00.000Z",
+  //   "rsvstatus": 1,
+  //   "paVehicleType": 1,
+  //   "rsvfee": "3.05",
+  //   "rsvcarplateno": "VLS432",
+  //   "rsvcarmodel": "Nissan"
   // }
 
   // type 1 -standard -> handicap \\ntype 2 - large\\ntype 3 - electric car\\ntype 4 - motorcycle
 
   // date time readable format:
-  const rsrv_start_date = new Date(item.rsrv_start.slice(0, 10))
-    .toString()
-    .slice(0, 10);
-  const rsrv_start_time = item.rsrv_start.slice(11, 16);
-  const rsrv_end_date = new Date(item.rsrv_end.slice(0, 10))
-    .toString()
-    .slice(0, 10);
-  const rsrv_end_time = item.rsrv_end.slice(11, 16);
+
+  const rsrv_start = new Date(item.rsrv_start);
+  const rsrv_start_date = rsrv_start.toString().slice(0, 10);
+  const rsrv_start_time = rsrv_start.toString().slice(16, 21);
+  const rsrv_end = new Date(item.rsrv_end);
+  const rsrv_end_date = rsrv_end.toString().slice(0, 10);
+  const rsrv_end_time = rsrv_end.toString().slice(16, 21);
 
   const whoParksDirectHandler = () => {
     navigation.navigate("ParkingStack", {
@@ -153,29 +151,13 @@ const ParkingSpotCard = ({
               >
                 <VStack space="4">
                   <HStack space="4">
-                    {type !== "hostSpot" && (
-                      <Box
-                        width="39"
-                        height="39"
-                        rounded="full"
-                        backgroundColor="#FD6B36"
-                      >
-                        <Center h="39">
-                          <Text color="white" fontSize="xl">
-                            {item.upFirstName.charAt(0).toUpperCase()}
-                            {item.upLastName.charAt(0).toUpperCase()}
-                          </Text>
-                        </Center>
-                      </Box>
-                    )}
-
                     {type !== "hostSpot" ? (
                       <VStack space="1">
                         <HStack alignItems="center" space="2">
-                          <HStack alignItems="center" space="2" w="260">
+                          <HStack alignItems="center" space="2" w="307">
                             <Box>
                               <Text fontWeight="medium" fontSize="xl">
-                                Spot {item.idParkingSlot}
+                                Spot {item.rsvparkingslotid}
                               </Text>
                             </Box>
                             <HStack justifyContent="space-between">
@@ -284,15 +266,20 @@ const ParkingSpotCard = ({
                   </HStack>
                   {type !== "hostSpot" && (
                     <HStack space="4" justifyContent="space-between">
-                      <Box ml="2">
-                        <Text>
-                          {rsrv_start_date}, {rsrv_start_time} -{" "}
-                          {/* {type === "today" && `${rsrv_end_date}, `} */}
-                          {rsrv_end_time}
-                        </Text>
-                      </Box>
                       <Box>
-                        <Text>CAD ${item.paFee}</Text>
+                        <VStack>
+                          <Text>
+                            <Text fontWeight="medium">Start:</Text>{" "}
+                            {rsrv_start_date}, {rsrv_start_time}
+                          </Text>
+                          <Text>
+                            <Text fontWeight="medium">End:</Text>{" "}
+                            {rsrv_end_date}, {rsrv_end_time}
+                          </Text>
+                        </VStack>
+                      </Box>
+                      <Box alignSelf="flex-end">
+                        <Text>CAD ${item.rsvfee}</Text>
                       </Box>
                     </HStack>
                   )}
@@ -306,4 +293,4 @@ const ParkingSpotCard = ({
   );
 };
 
-export default ParkingSpotCard;
+export default ActivitySpotCard;
