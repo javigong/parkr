@@ -90,30 +90,33 @@ const ChooseCarScreen = ({ route, navigation }) => {
               </Text>
             </Center>
             <Box borderBottomWidth={1} borderBottomColor="#FD6B36">
-              <HStack justifyContent="space-around" mb={3}>
-                <Text style={styles.carmodel}>New Car</Text>
+              <Pressable
+                onPress={() => {
+                  handlePress("newCar");
+                }}
+              >
+                <HStack justifyContent="space-around" mb={3}>
+                  <Text style={styles.carmodel}>New Car</Text>
 
-                <Pressable
-                  mt={2}
-                  borderWidth={2}
-                  borderColor="#43D3A4"
-                  borderRadius={50}
-                  padding={1}
-                  alignSelf="center"
-                >
-                  <Pressable
+                  <Box
+                    mt={2}
                     borderWidth={2}
                     borderColor="#43D3A4"
-                    borderRadius={20}
+                    borderRadius={50}
                     padding={1}
                     alignSelf="center"
-                    style={carType == "newCar" ? color : {}}
-                    onPress={() => {
-                      handlePress("newCar");
-                    }}
-                  ></Pressable>
-                </Pressable>
-              </HStack>
+                  >
+                    <Box
+                      borderWidth={2}
+                      borderColor="#43D3A4"
+                      borderRadius={20}
+                      padding={1}
+                      alignSelf="center"
+                      style={carType == "newCar" ? color : {}}
+                    ></Box>
+                  </Box>
+                </HStack>
+              </Pressable>
             </Box>
             {carList.length > 0 ? (
               carList.map((car, index) => {
@@ -124,37 +127,42 @@ const ChooseCarScreen = ({ route, navigation }) => {
                       borderBottomWidth={1}
                       borderBottomColor="#FD6B36"
                     >
-                      <HStack key={index} justifyContent="space-around">
-                        <VStack>
-                          <Text style={styles.carmodel}>{car.rsvcarmodel}</Text>
-                          <Text style={styles.carplate}>
-                            {car.rsvcarplateno}
-                          </Text>
-                        </VStack>
-                        <Pressable
-                          borderWidth={2}
-                          borderColor="#43D3A4"
-                          borderRadius={50}
-                          padding={1}
-                          alignSelf="center"
-                        >
-                          <Pressable
+                      <Pressable
+                        onPress={() => {
+                          handlePress(
+                            car.rsvcarmodel,
+                            car.rsvcarplateno,
+                            car.idbooking
+                          );
+                        }}
+                      >
+                        <HStack key={index} justifyContent="space-around">
+                          <VStack>
+                            <Text style={styles.carmodel}>
+                              {car.rsvcarmodel}
+                            </Text>
+                            <Text style={styles.carplate}>
+                              {car.rsvcarplateno}
+                            </Text>
+                          </VStack>
+                          <Box
                             borderWidth={2}
                             borderColor="#43D3A4"
-                            borderRadius={20}
+                            borderRadius={50}
                             padding={1}
                             alignSelf="center"
-                            style={idbooking == car.idbooking ? color : {}}
-                            onPress={() => {
-                              handlePress(
-                                car.rsvcarmodel,
-                                car.rsvcarplateno,
-                                car.idbooking
-                              );
-                            }}
-                          ></Pressable>
-                        </Pressable>
-                      </HStack>
+                          >
+                            <Box
+                              borderWidth={2}
+                              borderColor="#43D3A4"
+                              borderRadius={20}
+                              padding={1}
+                              alignSelf="center"
+                              style={idbooking == car.idbooking ? color : {}}
+                            ></Box>
+                          </Box>
+                        </HStack>
+                      </Pressable>
                     </Box>
                   </>
                 );
