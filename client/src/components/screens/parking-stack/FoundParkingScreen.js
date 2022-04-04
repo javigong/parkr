@@ -39,9 +39,19 @@ const FoundParkingScreen = ({ navigation, route }) => {
         // console.log(startResDate);
         console.log(eachResStartFormat);
 
+        // Set StartDate as Current Offset is	UTC/GMT -7 hours
+        const startDateLocale = new Date(startDate);
+        startDateLocale.setHours(startDateLocale.getHours() + 7);
+
+        const endDateLocale = new Date(endDate);
+        endDateLocale.setHours(endDateLocale.getHours() + 7);
+
         if (
-          eachResStartFormat.toString() <= startDate &&
-          eachResEndFormat.toString() >= endDate &&
+          // Start date search is equal or greater than start date availability
+          startDateLocale.getTime() >= eachResStartFormat.getTime() &&
+          // End date search is equal or less than end date availability
+          // end date currently unavailable
+          // endDateLocale.getTime() <= eachResEndFormat.getTime() &&
           each.paVehicleType === parkingTypeFilter
         ) {
           filteredSpotsArray.push(each);
