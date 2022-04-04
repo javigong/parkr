@@ -38,14 +38,19 @@ const ParkingSpotCard = ({
 
   // type 1 -standard -> handicap \\ntype 2 - large\\ntype 3 - electric car\\ntype 4 - motorcycle
 
-  // date time readable format:
-  const rsrv_start_date = new Date(item.rsrv_start.slice(0, 10))
+  // Set StartDate as Current Offset is	UTC/GMT -7 hours
+  const rsrv_start_date_noLocale =new Date(item.rsrv_start.slice(0, 10));
+  rsrv_start_date_noLocale.setHours(rsrv_start_date_noLocale.getHours() + 7 );
+  
+  const rsrv_start_date = rsrv_start_date_noLocale
     .toString()
     .slice(0, 10);
   const rsrv_start_time = item.rsrv_start.slice(11, 16);
+
   const rsrv_end_date = new Date(item.rsrv_end.slice(0, 10))
     .toString()
     .slice(0, 10);
+
   const rsrv_end_time = item.rsrv_end.slice(11, 16);
 
   const whoParksDirectHandler = () => {
