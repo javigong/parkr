@@ -223,11 +223,20 @@ const LicensePlateScreen = ({ route, navigation }) => {
                 }}
               >
                 {image && (
-                  <Image
-                    source={{ uri: image }}
-                    alt="car photo"
-                    style={{ width: 300, height: 150, borderRadius: 10 }}
-                  />
+                  <>
+                    <Image
+                      source={{ uri: image }}
+                      alt="car photo"
+                      style={{ width: 300, height: 150, borderRadius: 10 }}
+                    />
+                    {!uploadSuccessMessage ? (
+                      <Text fontSize={16} mt={9}>
+                        Please upload the image
+                      </Text>
+                    ) : (
+                      <Text></Text>
+                    )}
+                  </>
                 )}
 
                 <Box
