@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
-import { Box, Center, Text, HStack, Button, Pressable, Flex, View } from "native-base";
+import {
+  Box,
+  Center,
+  Text,
+  HStack,
+  Button,
+  Pressable,
+  Flex,
+  View,
+  VStack,
+} from "native-base";
 import OutlineButton from "../../UI/OutlineButton";
 import SolidOrangeButton from "../../UI/SolidOrangeButton";
 
@@ -39,50 +49,63 @@ const WhoParksScreen = ({ route, navigation }) => {
 
           <Box borderBottomWidth={1} py={2} borderBottomColor="#FD6B36">
             <HStack justifyContent="space-around">
-              <Text style={styles.usertype}>Me</Text>
               <Pressable
-                borderWidth={2}
-                borderColor="#43D3A4"
-                borderRadius={50}
-                padding={1}
-                alignSelf="center"
+                onPress={() => {
+                  handlePress("Me");
+                }}
               >
-                <Pressable
-                  borderWidth={2}
-                  borderColor="#43D3A4"
-                  borderRadius={20}
-                  padding={1}
-                  alignSelf="center"
-                  style={userType == "Me" ? color : {}}
-                  onPress={() => {
-                    handlePress("Me");
-                  }}
-                ></Pressable>
+                <HStack space="85">
+                  <Text style={styles.usertype}>Me</Text>
+                  <Box alignSelf="flex-end">
+                    <Box
+                      borderWidth={2}
+                      borderColor="#43D3A4"
+                      borderRadius={50}
+                      padding={1}
+                      alignSelf="center"
+                    >
+                      <Box
+                        borderWidth={2}
+                        borderColor="#43D3A4"
+                        borderRadius={20}
+                        padding={1}
+                        alignSelf="center"
+                        style={userType == "Me" ? color : {}}
+                      />
+                    </Box>
+                  </Box>
+                </HStack>
               </Pressable>
             </HStack>
           </Box>
           <Box borderBottomWidth={1} py={2} borderBottomColor="#FD6B36">
-            <HStack justifyContent="space-around">
-              <Text style={styles.usertype}>Visitor</Text>
-
+          <HStack justifyContent="space-around">
               <Pressable
-                borderWidth={2}
-                borderColor="#43D3A4"
-                borderRadius={50}
-                padding={1}
-                alignSelf="center"
+                onPress={() => {
+                  handlePress("Visitor");
+                }}
               >
-                <Pressable
-                  borderWidth={2}
-                  borderColor="#43D3A4"
-                  borderRadius={20}
-                  padding={1}
-                  alignSelf="center"
-                  style={userType == "Visitor" ? color : {}}
-                  onPress={() => {
-                    handlePress("Visitor");
-                  }}
-                ></Pressable>
+                <HStack space="85">
+                  <Text style={styles.usertype}>Visitor</Text>
+                  <Box alignSelf="flex-end">
+                    <Box
+                      borderWidth={2}
+                      borderColor="#43D3A4"
+                      borderRadius={50}
+                      padding={1}
+                      alignSelf="center"
+                    >
+                      <Box
+                        borderWidth={2}
+                        borderColor="#43D3A4"
+                        borderRadius={20}
+                        padding={1}
+                        alignSelf="center"
+                        style={userType == "Visitor" ? color : {}}
+                      />
+                    </Box>
+                  </Box>
+                </HStack>
               </Pressable>
             </HStack>
           </Box>
@@ -110,8 +133,8 @@ const WhoParksScreen = ({ route, navigation }) => {
           </Button>
         ) : (
           <Flex
-          width="90%"
-          mb={9}
+            width="90%"
+            mb={9}
             flex="1"
             flexDirection="row"
             alignItems="flex-end"
