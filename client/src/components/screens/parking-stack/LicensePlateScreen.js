@@ -156,173 +156,175 @@ const LicensePlateScreen = ({ route, navigation }) => {
   return (
     <>
       <Box flex="1" bg="white">
-        <SafeAreaView flex={1} alignItems="center">
-          <Text style={styles.pageTitle}>Car Information</Text>
-          <FormControl padding={5} isRequired>
-            <VStack mx="4" space="2">
-              <Box>
-                <FormControl.Label m="0" mb="1">
-                  Car Make & Model
-                </FormControl.Label>
-                <Input
-                  type="text"
-                  value={carType}
-                  placeholder="i.e. Mazda MX-5"
-                  onChangeText={(text) => setCarType(text)}
-                  style={styles.inputCar}
-                  borderColor="#FD6B36"
-                  height="40px"
-                  borderRadius="17"
-                />
+        <Box flex="1" justifyContent="space-between" mb={8}>
+          <SafeAreaView flex="1" alignItems="center">
+            <Text style={styles.pageTitle}>Car Information</Text>
+            <FormControl padding={5} isRequired>
+              <VStack mx="4" space="2">
+                <Box>
+                  <FormControl.Label m="0" mb="1">
+                    Car Make & Model
+                  </FormControl.Label>
+                  <Input
+                    type="text"
+                    value={carType}
+                    placeholder="i.e. Mazda MX-5"
+                    onChangeText={(text) => setCarType(text)}
+                    style={styles.inputCar}
+                    borderColor="#FD6B36"
+                    height="40px"
+                    borderRadius="17"
+                  />
 
+                  <FormControl.ErrorMessage
+                    leftIcon={<WarningOutlineIcon size="xs" />}
+                  >
+                    At least 3 characters are required.
+                  </FormControl.ErrorMessage>
+                </Box>
+                <Box>
+                  <FormControl.Label m="0" mb="1">
+                    License Plate
+                  </FormControl.Label>
+                  <Input
+                    type="text"
+                    value={plateNum}
+                    placeholder="i.e. 291VSA"
+                    onChangeText={(text) => setPlateNum(text)}
+                    borderColor="#FD6B36"
+                    height="40px"
+                    borderRadius="17"
+                  />
+                </Box>
                 <FormControl.ErrorMessage
                   leftIcon={<WarningOutlineIcon size="xs" />}
                 >
-                  At least 3 characters are required.
+                  At least 6 characters are required.
                 </FormControl.ErrorMessage>
-              </Box>
-              <Box>
-                <FormControl.Label m="0" mb="1">
-                  License Plate
-                </FormControl.Label>
-                <Input
-                  type="text"
-                  value={plateNum}
-                  placeholder="i.e. 291VSA"
-                  onChangeText={(text) => setPlateNum(text)}
-                  borderColor="#FD6B36"
-                  height="40px"
-                  borderRadius="17"
-                />
-              </Box>
-              <FormControl.ErrorMessage
-                leftIcon={<WarningOutlineIcon size="xs" />}
-              >
-                At least 6 characters are required.
-              </FormControl.ErrorMessage>
-            </VStack>
-          </FormControl>
+              </VStack>
+            </FormControl>
 
-          <Box
-            borderWidth={1}
-            borderColor="gray.200"
-            borderRadius="20px"
-            width="85%"
-            mb={6}
-            py={5}
-            height="50%"
-            shadow={2}
-          >
-            <ScrollView width="100%">
-              <Box
-                style={{
-                  flex: "1",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  width: "100%",
-                }}
-              >
-                {image && (
-                  <>
-                    <Image
-                      source={{ uri: image }}
-                      alt="car photo"
-                      style={{ width: 300, height: 150, borderRadius: 10 }}
-                    />
-                    {!uploadSuccessMessage ? (
-                      <Text fontSize={16} mt={9}>
-                        Please upload the image
-                      </Text>
-                    ) : (
-                      <Text></Text>
-                    )}
-                  </>
-                )}
-
+            <Box
+              borderWidth={1}
+              borderColor="gray.200"
+              borderRadius="20px"
+              width="85%"
+              mb={6}
+              py={5}
+              height="55%"
+              shadow={2}
+            >
+              <ScrollView width="100%">
                 <Box
                   style={{
                     flex: "1",
                     alignItems: "center",
-                    justifyContent: "center",
+                    justifyContent: "space-between",
                     width: "100%",
                   }}
                 >
-                  {cameraOn ? (
+                  {image && (
                     <>
-                      <Box style={styles.cameraContainer}>
-                        <Camera
-                          ref={(ref) => setCamera(ref)}
-                          style={styles.fixedRatio}
-                        />
-                      </Box>
+                      <Image
+                        source={{ uri: image }}
+                        alt="car photo"
+                        style={{ width: 300, height: 150, borderRadius: 10 }}
+                      />
+                      {!uploadSuccessMessage ? (
+                        <Text fontSize={16} my={9}>
+                          Please upload the image
+                        </Text>
+                      ) : (
+                        <Text></Text>
+                      )}
+                    </>
+                  )}
 
-                      <Pressable style={styles.button2a}>
-                        <Pressable
-                          style={styles.button2b}
-                          onPress={() => takePicture()}
-                        ></Pressable>
-                      </Pressable>
+                  <Box
+                    style={{
+                      flex: "1",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      width: "100%",
+                    }}
+                  >
+                    {cameraOn ? (
+                      <>
+                        <Box style={styles.cameraContainer}>
+                          <Camera
+                            ref={(ref) => setCamera(ref)}
+                            style={styles.fixedRatio}
+                          />
+                        </Box>
+
+                        <Pressable style={styles.button2a}>
+                          <Pressable
+                            style={styles.button2b}
+                            onPress={() => takePicture()}
+                          ></Pressable>
+                        </Pressable>
+                      </>
+                    ) : (
+                      <Text></Text>
+                    )}
+                  </Box>
+                  {uploadSuccessMessage ? (
+                    <Text
+                      fontWeight="bold"
+                      style={{ color: "#FD6B36" }}
+                      fontSize="16px"
+                    >
+                      {uploadSuccessMessage}
+                    </Text>
+                  ) : null}
+
+                  {plateNum ? (
+                    <>
+                      <Center>
+                        <Text fontSize="16px">
+                          Is your license plate number:{" "}
+                        </Text>
+                        <Text fontWeight="bold" fontSize="2xl">
+                          {plateNum}
+                        </Text>
+                      </Center>
                     </>
                   ) : (
                     <Text></Text>
                   )}
                 </Box>
-                {uploadSuccessMessage ? (
-                  <Text
-                    fontWeight="bold"
-                    style={{ color: "#FD6B36" }}
-                    fontSize="16px"
-                  >
-                    {uploadSuccessMessage}
-                  </Text>
-                ) : null}
+              </ScrollView>
 
-                {plateNum ? (
-                  <>
-                    <Center>
-                      <Text fontSize="16px">
-                        Is your license plate number:{" "}
-                      </Text>
-                      <Text fontWeight="bold" fontSize="2xl">
-                        {plateNum}
-                      </Text>
-                    </Center>
-                  </>
-                ) : (
-                  <Text></Text>
-                )}
-              </Box>
-            </ScrollView>
+              <HStack justifyContent="space-evenly">
+                <Pressable style={styles.button} onPress={pickImage}>
+                  <Icon
+                    color="white"
+                    size={8}
+                    as={<Ionicons name="images-outline" />}
+                  />
+                </Pressable>
 
-            <HStack justifyContent="space-evenly">
-              <Pressable style={styles.button} onPress={pickImage}>
-                <Icon
-                  color="white"
-                  size={8}
-                  as={<Ionicons name="images-outline" />}
-                />
-              </Pressable>
+                <Pressable style={styles.button} onPress={() => openCamera()}>
+                  <Icon
+                    color="white"
+                    size={8}
+                    as={<Ionicons name="camera-outline" />}
+                  />
+                </Pressable>
 
-              <Pressable style={styles.button} onPress={() => openCamera()}>
-                <Icon
-                  color="white"
-                  size={8}
-                  as={<Ionicons name="camera-outline" />}
-                />
-              </Pressable>
-
-              <Pressable style={styles.button} onPress={uploadFile}>
-                <Icon
-                  color="white"
-                  size={8}
-                  as={<Ionicons name="cloud-upload-outline" />}
-                />
-              </Pressable>
-            </HStack>
-          </Box>
-          <View flex="1" mt="50px" width="80%">
+                <Pressable style={styles.button} onPress={uploadFile}>
+                  <Icon
+                    color="white"
+                    size={8}
+                    as={<Ionicons name="cloud-upload-outline" />}
+                  />
+                </Pressable>
+              </HStack>
+            </Box>
+          </SafeAreaView>
+          <Center>
             <SolidOrangeButton
-              width="100%"
+              width="78%"
               buttonText="NEXT"
               onPress={() =>
                 navigation.navigate("ParkingStack", {
@@ -339,8 +341,8 @@ const LicensePlateScreen = ({ route, navigation }) => {
                 })
               }
             />
-          </View>
-        </SafeAreaView>
+          </Center>
+        </Box>
       </Box>
     </>
   );
