@@ -61,7 +61,7 @@ const SignupFormScreen = ({ navigation, route }) => {
               <FormControl.Label>
                 What is your parking spot number?
               </FormControl.Label>
-              <Input variant="underlined" placeholder="E.g. P2-12" />
+              <Input variant="underlined" placeholder="E.g. P2-09" />
             </Box>
             <Box>
               <FormControl.Label>Do you have a car?</FormControl.Label>
