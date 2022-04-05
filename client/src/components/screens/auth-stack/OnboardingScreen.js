@@ -56,9 +56,9 @@ const OnboardingScreen = ({ navigation }) => {
                 mb={10}
               />
             ),
-            title: "Visiting a friend",
+            title: "A friend is visiting you",
             subtitle:
-              "You wonder if there will be a visitor's spot available when you arrive",
+              "You wonder if there will be a visitor's spot available when your friend arrives.",
           },
           {
             backgroundColor: "white",
@@ -72,7 +72,7 @@ const OnboardingScreen = ({ navigation }) => {
             ),
             title: "Try Parkr",
             subtitle:
-              "You're in luck! Your friend's building is registered with Parkr.",
+              "You're in luck! Your building is registered with Parkr.",
           },
           {
             backgroundColor: "white",
@@ -86,7 +86,7 @@ const OnboardingScreen = ({ navigation }) => {
             ),
             title: "Park without hassle",
             subtitle:
-              "Parkr lets you reserve spots at participating buildings in advance.",
+              "Parkr lets you reserve spots at participating buildings in advance, for you and your guests.",
           },
         ]}
       />
