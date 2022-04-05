@@ -79,7 +79,7 @@ const WhoParksScreen = ({ route, navigation }) => {
             </HStack>
           </Box>
           <Box borderBottomWidth={1} py={2} borderBottomColor="#FD6B36">
-          <HStack justifyContent="space-around">
+            <HStack justifyContent="space-around">
               <Pressable
                 onPress={() => {
                   handlePress("Visitor");
@@ -143,23 +143,21 @@ const WhoParksScreen = ({ route, navigation }) => {
             <View flex="1">
               <OutlineButton buttonText="CANCEL" onPress={cancelFindParking} />
             </View>
-            <View flex="1">
-              <SolidOrangeButton
-                buttonText="NEXT"
-                onPress={() =>
-                  navigation.navigate("ParkingStack", {
-                    screen: "ChooseCarScreen",
-                    params: {
-                      userType: userType,
-                      item: item,
-                      currentDate: currentDate,
-                      startDate: startDate,
-                      endDate: endDate,
-                    },
-                  })
-                }
-              />
-            </View>
+            <SolidOrangeButton
+              buttonText="NEXT"
+              onPress={() =>
+                navigation.navigate("ParkingStack", {
+                  screen: "ChooseCarScreen",
+                  params: {
+                    userType: userType,
+                    item: item,
+                    currentDate: currentDate,
+                    startDate: startDate,
+                    endDate: endDate,
+                  },
+                })
+              }
+            />
           </Flex>
         )}
       </Box>

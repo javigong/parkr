@@ -171,13 +171,10 @@ const ChooseCarScreen = ({ route, navigation }) => {
               <Text></Text>
             )}
           </Box>
-          <View>
-            <SolidOrangeButton
-              buttonText="NEXT"
-              mb={1}
-              onPress={() => handleCarSelect()}
-            />
-          </View>
+          <SolidOrangeButton
+            buttonText="NEXT"
+            onPress={() => handleCarSelect()}
+          />
         </Box>
       </SafeAreaView>
     </Box>
