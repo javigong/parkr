@@ -22,7 +22,7 @@ const AccountScreen = ({ navigation }) => {
       setFullName(user.providerData[0].displayName);
       setEmail(user.providerData[0].email);
       // console.log("Account Screen:", user.providerData[0].email);
-      console.log("photoURL", photoURL);
+      // console.log("photoURL", photoURL);
     }
   }, []);
 
