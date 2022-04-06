@@ -62,7 +62,16 @@ const IndexScreen = ({ navigation }) => {
             <Box safeArea py="8" w="90%" maxW="290">
               <Box style={{ paddingTop: 50, paddingBottom: 80 }}>
                 <Center>
-                  <ParkrLogoSVG />
+                  <Image
+                    style={{
+                      width: 600,
+                      height: 300,
+                      marginTop: -100,
+                      marginBottom: -100,
+                    }}
+                    source={require("../../../../assets/Parkr-Logo2_Animation.gif")}
+                    alt="logo gif"
+                  />
                 </Center>
               </Box>
 
