@@ -140,10 +140,11 @@ const WhoParksScreen = ({ route, navigation }) => {
             alignItems="flex-end"
             // justifyContent="space-around"
           >
-            <View flex="1">
+            <View w="50%">
               <OutlineButton buttonText="CANCEL" onPress={cancelFindParking} />
             </View>
             <SolidOrangeButton
+              width="47%"
               buttonText="NEXT"
               onPress={() =>
                 navigation.navigate("ParkingStack", {

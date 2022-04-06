@@ -65,7 +65,9 @@ const ParkingLocationScreen = ({ navigation }) => {
           width="330"
           buttonText="NEXT"
           onPress={() => {
-            setHasBuilding("yes");
+            navigation.navigate("SignupFormScreen", {
+              parkingLot,
+            });
           }}
         />
       </Box>
