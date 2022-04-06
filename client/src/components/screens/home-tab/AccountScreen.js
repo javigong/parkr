@@ -18,10 +18,11 @@ const AccountScreen = ({ navigation }) => {
 
   useEffect(() => {
     if (user) {
-      setPhotoURL(user.providerData[0].photoURL);
+      setPhotoURL(user.providerData[0].photoURL.split("=")[0]);
       setFullName(user.providerData[0].displayName);
       setEmail(user.providerData[0].email);
       // console.log("Account Screen:", user.providerData[0].email);
+      // console.log("photoURL", photoURL);
     }
   }, []);
 
