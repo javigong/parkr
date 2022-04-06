@@ -162,14 +162,14 @@ const HostSpotCard = ({
                           <Box width="79%">
                             {item.paVehicleType == "1" && (
                               <Box
-                                width="78"
+                                width="55"
                                 px="2"
                                 borderWidth="1"
-                                borderColor="#0CB183"
+                                borderColor="#FD6B36"
                                 rounded="full"
                               >
-                                <Text flex="1" fontSize="13" color="#0CB183">
-                                  Handicap
+                                <Text fontSize="13" color="#FD6B36">
+                                  Large
                                 </Text>
                               </Box>
                             )}
@@ -244,10 +244,12 @@ const HostSpotCard = ({
                     <Box>
                       <VStack>
                         <Text>
-                          <Text fontWeight="medium">Start:</Text> {rsrv_start_date}, {rsrv_start_time}
+                          <Text fontWeight="medium">Start:</Text>{" "}
+                          {rsrv_start_date}, {rsrv_start_time}
                         </Text>
                         <Text>
-                          <Text fontWeight="medium">End:</Text> {rsrv_end_date}, {rsrv_end_time}
+                          <Text fontWeight="medium">End:</Text> {rsrv_end_date},{" "}
+                          {rsrv_end_time}
                         </Text>
                       </VStack>
                     </Box>
@@ -256,7 +258,10 @@ const HostSpotCard = ({
                       alignItems="center"
                       justifyContent="space-between"
                     >
-                      <Text><Text fontWeight="medium">Vehicle license:</Text> {item.rsvcarplateno}</Text>
+                      <Text>
+                        <Text fontWeight="medium">Vehicle license:</Text>{" "}
+                        {item.rsvcarplateno}
+                      </Text>
                       <Box>
                         <HStack alignItems="center">
                           <Text fontWeight="medium">Details</Text>
