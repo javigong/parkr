@@ -10,8 +10,8 @@ export default {
     icon: "./assets/icon.png",
     splash: {
       image: "./assets/Logo_BIG.png",
-      resizeMode: "contain",
-      backgroundColor: "#ffffff",
+      // resizeMode: "contain",
+      // backgroundColor: "#ffffff",
     },
     updates: {
       fallbackToCacheTimeout: 0,
