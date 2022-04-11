@@ -78,3 +78,6 @@ typings/
 # IntelliJ IDEA
 .idea
 server/config/parkr-auth-firebase-adminsdk-uqjni-1998552bdd.json
+
+*.pem
+
