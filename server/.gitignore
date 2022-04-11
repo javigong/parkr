@@ -151,3 +151,5 @@ dist
 **/.ssh/known_hosts
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,node,ssh
+
+server/config/google_app_credentials.json
