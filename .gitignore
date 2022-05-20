@@ -97,3 +97,6 @@ node_modules
 
 # Credentials
 google_app_credentials.json
+
+# Mac
+.DS_Store
