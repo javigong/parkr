@@ -78,6 +78,6 @@ typings/
 # IntelliJ IDEA
 .idea
 
-server/config/google_app_credentials.json
+google_app_credentials.json
 
 .pem
