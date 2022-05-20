@@ -77,4 +77,7 @@ typings/
 
 # IntelliJ IDEA
 .idea
-server/config/parkr-auth-firebase-adminsdk-uqjni-1998552bdd.json
+
+server/config/google_app_credentials.json
+
+.pem
