@@ -55,8 +55,8 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
 *.env
+.env
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -78,20 +78,25 @@ typings/
 
 # IntelliJ IDEA
 .idea
-server/config/parkr-auth-firebase-adminsdk-uqjni-1998552bdd.json
 
-server/config/google_app_credentials.json
+# SSH
+.ssh
 
-server/config/parkr.pem
+# Expo
+.expo
+.expo-shared
 
+# VSCode
+.vscode
+
+# Node modules
+node_modules
+
+# PEM files
 *.pem
 
-.ssh/
+# Credentials
+google_app_credentials.json
 
-dist/
-
+# Mac
 .DS_Store
-
-.vscode/
-
-.expo
