@@ -86,3 +86,13 @@ server/config/parkr.pem
 *.pem
 
 .ssh/
+
+dist/
+
+.env
+
+.DS_Store
+
+coverage/
+
+.vscode/
