@@ -5,12 +5,12 @@ const googleAppCredentials = require("../config/google_app_credentials.json");
 //firebase admin sdk
 const app = initializeApp({
   credential: cert(googleAppCredentials),
-  apiKey: "AIzaSyAIYaUqhUiWor-4am_U8Vs4A7dry_5Q2F0",
-  authDomain: "parkr-auth.firebaseapp.com",
-  projectId: "parkr-auth",
-  storageBucket: "parkr-auth.appspot.com",
-  messagingSenderId: "1013744309561",
-  appId: "1:1013744309561:web:66f2970dd44d6eb47144e8",
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID,
 });
 
 const auth = getAuth(app);
