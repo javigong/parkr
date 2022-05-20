@@ -55,6 +55,7 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
+.env
 *.env
 
 # parcel-bundler cache (https://parceljs.org/)
@@ -89,10 +90,8 @@ server/config/parkr.pem
 
 dist/
 
-.env
-
 .DS_Store
 
-coverage/
-
 .vscode/
+
+.expo
