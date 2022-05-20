@@ -83,14 +83,14 @@ typings/
 .ssh
 
 # Expo
-.expo/
-.expo-shared/
+.expo
+.expo-shared
 
 # VSCode
-.vscode/
+.vscode
 
 # Node modules
-node_modules/
+node_modules
 
 # PEM files
 *.pem

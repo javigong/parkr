@@ -151,6 +151,8 @@ dist
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,node,ssh
 
+# PEM files
 *.pem
 
+# API Credentials
 google_app_credentials.json
