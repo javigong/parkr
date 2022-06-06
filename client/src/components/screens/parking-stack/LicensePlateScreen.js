@@ -139,7 +139,7 @@ const LicensePlateScreen = ({ route, navigation }) => {
           "x-rapidapi-host":
             "zyanyatech1-license-plate-recognition-v1.p.rapidapi.com",
           "x-rapidapi-key":
-            "e2db6c2630msh1ecfed303fd1acfp1b1d28jsn4bb1e7714451",
+          Constants.manifest.extra.LicensePlateScreen,
         },
       };
 
