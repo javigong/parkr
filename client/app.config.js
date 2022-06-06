@@ -37,6 +37,8 @@ export default {
       messagingSenderId: process.env.MESSAGING_SENDER_ID,
       appId: process.env.APP_ID,
       databaseURL: process.env.DATABASE_URL,
+      s3AccessKey: process.env.S3_ACCESS_KEY,
+      s3SecretKey: process.env.S3_SECRET_KEY,
     },
     packagerOpts: {
       sourceExts: ["js", "json", "ts", "tsx", "jsx", "vue"],
