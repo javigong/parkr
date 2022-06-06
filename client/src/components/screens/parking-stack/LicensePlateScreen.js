@@ -23,6 +23,7 @@ import * as ImagePicker from "expo-image-picker";
 import { RNS3 } from "react-native-aws3";
 import { Camera } from "expo-camera";
 import axios from "axios";
+import Constants from "expo-constants";
 
 const LicensePlateScreen = ({ route, navigation }) => {
   const { userType, item, currentDate, startDate, endDate } = route.params;
@@ -117,8 +118,8 @@ const LicensePlateScreen = ({ route, navigation }) => {
         keyPrefix: "cars/",
         bucket: "parkrbucket",
         region: "us-west-2",
-        accessKey: "AKIAVQJSBTYGFURWAT76",
-        secretKey: "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",
+        accessKey: Constants.manifest.extra.S3_ACCESS_KEY,
+        secretKey: Constants.manifest.extra.S3_SECRET_KEY,
         successActionStatus: 201,
       }
     ).then((response) => {
